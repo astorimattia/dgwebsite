@@ -11,6 +11,11 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 
+// Serve analog.html for the /analog route
+app.get('/analog', (req, res) => {
+  res.sendFile(path.join(__dirname, 'analog.html'));
+});
+
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
 });

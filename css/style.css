@@ -1,0 +1,178 @@
+/* Analog‑film palette & typography */
+:root {
+  --bg: #faf8f3; /* warm paper */
+  --text: #222;
+  --caption: #6b6b6b;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  font-family: "Inter", system-ui, sans-serif;
+  line-height: 1.55;
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* Grain overlay */
+.grain::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: url("../assets/grain.png");
+  opacity: 0.15;
+  mix-blend-mode: soft-light;
+  animation: grain 6s steps(10) infinite;
+}
+@keyframes grain {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(-100%, -100%);
+  }
+}
+
+/* Home heroes */
+.hero {
+  height: 80vh;
+  width: 90%;
+  max-width: 1200px;
+  margin-top: 5vh;
+  margin-bottom: 10vh;
+  margin-left: 10vh;
+  margin-right: 10vh;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  align-items: flex-end;
+  transition: opacity 0.6s ease;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.25);
+  mix-blend-mode: multiply;
+}
+.caption {
+  position: relative;
+  z-index: 1;
+  margin: 0 0 2rem 2rem;
+  font-size: 0.9rem;
+  color: var(--bg);
+  opacity: 0.9;
+}
+/* caption inside hero on album page */
+.caption.inside {
+  margin-bottom: 1rem;
+  color: var(--caption);
+}
+
+.fade {
+  opacity: 0;
+}
+.fade.in {
+  opacity: 1;
+}
+
+/* Back link */
+.back {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  font-size: 0.9rem;
+  text-decoration: none;
+  color: var(--caption);
+  z-index: 10;
+}
+
+/* Album layout */
+.album-hero {
+  max-height: 60vh;
+  overflow: hidden;
+  position: relative;
+}
+.album-hero .cover {
+  width: 100%;
+  display: block;
+}
+.story {
+  max-width: 700px;
+  padding: 2rem 1rem;
+  margin: 0 auto;
+}
+.gallery {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  padding: 1rem;
+}
+.gallery img {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+  cursor: zoom-in;
+}
+.gallery img:hover {
+  transform: scale(1.02);
+}
+
+/* Lightbox */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 50;
+}
+.lightbox.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+.lightbox img {
+  max-width: 90vw;
+  max-height: 90vh;
+}
+
+@media (max-width: 600px) {
+  .hero {
+    width: 95%;
+    height: 70vh;
+    margin: 15vh auto;
+  }
+  .caption {
+    margin: 0 0 1.5rem 1.25rem;
+  }
+  .gallery {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .fade,
+  .fade.in,
+  .gallery img:hover,
+  .lightbox {
+    transition: none;
+  }
+}
+
+/* Accessibility focus */
+:focus-visible {
+  outline: 2px dashed var(--caption);
+  outline-offset: 4px;
+} 
