@@ -1,0 +1,30 @@
+@font-face {
+    font-family: 'GT America Regular';
+    src: url('./font/GT-America/GT-America-Standard-Regular-Trial.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+  font-family: 'GT America Medium';
+  src: url('./font/GT-America/GT-America-Standard-Medium-Trial.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+    font-family: 'GT America Thin';
+    src: url('./font/GT-America/GT-America-Standard-Thin-Trial.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Base font settings */
+body {
+    font-family: 'GT America Thin', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* Your name specific styling */
+.logo {
+    font-family: 'GT America Regular', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+} 
