@@ -295,7 +295,7 @@ body {
 
   .main-content {
     margin-left: 0;
-    padding: 0 10px;
+    padding: 0 10px 20px;
     height: auto;
   }
 
@@ -409,7 +409,7 @@ body {
 
   .about-content {
     max-width: 100%;
-    padding: 0 20px;
+    padding: 0 20px 20px;
   }
 
   .gallery-container {
@@ -680,7 +680,7 @@ body {
 
   .main-content {
     margin-left: 0;
-    padding: 0 10px;
+    padding: 0 10px 20px;
     height: auto;
   }
 
@@ -748,7 +748,7 @@ body {
 
   .about-content {
     max-width: 100%;
-    padding: 0 20px;
+    padding: 0 20px 20px;
   }
 
   .gallery-container {
