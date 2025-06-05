@@ -42,6 +42,12 @@ body {
   color: #000;
   padding-left: 0;
   font-family: 'GT America Regular', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  text-decoration: none;
+  cursor: default;
+}
+
+.logo:hover {
+  opacity: 1;
 }
 
 .nav {
@@ -366,6 +372,12 @@ body {
     font-weight: normal;
     color: #000;
     font-family: 'GT America Regular', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    text-decoration: none;
+    cursor: default;
+  }
+
+  .mobile-logo:hover {
+    opacity: 1;
   }
 
   .mobile-socials {
@@ -705,6 +717,12 @@ body {
     font-weight: normal;
     color: #000;
     font-family: 'GT America Regular', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    text-decoration: none;
+    cursor: default;
+  }
+
+  .mobile-logo:hover {
+    opacity: 1;
   }
 
   .mobile-socials {
