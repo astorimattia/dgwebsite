@@ -33,6 +33,8 @@
       overflow-y: auto;
       top: 20px;
       left: 15px;
+      display: flex;
+      flex-direction: column;
     }
 
     .logo {
@@ -41,6 +43,7 @@
       margin-bottom: 30px;
       color: #000;
       padding-left: 0;
+      font-family: 'GT America Regular', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     }
 
     .nav {
@@ -118,6 +121,18 @@
       overflow-y: auto;
     }
 
+    /* Ensure special characters maintain thin weight */
+    .main-content p,
+    .main-content h1,
+    .main-content h2,
+    .main-content h3,
+    .main-content span:not(.important) {
+      font-feature-settings: "ss01" 1, "kern" 1;
+      font-variant-numeric: tabular-nums;
+      font-weight: 200;
+      letter-spacing: -0.01em;
+    }
+
     /* Gallery */
     .gallery-container {
       position: relative;
@@ -185,11 +200,13 @@
     .nav-zone.left {
       left: 0;
       background: linear-gradient(to right, rgba(255, 255, 255, 0.2), transparent);
+      cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="black"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>') 12 12, auto;
     }
 
     .nav-zone.right {
       right: 0;
       background: linear-gradient(to left, rgba(255, 255, 255, 0.2), transparent);
+      cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="black"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>') 12 12, auto;
     }
 
     .nav-zone:hover {
@@ -343,6 +360,8 @@
       display: none;
       max-width: 500px;
       line-height: 1.5;
+      margin-top: 60px;
+      font-family: 'GT America Thin', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     }
 
     .about-section.active {
@@ -351,7 +370,7 @@
 
     .about-section p {
       margin-bottom: 20px;
-      font-size: 14px;
+      font-size: 16px;
       color: #000;
     }
 
@@ -387,6 +406,29 @@
     /* Mobile Responsive */
     .mobile-menu {
       display: none;
+    }
+
+    .image-title {
+      margin-top: auto;
+      font-size: 14px;
+      color: #000;
+      opacity: 1;
+      padding-bottom: 80px;
+      font-family: 'GT America Regular', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.4;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .image-year {
+      font-size: 12px;
+      color: #666;
+      margin-bottom: 4px;
+      font-family: 'GT America Thin', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    .image-title.hidden {
+      opacity: 0;
     }
 
     @media (max-width: 768px) {
@@ -442,8 +484,8 @@
     <aside class="sidebar" id="sidebar">
       <div class="logo">Mattia Astori</div>
       <nav class="nav">
-        <a href="#" onclick="showSection('home')" class="active">Home</a>
-        <a href="#" onclick="showSection('about')">About</a>
+        <a href="/" class="active">Home</a>
+        <a href="/about">About</a>
         <div class="social-icons">
           <a href="https://instagram.com/astori.teller" target="_blank" title="Instagram">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
@@ -462,6 +504,7 @@
           </a>
         </div>
       </nav>
+      <div class="image-title" id="image-title"></div>
     </aside>
 
     <!-- Main Content -->
@@ -474,37 +517,37 @@
           <div class="slide active">
             <div class="nav-zone left" onclick="changeSlide(-1)"></div>
             <div class="nav-zone right" onclick="changeSlide(1)"></div>
-            <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop"
-              alt="Vogue Italia August 2021">
+            <img src="assets/images/vogue-italia.jpg"
+              alt="Vogue Italia">
           </div>
           <div class="slide">
             <div class="nav-zone left" onclick="changeSlide(-1)"></div>
             <div class="nav-zone right" onclick="changeSlide(1)"></div>
-            <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=800&h=600&fit=crop"
+            <img src="assets/images/geolier-outpump.jpg"
               alt="Geolier for Outpump">
           </div>
           <div class="slide">
             <div class="nav-zone left" onclick="changeSlide(-1)"></div>
             <div class="nav-zone right" onclick="changeSlide(1)"></div>
-            <img src="https://images.unsplash.com/photo-1594736797933-d0dcced9132e?w=800&h=600&fit=crop"
+            <img src="assets/images/vogue-queen.jpg"
               alt="The Funeral of Queen Elizabeth II for Vogue Magazine">
           </div>
           <div class="slide">
             <div class="nav-zone left" onclick="changeSlide(-1)"></div>
             <div class="nav-zone right" onclick="changeSlide(1)"></div>
-            <img src="https://images.unsplash.com/photo-1539571696485-50566e0b2be5?w=800&h=600&fit=crop"
+            <img src="assets/images/editorial-fashion.png"
               alt="Editorial Fashion Series">
           </div>
           <div class="slide">
             <div class="nav-zone left" onclick="changeSlide(-1)"></div>
             <div class="nav-zone right" onclick="changeSlide(1)"></div>
-            <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=800&h=600&fit=crop"
+            <img src="assets/images/beauty-campaign.jpg"
               alt="Beauty Campaign">
           </div>
           <div class="slide">
             <div class="nav-zone left" onclick="changeSlide(-1)"></div>
             <div class="nav-zone right" onclick="changeSlide(1)"></div>
-            <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=800&h=600&fit=crop"
+            <img src="assets/images/street-style.jpg"
               alt="Street Style Documentation">
           </div>
         </div>
@@ -523,15 +566,6 @@
           </div>
         </div>
       </div>
-
-      <!-- About Section -->
-      <section class="about-section" id="about-section">
-        <p>Sam Gregg is a photographer based in London, specializing in fashion, portrait, and editorial photography.
-        </p>
-        <p>Recent work includes collaborations with Vogue Italia, editorial shoots for emerging artists, and
-          documentation of significant cultural events.</p>
-        <p>Available for commissions worldwide.</p>
-      </section>
     </main>
   </div>
 
@@ -544,12 +578,12 @@
 
     // Image data
     const imageData = [
-      { src: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop', title: 'Vogue Italia August 2021' },
-      { src: 'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=800&h=600&fit=crop', title: 'Geolier for Outpump' },
-      { src: 'https://images.unsplash.com/photo-1594736797933-d0dcced9132e?w=800&h=600&fit=crop', title: 'The Funeral of Queen Elizabeth II for Vogue Magazine' },
-      { src: 'https://images.unsplash.com/photo-1539571696485-50566e0b2be5?w=800&h=600&fit=crop', title: 'Editorial Fashion Series' },
-      { src: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=800&h=600&fit=crop', title: 'Beauty Campaign' },
-      { src: 'https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=800&h=600&fit=crop', title: 'Street Style Documentation' }
+      { src: 'assets/images/vogue-italia.jpg', title: 'Vogue Italia', year: '2021' },
+      { src: 'assets/images/geolier-outpump.jpg', title: 'Geolier for Outpump', year: '2022' },
+      { src: 'assets/images/vogue-queen.jpg', title: 'The Funeral of Queen Elizabeth II for Vogue Magazine', year: '2022' },
+      { src: 'assets/images/editorial-fashion.png', title: 'Editorial Fashion Series', year: '2023' },
+      { src: 'assets/images/beauty-campaign.png', title: 'Beauty Campaign', year: '2023' },
+      { src: 'assets/images/street-style.jpg', title: 'Street Style Documentation', year: '2024' }
     ];
 
     // Initialize the gallery
@@ -607,6 +641,10 @@
       thumbnails.forEach((thumbnail, index) => {
         thumbnail.classList.toggle('active', index === currentSlide);
       });
+
+      // Update image title
+      const imageTitle = document.getElementById('image-title');
+      imageTitle.innerHTML = `<div class="image-year">${imageData[currentSlide].year}</div>${imageData[currentSlide].title}`;
     }
 
     // Toggle thumbnails view
@@ -616,38 +654,17 @@
       const gallery = document.querySelector('.gallery');
       const controls = document.querySelector('.controls-container');
       const container = document.querySelector('.gallery-container');
+      const imageTitle = document.getElementById('image-title');
 
       showingThumbnails = !showingThumbnails;
       thumbnailsContainer.classList.toggle('show', showingThumbnails);
       toggleButton.textContent = showingThumbnails ? 'hide all photos' : 'show all photos';
       container.classList.toggle('showing-thumbnails', showingThumbnails);
+      imageTitle.classList.toggle('hidden', showingThumbnails);
       
       // Only hide/show main slide and controls
       gallery.style.display = showingThumbnails ? 'none' : 'flex';
       controls.style.display = showingThumbnails ? 'none' : 'flex';
-    }
-
-    // Section navigation
-    function showSection(sectionName) {
-      // Hide all sections
-      document.getElementById('home-section').style.display = 'none';
-      document.getElementById('about-section').classList.remove('active');
-
-      // Update nav active state
-      document.querySelectorAll('.nav a').forEach(link => link.classList.remove('active'));
-
-      // Show selected section
-      if (sectionName === 'home') {
-        document.getElementById('home-section').style.display = 'block';
-        document.querySelector('.nav a[onclick*="home"]').classList.add('active');
-      } else if (sectionName === 'about') {
-        document.getElementById('about-section').classList.add('active');
-        document.querySelector('.nav a[onclick*="about"]').classList.add('active');
-      }
-
-      // Close mobile menu
-      const sidebar = document.getElementById('sidebar');
-      sidebar.classList.remove('mobile-open');
     }
 
     // Toggle mobile menu
