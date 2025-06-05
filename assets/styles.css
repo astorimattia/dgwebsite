@@ -344,6 +344,114 @@ body {
     height: auto;
     object-fit: cover;
   }
+
+  /* Mobile header styles */
+  .mobile-header {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    background: #fff;
+    z-index: 1000;
+  }
+
+  .mobile-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  .mobile-logo {
+    font-size: 22px;
+    font-weight: normal;
+    color: #000;
+    font-family: 'GT America Regular', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+
+  .mobile-socials {
+    display: flex;
+    gap: 15px;
+    margin-top: 15px;
+  }
+
+  .mobile-socials a {
+    color: #000;
+  }
+
+  .mobile-socials svg {
+    fill: currentColor;
+  }
+
+  .mobile-about {
+    font-size: 16px;
+    color: #000;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+  }
+
+  .mobile-about:hover {
+    opacity: 0.5;
+  }
+
+  .about-section {
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    padding-top: 0;
+  }
+
+  .profile-image {
+    width: 100%;
+    max-width: 300px;
+    height: 400px;
+    order: -1;
+  }
+
+  .about-content {
+    max-width: 100%;
+  }
+
+  .gallery-container {
+    padding-top: 0;
+  }
+
+  .gallery-container.showing-thumbnails {
+    padding-bottom: 0;
+  }
+
+  .gallery {
+    display: none;
+  }
+
+  .controls-container {
+    display: none;
+  }
+
+  .thumbnails-toggle {
+    display: none;
+  }
+
+  .thumbnails {
+    position: static;
+    column-count: 1;
+    column-gap: 20px;
+    padding-bottom: 0;
+  }
+
+  .thumbnail {
+    position: static;
+    width: 100%;
+    margin-bottom: 20px;
+    break-inside: avoid;
+  }
+
+  .thumbnail:last-child {
+    margin-bottom: 0;
+  }
+
+  .thumbnail:hover {
+    transform: none;
+  }
 }
 
 @media (max-width: 480px) {
@@ -580,7 +688,6 @@ body {
     display: flex;
     flex-direction: column;
     padding: 20px;
-    position: relative;
     background: #fff;
     z-index: 1000;
   }
