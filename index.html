@@ -130,6 +130,13 @@
       margin: 0 auto;
       max-width: 1200px;
       min-height: calc(100vh - 60px);
+      padding-top: 60px;
+      padding-bottom: 60px;
+      transition: justify-content 0.3s ease;
+    }
+
+    .gallery-container.showing-thumbnails {
+      justify-content: flex-start;
     }
 
     .gallery {
@@ -140,6 +147,7 @@
       margin: 0 auto;
       display: flex;
       flex-direction: column;
+      flex-shrink: 0;
     }
 
     .slide {
@@ -154,20 +162,23 @@
 
     .slide img {
       max-width: 100%;
-      height: 70vh;
+      height: 80vh;
+      min-height: 80vh;
       object-fit: cover;
       margin: 0 auto;
     }
 
-    /* Navigation Controls - Above the image */
+    /* Navigation Controls - Below the image */
     .controls-container {
       display: flex;
       align-items: center;
       gap: 10px;
       font-size: 14px;
       justify-content: center;
-      margin-bottom: 25px;
-      position: relative;
+      position: absolute;
+      bottom: 18px;
+      left: 0;
+      right: 0;
       z-index: 2;
     }
 
@@ -180,6 +191,7 @@
       text-decoration: underline;
       transition: opacity 0.2s ease;
       font-family: 'GT America Thin', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      padding: 0;
     }
 
     .control-btn:hover {
@@ -221,26 +233,35 @@
     /* Thumbnails */
     .thumbnails-container {
       display: flex;
-      margin-top: 30px;
       justify-content: center;
       position: relative;
       flex-direction: column;
       align-items: center;
       width: 100%;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+      flex-shrink: 0;
+      z-index: 1;
     }
 
     .thumbnails-toggle {
-      background: none;
-      border: none;
       color: #000;
       cursor: pointer;
       font-size: 14px;
       text-decoration: underline;
-      margin-top: 25px;
       padding: 0;
       text-align: center;
       width: 100%;
       font-family: 'GT America Thin', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      position: absolute;
+      top: 18px;
+      left: 0;
+      right: 0;
+      background: none;
+      border: none;
+      outline: none;
+      z-index: 3;
     }
 
     .thumbnails-toggle:hover {
@@ -249,18 +270,23 @@
 
     .thumbnails {
       display: none;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-      max-width: 500px;
+      column-count: 3;
+      column-gap: 20px;
+      width: 100%;
       margin: 0 auto;
+      padding-bottom: 40px;
     }
 
     .thumbnails.show {
-      display: grid;
+      display: block;
     }
 
     .thumbnail {
       cursor: pointer;
+      width: 100%;
+      height: auto;
+      break-inside: avoid;
+      margin-bottom: 20px;
     }
 
     .thumbnail:hover,
@@ -404,13 +430,8 @@
     <main class="main-content">
       <!-- Home Section (Gallery) -->
       <div class="gallery-container" id="home-section">
-        <!-- Navigation Controls - Only prev/next -->
-        <div class="controls-container">
-          <button class="control-btn" onclick="changeSlide(-1)">prev</button>
-          <span class="separator">/</span>
-          <button class="control-btn" onclick="changeSlide(1)">next</button>
-        </div>
-
+        <span class="thumbnails-toggle" onclick="toggleThumbnails()">show all photos</span>
+        
         <div class="gallery">
           <div class="slide active">
             <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop"
@@ -437,9 +458,14 @@
               alt="Street Style Documentation">
           </div>
         </div>
-        <div class="thumbnails-toggle-container">
-          <button class="thumbnails-toggle" onclick="toggleThumbnails()">show all photos</button>
+
+        <!-- Navigation Controls - Below the image -->
+        <div class="controls-container">
+          <button class="control-btn" onclick="changeSlide(-1)">prev</button>
+          <span class="separator">/</span>
+          <button class="control-btn" onclick="changeSlide(1)">next</button>
         </div>
+
         <!-- Thumbnails -->
         <div class="thumbnails-container">
           <div class="thumbnails" id="thumbnails">
@@ -537,10 +563,18 @@
     function toggleThumbnails() {
       const thumbnailsContainer = document.getElementById('thumbnails');
       const toggleButton = document.querySelector('.thumbnails-toggle');
+      const gallery = document.querySelector('.gallery');
+      const controls = document.querySelector('.controls-container');
+      const container = document.querySelector('.gallery-container');
 
       showingThumbnails = !showingThumbnails;
       thumbnailsContainer.classList.toggle('show', showingThumbnails);
-      toggleButton.textContent = showingThumbnails ? 'hide thumbnails' : 'show thumbnails';
+      toggleButton.textContent = showingThumbnails ? 'hide all photos' : 'show all photos';
+      container.classList.toggle('showing-thumbnails', showingThumbnails);
+      
+      // Only hide/show main slide and controls
+      gallery.style.display = showingThumbnails ? 'none' : 'flex';
+      controls.style.display = showingThumbnails ? 'none' : 'flex';
     }
 
     // Section navigation
