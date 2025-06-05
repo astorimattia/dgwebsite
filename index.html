@@ -325,21 +325,25 @@
 
     .thumbnails {
       display: none;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
+      position: relative;
       width: 100%;
       margin: 0 auto;
       padding-bottom: 40px;
     }
 
     .thumbnails.show {
-      display: grid;
+      display: block;
     }
 
     .thumbnail {
       cursor: pointer;
-      width: 100%;
+      position: absolute;
+      transition: transform 0.2s ease;
+      margin-bottom: 20px;
+    }
+
+    .thumbnail:hover {
+      transform: scale(1.02);
     }
 
     .thumbnail img {
@@ -496,6 +500,10 @@
         padding-top: 0;
       }
 
+      .gallery-container.showing-thumbnails {
+        padding-bottom: 0;
+      }
+
       .gallery {
         display: none;
       }
@@ -509,11 +517,25 @@
       }
 
       .thumbnails {
-        grid-template-columns: 1fr;
+        position: static;
+        column-count: 1;
+        column-gap: 20px;
+        padding-bottom: 0;
       }
 
-      .gallery-container.showing-thumbnails {
-        justify-content: flex-start;
+      .thumbnail {
+        position: static;
+        width: 100%;
+        margin-bottom: 20px;
+        break-inside: avoid;
+      }
+
+      .thumbnail:last-child {
+        margin-bottom: 0;
+      }
+
+      .thumbnail:hover {
+        transform: none;
       }
     }
   </style>
@@ -837,10 +859,71 @@
         const img = document.createElement('img');
         img.src = image.src;
         img.alt = image.title;
+        
+        // Add load event to trigger masonry layout
+        img.onload = () => {
+          if (window.innerWidth > 768) {
+            layoutMasonry();
+          }
+        };
 
         thumbnail.appendChild(img);
         thumbnailsContainer.appendChild(thumbnail);
       });
+    }
+
+    // Masonry layout function
+    function layoutMasonry() {
+      if (window.innerWidth <= 768) {
+        // Reset any masonry styles on mobile
+        const container = document.getElementById('thumbnails');
+        const thumbnails = container.querySelectorAll('.thumbnail');
+        thumbnails.forEach(thumbnail => {
+          thumbnail.style.width = '';
+          thumbnail.style.left = '';
+          thumbnail.style.top = '';
+        });
+        container.style.height = '';
+        return;
+      }
+      
+      const container = document.getElementById('thumbnails');
+      const thumbnails = container.querySelectorAll('.thumbnail');
+      
+      if (thumbnails.length === 0) return;
+      
+      const containerWidth = container.offsetWidth;
+      const columnCount = 3;
+      const gap = 20;
+      const columnWidth = (containerWidth - (gap * (columnCount - 1))) / columnCount;
+      
+      // Initialize column heights
+      const columnHeights = new Array(columnCount).fill(0);
+      
+      thumbnails.forEach((thumbnail, index) => {
+        const img = thumbnail.querySelector('img');
+        if (!img.complete) return; // Skip if image not loaded
+        
+        // Calculate which column to place this thumbnail in
+        // For left-to-right, top-to-bottom order, we use the shortest column
+        const shortestColumnIndex = columnHeights.indexOf(Math.min(...columnHeights));
+        
+        // Set thumbnail size and position
+        thumbnail.style.width = `${columnWidth}px`;
+        thumbnail.style.left = `${shortestColumnIndex * (columnWidth + gap)}px`;
+        thumbnail.style.top = `${columnHeights[shortestColumnIndex]}px`;
+        
+        // Calculate the aspect ratio and height
+        const aspectRatio = img.naturalHeight / img.naturalWidth;
+        const thumbnailHeight = columnWidth * aspectRatio;
+        
+        // Update column height
+        columnHeights[shortestColumnIndex] += thumbnailHeight + gap;
+      });
+      
+      // Set container height
+      const maxHeight = Math.max(...columnHeights);
+      container.style.height = `${maxHeight}px`;
     }
 
     // Change slide
@@ -898,6 +981,11 @@
       
       gallery.style.display = showingThumbnails ? 'none' : 'flex';
       controls.style.display = showingThumbnails ? 'none' : 'flex';
+      
+      // Trigger masonry layout when showing thumbnails
+      if (showingThumbnails) {
+        setTimeout(layoutMasonry, 50); // Small delay to ensure display change is applied
+      }
     }
 
     // Toggle mobile menu

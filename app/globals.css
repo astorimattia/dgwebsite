@@ -1,0 +1,62 @@
+:root {
+  --arc-palette-focus: #C1A07AF9;
+  --arc-palette-foregroundSecondary: #EFA663FF;
+  --arc-palette-cutoutColor: #FCEDE0FF;
+  --arc-palette-background: #F2ECE4F4;
+  --arc-palette-foregroundPrimary: #EFA663FF;
+  --arc-palette-title: #2A1600F6;
+  --arc-background-simple-color: #EFA663FF;
+  --arc-palette-foregroundTertiary: #FCEDE0FF;
+  --arc-palette-maxContrastColor: #88480EFF;
+  --arc-palette-hover: #E5D8C9F5;
+  --arc-palette-backgroundExtra: #FEFDFCF2;
+  --arc-palette-minContrastColor: #FCEDE0FF;
+  --arc-palette-subtitle: #CDB394F7;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+body {
+  color: var(--arc-palette-title);
+  background: var(--arc-palette-background);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.header {
+  padding: 1rem;
+}
+
+#content {
+  max-width: 650px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.code {
+  font-family: monospace;
+}
+
+.company-logo {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  margin-right: 0px;
+  vertical-align: middle;
+  margin: 0px;
+} 
