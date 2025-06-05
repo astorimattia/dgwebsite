@@ -5,6 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mattia Astori</title>
+  <link rel="icon" type="image/webp" href="assets/favicon_chaos.webp">
+  <link rel="apple-touch-icon" href="assets/favicon_chaos.webp">
   <link rel="stylesheet" href="assets/fonts.css">
   <link rel="stylesheet" href="assets/styles.css">
 </head>
@@ -300,13 +302,49 @@
     function initGallery() {
       generateThumbnails();
       updateSlide();
+      handleResponsiveLayout();
 
-      // On mobile, always show thumbnails
+      // Add window resize listener
+      window.addEventListener('resize', handleResponsiveLayout);
+    }
+
+    // Handle responsive layout
+    function handleResponsiveLayout() {
+      const container = document.querySelector('.gallery-container');
+      const thumbnails = document.getElementById('thumbnails');
+      const gallery = document.querySelector('.gallery');
+      const controls = document.querySelector('.controls-container');
+      const toggleButton = document.querySelector('.thumbnails-toggle');
+
       if (window.innerWidth <= 768) {
-        const container = document.querySelector('.gallery-container');
+        // Mobile layout
         container.classList.add('showing-thumbnails');
-        const thumbnails = document.getElementById('thumbnails');
         thumbnails.classList.add('show');
+        gallery.style.display = 'none';
+        controls.style.display = 'none';
+        if (toggleButton) toggleButton.style.display = 'none';
+      } else if (window.innerWidth <= 1366) {
+        // Laptop layout
+        container.classList.remove('showing-thumbnails');
+        thumbnails.classList.remove('show');
+        gallery.style.display = 'flex';
+        controls.style.display = 'flex';
+        if (toggleButton) toggleButton.style.display = 'block';
+        
+        // Adjust masonry layout for laptop screens
+        if (window.innerWidth <= 1200) {
+          layoutMasonry(2); // 2 columns for smaller laptops
+        } else {
+          layoutMasonry(3); // 3 columns for larger laptops
+        }
+      } else {
+        // Desktop layout
+        container.classList.remove('showing-thumbnails');
+        thumbnails.classList.remove('show');
+        gallery.style.display = 'flex';
+        controls.style.display = 'flex';
+        if (toggleButton) toggleButton.style.display = 'block';
+        layoutMasonry(3); // 3 columns for desktop
       }
     }
 
@@ -341,7 +379,7 @@
     }
 
     // Masonry layout function
-    function layoutMasonry() {
+    function layoutMasonry(columnCount = 3) {
       if (window.innerWidth <= 768) {
         // Reset any masonry styles on mobile
         const container = document.getElementById('thumbnails');
@@ -361,7 +399,6 @@
       if (thumbnails.length === 0) return;
       
       const containerWidth = container.offsetWidth;
-      const columnCount = 3;
       const gap = 20;
       const columnWidth = (containerWidth - (gap * (columnCount - 1))) / columnCount;
       
@@ -373,7 +410,6 @@
         if (!img.complete) return; // Skip if image not loaded
         
         // Calculate which column to place this thumbnail in
-        // For left-to-right, top-to-bottom order, we use the shortest column
         const shortestColumnIndex = columnHeights.indexOf(Math.min(...columnHeights));
         
         // Set thumbnail size and position
