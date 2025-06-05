@@ -1,0 +1,516 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #ffffff;
+  color: #000000;
+  line-height: 1.4;
+}
+
+.container {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* Left Sidebar - exact match */
+.sidebar {
+  width: 240px;
+  padding: 30px 40px;
+  position: fixed;
+  height: 100vh;
+  overflow-y: auto;
+  top: 20px;
+  left: 15px;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+
+.logo {
+  font-size: 25px;
+  font-weight: normal;
+  margin-bottom: 30px;
+  color: #000;
+  padding-left: 0;
+  font-family: 'GT America Regular', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 40px;
+}
+
+.nav a {
+  color: #000;
+  text-decoration: none;
+  font-size: 16px;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.nav a:hover,
+.nav a.active {
+  opacity: 0.5;
+}
+
+.social-icons {
+  display: flex;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.social-icons a {
+  color: #000;
+  text-decoration: none;
+  font-size: 14px;
+  transition: opacity 0.2s ease;
+}
+
+.social-icons a:hover {
+  opacity: 0.5;
+}
+
+.social-icons svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Main Content */
+.main-content {
+  flex: 1;
+  padding: 30px 40px;
+  height: 100vh;
+  overflow-y: auto;
+  margin-left: 240px;
+}
+
+/* About Content */
+.about-content {
+  max-width: 500px;
+  line-height: 1.5;
+  font-family: 'GT America Thin', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+.about-content p {
+  margin-bottom: 20px;
+  font-size: 16px;
+  color: #000;
+}
+
+.important {
+  font-family: 'GT America Regular', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* Ensure special characters maintain thin weight */
+.about-content p span:not(.important),
+.about-content p {
+  font-feature-settings: "ss01" 1;
+  font-variant-numeric: tabular-nums;
+  font-weight: 200;
+}
+
+/* Specific styling for punctuation and special characters */
+.about-content p span:not(.important),
+.about-content p {
+  font-feature-settings: "ss01" 1, "kern" 1;
+  letter-spacing: -0.01em;
+}
+
+.about-section {
+  display: flex;
+  gap: 60px;
+  align-items: flex-start;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding-top: 60px;
+}
+
+.profile-image {
+  width: 300px;
+  height: 400px;
+  object-fit: cover;
+  flex-shrink: 0;
+  margin-top: 0;
+}
+
+/* Gallery */
+.gallery-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  margin: 0 auto;
+  max-width: 1200px;
+  min-height: calc(100vh - 60px);
+  padding-top: 60px;
+  padding-bottom: 60px;
+  transition: justify-content 0.3s ease;
+}
+
+.gallery-container.showing-thumbnails {
+  justify-content: flex-start;
+}
+
+.gallery {
+  position: relative;
+  text-align: center;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  align-items: center;
+}
+
+.slide {
+  display: none;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.slide.active {
+  display: block;
+}
+
+.slide img {
+  height: 80vh;
+  min-height: 80vh;
+  max-height: 80vh;
+  width: auto;
+  object-fit: contain;
+  margin: 0 auto;
+}
+
+/* Navigation zones */
+.nav-zone {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 50%;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.nav-zone.left {
+  left: 0;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.2), transparent);
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="black"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>') 12 12, auto;
+}
+
+.nav-zone.right {
+  right: 0;
+  background: linear-gradient(to left, rgba(255, 255, 255, 0.2), transparent);
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="black"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>') 12 12, auto;
+}
+
+.nav-zone:hover {
+  opacity: 1;
+}
+
+/* Remove the arrow indicators */
+.nav-zone::after {
+  display: none;
+}
+
+.nav-zone.left::after,
+.nav-zone.right::after {
+  display: none;
+}
+
+/* Navigation Controls - Below the image */
+.controls-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  justify-content: center;
+  position: absolute;
+  bottom: 16px;
+  left: 0;
+  right: 0;
+  z-index: 2;
+}
+
+.control-btn {
+  background: none;
+  border: none;
+  color: #000;
+  cursor: pointer;
+  font-size: 14px;
+  text-decoration: underline;
+  transition: opacity 0.2s ease;
+  font-family: 'GT America Thin', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  padding: 0;
+}
+
+.control-btn:hover {
+  opacity: 0.5;
+}
+
+.separator {
+  color: #000;
+  margin: 0 5px;
+  font-family: 'GT America Thin', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* Pagination Dots */
+.pagination {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 40px;
+  justify-content: center;
+}
+
+.page-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #ddd;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.page-dot.active {
+  background-color: #000;
+}
+
+.page-dot:hover {
+  background-color: #666;
+}
+
+/* Thumbnails */
+.thumbnails-container {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  flex-shrink: 0;
+  z-index: 1;
+}
+
+.thumbnails-toggle {
+  color: #000;
+  cursor: pointer;
+  font-size: 14px;
+  text-decoration: underline;
+  padding: 0;
+  text-align: center;
+  width: 100%;
+  font-family: 'GT America Thin', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  position: absolute;
+  top: 16px;
+  left: 0;
+  right: 0;
+  background: none;
+  border: none;
+  outline: none;
+  z-index: 3;
+}
+
+.thumbnails-toggle:hover {
+  opacity: 0.5;
+}
+
+.thumbnails {
+  display: none;
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+  padding-bottom: 40px;
+}
+
+.thumbnails.show {
+  display: block;
+}
+
+.thumbnail {
+  cursor: pointer;
+  position: absolute;
+  transition: transform 0.2s ease;
+  margin-bottom: 20px;
+}
+
+.thumbnail:hover {
+  transform: scale(1.02);
+}
+
+.thumbnail img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Image Title */
+.image-title {
+  margin-top: auto;
+  font-size: 14px;
+  color: #000;
+  opacity: 1;
+  padding-bottom: 80px;
+  font-family: 'GT America Regular', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.4;
+  display: flex;
+  flex-direction: column;
+}
+
+.image-year {
+  font-size: 12px;
+  color: #666;
+  margin-bottom: 4px;
+  font-family: 'GT America Thin', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+.image-title.hidden {
+  opacity: 0;
+}
+
+/* Mobile Menu */
+.mobile-menu {
+  display: none;
+}
+
+/* Mobile header styles */
+.mobile-header {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    display: none;
+  }
+
+  .main-content {
+    margin-left: 0;
+    padding: 20px;
+  }
+
+  /* Mobile header styles */
+  .mobile-header {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    position: relative;
+    background: #fff;
+    z-index: 1000;
+  }
+
+  .mobile-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  .mobile-logo {
+    font-size: 22px;
+    font-weight: normal;
+    color: #000;
+    font-family: 'GT America Regular', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+
+  .mobile-socials {
+    display: flex;
+    gap: 15px;
+    margin-top: 15px;
+  }
+
+  .mobile-socials a {
+    color: #000;
+  }
+
+  .mobile-socials svg {
+    fill: currentColor;
+  }
+
+  .mobile-about {
+    font-size: 16px;
+    color: #000;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+  }
+
+  .mobile-about:hover {
+    opacity: 0.5;
+  }
+
+  .about-section {
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    padding-top: 0;
+  }
+
+  .profile-image {
+    width: 100%;
+    max-width: 300px;
+    height: 400px;
+    order: -1;
+  }
+
+  .about-content {
+    max-width: 100%;
+  }
+
+  .gallery-container {
+    padding-top: 0;
+  }
+
+  .gallery-container.showing-thumbnails {
+    padding-bottom: 0;
+  }
+
+  .gallery {
+    display: none;
+  }
+
+  .controls-container {
+    display: none;
+  }
+
+  .thumbnails-toggle {
+    display: none;
+  }
+
+  .thumbnails {
+    position: static;
+    column-count: 1;
+    column-gap: 20px;
+    padding-bottom: 0;
+  }
+
+  .thumbnail {
+    position: static;
+    width: 100%;
+    margin-bottom: 20px;
+    break-inside: avoid;
+  }
+
+  .thumbnail:last-child {
+    margin-bottom: 0;
+  }
+
+  .thumbnail:hover {
+    transform: none;
+  }
+} 
