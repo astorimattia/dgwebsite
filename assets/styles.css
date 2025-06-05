@@ -295,7 +295,8 @@ body {
 
   .main-content {
     margin-left: 0;
-    padding: 20px;
+    padding: 10px;
+    height: auto;
   }
 
   .gallery-container {
@@ -570,7 +571,8 @@ body {
 
   .main-content {
     margin-left: 0;
-    padding: 20px;
+    padding: 10px;
+    height: auto;
   }
 
   /* Mobile header styles */
