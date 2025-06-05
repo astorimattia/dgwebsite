@@ -325,6 +325,7 @@
 
     .thumbnails {
       display: none;
+      display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 20px;
       width: 100%;
@@ -339,13 +340,6 @@
     .thumbnail {
       cursor: pointer;
       width: 100%;
-      height: auto;
-      margin-bottom: 0;
-    }
-
-    .thumbnail:hover,
-    .thumbnail.active {
-      opacity: 1;
     }
 
     .thumbnail img {
@@ -515,28 +509,7 @@
       }
 
       .thumbnails {
-        display: none;
         grid-template-columns: 1fr;
-        gap: 20px;
-        width: 100%;
-        margin: 0 auto;
-        padding-bottom: 40px;
-      }
-
-      .thumbnails.show {
-        display: grid;
-      }
-
-      .thumbnail {
-        break-inside: avoid;
-        margin-bottom: 0;
-        width: 100%;
-      }
-
-      .thumbnail img {
-        width: 100%;
-        height: auto;
-        display: block;
       }
 
       .gallery-container.showing-thumbnails {
@@ -609,41 +582,162 @@
         <span class="thumbnails-toggle" onclick="toggleThumbnails()">show all photos</span>
         
         <div class="gallery">
+          <!-- Macha Series -->
           <div class="slide active">
             <div class="nav-zone left" onclick="changeSlide(-1)"></div>
             <div class="nav-zone right" onclick="changeSlide(1)"></div>
-            <img src="assets/images/vogue-italia.jpg"
-              alt="Vogue Italia">
+            <img src="assets/images/macha-rope-guy.webp" alt="Macha Series - Rope Guy">
           </div>
           <div class="slide">
             <div class="nav-zone left" onclick="changeSlide(-1)"></div>
             <div class="nav-zone right" onclick="changeSlide(1)"></div>
-            <img src="assets/images/geolier-outpump.jpg"
-              alt="Geolier for Outpump">
+            <img src="assets/images/macha-purple-rope-guy.webp" alt="Macha Series - Purple Rope Guy">
           </div>
           <div class="slide">
             <div class="nav-zone left" onclick="changeSlide(-1)"></div>
             <div class="nav-zone right" onclick="changeSlide(1)"></div>
-            <img src="assets/images/vogue-queen.jpg"
-              alt="The Funeral of Queen Elizabeth II for Vogue Magazine">
+            <img src="assets/images/macha-moving-punch.webp" alt="Macha Series - Moving Punch">
           </div>
           <div class="slide">
             <div class="nav-zone left" onclick="changeSlide(-1)"></div>
             <div class="nav-zone right" onclick="changeSlide(1)"></div>
-            <img src="assets/images/editorial-fashion.png"
-              alt="Editorial Fashion Series">
+            <img src="assets/images/macha-missing-eye.webp" alt="Macha Series - Missing Eye">
           </div>
           <div class="slide">
             <div class="nav-zone left" onclick="changeSlide(-1)"></div>
             <div class="nav-zone right" onclick="changeSlide(1)"></div>
-            <img src="assets/images/beauty-campaign.jpg"
-              alt="Beauty Campaign">
+            <img src="assets/images/macha-hat-lady.webp" alt="Macha Series - Hat Lady">
           </div>
           <div class="slide">
             <div class="nav-zone left" onclick="changeSlide(-1)"></div>
             <div class="nav-zone right" onclick="changeSlide(1)"></div>
-            <img src="assets/images/street-style.jpg"
-              alt="Street Style Documentation">
+            <img src="assets/images/macha-girl.webp" alt="Macha Series - Girl">
+          </div>
+          <div class="slide">
+            <div class="nav-zone left" onclick="changeSlide(-1)"></div>
+            <div class="nav-zone right" onclick="changeSlide(1)"></div>
+            <img src="assets/images/macha-coca-punch.webp" alt="Macha Series - Coca Punch">
+          </div>
+          <div class="slide">
+            <div class="nav-zone left" onclick="changeSlide(-1)"></div>
+            <div class="nav-zone right" onclick="changeSlide(1)"></div>
+            <img src="assets/images/macha-broken-nose.webp" alt="Macha Series - Broken Nose">
+          </div>
+          <div class="slide">
+            <div class="nav-zone left" onclick="changeSlide(-1)"></div>
+            <div class="nav-zone right" onclick="changeSlide(1)"></div>
+            <img src="assets/images/macha-punch.webp" alt="Macha Series - Punch">
+          </div>
+          <div class="slide">
+            <div class="nav-zone left" onclick="changeSlide(-1)"></div>
+            <div class="nav-zone right" onclick="changeSlide(1)"></div>
+            <img src="assets/images/macha-policia.webp" alt="Macha Series - Policia">
+          </div>
+
+          <!-- Tultepec Series -->
+          <div class="slide">
+            <div class="nav-zone left" onclick="changeSlide(-1)"></div>
+            <div class="nav-zone right" onclick="changeSlide(1)"></div>
+            <img src="assets/images/tultepec-sinaloa.webp" alt="Tultepec Series - Sinaloa">
+          </div>
+          <div class="slide">
+            <div class="nav-zone left" onclick="changeSlide(-1)"></div>
+            <div class="nav-zone right" onclick="changeSlide(1)"></div>
+            <img src="assets/images/tultepec-sinaloa-rocket.webp" alt="Tultepec Series - Sinaloa Rocket">
+          </div>
+          <div class="slide">
+            <div class="nav-zone left" onclick="changeSlide(-1)"></div>
+            <div class="nav-zone right" onclick="changeSlide(1)"></div>
+            <img src="assets/images/tultepec-push.webp" alt="Tultepec Series - Push">
+          </div>
+          <div class="slide">
+            <div class="nav-zone left" onclick="changeSlide(-1)"></div>
+            <div class="nav-zone right" onclick="changeSlide(1)"></div>
+            <img src="assets/images/tultepec-phone.webp" alt="Tultepec Series - Phone">
+          </div>
+          <div class="slide">
+            <div class="nav-zone left" onclick="changeSlide(-1)"></div>
+            <div class="nav-zone right" onclick="changeSlide(1)"></div>
+            <img src="assets/images/tultepec-milky-way.webp" alt="Tultepec Series - Milky Way">
+          </div>
+          <div class="slide">
+            <div class="nav-zone left" onclick="changeSlide(-1)"></div>
+            <div class="nav-zone right" onclick="changeSlide(1)"></div>
+            <img src="assets/images/tultepec-hooligan.webp" alt="Tultepec Series - Hooligan">
+          </div>
+          <div class="slide">
+            <div class="nav-zone left" onclick="changeSlide(-1)"></div>
+            <div class="nav-zone right" onclick="changeSlide(1)"></div>
+            <img src="assets/images/tultepec-guy-back.webp" alt="Tultepec Series - Guy Back">
+          </div>
+          <div class="slide">
+            <div class="nav-zone left" onclick="changeSlide(-1)"></div>
+            <div class="nav-zone right" onclick="changeSlide(1)"></div>
+            <img src="assets/images/tultepec-fire.webp" alt="Tultepec Series - Fire">
+          </div>
+          <div class="slide">
+            <div class="nav-zone left" onclick="changeSlide(-1)"></div>
+            <div class="nav-zone right" onclick="changeSlide(1)"></div>
+            <img src="assets/images/tultepec-everyone-carrying.webp" alt="Tultepec Series - Everyone Carrying">
+          </div>
+          <div class="slide">
+            <div class="nav-zone left" onclick="changeSlide(-1)"></div>
+            <div class="nav-zone right" onclick="changeSlide(1)"></div>
+            <img src="assets/images/tultepec-chaos-vertical.webp" alt="Tultepec Series - Chaos Vertical">
+          </div>
+          <div class="slide">
+            <div class="nav-zone left" onclick="changeSlide(-1)"></div>
+            <div class="nav-zone right" onclick="changeSlide(1)"></div>
+            <img src="assets/images/tultepec-chaos-horizontal.webp" alt="Tultepec Series - Chaos Horizontal">
+          </div>
+          <div class="slide">
+            <div class="nav-zone left" onclick="changeSlide(-1)"></div>
+            <div class="nav-zone right" onclick="changeSlide(1)"></div>
+            <img src="assets/images/tultepec-bull.webp" alt="Tultepec Series - Bull">
+          </div>
+
+          <!-- Tultepec Day Series -->
+          <div class="slide">
+            <div class="nav-zone left" onclick="changeSlide(-1)"></div>
+            <div class="nav-zone right" onclick="changeSlide(1)"></div>
+            <img src="assets/images/tultepec-day-kid-vertical.webp" alt="Tultepec Day Series - Kid Vertical">
+          </div>
+          <div class="slide">
+            <div class="nav-zone left" onclick="changeSlide(-1)"></div>
+            <div class="nav-zone right" onclick="changeSlide(1)"></div>
+            <img src="assets/images/tultepec-day-kid-horizontal.webp" alt="Tultepec Day Series - Kid Horizontal">
+          </div>
+          <div class="slide">
+            <div class="nav-zone left" onclick="changeSlide(-1)"></div>
+            <div class="nav-zone right" onclick="changeSlide(1)"></div>
+            <img src="assets/images/tultepec-day-kid-and-sister.webp" alt="Tultepec Day Series - Kid and Sister">
+          </div>
+          <div class="slide">
+            <div class="nav-zone left" onclick="changeSlide(-1)"></div>
+            <div class="nav-zone right" onclick="changeSlide(1)"></div>
+            <img src="assets/images/tultepec-day-chihuahua.webp" alt="Tultepec Day Series - Chihuahua">
+          </div>
+          <div class="slide">
+            <div class="nav-zone left" onclick="changeSlide(-1)"></div>
+            <div class="nav-zone right" onclick="changeSlide(1)"></div>
+            <img src="assets/images/tultepec-day-bench-guy.webp" alt="Tultepec Day Series - Bench Guy">
+          </div>
+          <div class="slide">
+            <div class="nav-zone left" onclick="changeSlide(-1)"></div>
+            <div class="nav-zone right" onclick="changeSlide(1)"></div>
+            <img src="assets/images/tultepec-day-baby.webp" alt="Tultepec Day Series - Baby">
+          </div>
+
+          <!-- Australia Series -->
+          <div class="slide">
+            <div class="nav-zone left" onclick="changeSlide(-1)"></div>
+            <div class="nav-zone right" onclick="changeSlide(1)"></div>
+            <img src="assets/images/australia-kangaroo.webp" alt="Australia Series - Kangaroo">
+          </div>
+          <div class="slide">
+            <div class="nav-zone left" onclick="changeSlide(-1)"></div>
+            <div class="nav-zone right" onclick="changeSlide(1)"></div>
+            <img src="assets/images/australia-chair.webp" alt="Australia Series - Chair">
           </div>
         </div>
 
@@ -673,12 +767,43 @@
 
     // Image data
     const imageData = [
-      { src: 'assets/images/vogue-italia.jpg', title: 'Vogue Italia', year: '2021' },
-      { src: 'assets/images/geolier-outpump.jpg', title: 'Geolier for Outpump', year: '2022' },
-      { src: 'assets/images/vogue-queen.jpg', title: 'The Funeral of Queen Elizabeth II for Vogue Magazine', year: '2022' },
-      { src: 'assets/images/editorial-fashion.png', title: 'Editorial Fashion Series', year: '2023' },
-      { src: 'assets/images/beauty-campaign.png', title: 'Beauty Campaign', year: '2023' },
-      { src: 'assets/images/street-style.jpg', title: 'Street Style Documentation', year: '2024' }
+      // Macha series
+      { src: 'assets/images/macha-rope-guy.webp', title: 'Tinku de Macha, Bolivia', year: '2025' },
+      { src: 'assets/images/macha-purple-rope-guy.webp', title: 'Tinku de Macha, Bolivia', year: '2025' },
+      { src: 'assets/images/macha-moving-punch.webp', title: 'Tinku de Macha, Bolivia', year: '2025' },
+      { src: 'assets/images/macha-missing-eye.webp', title: 'Tinku de Macha, Bolivia', year: '2025' },
+      { src: 'assets/images/macha-hat-lady.webp', title: 'Tinku de Macha, Bolivia', year: '2025' },
+      { src: 'assets/images/macha-girl.webp', title: 'Tinku de Macha, Bolivia', year: '2025' },
+      { src: 'assets/images/macha-coca-punch.webp', title: 'Tinku de Macha, Bolivia', year: '2025' },
+      { src: 'assets/images/macha-broken-nose.webp', title: 'Tinku de Macha, Bolivia', year: '2025' },
+      { src: 'assets/images/macha-punch.webp', title: 'Tinku de Macha, Bolivia', year: '2025' },
+      { src: 'assets/images/macha-policia.webp', title: 'Tinku de Macha, Bolivia', year: '2025' },
+      
+      // Tultepec series
+      { src: 'assets/images/tultepec-sinaloa.webp', title: 'Feria Internacional de la Pirotecnìa, Mexico', year: '2025' },
+      { src: 'assets/images/tultepec-sinaloa-rocket.webp', title: 'Feria Internacional de la Pirotecnìa, Mexico', year: '2025' },
+      { src: 'assets/images/tultepec-push.webp', title: 'Feria Internacional de la Pirotecnìa, Mexico', year: '2025' },
+      { src: 'assets/images/tultepec-phone.webp', title: 'Feria Internacional de la Pirotecnìa, Mexico', year: '2025' },
+      { src: 'assets/images/tultepec-milky-way.webp', title: 'Feria Internacional de la Pirotecnìa, Mexico', year: '2025' },
+      { src: 'assets/images/tultepec-hooligan.webp', title: 'Feria Internacional de la Pirotecnìa, Mexico', year: '2025' },
+      { src: 'assets/images/tultepec-guy-back.webp', title: 'Feria Internacional de la Pirotecnìa, Mexico', year: '2025' },
+      { src: 'assets/images/tultepec-fire.webp', title: 'Feria Internacional de la Pirotecnìa, Mexico', year: '2025' },
+      { src: 'assets/images/tultepec-everyone-carrying.webp', title: 'Feria Internacional de la Pirotecnìa, Mexico', year: '2025' },
+      { src: 'assets/images/tultepec-chaos-vertical.webp', title: 'Feria Internacional de la Pirotecnìa, Mexico', year: '2025' },
+      { src: 'assets/images/tultepec-chaos-horizontal.webp', title: 'Feria Internacional de la Pirotecnìa, Mexico', year: '2025' },
+      { src: 'assets/images/tultepec-bull.webp', title: 'Feria Internacional de la Pirotecnìa, Mexico', year: '2025' },
+      
+      // Tultepec Day series
+      { src: 'assets/images/tultepec-day-kid-vertical.webp', title: 'Tultepec, Mexico', year: '2025' },
+      { src: 'assets/images/tultepec-day-kid-horizontal.webp', title: 'Tultepec, Mexico', year: '2025' },
+      { src: 'assets/images/tultepec-day-kid-and-sister.webp', title: 'Tultepec, Mexico', year: '2025' },
+      { src: 'assets/images/tultepec-day-chihuahua.webp', title: 'Tultepec, Mexico', year: '2025' },
+      { src: 'assets/images/tultepec-day-bench-guy.webp', title: 'Tultepec, Mexico', year: '2025' },
+      { src: 'assets/images/tultepec-day-baby.webp', title: 'Tultepec, Mexico', year: '2025' },
+
+      // Australia series
+      { src: 'assets/images/australia-kangaroo.webp', title: 'Australia', year: '2024' },
+      { src: 'assets/images/australia-chair.webp', title: 'Australia', year: '2024' }
     ];
 
     // Initialize the gallery
