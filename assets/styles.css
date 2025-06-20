@@ -858,3 +858,81 @@ body {
     display: none;
   }
 }
+
+/* Mobile Location Section */
+.mobile-location-section {
+  display: none;
+  padding: 0;
+  background: none;
+  border: none;
+  margin-top: 15px;
+}
+
+#mobile-location-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.mobile-location-label {
+  font-family: 'GT America Thin', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-weight: 200;
+  font-size: 16px;
+  color: #000;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: "ss01" 1, "kern" 1;
+  letter-spacing: -0.01em;
+}
+
+#mobile-city {
+  font-family: 'GT America Regular', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-weight: normal;
+  font-size: 16px;
+  color: #000;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#mobile-city-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+#mobile-city-link:hover {
+  opacity: 0.7;
+}
+
+/* Hide location section on mobile since sidebar is hidden */
+@media (max-width: 768px) {
+  .location-section {
+    display: none;
+  }
+  
+  .mobile-location-section {
+    display: block;
+  }
+}
+
+.mobile-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 18px;
+}
+
+.mobile-location-section {
+  display: none;
+  padding: 0;
+  background: none;
+  border: none;
+}
+
+@media (max-width: 768px) {
+  .location-section {
+    display: none;
+  }
+  .mobile-location-section {
+    display: block;
+  }
+}
