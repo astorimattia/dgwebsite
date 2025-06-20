@@ -47,6 +47,17 @@
       <a href="/" class="logo">Mattia Astori</a>
       <nav class="nav">
         <a href="/about">About</a>
+        
+        <!-- Location Section -->
+        <div class="location-section">
+          <div id="location-container">
+            <span class="location-label">Currently in:</span>
+            <a id="city-link" href="#" target="_blank">
+              <div id="city">Loading...</div>
+            </a>
+          </div>
+        </div>
+        
         <div class="social-icons">
           <a href="https://instagram.com/astori.teller" target="_blank" title="Instagram">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
@@ -523,6 +534,43 @@
 
     // Initialize when page loads
     document.addEventListener('DOMContentLoaded', initGallery);
+
+    // Location feature
+    const GIST_URL = 'https://gist.githubusercontent.com/astorimattia/5d43be1043ca3e39a8d3d214392a870e/raw/location.json';
+    const GOOGLE_MAPS_API_KEY = ''; // Leave empty to use OpenStreetMap fallback
+
+    function loadLocation() {
+      fetch(GIST_URL)
+        .then(res => res.json())
+        .then(data => {
+          const city = data.city || "Unknown";
+          const cityElement = document.getElementById('city');
+          const cityLink = document.getElementById('city-link');
+          
+          cityElement.innerText = city;
+          
+          if (city !== "Unknown") {
+            const googleMapsUrl = `https://www.google.com/maps/search/${encodeURIComponent(city)}`;
+            cityLink.href = googleMapsUrl;
+            cityLink.style.cursor = 'pointer';
+          } else {
+            cityLink.href = '#';
+            cityLink.style.cursor = 'default';
+          }
+        })
+        .catch(err => {
+          console.error('Error loading location:', err);
+          const cityElement = document.getElementById('city');
+          const cityLink = document.getElementById('city-link');
+          
+          cityElement.innerText = "Unavailable";
+          cityLink.href = '#';
+          cityLink.style.cursor = 'default';
+        });
+    }
+
+    // Load location when page loads
+    document.addEventListener('DOMContentLoaded', loadLocation);
   </script>
 </body>
 

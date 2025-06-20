@@ -811,3 +811,50 @@ body {
     transform: none;
   }
 }
+
+/* Location Section */
+.location-section {
+  margin-top: 8px;
+}
+
+#location-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.location-label {
+  font-family: 'GT America Thin', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-weight: 200;
+  font-size: 16px;
+  color: #000;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: "ss01" 1, "kern" 1;
+  letter-spacing: -0.01em;
+}
+
+#city {
+  font-family: 'GT America Regular', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-weight: normal;
+  font-size: 16px;
+  color: #000;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#city-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+#city-link:hover {
+  opacity: 0.7;
+}
+
+/* Hide location section on mobile since sidebar is hidden */
+@media (max-width: 768px) {
+  .location-section {
+    display: none;
+  }
+}
