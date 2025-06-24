@@ -516,8 +516,7 @@
       imageTitle.classList.toggle('hidden', showingThumbnails);
       
       gallery.style.display = showingThumbnails ? 'none' : 'flex';
-      // Don't hide controls when showing thumbnails since toggle button is inside it
-      // controls.style.display = showingThumbnails ? 'none' : 'flex';
+      controls.style.display = showingThumbnails ? 'none' : 'flex';
       
       // Trigger masonry layout when showing thumbnails
       if (showingThumbnails) {
