@@ -875,6 +875,73 @@ body {
   }
 }
 
+/* About Preview Section */
+.about-preview {
+  margin-top: 8px;
+  margin-bottom: 20px;
+}
+
+.about-preview-text {
+  font-size: 14px;
+  line-height: 1.4;
+  margin-bottom: 0;
+  color: #333;
+}
+
+.view-more-btn {
+  color: #999;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 100;
+  transition: opacity 0.2s ease;
+  display: inline;
+  opacity: 0.4;
+  margin-left: 3px;
+}
+
+.view-more-btn:hover {
+  opacity: 0.4;
+}
+
+/* Mobile About Preview */
+.mobile-about-preview {
+  display: none;
+  padding: 25px 0 0 0;
+}
+
+.mobile-about-preview-text {
+  font-size: 14px;
+  line-height: 1.4;
+  margin: 0;
+  color: #333;
+}
+
+.mobile-view-more-btn {
+  color: #000;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 100;
+  transition: opacity 0.2s ease;
+  display: inline;
+  opacity: 0.4;
+  margin-left: 3px;
+}
+
+.mobile-view-more-btn:hover {
+  opacity: 0.2;
+}
+
+/* Show mobile about preview on mobile, hide desktop version */
+@media (max-width: 768px) {
+  .about-preview {
+    display: none;
+  }
+  
+  .mobile-about-preview {
+    display: block;
+  }
+}
+
 /* Location Section */
 .location-section {
   margin-top: 8px;
