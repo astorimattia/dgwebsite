@@ -909,6 +909,18 @@ body {
   padding: 25px 0 0 0;
 }
 
+.mobile-about-preview-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  transition: opacity 0.2s ease;
+  cursor: pointer;
+}
+
+.mobile-about-preview-link:hover {
+  opacity: 0.7;
+}
+
 .mobile-about-preview-text {
   font-size: 14px;
   line-height: 1.4;
@@ -918,17 +930,12 @@ body {
 
 .mobile-view-more-btn {
   color: #000;
-  text-decoration: none;
   font-size: 12px;
   font-weight: 100;
   transition: opacity 0.2s ease;
   display: inline;
   opacity: 0.4;
   margin-left: 3px;
-}
-
-.mobile-view-more-btn:hover {
-  opacity: 0.2;
 }
 
 /* Show mobile about preview on mobile, hide desktop version */
