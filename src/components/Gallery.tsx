@@ -10,44 +10,50 @@ interface ImageData {
 }
 
 const imageData: ImageData[] = [
-  // Macha series
-  { src: '/assets/images/macha-rope-guy.webp', title: 'Tinku de Macha, Bolivia', year: '2025' },
-  { src: '/assets/images/macha-purple-rope-guy.webp', title: 'Tinku de Macha, Bolivia', year: '2025' },
-  { src: '/assets/images/macha-moving-punch.webp', title: 'Tinku de Macha, Bolivia', year: '2025' },
-  { src: '/assets/images/macha-missing-eye.webp', title: 'Tinku de Macha, Bolivia', year: '2025' },
-  { src: '/assets/images/macha-hat-lady.webp', title: 'Tinku de Macha, Bolivia', year: '2025' },
-  { src: '/assets/images/macha-girl.webp', title: 'Tinku de Macha, Bolivia', year: '2025' },
-  { src: '/assets/images/macha-coca-punch.webp', title: 'Tinku de Macha, Bolivia', year: '2025' },
-  { src: '/assets/images/macha-broken-nose.webp', title: 'Tinku de Macha, Bolivia', year: '2025' },
-  { src: '/assets/images/macha-punch.webp', title: 'Tinku de Macha, Bolivia', year: '2025' },
-  { src: '/assets/images/macha-policia.webp', title: 'Tinku de Macha, Bolivia', year: '2025' },
+  // Tinku series (Macha, Bolivia)
+  { src: '/assets/images/tinku-analog.webp', title: 'Tinku de Macha, Bolivia', year: '2025' },
+  { src: '/assets/images/tinku-analog2.webp', title: 'Tinku de Macha, Bolivia', year: '2025' },
+  { src: '/assets/images/tinku-analog3.webp', title: 'Tinku de Macha, Bolivia', year: '2025' },
+  { src: '/assets/images/tinku-analog4.webp', title: 'Tinku de Macha, Bolivia', year: '2025' },
+  { src: '/assets/images/tinku-analog5.webp', title: 'Tinku de Macha, Bolivia', year: '2025' },
+  { src: '/assets/images/tinku-analog6.webp', title: 'Tinku de Macha, Bolivia', year: '2025' },
+  { src: '/assets/images/tinku-analog7.webp', title: 'Tinku de Macha, Bolivia', year: '2025' },
+  { src: '/assets/images/tinku-analog8.webp', title: 'Tinku de Macha, Bolivia', year: '2025' },
+  { src: '/assets/images/tinku-analog9.webp', title: 'Tinku de Macha, Bolivia', year: '2025' },
+  { src: '/assets/images/tinku-analog10.webp', title: 'Tinku de Macha, Bolivia', year: '2025' },
+  { src: '/assets/images/tinku-analog11.webp', title: 'Tinku de Macha, Bolivia', year: '2025' },
+  { src: '/assets/images/tinku-analog12.webp', title: 'Tinku de Macha, Bolivia', year: '2025' },
+  { src: '/assets/images/tinku-analog13.webp', title: 'Tinku de Macha, Bolivia', year: '2025' },
+  { src: '/assets/images/tinku-analog14.webp', title: 'Tinku de Macha, Bolivia', year: '2025' },
+  { src: '/assets/images/tinku-analog15.webp', title: 'Tinku de Macha, Bolivia', year: '2025' },
+  { src: '/assets/images/tinku-analog16.webp', title: 'Tinku de Macha, Bolivia', year: '2025' },
   
-  // Tultepec series
-  { src: '/assets/images/tultepec-sinaloa.webp', title: 'Feria Internacional de la Pirotecnìa, Mexico', year: '2025' },
-  { src: '/assets/images/tultepec-sinaloa-rocket.webp', title: 'Feria Internacional de la Pirotecnìa, Mexico', year: '2025' },
-  { src: '/assets/images/tultepec-push.webp', title: 'Feria Internacional de la Pirotecnìa, Mexico', year: '2025' },
-  { src: '/assets/images/tultepec-phone.webp', title: 'Feria Internacional de la Pirotecnìa, Mexico', year: '2025' },
-  { src: '/assets/images/tultepec-milky-way.webp', title: 'Feria Internacional de la Pirotecnìa, Mexico', year: '2025' },
-  { src: '/assets/images/tultepec-hooligan.webp', title: 'Feria Internacional de la Pirotecnìa, Mexico', year: '2025' },
-  { src: '/assets/images/tultepec-guy-back.webp', title: 'Feria Internacional de la Pirotecnìa, Mexico', year: '2025' },
-  { src: '/assets/images/tultepec-fire.webp', title: 'Feria Internacional de la Pirotecnìa, Mexico', year: '2025' },
-  { src: '/assets/images/tultepec-everyone-carrying.webp', title: 'Feria Internacional de la Pirotecnìa, Mexico', year: '2025' },
-  { src: '/assets/images/tultepec-chaos-vertical.webp', title: 'Feria Internacional de la Pirotecnìa, Mexico', year: '2025' },
-  { src: '/assets/images/tultepec-chaos-horizontal.webp', title: 'Feria Internacional de la Pirotecnìa, Mexico', year: '2025' },
-  { src: '/assets/images/tultepec-bull.webp', title: 'Feria Internacional de la Pirotecnìa, Mexico', year: '2025' },
-  
-  // Tultepec Day series
-  { src: '/assets/images/tultepec-day-kid-horizontal.webp', title: 'Tultepec, Mexico', year: '2025' },
-  { src: '/assets/images/tultepec-day-chihuahua.webp', title: 'Tultepec, Mexico', year: '2025' },
-  { src: '/assets/images/tultepec-day-bench-guy.webp', title: 'Tultepec, Mexico', year: '2025' },
-  { src: '/assets/images/tultepec-day-baby.webp', title: 'Tultepec, Mexico', year: '2025' },
-
-  // Australia series - removed
+  // Tultepec series (Mexico)
+  { src: '/assets/images/tultepec-analog.webp', title: 'Feria Internacional de la Pirotecnìa, Mexico', year: '2025' },
+  { src: '/assets/images/tultepec-analog2.webp', title: 'Feria Internacional de la Pirotecnìa, Mexico', year: '2025' },
+  { src: '/assets/images/tultepec-analog3.webp', title: 'Feria Internacional de la Pirotecnìa, Mexico', year: '2025' },
+  { src: '/assets/images/tultepec-analog4.webp', title: 'Feria Internacional de la Pirotecnìa, Mexico', year: '2025' },
+  { src: '/assets/images/tultepec-analog5.webp', title: 'Feria Internacional de la Pirotecnìa, Mexico', year: '2025' },
+  { src: '/assets/images/tultepec-analog6.webp', title: 'Feria Internacional de la Pirotecnìa, Mexico', year: '2025' },
+  { src: '/assets/images/tultepec-analog7.webp', title: 'Feria Internacional de la Pirotecnìa, Mexico', year: '2025' },
+  { src: '/assets/images/tultepec-analog8.webp', title: 'Feria Internacional de la Pirotecnìa, Mexico', year: '2025' },
+  { src: '/assets/images/tultepec-analog9.webp', title: 'Feria Internacional de la Pirotecnìa, Mexico', year: '2025' },
+  { src: '/assets/images/tultepec-analog10.webp', title: 'Feria Internacional de la Pirotecnìa, Mexico', year: '2025' },
+  { src: '/assets/images/tultepec-analog11.webp', title: 'Feria Internacional de la Pirotecnìa, Mexico', year: '2025' },
+  { src: '/assets/images/tultepec-analog12.webp', title: 'Feria Internacional de la Pirotecnìa, Mexico', year: '2025' },
+  { src: '/assets/images/tultepec-analog13.webp', title: 'Feria Internacional de la Pirotecnìa, Mexico', year: '2025' },
+  { src: '/assets/images/tultepec-analog14.webp', title: 'Feria Internacional de la Pirotecnìa, Mexico', year: '2025' },
+  { src: '/assets/images/tultepec-analog15.webp', title: 'Feria Internacional de la Pirotecnìa, Mexico', year: '2025' },
+  { src: '/assets/images/tultepec-analog16.webp', title: 'Feria Internacional de la Pirotecnìa, Mexico', year: '2025' },
+  { src: '/assets/images/tultepec-analog17.webp', title: 'Feria Internacional de la Pirotecnìa, Mexico', year: '2025' },
+  { src: '/assets/images/tultepec-analog18.webp', title: 'Feria Internacional de la Pirotecnìa, Mexico', year: '2025' },
+  { src: '/assets/images/tultepec-analog19.webp', title: 'Feria Internacional de la Pirotecnìa, Mexico', year: '2025' }
 ];
 
 const Gallery: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [showingThumbnails, setShowingThumbnails] = useState(false);
+  const [masonryReady, setMasonryReady] = useState(false);
 
   const totalSlides = imageData.length;
 
@@ -68,6 +74,7 @@ const Gallery: React.FC = () => {
   };
 
   const toggleThumbnails = () => {
+    setMasonryReady(false);
     setShowingThumbnails(prev => !prev);
   };
 
@@ -100,7 +107,7 @@ const Gallery: React.FC = () => {
     // Initialize column heights
     const columnHeights = new Array(columnCount).fill(0);
     
-    thumbnails.forEach((thumbnail, index) => {
+    thumbnails.forEach((thumbnail) => {
       const img = thumbnail.querySelector('img') as HTMLImageElement;
       if (!img || !img.complete) return; // Skip if image not loaded
       
@@ -123,12 +130,16 @@ const Gallery: React.FC = () => {
     // Set container height
     const maxHeight = Math.max(...columnHeights);
     container.style.height = `${maxHeight}px`;
+    
+    // Mark masonry as ready
+    setMasonryReady(true);
   }, []);
 
   // Handle responsive layout
   const handleResponsiveLayout = useCallback(() => {
     if (window.innerWidth <= 768) {
       // Mobile layout - thumbnails are always shown
+      setMasonryReady(true);
       return;
     } else if (window.innerWidth <= 1366) {
       // Laptop layout
@@ -265,7 +276,14 @@ const Gallery: React.FC = () => {
           hide all photos
         </span>
         {showingThumbnails && <div style={{ height: '60px', width: '100%' }}></div>}
-        <div className={`thumbnails ${showingThumbnails ? 'show' : ''}`} id="thumbnails">
+        <div 
+          className={`thumbnails ${showingThumbnails ? 'show' : ''}`} 
+          id="thumbnails"
+          style={{
+            opacity: showingThumbnails && masonryReady ? 1 : 0,
+            transition: 'opacity 0.3s ease'
+          }}
+        >
           {imageData.map((image, index) => (
             <div 
               key={index} 
