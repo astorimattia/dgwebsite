@@ -23,9 +23,9 @@ export const metadata: Metadata = {
     telephone: false,
   },
   icons: {
-    icon: '/assets/favicon_chaos.webp?v=3',
-    apple: '/assets/favicon_chaos.webp?v=3',
-    shortcut: '/assets/favicon_chaos.webp?v=3',
+    icon: '/favicon.ico',
+    apple: '/favicon.ico',
+    shortcut: '/favicon.ico',
   },
   openGraph: {
     title: 'Mattia Astori',
@@ -59,8 +59,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link rel="icon" href="/assets/favicon_chaos.webp?v=3" type="image/webp" />
-        <link rel="apple-touch-icon" href="/assets/favicon_chaos.webp?v=3" />
+        <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+        <link rel="apple-touch-icon" href="/favicon.ico" />
         <link rel="preconnect" href="https://gc.zgo.at" />
         <link rel="preconnect" href="https://www.clarity.ms" />
         <script 
