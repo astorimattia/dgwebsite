@@ -273,10 +273,11 @@ const Gallery: React.FC = () => {
   return (
     <>
       {/* Main Gallery Container */}
-      <div className={`relative flex flex-col items-center w-full h-full justify-center mx-auto max-w-[1200px] min-h-[calc(100vh-60px)] pt-0 md:pt-[50px] pb-[140px] transition-all duration-300 ease-in-out p-0 md:p-0 min-h-auto md:min-h-[calc(100vh-60px)] ${showingThumbnails ? 'hidden' : ''}`} id="home-section">
-        {/* Gallery */}
-        <div className={`relative text-center w-full max-w-[1200px] mx-auto flex flex-col flex-shrink-0 items-center hidden md:flex -mt-4 ${showingThumbnails ? 'hidden' : ''}`}>
-          {/* Navigation hover zones - outside the image loop */}
+      <div className={`relative flex flex-col w-full h-full mx-auto max-w-[1200px] min-h-[calc(100vh-60px)] pt-0 md:pt-[50px] pb-0 transition-all duration-300 ease-in-out p-0 md:p-0 min-h-auto md:min-h-[calc(100vh-60px)] ${showingThumbnails ? 'hidden' : ''}`} id="home-section">
+        
+        {/* Desktop Gallery - Image Area */}
+        <div className={`hidden md:flex flex-col items-center justify-center flex-1 relative ${showingThumbnails ? 'hidden' : ''}`}>
+          {/* Navigation hover zones */}
           <div className="absolute top-0 h-full w-1/2 cursor-pointer opacity-0 transition-opacity duration-300 ease-in-out left-0 bg-gradient-to-r from-white/20 to-transparent hover:opacity-100 z-10" onClick={() => changeSlide(-1)} style={{cursor: `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="black"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>') 12 12, auto`, pointerEvents: 'auto'}}></div>
           <div className="absolute top-0 h-full w-1/2 cursor-pointer opacity-0 transition-opacity duration-300 ease-in-out right-0 bg-gradient-to-l from-white/20 to-transparent hover:opacity-100 z-10" onClick={() => changeSlide(1)} style={{cursor: `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="black"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>') 12 12, auto`, pointerEvents: 'auto'}}></div>
           
@@ -301,9 +302,9 @@ const Gallery: React.FC = () => {
                 onLoad={() => handleImageLoad(index)}
                 onError={() => handleImageError(index)}
                 style={{
-                  height: 'calc(95vh - 80px)',
-                  minHeight: 'calc(95vh - 80px)',
-                  maxHeight: 'calc(95vh - 80px)',
+                  height: 'calc(100vh - 200px)',
+                  minHeight: 'calc(100vh - 200px)',
+                  maxHeight: 'calc(100vh - 200px)',
                   width: 'auto',
                   maxWidth: '95%',
                   objectFit: 'contain',
@@ -343,8 +344,8 @@ const Gallery: React.FC = () => {
           </div>
         </div>
 
-        {/* Navigation Controls */}
-        <div className={`hidden md:flex items-center gap-[10px] text-sm justify-center absolute bottom-2 left-0 right-0 z-[2] px-5 ${showingThumbnails ? 'hidden' : ''}`}>
+        {/* Desktop Navigation Controls - Fixed at bottom */}
+        <div className={`hidden md:flex items-center gap-[10px] text-sm justify-center relative bottom-0 left-0 right-0 z-[2] px-5 py-4 bg-white ${showingThumbnails ? 'hidden' : ''}`}>
           <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-[10px] w-full mx-5">
             <div className="text-sm text-black opacity-100 font-gt-america-regular leading-[1.4] flex flex-row items-center gap-2 text-left col-start-1 justify-self-start" id="image-title">
               {imageData[currentSlide].title}
