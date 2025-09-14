@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useCallback } from 'react';
-import Image from 'next/image';
+import ResponsiveImage from './ResponsiveImage';
 
 interface ImageData {
   src: string;
@@ -231,11 +231,12 @@ const Gallery: React.FC = () => {
           >
             <div className="nav-zone left" onClick={() => changeSlide(-1)}></div>
             <div className="nav-zone right" onClick={() => changeSlide(1)}></div>
-            <Image
+            <ResponsiveImage
               src={image.src}
               alt={image.title}
               width={1200}
               height={800}
+              priority={index === currentSlide}
               style={{
                 height: '80vh',
                 minHeight: '80vh',
@@ -245,6 +246,7 @@ const Gallery: React.FC = () => {
                 objectFit: 'contain',
                 margin: '0 auto'
               }}
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 70vw"
             />
           </div>
         ))}
@@ -290,7 +292,7 @@ const Gallery: React.FC = () => {
               className={`thumbnail ${index === currentSlide ? 'active' : ''}`}
               onClick={() => goToSlide(index)}
             >
-              <Image
+              <ResponsiveImage
                 src={image.src}
                 alt={image.title}
                 width={300}
@@ -300,6 +302,7 @@ const Gallery: React.FC = () => {
                   height: 'auto',
                   display: 'block'
                 }}
+                sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
                 onLoad={() => {
                   // Trigger masonry layout when image loads
                   if (showingThumbnails) {
