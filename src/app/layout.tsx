@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     telephone: false,
   },
   icons: {
-    icon: '/assets/favicon_chaos.webp',
+    icon: '/favicon.ico',
     apple: '/assets/favicon_chaos.webp',
   },
   openGraph: {
