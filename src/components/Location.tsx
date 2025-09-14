@@ -35,7 +35,7 @@ const Location: React.FC<LocationProps> = ({ isMobile = false }) => {
 
   if (isMobile) {
     return (
-      <div className="block md:hidden p-0 bg-none border-none mt-[15px]">
+      <div className="block md:hidden p-0 bg-none border-none mt-[10px]">
         <div id="mobile-location-container" className="flex items-center gap-2">
           <span className="font-gt-america-thin font-[200] text-base text-black antialiased tracking-tight">Currently in:</span>
           <a id="mobile-city-link" href={cityLink} target="_blank" rel="noopener noreferrer" className="no-underline text-inherit hover:opacity-70">
