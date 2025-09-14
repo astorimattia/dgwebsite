@@ -18,13 +18,15 @@ const Sidebar: React.FC = () => {
           {isAboutPage ? "Home" : "About"}
         </Link>
         
-        {/* About Preview Section */}
-        <div className="mt-2 mb-5">
-          <p className="text-sm leading-[1.4] mb-0 text-[#333]">
-            Hi, I&apos;m Mattia! I&apos;m traveling with a film camera in hand, documenting the extreme, the obscure, and... 
-            <Link href="/about" className="text-[#999] no-underline text-xs font-[100] transition-opacity duration-200 ease-in-out inline opacity-40 ml-[3px] hover:opacity-100 hover:text-black hover:underline hover:cursor-pointer">→</Link>
-          </p>
-        </div>
+        {/* About Preview Section - Only show when not on About page */}
+        {!isAboutPage && (
+          <div className="mt-2 mb-5">
+            <Link href="/about" className="text-sm leading-[1.4] mb-0 text-[#333] no-underline cursor-pointer transition-opacity duration-200 ease-in-out hover:opacity-70 block">
+              Hi, I&apos;m Mattia! I&apos;m traveling with a film camera in hand, documenting the extreme, the obscure, and... 
+              <span className="text-[#999] text-xs font-[100] opacity-40 ml-[3px] hover:opacity-100 hover:text-black hover:underline">→</span>
+            </Link>
+          </div>
+        )}
         
         {/* Location Section */}
         <Location />
