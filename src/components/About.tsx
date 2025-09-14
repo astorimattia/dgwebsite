@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 const About: React.FC = () => {
   return (
-    <div className="flex gap-[30px] md:gap-[60px] items-start max-w-about-section mx-auto pt-0 md:pt-[60px] flex-col md:flex-row items-center md:items-start">
+    <div className="flex gap-[30px] md:gap-[60px] items-start max-w-about-section mx-auto pt-0 md:pt-[60px] pb-0 flex-col md:flex-row items-center md:items-start">
       <div className="max-w-about-content leading-[1.5] font-gt-america-thin">
         <p className="mb-5 text-base text-black">Hi, I&apos;m Mattia!</p>
         <p className="mb-5 text-base text-black">

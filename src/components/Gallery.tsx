@@ -273,7 +273,7 @@ const Gallery: React.FC = () => {
   return (
     <>
       {/* Main Gallery Container */}
-      <div className={`relative flex flex-col w-full h-full mx-auto max-w-[1200px] min-h-[calc(100vh-60px)] pt-0 md:pt-[50px] pb-0 transition-all duration-300 ease-in-out p-0 md:p-0 min-h-auto md:min-h-[calc(100vh-60px)] ${showingThumbnails ? 'hidden' : ''}`} id="home-section">
+      <div className={`relative flex flex-col w-full h-full mx-auto max-w-[1200px] min-h-[calc(100dvh-60px)] md:min-h-[calc(100vh-60px)] pt-0 md:pt-[50px] pb-0 transition-all duration-300 ease-in-out p-0 md:p-0 min-h-auto md:min-h-[calc(100vh-60px)] ${showingThumbnails ? 'hidden' : ''}`} id="home-section">
         
         {/* Desktop Gallery - Image Area */}
         <div className={`hidden md:flex flex-col items-center justify-center flex-1 relative ${showingThumbnails ? 'hidden' : ''}`}>
