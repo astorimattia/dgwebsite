@@ -1,14 +1,22 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import SocialIcons from './SocialIcons';
 import Location from './Location';
 
 const MobileHeader: React.FC = () => {
+  const pathname = usePathname();
+  const isAboutPage = pathname === '/about' || pathname === '/about/';
+
   return (
     <div className="flex md:hidden flex-col py-5 bg-white">
       <div className="flex justify-between items-center w-full">
         <Link href="/" className="text-[22px] font-normal text-black font-gt-america-regular no-underline cursor-default hover:opacity-100">Mattia Astori</Link>
-        <Link href="/about" className="text-base text-black no-underline transition-opacity duration-200 ease-in-out hover:opacity-50">About</Link>
+        <Link href={isAboutPage ? "/" : "/about"} className="text-base text-black no-underline transition-opacity duration-200 ease-in-out hover:opacity-50">
+          {isAboutPage ? "Home" : "About"}
+        </Link>
       </div>
       <div className="flex justify-between items-center gap-[18px]">
         <SocialIcons />
