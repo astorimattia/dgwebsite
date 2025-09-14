@@ -35,11 +35,11 @@ const Location: React.FC<LocationProps> = ({ isMobile = false }) => {
 
   if (isMobile) {
     return (
-      <div className="mobile-location-section">
-        <div id="mobile-location-container">
-          <span className="mobile-location-label">Currently in:</span>
-          <a id="mobile-city-link" href={cityLink} target="_blank" rel="noopener noreferrer">
-            <div id="mobile-city">{city}</div>
+      <div className="block md:hidden p-0 bg-none border-none mt-[15px]">
+        <div id="mobile-location-container" className="flex items-center gap-2">
+          <span className="font-gt-america-thin font-[200] text-base text-black antialiased tracking-tight">Currently in:</span>
+          <a id="mobile-city-link" href={cityLink} target="_blank" rel="noopener noreferrer" className="no-underline text-inherit hover:opacity-70">
+            <div id="mobile-city" className="font-gt-america-regular font-normal text-base text-black antialiased">{city}</div>
           </a>
         </div>
       </div>
@@ -47,11 +47,11 @@ const Location: React.FC<LocationProps> = ({ isMobile = false }) => {
   }
 
   return (
-    <div className="location-section">
-      <div id="location-container">
-        <span className="location-label">Currently in:</span>
-        <a id="city-link" href={cityLink} target="_blank" rel="noopener noreferrer">
-          <div id="city">{city}</div>
+    <div className="mt-2">
+      <div id="location-container" className="flex flex-col items-start gap-1">
+        <span className="font-gt-america-thin font-[200] text-base text-black antialiased tracking-tight">Currently in:</span>
+        <a id="city-link" href={cityLink} target="_blank" rel="noopener noreferrer" className="no-underline text-inherit hover:opacity-70">
+          <div id="city" className="font-gt-america-regular font-normal text-base text-black antialiased">{city}</div>
         </a>
       </div>
     </div>

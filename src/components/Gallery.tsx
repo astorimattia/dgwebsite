@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useCallback } from 'react';
+import Image from 'next/image';
 import ResponsiveImage from './ResponsiveImage';
 
 interface ImageData {
@@ -54,6 +55,9 @@ const Gallery: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [showingThumbnails, setShowingThumbnails] = useState(false);
   const [masonryReady, setMasonryReady] = useState(false);
+  const [imageLoading, setImageLoading] = useState(true);
+  const [showSpinner, setShowSpinner] = useState(false);
+  const [loadedImages, setLoadedImages] = useState<Set<number>>(new Set());
 
   const totalSlides = imageData.length;
 
@@ -62,14 +66,43 @@ const Gallery: React.FC = () => {
       let newSlide = prev + direction;
       if (newSlide >= totalSlides) newSlide = 0;
       if (newSlide < 0) newSlide = totalSlides - 1;
+      
+      // Set loading state if the new image isn't loaded yet
+      if (!loadedImages.has(newSlide)) {
+        setImageLoading(true);
+      }
+      
       return newSlide;
     });
-  }, [totalSlides]);
+  }, [totalSlides, loadedImages]);
+
+  const handleImageLoad = useCallback((index: number) => {
+    setLoadedImages(prev => new Set(prev).add(index));
+    if (index === currentSlide) {
+      setImageLoading(false);
+      setShowSpinner(false);
+    }
+  }, [currentSlide]);
+
+  const handleImageError = useCallback((index: number) => {
+    console.error(`Failed to load image at index ${index}`);
+    // Still mark as "loaded" to prevent infinite loading
+    setLoadedImages(prev => new Set(prev).add(index));
+    if (index === currentSlide) {
+      setImageLoading(false);
+      setShowSpinner(false);
+    }
+  }, [currentSlide]);
 
   const goToSlide = (index: number) => {
     setCurrentSlide(index);
     if (showingThumbnails) {
       setShowingThumbnails(false);
+    }
+    
+    // Set loading state if the new image isn't loaded yet
+    if (!loadedImages.has(index)) {
+      setImageLoading(true);
     }
   };
 
@@ -77,6 +110,22 @@ const Gallery: React.FC = () => {
     setMasonryReady(false);
     setShowingThumbnails(prev => !prev);
   };
+
+  // Handle loading state when current slide changes
+  useEffect(() => {
+    if (loadedImages.has(currentSlide)) {
+      setImageLoading(false);
+      setShowSpinner(false);
+    } else {
+      setImageLoading(true);
+      // Add 350ms delay before showing spinner
+      const timer = setTimeout(() => {
+        setShowSpinner(true);
+      }, 350);
+      
+      return () => clearTimeout(timer);
+    }
+  }, [currentSlide, loadedImages]);
 
   // Masonry layout function
   const layoutMasonry = useCallback((columnCount = 3) => {
@@ -222,64 +271,106 @@ const Gallery: React.FC = () => {
   }, [handleResponsiveLayout]);
 
   return (
-    <div className={`gallery-container ${showingThumbnails ? 'showing-thumbnails' : ''}`} id="home-section">
-      <div className="gallery">
-        {imageData.map((image, index) => (
-          <div 
-            key={index} 
-            className={`slide ${index === currentSlide ? 'active' : ''}`}
-          >
-            <div className="nav-zone left" onClick={() => changeSlide(-1)}></div>
-            <div className="nav-zone right" onClick={() => changeSlide(1)}></div>
-            <ResponsiveImage
-              src={image.src}
-              alt={image.title}
-              width={1200}
-              height={800}
-              priority={index === currentSlide}
-              style={{
-                height: '80vh',
-                minHeight: '80vh',
-                maxHeight: '80vh',
-                width: 'auto',
-                maxWidth: '90%',
-                objectFit: 'contain',
-                margin: '0 auto'
-              }}
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 70vw"
-            />
-          </div>
-        ))}
-      </div>
+    <>
+      {/* Main Gallery Container */}
+      <div className={`relative flex flex-col items-center w-full h-full justify-center mx-auto max-w-[1200px] min-h-[calc(100vh-60px)] pt-[50px] pb-[140px] transition-all duration-300 ease-in-out p-0 md:p-0 min-h-auto md:min-h-[calc(100vh-60px)] ${showingThumbnails ? 'hidden' : ''}`} id="home-section">
+        {/* Gallery */}
+        <div className={`relative text-center w-full max-w-[1200px] mx-auto flex flex-col flex-shrink-0 items-center hidden md:flex -mt-4 ${showingThumbnails ? 'hidden' : ''}`}>
+          {/* Navigation hover zones - outside the image loop */}
+          <div className="absolute top-0 h-full w-1/2 cursor-pointer opacity-0 transition-opacity duration-300 ease-in-out left-0 bg-gradient-to-r from-white/20 to-transparent hover:opacity-100 z-10" onClick={() => changeSlide(-1)} style={{cursor: `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="black"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>') 12 12, auto`, pointerEvents: 'auto'}}></div>
+          <div className="absolute top-0 h-full w-1/2 cursor-pointer opacity-0 transition-opacity duration-300 ease-in-out right-0 bg-gradient-to-l from-white/20 to-transparent hover:opacity-100 z-10" onClick={() => changeSlide(1)} style={{cursor: `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="black"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>') 12 12, auto`, pointerEvents: 'auto'}}></div>
+          
+          {/* Loading indicator */}
+          {imageLoading && showSpinner && (
+            <div className="absolute inset-0 flex items-center justify-center bg-white/95 z-20">
+              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-black"></div>
+            </div>
+          )}
+          
+          {imageData.map((image, index) => (
+            <div 
+              key={index} 
+              className={`w-full h-full relative ${index === currentSlide ? 'block' : 'hidden'}`}
+            >
+              <Image
+                src={image.src}
+                alt={image.title}
+                width={1200}
+                height={800}
+                priority={index === currentSlide}
+                onLoad={() => handleImageLoad(index)}
+                onError={() => handleImageError(index)}
+                style={{
+                  height: 'calc(95vh - 80px)',
+                  minHeight: 'calc(95vh - 80px)',
+                  maxHeight: 'calc(95vh - 80px)',
+                  width: 'auto',
+                  maxWidth: '95%',
+                  objectFit: 'contain',
+                  margin: '0 auto',
+                  opacity: loadedImages.has(index) ? 1 : 0,
+                  transition: 'opacity 0.3s ease-in-out'
+                }}
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 85vw"
+              />
+            </div>
+          ))}
+        </div>
 
-      {/* Navigation Controls */}
-      <div className="controls-container">
-        <div className="nav-controls">
-          <div className="image-title" id="image-title">
-            {imageData[currentSlide].title}
-            <div className="image-year">{imageData[currentSlide].year}</div>
+        {/* Mobile Thumbnails - Always visible on mobile */}
+        <div className="block md:hidden relative w-full mx-auto flex-shrink-0 z-[1] p-0">
+          <div className="relative w-full mx-auto pb-0" id="mobile-thumbnails">
+            {imageData.map((image, index) => (
+              <div 
+                key={index} 
+                className="cursor-pointer static w-full mb-5 break-inside-avoid hover:transform-none"
+                onClick={() => goToSlide(index)}
+              >
+                <Image
+                  src={image.src}
+                  alt={image.title}
+                  width={300}
+                  height={200}
+                  style={{
+                    width: '100%',
+                    height: 'auto',
+                    display: 'block'
+                  }}
+                  sizes="100vw"
+                />
+              </div>
+            ))}
           </div>
-          <div className="nav-buttons">
-            <button className="control-btn" onClick={() => changeSlide(-1)}>prev</button>
-            <span className="separator">/</span>
-            <button className="control-btn" onClick={() => changeSlide(1)}>next</button>
+        </div>
+
+        {/* Navigation Controls */}
+        <div className={`hidden md:flex items-center gap-[10px] text-sm justify-center absolute bottom-2 left-0 right-0 z-[2] px-5 ${showingThumbnails ? 'hidden' : ''}`}>
+          <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-[10px] w-full mx-5">
+            <div className="text-sm text-black opacity-100 font-gt-america-regular leading-[1.4] flex flex-row items-center gap-2 text-left col-start-1 justify-self-start" id="image-title">
+              {imageData[currentSlide].title}
+              <div className="text-xs text-[#666] font-gt-america-thin">{imageData[currentSlide].year}</div>
+            </div>
+            <div className="flex items-center gap-[10px] justify-center col-start-2">
+              <button className="bg-none border-none text-black cursor-pointer text-sm underline transition-opacity duration-200 ease-in-out font-gt-america-thin p-0 hover:opacity-50" onClick={() => changeSlide(-1)}>prev</button>
+              <span className="text-black mx-[5px] font-gt-america-thin">/</span>
+              <button className="bg-none border-none text-black cursor-pointer text-sm underline transition-opacity duration-200 ease-in-out font-gt-america-thin p-0 hover:opacity-50" onClick={() => changeSlide(1)}>next</button>
+            </div>
+            <span className="text-black cursor-pointer text-sm underline p-0 text-center font-gt-america-thin bg-none border-none outline-none transition-opacity duration-200 ease-in-out col-start-3 justify-self-end hover:opacity-50" onClick={toggleThumbnails}>show all photos</span>
           </div>
-          <span className="thumbnails-toggle" onClick={toggleThumbnails}>show all photos</span>
         </div>
       </div>
 
-      {/* Thumbnails */}
-      <div className="thumbnails-container">
+      {/* Thumbnails Container - Separate from main gallery */}
+      <div className={`hidden md:flex justify-center relative flex-col items-center w-full max-w-[1200px] mx-auto flex-shrink-0 z-[1] ${showingThumbnails ? 'pt-[60px]' : 'hidden'}`}>
         <span 
-          className="hide-all-photos" 
+          className="text-black cursor-pointer text-sm underline p-0 text-center w-full font-gt-america-thin bg-none border-none outline-none transition-opacity duration-200 ease-in-out absolute top-4 left-0 right-0 z-[3] hover:opacity-50" 
           onClick={toggleThumbnails} 
           style={{ display: showingThumbnails ? 'block' : 'none' }}
         >
           hide all photos
         </span>
-        {showingThumbnails && <div style={{ height: '60px', width: '100%' }}></div>}
         <div 
-          className={`thumbnails ${showingThumbnails ? 'show' : ''}`} 
+          className={`relative w-full mx-auto pb-10 ${showingThumbnails ? 'block' : 'hidden'}`} 
           id="thumbnails"
           style={{
             opacity: showingThumbnails && masonryReady ? 1 : 0,
@@ -289,10 +380,10 @@ const Gallery: React.FC = () => {
           {imageData.map((image, index) => (
             <div 
               key={index} 
-              className={`thumbnail ${index === currentSlide ? 'active' : ''}`}
+              className="thumbnail cursor-pointer absolute transition-transform duration-200 ease-in-out mb-5 hover:scale-[1.02]"
               onClick={() => goToSlide(index)}
             >
-              <ResponsiveImage
+              <Image
                 src={image.src}
                 alt={image.title}
                 width={300}
@@ -316,7 +407,7 @@ const Gallery: React.FC = () => {
           ))}
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

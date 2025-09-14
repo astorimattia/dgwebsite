@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import './globals-optimized.css'
+import './globals.css'
 import PerformanceMonitor from '@/components/PerformanceMonitor'
 
 const inter = Inter({ 

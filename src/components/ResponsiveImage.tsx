@@ -28,24 +28,10 @@ const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
 }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isInView, setIsInView] = useState(priority);
-  const [currentSrc, setCurrentSrc] = useState('');
   const imgRef = useRef<HTMLDivElement>(null);
 
-  // Generate optimized image sources
-  const getOptimizedSrc = (originalSrc: string, size: string) => {
-    const baseName = originalSrc.replace('.webp', '');
-    return `${baseName}${size}.webp`;
-  };
-
-  const getAvifSrc = (originalSrc: string) => {
-    return originalSrc.replace('.webp', '.avif');
-  };
-
   useEffect(() => {
-    if (priority) {
-      setCurrentSrc(src);
-      return;
-    }
+    if (priority) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -65,33 +51,12 @@ const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
     }
 
     return () => observer.disconnect();
-  }, [priority, src]);
-
-  useEffect(() => {
-    if (isInView) {
-      // Use appropriate size based on viewport
-      const updateSrc = () => {
-        if (window.innerWidth <= 768) {
-          setCurrentSrc(getOptimizedSrc(src, '-sm'));
-        } else if (window.innerWidth <= 1200) {
-          setCurrentSrc(getOptimizedSrc(src, '-md'));
-        } else {
-          setCurrentSrc(getOptimizedSrc(src, '-lg'));
-        }
-      };
-
-      updateSrc();
-      window.addEventListener('resize', updateSrc);
-      return () => window.removeEventListener('resize', updateSrc);
-    }
-  }, [isInView, src]);
+  }, [priority]);
 
   const handleLoad = () => {
     setIsLoaded(true);
     onLoad?.();
   };
-
-  const avifSrc = getAvifSrc(src);
 
   return (
     <div
@@ -100,32 +65,29 @@ const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
       style={{
         position: 'relative',
         overflow: 'hidden',
+        zIndex: 1,
+        pointerEvents: 'none',
         ...style
       }}
     >
-      {isInView && currentSrc && (
-        <picture>
-          <source srcSet={avifSrc} type="image/avif" />
-          <Image
-            src={currentSrc}
-            alt={alt}
-            width={width}
-            height={height}
-            priority={priority}
-            sizes={sizes}
-            quality={85}
-            placeholder="blur"
-            blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
-            onLoad={handleLoad}
-            style={{
-              opacity: isLoaded ? 1 : 0,
-              transition: 'opacity 0.3s ease-in-out',
-              width: '100%',
-              height: 'auto',
-              ...style
-            }}
-          />
-        </picture>
+      {isInView && (
+        <Image
+          src={src}
+          alt={alt}
+          width={width}
+          height={height}
+          priority={priority}
+          sizes={sizes}
+          quality={85}
+          onLoad={handleLoad}
+          style={{
+            opacity: isLoaded ? 1 : 0,
+            transition: 'opacity 0.3s ease-in-out',
+            width: '100%',
+            height: 'auto',
+            ...style
+          }}
+        />
       )}
       {!isLoaded && isInView && (
         <div
