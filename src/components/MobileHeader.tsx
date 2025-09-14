@@ -11,7 +11,7 @@ const MobileHeader: React.FC = () => {
   const isAboutPage = pathname === '/about' || pathname === '/about/';
 
   return (
-    <div className="flex md:hidden flex-col py-5 bg-white">
+    <div className="flex md:hidden flex-col pt-5 pb-[25px] bg-white">
       <div className="flex justify-between items-center w-full">
         <Link href="/" className="text-[22px] font-normal text-black font-gt-america-regular no-underline cursor-default hover:opacity-100">Mattia Astori</Link>
         <Link href={isAboutPage ? "/" : "/about"} className="text-base text-black no-underline transition-opacity duration-200 ease-in-out hover:opacity-50">
