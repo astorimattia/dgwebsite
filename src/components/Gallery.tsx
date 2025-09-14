@@ -273,7 +273,7 @@ const Gallery: React.FC = () => {
   return (
     <>
       {/* Main Gallery Container */}
-      <div className={`relative flex flex-col items-center w-full h-full justify-center mx-auto max-w-[1200px] min-h-[calc(100vh-60px)] pt-[50px] pb-[140px] transition-all duration-300 ease-in-out p-0 md:p-0 min-h-auto md:min-h-[calc(100vh-60px)] ${showingThumbnails ? 'hidden' : ''}`} id="home-section">
+      <div className={`relative flex flex-col items-center w-full h-full justify-center mx-auto max-w-[1200px] min-h-[calc(100vh-60px)] pt-0 md:pt-[50px] pb-[140px] transition-all duration-300 ease-in-out p-0 md:p-0 min-h-auto md:min-h-[calc(100vh-60px)] ${showingThumbnails ? 'hidden' : ''}`} id="home-section">
         {/* Gallery */}
         <div className={`relative text-center w-full max-w-[1200px] mx-auto flex flex-col flex-shrink-0 items-center hidden md:flex -mt-4 ${showingThumbnails ? 'hidden' : ''}`}>
           {/* Navigation hover zones - outside the image loop */}
