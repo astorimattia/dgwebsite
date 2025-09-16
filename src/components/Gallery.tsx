@@ -190,16 +190,9 @@ const Gallery: React.FC = () => {
       // Mobile layout - thumbnails are always shown
       setMasonryReady(true);
       return;
-    } else if (window.innerWidth <= 1366) {
-      // Laptop layout
-      if (window.innerWidth <= 1200) {
-        layoutMasonry(2); // 2 columns for smaller laptops
-      } else {
-        layoutMasonry(3); // 3 columns for larger laptops
-      }
     } else {
-      // Desktop layout
-      layoutMasonry(3); // 3 columns for desktop
+      // Desktop layout - always use 2 columns
+      layoutMasonry(2); // 2 columns for all desktop layouts
     }
   }, [layoutMasonry]);
 
