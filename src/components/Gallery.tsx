@@ -58,8 +58,29 @@ const Gallery: React.FC = () => {
   const [imageLoading, setImageLoading] = useState(true);
   const [showSpinner, setShowSpinner] = useState(false);
   const [loadedImages, setLoadedImages] = useState<Set<number>>(new Set());
+  const [preloadedImages, setPreloadedImages] = useState<Set<number>>(new Set());
 
   const totalSlides = imageData.length;
+
+  // Function to preload adjacent images
+  const preloadAdjacentImages = useCallback((currentIndex: number) => {
+    const nextIndex = (currentIndex + 1) % totalSlides;
+    const prevIndex = currentIndex === 0 ? totalSlides - 1 : currentIndex - 1;
+    
+    // Preload next and previous images if not already loaded or preloaded
+    [nextIndex, prevIndex].forEach(index => {
+      if (!loadedImages.has(index) && !preloadedImages.has(index)) {
+        const img = new window.Image();
+        img.onload = () => {
+          setPreloadedImages(prev => new Set(prev).add(index));
+        };
+        img.onerror = () => {
+          console.warn(`Failed to preload image at index ${index}`);
+        };
+        img.src = imageData[index].src;
+      }
+    });
+  }, [totalSlides, loadedImages, preloadedImages]);
 
   const changeSlide = useCallback((direction: number) => {
     setCurrentSlide(prev => {
@@ -68,13 +89,13 @@ const Gallery: React.FC = () => {
       if (newSlide < 0) newSlide = totalSlides - 1;
       
       // Set loading state if the new image isn't loaded yet
-      if (!loadedImages.has(newSlide)) {
+      if (!loadedImages.has(newSlide) && !preloadedImages.has(newSlide)) {
         setImageLoading(true);
       }
       
       return newSlide;
     });
-  }, [totalSlides, loadedImages]);
+  }, [totalSlides, loadedImages, preloadedImages]);
 
   const handleImageLoad = useCallback((index: number) => {
     setLoadedImages(prev => new Set(prev).add(index));
@@ -101,7 +122,7 @@ const Gallery: React.FC = () => {
     }
     
     // Set loading state if the new image isn't loaded yet
-    if (!loadedImages.has(index)) {
+    if (!loadedImages.has(index) && !preloadedImages.has(index)) {
       setImageLoading(true);
     }
   };
@@ -113,7 +134,7 @@ const Gallery: React.FC = () => {
 
   // Handle loading state when current slide changes
   useEffect(() => {
-    if (loadedImages.has(currentSlide)) {
+    if (loadedImages.has(currentSlide) || preloadedImages.has(currentSlide)) {
       setImageLoading(false);
       setShowSpinner(false);
     } else {
@@ -125,7 +146,16 @@ const Gallery: React.FC = () => {
       
       return () => clearTimeout(timer);
     }
-  }, [currentSlide, loadedImages]);
+  }, [currentSlide, loadedImages, preloadedImages]);
+
+  // Preload adjacent images when current slide changes (with small delay)
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      preloadAdjacentImages(currentSlide);
+    }, 100); // Small delay to let current image load first
+    
+    return () => clearTimeout(timer);
+  }, [currentSlide, preloadAdjacentImages]);
 
   // Masonry layout function
   const layoutMasonry = useCallback((columnCount = 3) => {
@@ -302,7 +332,7 @@ const Gallery: React.FC = () => {
                   maxWidth: '95%',
                   objectFit: 'contain',
                   margin: '0 auto',
-                  opacity: loadedImages.has(index) ? 1 : 0,
+                  opacity: (loadedImages.has(index) || preloadedImages.has(index)) ? 1 : 0,
                   transition: 'opacity 0.3s ease-in-out'
                 }}
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 85vw"
