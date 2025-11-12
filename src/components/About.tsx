@@ -7,7 +7,7 @@ const About: React.FC = () => {
       <div className="max-w-about-content leading-[1.5] font-gt-america-thin">
         <p className="mb-5 text-base text-black">Hi, I&apos;m Mattia!</p>
         <p className="mb-5 text-base text-black">
-          I&apos;m documenting the world's most <span className="font-gt-america-regular font-normal antialiased">extreme</span> rituals, from fist fights in Bolivia to spirt mediums in Thailand. Stories that deserve to be told, way outside of our city bubbles. (<a href="https://sacratos.com" target="_blank" rel="noopener noreferrer" className="invisible-link">sacratos.com</a>)
+          I&apos;m documenting the world&apos;s most <span className="font-gt-america-regular font-normal antialiased">extreme</span> rituals, from fist fights in Bolivia to spirt mediums in Thailand. Stories that deserve to be told, way outside of our city bubbles. (<a href="https://sacratos.com" target="_blank" rel="noopener noreferrer" className="invisible-link">sacratos.com</a>)
         </p>
         <p className="mb-5 text-base text-black">
           I shoot on <span className="font-gt-america-regular font-normal antialiased">analog</span> because I want to capture things raw, imperfect, and real.
