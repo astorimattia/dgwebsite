@@ -238,9 +238,35 @@ export async function getAnalyticsData(options: AnalyticsOptions = {}) {
     };
   }));
 
-  let filteredTopVisitors = enrichedTopVisitors;
+  // Filter out localhost and private IPs
+  const isLocalhost = (ip: string | null) => {
+    if (!ip) return false;
+    return ip === '127.0.0.1' ||
+      ip === '::1' ||
+      ip === 'localhost' ||
+      ip.startsWith('192.168.') ||
+      ip.startsWith('10.') ||
+      ip.startsWith('172.16.') ||
+      ip.startsWith('172.17.') ||
+      ip.startsWith('172.18.') ||
+      ip.startsWith('172.19.') ||
+      ip.startsWith('172.20.') ||
+      ip.startsWith('172.21.') ||
+      ip.startsWith('172.22.') ||
+      ip.startsWith('172.23.') ||
+      ip.startsWith('172.24.') ||
+      ip.startsWith('172.25.') ||
+      ip.startsWith('172.26.') ||
+      ip.startsWith('172.27.') ||
+      ip.startsWith('172.28.') ||
+      ip.startsWith('172.29.') ||
+      ip.startsWith('172.30.') ||
+      ip.startsWith('172.31.');
+  };
+
+  let filteredTopVisitors = enrichedTopVisitors.filter(v => !isLocalhost(v.ip));
   if (countryFilter) {
-    filteredTopVisitors = enrichedTopVisitors.filter(v => v.country === countryFilter);
+    filteredTopVisitors = filteredTopVisitors.filter(v => v.country === countryFilter);
   }
 
   // 2. Recent Visitor Identities & Pagination logic (simplified)
@@ -276,6 +302,9 @@ export async function getAnalyticsData(options: AnalyticsOptions = {}) {
     };
   }));
 
+  // Filter out localhost from recent visitors
+  const filteredVisitors = visitors.filter(v => !isLocalhost(v.ip));
+
   return {
     overview: {
       views: totalViews,
@@ -288,7 +317,7 @@ export async function getAnalyticsData(options: AnalyticsOptions = {}) {
       cities: cities.map(c => ({ name: c.value, value: c.score })),
       referrers: finalReferrers.map(r => ({ name: r.value, value: r.score })),
       topVisitors: filteredTopVisitors.slice(0, 50),
-      recentVisitors: visitors,
+      recentVisitors: filteredVisitors,
       pagination: {
         page: visitorPage,
         limit: visitorLimit,
