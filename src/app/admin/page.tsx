@@ -188,6 +188,17 @@ export default function AdminPage() {
       setPassword(pwd); // Sync state
       setCookie('admin_secret', pwd, 30); // Persist login
 
+      // Auto-identify as Admin
+      try {
+        await fetch('/api/identify', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ identity: 'Admin' })
+        });
+      } catch (err) {
+        console.error('Failed to identify as admin', err);
+      }
+
     } catch (e: unknown) {
       setError((e as Error).message || 'Failed to connect to server');
       setCookie('admin_secret', '', -1);
@@ -520,7 +531,7 @@ export default function AdminPage() {
                           dataKey="date"
                           stroke="#9ca3af"
                           fontSize={12}
-                          tickFormatter={(str) => {
+                          tickFormatter={(str: string) => {
                             if (str.includes('T')) {
                               // ISO String (Hourly) - Format to PST Time
                               return new Date(str).toLocaleTimeString('en-US', {
@@ -539,7 +550,7 @@ export default function AdminPage() {
                           contentStyle={{ backgroundColor: '#111827', borderColor: '#374151', color: '#f3f4f6' }}
                           itemStyle={{ color: '#f3f4f6' }}
                           labelStyle={{ color: '#9ca3af' }}
-                          labelFormatter={(label) => {
+                          labelFormatter={(label: string) => {
                             if (label.includes('T')) {
                               const pstTime = new Date(label).toLocaleTimeString('en-US', {
                                 timeZone: 'America/Los_Angeles',
