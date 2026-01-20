@@ -1,6 +1,7 @@
 
 import { NextResponse } from 'next/server';
 import { getAnalyticsData } from '@/lib/analytics';
+import { ensureRedisConnection } from '@/lib/redis';
 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
@@ -33,6 +34,11 @@ export async function GET(req: Request) {
   }
 
   try {
+    // Ensure Redis connection is ready before querying
+    console.log('Analytics API: Ensuring Redis connection...');
+    await ensureRedisConnection();
+    console.log('Analytics API: Redis connection verified');
+
     const from = searchParams.get('from') || undefined;
     const to = searchParams.get('to') || undefined;
     const visitorPage = parseInt(searchParams.get('visitorPage') || '1');
@@ -42,6 +48,10 @@ export async function GET(req: Request) {
     const timeZone = searchParams.get('timeZone') || 'UTC';
     const granularity = searchParams.get('granularity') as 'day' | 'hour' || 'day';
     const search = searchParams.get('search') || undefined;
+
+    console.log('Analytics API: Fetching data with params:', {
+      from, to, visitorPage, visitorLimit, country, visitorId, timeZone, granularity
+    });
 
     const data = await getAnalyticsData({
       from,
@@ -55,9 +65,25 @@ export async function GET(req: Request) {
       search
     });
 
+    console.log('Analytics API: Data fetched successfully');
     return NextResponse.json(data);
   } catch (error) {
     console.error('Analytics API error:', error);
-    return NextResponse.json({ error: 'Failed to fetch analytics' }, { status: 500 });
+
+    // Provide more detailed error information
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    const errorStack = error instanceof Error ? error.stack : undefined;
+
+    console.error('Error details:', {
+      message: errorMessage,
+      stack: errorStack,
+      redisUrl: process.env.REDIS_URL ? 'Set' : 'Not set',
+      adminPassword: process.env.ADMIN_PASSWORD ? 'Set' : 'Not set'
+    });
+
+    return NextResponse.json({
+      error: 'Failed to fetch analytics',
+      details: process.env.NODE_ENV === 'development' ? errorMessage : undefined
+    }, { status: 500 });
   }
 }
