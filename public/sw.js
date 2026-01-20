@@ -1,13 +1,12 @@
 // Service Worker for caching and performance optimization
-const CACHE_NAME = 'mattia-astori-v1';
-const STATIC_CACHE = 'static-v1';
-const IMAGE_CACHE = 'images-v1';
+const CACHE_NAME = 'mattia-astori-v2';
+const STATIC_CACHE = 'static-v2';
+const IMAGE_CACHE = 'images-v2';
 
 // Files to cache immediately
 const STATIC_FILES = [
   '/',
   '/about/',
-  '/assets/styles.css',
   '/assets/fonts.css',
   '/assets/favicon_chaos.webp',
   '/assets/font/GT-America/GT-America-Standard-Regular-Trial.otf',
@@ -35,6 +34,7 @@ self.addEventListener('activate', (event) => {
       return Promise.all(
         cacheNames.map((cacheName) => {
           if (cacheName !== STATIC_CACHE && cacheName !== IMAGE_CACHE) {
+            console.log('Deleting old cache:', cacheName);
             return caches.delete(cacheName);
           }
         })
@@ -59,7 +59,7 @@ self.addEventListener('fetch', (event) => {
           if (response) {
             return response;
           }
-          
+
           return fetch(request).then((networkResponse) => {
             // Cache successful responses
             if (networkResponse.status === 200) {
@@ -77,23 +77,21 @@ self.addEventListener('fetch', (event) => {
       })
     );
   } else if (url.origin === location.origin) {
-    // Same-origin requests: cache first, then network
+    // Same-origin requests: Network First, then Cache (for offline support)
+    // This prevents stale content in development
     event.respondWith(
-      caches.match(request).then((response) => {
-        if (response) {
-          return response;
+      fetch(request).then((networkResponse) => {
+        // Cache successful responses
+        if (networkResponse.status === 200) {
+          const responseClone = networkResponse.clone();
+          caches.open(STATIC_CACHE).then((cache) => {
+            cache.put(request, responseClone);
+          });
         }
-        
-        return fetch(request).then((networkResponse) => {
-          // Cache successful responses
-          if (networkResponse.status === 200) {
-            const responseClone = networkResponse.clone();
-            caches.open(STATIC_CACHE).then((cache) => {
-              cache.put(request, responseClone);
-            });
-          }
-          return networkResponse;
-        });
+        return networkResponse;
+      }).catch(() => {
+        // Network failed, try cache
+        return caches.match(request);
       })
     );
   }

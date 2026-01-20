@@ -1,14 +1,6 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
 import './globals.css'
 import PerformanceMonitor from '@/components/PerformanceMonitor'
-
-const inter = Inter({ 
-  subsets: ['latin'],
-  display: 'swap',
-  preload: true,
-  fallback: ['system-ui', 'arial']
-})
 
 export const metadata: Metadata = {
   title: 'Mattia Astori',
@@ -63,9 +55,9 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/favicon.ico" />
         <link rel="preconnect" href="https://gc.zgo.at" />
         <link rel="preconnect" href="https://www.clarity.ms" />
-        <script 
-          data-goatcounter="https://mattia.goatcounter.com/count" 
-          async 
+        <script
+          data-goatcounter="https://mattia.goatcounter.com/count"
+          async
           src="//gc.zgo.at/count.js"
         />
         <script
@@ -85,20 +77,31 @@ export default function RootLayout({
             __html: `
               if ('serviceWorker' in navigator) {
                 window.addEventListener('load', function() {
-                  navigator.serviceWorker.register('/sw.js')
-                    .then(function(registration) {
-                      console.log('SW registered: ', registration);
-                    })
-                    .catch(function(registrationError) {
-                      console.log('SW registration failed: ', registrationError);
+                  // Only register service worker in production
+                  if ('${process.env.NODE_ENV}' === 'production') {
+                    navigator.serviceWorker.register('/sw.js')
+                      .then(function(registration) {
+                        console.log('SW registered: ', registration);
+                      })
+                      .catch(function(registrationError) {
+                        console.log('SW registration failed: ', registrationError);
+                      });
+                  } else {
+                    // Unregister service worker in development to avoid caching issues
+                    navigator.serviceWorker.getRegistrations().then(function(registrations) {
+                      for(let registration of registrations) {
+                        registration.unregister();
+                        console.log('SW unregistered (dev mode)');
+                      }
                     });
+                  }
                 });
               }
             `
           }}
         />
       </head>
-      <body className={inter.className}>
+      <body suppressHydrationWarning={true}>
         {children}
         <PerformanceMonitor />
       </body>

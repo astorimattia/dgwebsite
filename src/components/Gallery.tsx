@@ -28,7 +28,7 @@ const imageData: ImageData[] = [
   { src: '/assets/images/tinku-analog14.webp', title: 'Tinku de Macha, Bolivia', year: '2025' },
   { src: '/assets/images/tinku-analog15.webp', title: 'Tinku de Macha, Bolivia', year: '2025' },
   { src: '/assets/images/tinku-analog16.webp', title: 'Tinku de Macha, Bolivia', year: '2025' },
-  
+
   // Tultepec series (Mexico)
   { src: '/assets/images/tultepec-analog.webp', title: 'Feria Internacional de la Pirotecnìa, Mexico', year: '2025' },
   { src: '/assets/images/tultepec-analog2.webp', title: 'Feria Internacional de la Pirotecnìa, Mexico', year: '2025' },
@@ -66,7 +66,7 @@ const Gallery: React.FC = () => {
   const preloadAdjacentImages = useCallback((currentIndex: number) => {
     const nextIndex = (currentIndex + 1) % totalSlides;
     const prevIndex = currentIndex === 0 ? totalSlides - 1 : currentIndex - 1;
-    
+
     // Preload next and previous images if not already loaded or preloaded
     [nextIndex, prevIndex].forEach(index => {
       if (!loadedImages.has(index) && !preloadedImages.has(index)) {
@@ -87,12 +87,12 @@ const Gallery: React.FC = () => {
       let newSlide = prev + direction;
       if (newSlide >= totalSlides) newSlide = 0;
       if (newSlide < 0) newSlide = totalSlides - 1;
-      
+
       // Set loading state if the new image isn't loaded yet
       if (!loadedImages.has(newSlide) && !preloadedImages.has(newSlide)) {
         setImageLoading(true);
       }
-      
+
       return newSlide;
     });
   }, [totalSlides, loadedImages, preloadedImages]);
@@ -120,7 +120,7 @@ const Gallery: React.FC = () => {
     if (showingThumbnails) {
       setShowingThumbnails(false);
     }
-    
+
     // Set loading state if the new image isn't loaded yet
     if (!loadedImages.has(index) && !preloadedImages.has(index)) {
       setImageLoading(true);
@@ -143,7 +143,7 @@ const Gallery: React.FC = () => {
       const timer = setTimeout(() => {
         setShowSpinner(true);
       }, 350);
-      
+
       return () => clearTimeout(timer);
     }
   }, [currentSlide, loadedImages, preloadedImages]);
@@ -153,7 +153,7 @@ const Gallery: React.FC = () => {
     const timer = setTimeout(() => {
       preloadAdjacentImages(currentSlide);
     }, 100); // Small delay to let current image load first
-    
+
     return () => clearTimeout(timer);
   }, [currentSlide, preloadAdjacentImages]);
 
@@ -172,44 +172,44 @@ const Gallery: React.FC = () => {
       container.style.height = '';
       return;
     }
-    
+
     const container = document.getElementById('thumbnails');
     if (!container) return;
     const thumbnails = container.querySelectorAll('.thumbnail');
-    
+
     if (thumbnails.length === 0) return;
-    
+
     const containerWidth = container.offsetWidth;
     const gap = 20;
     const columnWidth = (containerWidth - (gap * (columnCount - 1))) / columnCount;
-    
+
     // Initialize column heights
     const columnHeights = new Array(columnCount).fill(0);
-    
+
     thumbnails.forEach((thumbnail) => {
       const img = thumbnail.querySelector('img') as HTMLImageElement;
       if (!img || !img.complete) return; // Skip if image not loaded
-      
+
       // Calculate which column to place this thumbnail in
       const shortestColumnIndex = columnHeights.indexOf(Math.min(...columnHeights));
-      
+
       // Set thumbnail size and position
       (thumbnail as HTMLElement).style.width = `${columnWidth}px`;
       (thumbnail as HTMLElement).style.left = `${shortestColumnIndex * (columnWidth + gap)}px`;
       (thumbnail as HTMLElement).style.top = `${columnHeights[shortestColumnIndex]}px`;
-      
+
       // Calculate the aspect ratio and height
       const aspectRatio = img.naturalHeight / img.naturalWidth;
       const thumbnailHeight = columnWidth * aspectRatio;
-      
+
       // Update column height
       columnHeights[shortestColumnIndex] += thumbnailHeight + gap;
     });
-    
+
     // Set container height
     const maxHeight = Math.max(...columnHeights);
     container.style.height = `${maxHeight}px`;
-    
+
     // Mark masonry as ready
     setMasonryReady(true);
   }, []);
@@ -266,7 +266,7 @@ const Gallery: React.FC = () => {
 
     document.addEventListener('touchstart', handleTouchStart);
     document.addEventListener('touchend', handleTouchEnd);
-    
+
     return () => {
       document.removeEventListener('touchstart', handleTouchStart);
       document.removeEventListener('touchend', handleTouchEnd);
@@ -297,23 +297,23 @@ const Gallery: React.FC = () => {
     <>
       {/* Main Gallery Container */}
       <div className={`relative flex flex-col w-full h-full mx-auto max-w-[1200px] min-h-[calc(100dvh-60px)] md:min-h-[calc(100vh-60px)] pt-0 md:pt-[50px] pb-0 transition-all duration-300 ease-in-out p-0 md:p-0 min-h-auto md:min-h-[calc(100vh-60px)] ${showingThumbnails ? 'hidden' : ''}`} id="home-section">
-        
+
         {/* Desktop Gallery - Image Area */}
         <div className={`hidden md:flex flex-col items-center justify-center flex-1 relative ${showingThumbnails ? 'hidden' : ''}`}>
           {/* Navigation hover zones */}
-          <div className="absolute top-0 h-full w-1/2 cursor-pointer opacity-0 transition-opacity duration-300 ease-in-out left-0 bg-gradient-to-r from-white/20 to-transparent hover:opacity-100 z-10" onClick={() => changeSlide(-1)} style={{cursor: `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="black"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>') 12 12, auto`, pointerEvents: 'auto'}}></div>
-          <div className="absolute top-0 h-full w-1/2 cursor-pointer opacity-0 transition-opacity duration-300 ease-in-out right-0 bg-gradient-to-l from-white/20 to-transparent hover:opacity-100 z-10" onClick={() => changeSlide(1)} style={{cursor: `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="black"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>') 12 12, auto`, pointerEvents: 'auto'}}></div>
-          
+          <div className="absolute top-0 h-full w-1/2 cursor-pointer opacity-0 transition-opacity duration-300 ease-in-out left-0 bg-gradient-to-r from-white/20 to-transparent hover:opacity-100 z-10" onClick={() => changeSlide(-1)} style={{ cursor: `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="black"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>') 12 12, auto`, pointerEvents: 'auto' }}></div>
+          <div className="absolute top-0 h-full w-1/2 cursor-pointer opacity-0 transition-opacity duration-300 ease-in-out right-0 bg-gradient-to-l from-white/20 to-transparent hover:opacity-100 z-10" onClick={() => changeSlide(1)} style={{ cursor: `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="black"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>') 12 12, auto`, pointerEvents: 'auto' }}></div>
+
           {/* Loading indicator */}
           {imageLoading && showSpinner && (
             <div className="absolute inset-0 flex items-center justify-center bg-white/95 z-20">
               <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-black"></div>
             </div>
           )}
-          
+
           {imageData.map((image, index) => (
-            <div 
-              key={index} 
+            <div
+              key={index}
               className={`w-full h-full relative ${index === currentSlide ? 'block' : 'hidden'}`}
             >
               <Image
@@ -345,8 +345,8 @@ const Gallery: React.FC = () => {
         <div className="block md:hidden relative w-full mx-auto flex-shrink-0 z-[1] p-0">
           <div className="relative w-full mx-auto pb-0" id="mobile-thumbnails">
             {imageData.map((image, index) => (
-              <div 
-                key={index} 
+              <div
+                key={index}
                 className="cursor-pointer static w-full mb-5 break-inside-avoid hover:transform-none"
                 onClick={() => goToSlide(index)}
               >
@@ -355,6 +355,7 @@ const Gallery: React.FC = () => {
                   alt={image.title}
                   width={300}
                   height={200}
+                  priority={index === 0}
                   style={{
                     width: '100%',
                     height: 'auto',
@@ -386,15 +387,15 @@ const Gallery: React.FC = () => {
 
       {/* Thumbnails Container - Separate from main gallery */}
       <div className={`hidden md:flex justify-center relative flex-col items-center w-full max-w-[1200px] mx-auto flex-shrink-0 z-[1] ${showingThumbnails ? 'pt-[60px]' : 'hidden'}`}>
-        <span 
-          className="text-black cursor-pointer text-sm underline p-0 text-center w-full font-gt-america-thin bg-none border-none outline-none transition-opacity duration-200 ease-in-out absolute top-4 left-0 right-0 z-[3] hover:opacity-50" 
-          onClick={toggleThumbnails} 
+        <span
+          className="text-black cursor-pointer text-sm underline p-0 text-center w-full font-gt-america-thin bg-none border-none outline-none transition-opacity duration-200 ease-in-out absolute top-4 left-0 right-0 z-[3] hover:opacity-50"
+          onClick={toggleThumbnails}
           style={{ display: showingThumbnails ? 'block' : 'none' }}
         >
           hide all photos
         </span>
-        <div 
-          className={`relative w-full mx-auto pb-10 ${showingThumbnails ? 'block' : 'hidden'}`} 
+        <div
+          className={`relative w-full mx-auto pb-10 ${showingThumbnails ? 'block' : 'hidden'}`}
           id="thumbnails"
           style={{
             opacity: showingThumbnails && masonryReady ? 1 : 0,
@@ -402,8 +403,8 @@ const Gallery: React.FC = () => {
           }}
         >
           {imageData.map((image, index) => (
-            <div 
-              key={index} 
+            <div
+              key={index}
               className="thumbnail cursor-pointer absolute transition-transform duration-200 ease-in-out mb-5 hover:scale-[1.02]"
               onClick={() => goToSlide(index)}
             >
@@ -412,6 +413,7 @@ const Gallery: React.FC = () => {
                 alt={image.title}
                 width={300}
                 height={200}
+                priority={index === 0}
                 style={{
                   width: '100%',
                   height: 'auto',
