@@ -355,6 +355,7 @@ const Gallery: React.FC = () => {
                   alt={image.title}
                   width={300}
                   height={200}
+                  priority={index === 0}
                   style={{
                     width: '100%',
                     height: 'auto',
