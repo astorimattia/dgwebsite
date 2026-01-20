@@ -113,7 +113,7 @@ export default function AdminPage() {
     if (parts.length === 2) return parts.pop()?.split(';').shift();
   };
 
-  const verifyAndLoad = async (pwd: string, _subP = subPage, visP = visitorPage) => {
+  const verifyAndLoad = async (pwd: string, visP = visitorPage) => {
     setLoading(true);
     setError('');
 

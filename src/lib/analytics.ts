@@ -22,8 +22,7 @@ export async function getAnalyticsData(options: AnalyticsOptions = {}) {
     country: countryFilter = null,
     visitorId: visitorFilter = null,
     timeZone = 'UTC',
-    granularity = 'day',
-    search: _search = ''
+    granularity = 'day'
   } = options
 
   // Date Range Logic
