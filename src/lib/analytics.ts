@@ -1,66 +1,301 @@
 import { redis } from './redis'
-import { format, subDays, subHours, startOfDay, startOfHour } from 'date-fns'
 
-export async function getAnalyticsData(timeRange: '24h' | '7d' | '30d') {
-  const now = new Date()
-  let dataPoints = []
-  let totalViews = 0
-  let totalVisitors = 0
+export type AnalyticsOptions = {
+  key?: string
+  from?: string
+  to?: string
+  visitorPage?: number
+  visitorLimit?: number
+  country?: string | null
+  visitorId?: string | null
+  timeZone?: string
+  granularity?: 'day' | 'hour'
+  search?: string
+}
 
-  if (timeRange === '24h') {
-    // Last 24 hours
-    for (let i = 23; i >= 0; i--) {
-      const date = subHours(now, i)
-      const key = format(date, 'yyyy-MM-dd-HH')
-      const views = (await redis.get(`analytics:views:hourly:${key}`)) ?? 0
-      const visitors = await redis.pfcount(`analytics:visitors:hourly:${key}`)
-      dataPoints.push({ name: format(date, 'HH:mm'), views: Number(views), visitors })
-      totalViews += Number(views)
-      totalVisitors += visitors
+export async function getAnalyticsData(options: AnalyticsOptions = {}) {
+  const {
+    from: fromParam,
+    to: toParam,
+    visitorPage = 1,
+    visitorLimit = 10,
+    country: countryFilter = null,
+    visitorId: visitorFilter = null,
+    timeZone = 'UTC',
+    granularity = 'day',
+    search = ''
+  } = options
+
+  // Date Range Logic
+  const now = new Date();
+  const nowInTz = new Date(now.toLocaleString('en-US', { timeZone }));
+
+  let startYmd = fromParam; // YYYY-MM-DD
+  let endYmd = toParam;     // YYYY-MM-DD
+
+  if (!startYmd && fromParam !== 'all') {
+    const y = nowInTz.getFullYear();
+    const m = String(nowInTz.getMonth() + 1).padStart(2, '0');
+    const d = String(nowInTz.getDate()).padStart(2, '0');
+    startYmd = `${y}-${m}-${d}`;
+  }
+
+  if (!endYmd && fromParam !== 'all') {
+    const y = nowInTz.getFullYear();
+    const m = String(nowInTz.getMonth() + 1).padStart(2, '0');
+    const d = String(nowInTz.getDate()).padStart(2, '0');
+    endYmd = `${y}-${m}-${d}`;
+  }
+
+  // Calculate Days Range
+  const dates: string[] = [];
+  if (fromParam === 'all') {
+    const current = new Date('2024-01-01T00:00:00Z');
+    const end = new Date();
+    while (current <= end) {
+      dates.push(current.toISOString().slice(0, 10));
+      current.setDate(current.getDate() + 1);
     }
   } else {
-    const days = timeRange === '7d' ? 7 : 30
-    for (let i = days - 1; i >= 0; i--) {
-      const date = subDays(now, i)
-      const key = format(date, 'yyyy-MM-dd')
-      const views = (await redis.get(`analytics:views:daily:${key}`)) ?? 0
-      const visitors = await redis.pfcount(`analytics:visitors:daily:${key}`)
-      dataPoints.push({ name: format(date, 'MMM dd'), views: Number(views), visitors })
-      totalViews += Number(views)
-      totalVisitors += visitors
+    const s = new Date(startYmd!);
+    const e = new Date(endYmd!);
+    while (s <= e) {
+      dates.push(s.toISOString().slice(0, 10));
+      s.setDate(s.getDate() + 1);
     }
   }
 
-  // Top rankings (Fetching for TODAY only for simplicity)
-  const dayKey = format(now, 'yyyy-MM-dd')
+  let totalViews = 0;
+  let targetKeys: { view: string, visitor: string, label: string }[] = [];
 
-  // ioredis returns array of strings [member, score, member, score] when WITHSCORES is passed
-  // We use revRange to get high scores first (zrevrange in standard redis, ioredis supports zrange with REV argument in newer versions, or zrevrange)
-  // ioredis/Redis 6.2+ supports ZRANGE with REV
-  // But safest for older redis versions (if cloud is older) is zrevrange
+  if (granularity === 'hour' && startYmd && endYmd) {
+    const searchStart = new Date(startYmd);
+    searchStart.setDate(searchStart.getDate() - 1); // Buffer
+    const searchEnd = new Date(endYmd);
+    searchEnd.setDate(searchEnd.getDate() + 2); // Buffer
 
-  // Actually, Redis Cloud is 7.2+ usually. ioredis `zrange` is generic.
-  // let's use zrevrange for compatibility with 'WITHSCORES' string arg
+    const current = new Date(searchStart);
+    const validKeys: typeof targetKeys = [];
 
-  const topPages = await redis.zrevrange(`analytics:pages:daily:${dayKey}`, 0, 9, 'WITHSCORES')
-  const topCountries = await redis.zrevrange(`analytics:countries:daily:${dayKey}`, 0, 9, 'WITHSCORES')
-  const topReferrers = await redis.zrevrange(`analytics:referrers:daily:${dayKey}`, 0, 9, 'WITHSCORES')
+    while (current < searchEnd) {
+      const parts = new Intl.DateTimeFormat('en-US', {
+        timeZone,
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        hour12: false,
+        hourCycle: 'h23'
+      }).formatToParts(current);
 
-  // Format ZRANGE result: [val, score, val, score...]
-  const formatList = (list: string[]) => {
-    const res = []
-    for (let i = 0; i < list.length; i += 2) {
-      res.push({ name: list[i], value: Number(list[i + 1]) })
+      const p: Record<string, string> = {};
+      parts.forEach(({ type, value }) => p[type] = value);
+      const localYmd = `${p.year}-${p.month}-${p.day}`;
+
+      if (localYmd >= startYmd && localYmd <= endYmd) {
+        const utcY = current.getUTCFullYear();
+        const utcM = String(current.getUTCMonth() + 1).padStart(2, '0');
+        const utcD = String(current.getUTCDate()).padStart(2, '0');
+        const utcH = String(current.getUTCHours()).padStart(2, '0');
+
+        const utcKeySuffix = `${utcY}-${utcM}-${utcD}T${utcH}`;
+
+        validKeys.push({
+          view: `analytics:views:${utcKeySuffix}`,
+          visitor: `analytics:visitors:${utcKeySuffix}`,
+          label: current.toISOString()
+        });
+      }
+      current.setTime(current.getTime() + 3600 * 1000); // +1 Hour
     }
-    return res
+    targetKeys = validKeys;
+  } else {
+    targetKeys = dates.map(d => ({
+      view: `analytics:views:${d}`,
+      visitor: `analytics:visitors:${d}`,
+      label: d
+    }));
   }
+
+  const viewKeys = targetKeys.map(k => k.view);
+  const visitorKeys = targetKeys.map(k => k.visitor);
+
+  // Overview Totals (Daily Sums)
+  const dailyViewKeys = dates.map(d => `analytics:views:${d}`);
+  if (dailyViewKeys.length > 0) {
+    const viewsPerDay = await redis.mget(dailyViewKeys);
+    totalViews = viewsPerDay.reduce((acc, v) => acc + (parseInt(v || '0')), 0);
+  }
+
+  const dailyVisitorKeys = dates.map(d => `analytics:visitors:${d}`);
+  const uniqueVisitors = await redis.pfcount(dailyVisitorKeys);
+
+  // Chart Data
+  const chartData = [];
+  if (targetKeys.length > 0) {
+    const chartPipeline = redis.multi();
+    viewKeys.forEach(k => chartPipeline.get(k));
+    visitorKeys.forEach(k => chartPipeline.pfcount(k));
+
+    // ioredis exec returns [[err, result], [err, result]...]
+    const results = await chartPipeline.exec();
+
+    const mid = targetKeys.length;
+    // Extract values from pipeline result
+    const viewCounts = results ? results.slice(0, mid).map(r => r[1]) : [];
+    const visitorCounts = results ? results.slice(mid).map(r => r[1]) : [];
+
+    for (let i = 0; i < targetKeys.length; i++) {
+      chartData.push({
+        date: targetKeys[i].label,
+        views: parseInt((viewCounts[i] as unknown as string) || '0'),
+        visitors: (visitorCounts[i] as unknown as number) || 0,
+      });
+    }
+  }
+
+  // Helper for Top Lists
+  const getTop = async (keys: string[]) => {
+    if (keys.length === 0) return [];
+    const pipeline = redis.multi();
+    // Use zrevrange for high scores first
+    keys.forEach(k => pipeline.zrevrange(k, 0, -1, 'WITHSCORES'));
+    const results = await pipeline.exec();
+
+    const agg = new Map<string, number>();
+    results?.forEach((res) => {
+      const dayList = res[1] as string[]; // [val, score, val, score]
+      if (Array.isArray(dayList)) {
+        for (let i = 0; i < dayList.length; i += 2) {
+          const val = dayList[i];
+          const score = Number(dayList[i + 1]);
+          const current = agg.get(val) || 0;
+          agg.set(val, current + score);
+        }
+      }
+    });
+
+    return Array.from(agg.entries())
+      .map(([value, score]) => ({ value, score }))
+      .filter(item => {
+        const val = item.value.toLowerCase();
+        if (val === 'unknown') return false;
+        if (val.startsWith('/admin')) return false;
+        return true;
+      })
+      .sort((a, b) => b.score - a.score)
+      .slice(0, 50);
+  };
+
+  const pageKeys = visitorFilter
+    ? dates.map(d => `analytics:visitors:${visitorFilter}:pages:${d}`)
+    : countryFilter
+      ? dates.map(d => `analytics:pages:country:${countryFilter}:${d}`)
+      : dates.map(d => `analytics:pages:${d}`);
+
+  const countryKeys = dates.map(d => `analytics:countries:${d}`);
+
+  const referrerKeys = countryFilter
+    ? dates.map(d => `analytics:referrers:country:${countryFilter}:${d}`)
+    : dates.map(d => `analytics:referrers:${d}`);
+
+  const cityKeys = countryFilter
+    ? dates.map(d => `analytics:cities:${countryFilter}:${d}`)
+    : dates.map(d => `analytics:cities:all:${d}`);
+
+  const visitorTopKeys = dates.map(d => `analytics:visitors:top:${d}`);
+
+  const [pages, countries, referrers, cities, topVisitors] = await Promise.all([
+    getTop(pageKeys),
+    getTop(countryKeys),
+    visitorFilter ? Promise.resolve([]) : getTop(referrerKeys),
+    getTop(cityKeys),
+    getTop(visitorTopKeys)
+  ]);
+
+  let finalReferrers = referrers;
+  if (visitorFilter) {
+    const meta = await redis.hgetall(`analytics:visitor:${visitorFilter}`);
+    if (meta && meta.referrer && meta.referrer !== 'unknown') {
+      finalReferrers = [{ value: meta.referrer, score: 1 }];
+    }
+  }
+
+  // Get Top Visitor Details
+  const enrichedTopVisitors = await Promise.all(topVisitors.map(async (v) => {
+    const vid = v.value;
+    const [meta, email] = await Promise.all([
+      redis.hgetall(`analytics:visitor:${vid}`),
+      redis.get(`analytics:identity:${vid}`)
+    ]);
+    return {
+      id: vid,
+      value: v.score, // view count
+      email: email || null,
+      ip: meta.ip || null,
+      country: meta.country || null,
+      city: meta.city || null,
+      referrer: meta.referrer || null
+    };
+  }));
+
+  let filteredTopVisitors = enrichedTopVisitors;
+  if (countryFilter) {
+    filteredTopVisitors = enrichedTopVisitors.filter(v => v.country === countryFilter);
+  }
+
+  // 2. Recent Visitor Identities & Pagination logic (simplified)
+  let recentVisitorsKey = 'analytics:recent_visitors';
+  if (countryFilter) {
+    recentVisitorsKey = `analytics:recent_visitors:country:${countryFilter}`;
+  }
+
+  let recentIds: string[] = [];
+  let totalFilteredVisitors = 0;
+
+  // Simple Logic for now: Fetch from recent list
+  const total = await redis.llen(recentVisitorsKey);
+  totalFilteredVisitors = total;
+  const start = (visitorPage - 1) * visitorLimit;
+  const end = start + visitorLimit - 1;
+  recentIds = await redis.lrange(recentVisitorsKey, start, end);
+
+  const visitors = await Promise.all(recentIds.map(async (vid) => {
+    const [meta, email] = await Promise.all([
+      redis.hgetall(`analytics:visitor:${vid}`),
+      redis.get(`analytics:identity:${vid}`)
+    ]);
+    return {
+      id: vid,
+      email: email || null,
+      ip: meta.ip || null,
+      country: meta.country || null,
+      city: meta.city || null,
+      referrer: meta.referrer || null,
+      userAgent: meta.userAgent || null,
+      lastSeen: meta.lastSeen || null
+    };
+  }));
 
   return {
-    dataPoints,
-    totalViews,
-    totalVisitors,
-    topPages: formatList(topPages),
-    topCountries: formatList(topCountries),
-    topReferrers: formatList(topReferrers),
+    overview: {
+      views: totalViews,
+      visitors: uniqueVisitors,
+    },
+    data: {
+      chart: chartData,
+      pages: pages.map(p => ({ name: p.value, value: p.score })),
+      countries: countries.map(c => ({ name: c.value, value: c.score })),
+      cities: cities.map(c => ({ name: c.value, value: c.score })),
+      referrers: finalReferrers.map(r => ({ name: r.value, value: r.score })),
+      topVisitors: filteredTopVisitors.slice(0, 50),
+      recentVisitors: visitors,
+      pagination: {
+        page: visitorPage,
+        limit: visitorLimit,
+        total: totalFilteredVisitors,
+        totalPages: Math.ceil(totalFilteredVisitors / visitorLimit)
+      }
+    }
   }
 }

@@ -33,7 +33,7 @@ export async function middleware(req: NextRequest, event: NextFetchEvent) {
   const visitorId = hashArray.map((b) => b.toString(16).padStart(2, '0')).join('')
 
   const url = req.nextUrl.clone()
-  url.pathname = '/api/analytics/track'
+  url.pathname = '/api/track'
 
   // Fire and forget tracking request
   event.waitUntil(
