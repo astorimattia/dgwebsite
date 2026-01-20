@@ -3,16 +3,34 @@ import { NextResponse } from 'next/server';
 import { getAnalyticsData } from '@/lib/analytics';
 
 export async function GET(req: Request) {
-  // Check for admin_token cookie set by the login action
+  const { searchParams } = new URL(req.url);
+  const key = searchParams.get('key');
+  const adminPassword = process.env.ADMIN_PASSWORD;
+
+  // TODO: Use better auth, e.g. cookie matching from `admin/actions.ts` check?
+  // For now, simple key check or cookie check manually would be ideal.
+  // Given the previous code used "cookies().get('admin_token')", we should probably check that here too?
+  // Or just accept the key param for flexibility.
+
+  // Cookie check:
+  // import { cookies } from 'next/headers'; 
+  // const cookieStore = await cookies();
+  // const token = cookieStore.get('admin_token');
+  // if (!token || token.value !== 'true') ...
+
+  // For simplicity matching user logic, checking key OR cookie? 
+  // Let's stick to key for API calls, but maybe client side needs to pass it?
+  // The Admin Dashboard runs on client, it might NOT have the key in env var easily exposed to fetch.
+  // It's safer to rely on the HttpOnly cookie for the Admin UI interactions.
+
+  // Let's import cookies to check auth.
   const { cookies } = await import('next/headers');
   const cookieStore = await cookies();
   const token = cookieStore.get('admin_token');
 
-  if (!token || token.value !== 'true') {
+  if ((!adminPassword || key !== adminPassword) && (!token || token.value !== 'true')) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
-
-  const { searchParams } = new URL(req.url);
 
   try {
     const from = searchParams.get('from') || undefined;
