@@ -2,8 +2,9 @@
 
 import { login } from '../actions'
 import { useSearchParams } from 'next/navigation'
+import { Suspense } from 'react'
 
-export default function LoginPage() {
+function LoginForm() {
   const searchParams = useSearchParams()
   const error = searchParams.get('error')
 
@@ -38,5 +39,19 @@ export default function LoginPage() {
         </form>
       </div>
     </div>
+  )
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense fallback={
+      <div className="flex min-h-screen items-center justify-center bg-gray-50">
+        <div className="w-full max-w-sm p-6 bg-white rounded-lg shadow-md">
+          <h1 className="mb-6 text-2xl font-bold text-center text-gray-800">Admin Login</h1>
+        </div>
+      </div>
+    }>
+      <LoginForm />
+    </Suspense>
   )
 }
