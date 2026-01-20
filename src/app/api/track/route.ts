@@ -18,9 +18,9 @@ export async function POST(req: Request) {
     }
 
     // 2. Ignore Localhost
-    // if (ip === '::1' || ip === '127.0.0.1') {
-    //   return NextResponse.json({ success: true, ignored: true });
-    // }
+    if (ip === '::1' || ip === '127.0.0.1') {
+      return NextResponse.json({ success: true, ignored: true });
+    }
 
     // Decode location data to avoid %20
     const safeCountry = country ? decodeURIComponent(country) : null;
