@@ -92,13 +92,11 @@ export default function AdminPage() {
   const [visitorsPage, setVisitorsPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState('');
   const [debouncedSearch, setDebouncedSearch] = useState('');
-  const [subSearchTerm, setSubSearchTerm] = useState('');
+  const [subSearchTerm] = useState('');
   const [debouncedSubSearch, setDebouncedSubSearch] = useState('');
   const [referrersLimit, setReferrersLimit] = useState(14); // Default to desktop limit
 
   // Sorting is default by Date Descending from backend
-  const sortedSubscribers = subscribers;
-
 
 
   // helper to set cookie
@@ -115,7 +113,7 @@ export default function AdminPage() {
     if (parts.length === 2) return parts.pop()?.split(';').shift();
   };
 
-  const verifyAndLoad = async (pwd: string, subP = subPage, visP = visitorPage) => {
+  const verifyAndLoad = async (pwd: string, _subP = subPage, visP = visitorPage) => {
     setLoading(true);
     setError('');
 
@@ -190,8 +188,8 @@ export default function AdminPage() {
       setPassword(pwd); // Sync state
       setCookie('admin_secret', pwd, 30); // Persist login
 
-    } catch (e: any) {
-      setError(e.message || 'Failed to connect to server');
+    } catch (e: unknown) {
+      setError((e as Error).message || 'Failed to connect to server');
       setCookie('admin_secret', '', -1);
     } finally {
       setLoading(false);

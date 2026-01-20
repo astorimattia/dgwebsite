@@ -4,7 +4,7 @@ import { format } from 'date-fns'
 
 export async function POST(req: NextRequest) {
   try {
-    const { path, country, city, referrer, visitorId } = await req.json()
+    const { path, country, referrer, visitorId } = await req.json()
 
     if (!path || !visitorId) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 })
