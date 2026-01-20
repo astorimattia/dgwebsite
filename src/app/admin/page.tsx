@@ -215,7 +215,7 @@ export default function AdminPage() {
   // Refresh when timeRange or pages change
   useEffect(() => {
     if (isAuthenticated && password) {
-      verifyAndLoad(password, subPage, visitorPage);
+      verifyAndLoad(password, visitorPage);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [analyticsTimeRange, subscribersTimeRange, subPage, visitorPage, selectedCountry, selectedVisitor, debouncedSearch, debouncedSubSearch]);
