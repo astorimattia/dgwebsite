@@ -55,23 +55,27 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/favicon.ico" />
         <link rel="preconnect" href="https://gc.zgo.at" />
         <link rel="preconnect" href="https://www.clarity.ms" />
-        <script
-          data-goatcounter="https://mattia.goatcounter.com/count"
-          async
-          src="//gc.zgo.at/count.js"
-        />
-        <script
-          type="text/javascript"
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function(c,l,a,r,i,t,y){
-                  c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-                  t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-                  y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-              })(window, document, "clarity", "script", "t6xnykjbjr");
-            `
-          }}
-        />
+        {process.env.NODE_ENV === 'production' && (
+          <>
+            <script
+              data-goatcounter="https://mattia.goatcounter.com/count"
+              async
+              src="//gc.zgo.at/count.js"
+            />
+            <script
+              type="text/javascript"
+              dangerouslySetInnerHTML={{
+                __html: `
+                  (function(c,l,a,r,i,t,y){
+                      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+                      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+                      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+                  })(window, document, "clarity", "script", "t6xnykjbjr");
+                `
+              }}
+            />
+          </>
+        )}
         <script
           dangerouslySetInnerHTML={{
             __html: `

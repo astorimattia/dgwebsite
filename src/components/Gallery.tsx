@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useCallback } from 'react';
 import Image from 'next/image';
-import ResponsiveImage from './ResponsiveImage';
+
 
 interface ImageData {
   src: string;
@@ -355,7 +355,6 @@ const Gallery: React.FC = () => {
                   alt={image.title}
                   width={300}
                   height={200}
-                  priority={index === 0}
                   style={{
                     width: '100%',
                     height: 'auto',
@@ -413,7 +412,6 @@ const Gallery: React.FC = () => {
                 alt={image.title}
                 width={300}
                 height={200}
-                priority={index === 0}
                 style={{
                   width: '100%',
                   height: 'auto',

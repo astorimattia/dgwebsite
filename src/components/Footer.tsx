@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import SocialIcons from './SocialIcons';
+
 
 const Footer: React.FC = () => {
   return (
