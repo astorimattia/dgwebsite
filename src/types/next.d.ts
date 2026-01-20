@@ -1,3 +1,4 @@
+// Type declarations for Vercel-specific NextRequest extensions
 declare module 'next/server' {
   interface NextRequest {
     ip?: string
@@ -10,3 +11,5 @@ declare module 'next/server' {
     }
   }
 }
+
+export { }
