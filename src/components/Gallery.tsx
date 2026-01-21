@@ -328,7 +328,7 @@ const Gallery: React.FC = () => {
 
         {/* Desktop View - Split Columns for correct global order */}
         <div
-          className="relative w-full mx-auto pb-10 hidden md:grid grid-cols-2 gap-5 items-start"
+          className="relative w-full mx-auto pb-10 hidden md:grid grid-cols-2 gap-5 items-start px-3"
           id="thumbnails-desktop"
         >
           {/* Left Column - Even Indices (0, 2, 4...) */}
