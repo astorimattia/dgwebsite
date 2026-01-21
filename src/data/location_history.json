@@ -9,11 +9,11 @@
   },
   {
     "date": "2025-06-20T21:02:37Z",
-    "city": "València"
+    "city": "Spain"
   },
   {
     "date": "2025-06-20T21:02:57Z",
-    "city": "València"
+    "city": "Spain"
   },
   {
     "date": "2025-06-20T21:41:18Z",
@@ -818,5 +818,65 @@
   {
     "date": "2026-01-04T14:30:03Z",
     "city": "Tamanique"
+  },
+  {
+    "date": "2026-01-05T14:30:02Z",
+    "city": "Chiltiupán"
+  },
+  {
+    "date": "2026-01-06T14:30:02Z",
+    "city": "Chiltiupán"
+  },
+  {
+    "date": "2026-01-07T14:30:04Z",
+    "city": "Teotepeque"
+  },
+  {
+    "date": "2026-01-08T14:30:04Z",
+    "city": "Teotepeque"
+  },
+  {
+    "date": "2026-01-10T14:30:01Z",
+    "city": "Guadalajara"
+  },
+  {
+    "date": "2026-01-11T14:30:04Z",
+    "city": "Guadalajara"
+  },
+  {
+    "date": "2026-01-12T14:30:03Z",
+    "city": "Guadalajara"
+  },
+  {
+    "date": "2026-01-13T14:30:03Z",
+    "city": "Guadalajara"
+  },
+  {
+    "date": "2026-01-14T14:31:49Z",
+    "city": "Guadalajara"
+  },
+  {
+    "date": "2026-01-15T14:30:04Z",
+    "city": "Guadalajara"
+  },
+  {
+    "date": "2026-01-16T14:30:02Z",
+    "city": "Guadalajara"
+  },
+  {
+    "date": "2026-01-17T14:30:04Z",
+    "city": "Tlajomulco de Zúñiga"
+  },
+  {
+    "date": "2026-01-18T16:30:04Z",
+    "city": "San Francisco"
+  },
+  {
+    "date": "2026-01-19T16:30:03Z",
+    "city": "San Francisco"
+  },
+  {
+    "date": "2026-01-20T16:30:03Z",
+    "city": "San Francisco"
   }
 ]

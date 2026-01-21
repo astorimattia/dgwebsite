@@ -17,14 +17,29 @@ export async function POST(req: Request) {
       return NextResponse.json({ success: true, ignored: true });
     }
 
-    // 2. Ignore Localhost
-    // if (ip === '::1' || ip === '127.0.0.1') {
-    //   return NextResponse.json({ success: true, ignored: true });
-    // }
-
+    // 2. Ignore Localhost and User IP
+    if (ip === '::1' || ip === '127.0.0.1' || ip === '73.231.242.251') {
+      return NextResponse.json({ success: true, ignored: true });
+    }
     // Decode location data to avoid %20
-    const safeCountry = country ? decodeURIComponent(country) : null;
-    const safeCity = city ? decodeURIComponent(city) : null;
+    let safeCountry = country ? decodeURIComponent(country) : null;
+    let safeCity = city ? decodeURIComponent(city) : null;
+
+    // Resolve location from IP if missing
+    if ((!safeCountry || !safeCity || safeCountry === 'unknown') && ip && ip !== 'unknown' && ip !== '::1' && ip !== '127.0.0.1') {
+      try {
+        const res = await fetch(`http://ip-api.com/json/${ip}`);
+        if (res.ok) {
+          const data = await res.json();
+          if (data.status === 'success') {
+            safeCountry = data.country;
+            safeCity = data.city;
+          }
+        }
+      } catch (e) {
+        console.error('IP Geolocation failed:', e);
+      }
+    }
 
     const today = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
     const currentHour = new Date().toISOString().slice(0, 13); // YYYY-MM-DDTHH
@@ -54,22 +69,16 @@ export async function POST(req: Request) {
     // 3b. Top Visitors (Sorted Set by View Count)
     if (visitorId) {
       pipeline.zincrby(`analytics:visitors:top:${today}`, 1, visitorId);
-
-      // 3c. Pages per Visitor (Sorted Set) - Enables filtering "Top Pages" by Visitor
       pipeline.zincrby(`analytics:visitors:${visitorId}:pages:${today}`, 1, path);
     }
 
     // 4. Top Countries (Sorted Set)
-    if (safeCountry) {
+    if (safeCountry && safeCountry !== 'unknown') {
       pipeline.zincrby(`analytics:countries:${today}`, 1, safeCountry);
 
       // 4a. Top Cities per Country
-      if (safeCity) {
-        // Key: analytics:cities:{country}:{date}
-        // We use daily aggregation for now
+      if (safeCity && safeCity !== 'unknown') {
         pipeline.zincrby(`analytics:cities:${safeCountry}:${today}`, 1, safeCity);
-
-        // 4b. Global Top Cities (for the "Top Cities" card when no country selected)
         pipeline.zincrby(`analytics:cities:all:${today}`, 1, safeCity);
       }
 
@@ -82,14 +91,10 @@ export async function POST(req: Request) {
       try {
         const domain = new URL(referrer).hostname;
         pipeline.zincrby(`analytics:referrers:${today}`, 1, domain);
-
-        // 5b. Top Referrers per Country
-        if (safeCountry) {
+        if (safeCountry && safeCountry !== 'unknown') {
           pipeline.zincrby(`analytics:referrers:country:${safeCountry}:${today}`, 1, domain);
         }
-      } catch {
-        // Invalid URL
-      }
+      } catch { }
     }
 
     // 6. Visitor Metadata & Identity
@@ -109,17 +114,16 @@ export async function POST(req: Request) {
         pipeline.lpush('analytics:recent_identified_visitors', visitorId);
       }
 
-      // Update Recent Visitors List (Raw)
-      const hasValidIp = ip && ip !== '::1' && ip !== '127.0.0.1' && ip !== 'unknown';
-      const hasLocation = safeCountry && safeCountry !== 'unknown';
+      // Update Recent Visitors List (Deduplicated)
+      // Check if most recent visitor is same (to avoid duplicates)
+      const lastVisitors = await redis.lrange('analytics:recent_visitors', 0, 0);
+      const isDuplicate = lastVisitors.length > 0 && lastVisitors[0] === visitorId;
 
-      if (isIdentified || hasValidIp || hasLocation) {
-        // Allow duplicates (visit log style) - store latest at top
+      if (!isDuplicate) {
         pipeline.lpush('analytics:recent_visitors', visitorId);
-        // Trim list to keep size manageable (e.g. 5000)
         pipeline.ltrim('analytics:recent_visitors', 0, 5000);
 
-        // Add to country specific list if we have a valid country
+        // Country-specific list
         if (safeCountry && safeCountry !== 'unknown') {
           const countryKey = `analytics:recent_visitors:country:${safeCountry}`;
           pipeline.lpush(countryKey, visitorId);
@@ -129,9 +133,7 @@ export async function POST(req: Request) {
     }
 
     // Set expiry for keys
-    const HOURLY_EXPIRY = 60 * 60 * 48; // 48 hours for graph granularity
-
-    // We only expire hourly keys. Daily keys are kept forever (or until eviction).
+    const HOURLY_EXPIRY = 60 * 60 * 48; // 48 hours
     pipeline.expire(`analytics:views:${currentHour}`, HOURLY_EXPIRY);
     pipeline.expire(`analytics:visitors:${currentHour}`, HOURLY_EXPIRY);
 
