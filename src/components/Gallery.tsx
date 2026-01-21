@@ -11,6 +11,34 @@ interface ImageData {
 }
 
 const imageData: ImageData[] = [
+  // Maut Ka Kuan series (India)
+  { src: '/assets/images-optimized/mautkakuan-analog.webp', title: 'Maut Ka Kuan, India', year: '2025' },
+  { src: '/assets/images-optimized/mautkakuan-analog3.webp', title: 'Maut Ka Kuan, India', year: '2025' },
+  { src: '/assets/images-optimized/mautkakuan-analog5.webp', title: 'Maut Ka Kuan, India', year: '2025' },
+  { src: '/assets/images-optimized/mautkakuan-analog6.webp', title: 'Maut Ka Kuan, India', year: '2025' },
+  { src: '/assets/images-optimized/mautkakuan-analog7.webp', title: 'Maut Ka Kuan, India', year: '2025' },
+  { src: '/assets/images-optimized/mautkakuan-analog8.webp', title: 'Maut Ka Kuan, India', year: '2025' },
+  { src: '/assets/images-optimized/mautkakuan-analog10.webp', title: 'Maut Ka Kuan, India', year: '2025' },
+  { src: '/assets/images-optimized/mautkakuan-analog12.webp', title: 'Maut Ka Kuan, India', year: '2025' },
+  { src: '/assets/images-optimized/mautkakuan-analog13.webp', title: 'Maut Ka Kuan, India', year: '2025' },
+  { src: '/assets/images-optimized/mautkakuan-analog14.webp', title: 'Maut Ka Kuan, India', year: '2025' },
+  { src: '/assets/images-optimized/mautkakuan-analog15.webp', title: 'Maut Ka Kuan, India', year: '2025' },
+
+  // Banni series (India)
+  { src: '/assets/images-optimized/banni-analog.webp', title: 'Banni, India', year: '2025' },
+  { src: '/assets/images-optimized/banni-analog2.webp', title: 'Banni, India', year: '2025' },
+  { src: '/assets/images-optimized/banni-analog3.webp', title: 'Banni, India', year: '2025' },
+  { src: '/assets/images-optimized/banni-analog5.webp', title: 'Banni, India', year: '2025' },
+  { src: '/assets/images-optimized/banni-analog6.webp', title: 'Banni, India', year: '2025' },
+  { src: '/assets/images-optimized/banni-analog7.webp', title: 'Banni, India', year: '2025' },
+  { src: '/assets/images-optimized/banni-analog8.webp', title: 'Banni, India', year: '2025' },
+  { src: '/assets/images-optimized/banni-analog9.webp', title: 'Banni, India', year: '2025' },
+  { src: '/assets/images-optimized/banni-analog10.webp', title: 'Banni, India', year: '2025' },
+  { src: '/assets/images-optimized/banni-analog11.webp', title: 'Banni, India', year: '2025' },
+  { src: '/assets/images-optimized/banni-analog13.webp', title: 'Banni, India', year: '2025' },
+  { src: '/assets/images-optimized/banni-analog14.webp', title: 'Banni, India', year: '2025' },
+  { src: '/assets/images-optimized/banni-analog15.webp', title: 'Banni, India', year: '2025' },
+
   // Tinku series (Macha, Bolivia)
   { src: '/assets/images/tinku-analog.webp', title: 'Tinku de Macha, Bolivia', year: '2025' },
   { src: '/assets/images/tinku-analog2.webp', title: 'Tinku de Macha, Bolivia', year: '2025' },
