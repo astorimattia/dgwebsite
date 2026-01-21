@@ -239,19 +239,12 @@ const Gallery: React.FC = () => {
                 <Image
                   src={image.src}
                   alt={image.title}
-                  width={1200}
-                  height={800}
+                  fill
                   priority={isCurrent}
                   onLoad={() => handleImageLoad(index)}
                   onError={() => handleImageError(index)}
                   style={{
-                    height: '100%',
-                    minHeight: 'unset',
-                    maxHeight: 'unset',
-                    width: '100%',
-                    maxWidth: '100%',
                     objectFit: 'contain',
-                    margin: '0 auto',
                     opacity: loadedImages.has(index) ? 1 : 0,
                     transition: 'opacity 0.3s ease-in-out'
                   }}
