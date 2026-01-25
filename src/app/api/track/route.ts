@@ -25,8 +25,12 @@ export async function POST(req: Request) {
     let safeCountry = country ? decodeURIComponent(country) : null;
     let safeCity = city ? decodeURIComponent(city) : null;
 
-    // Resolve location from IP if missing
-    if ((!safeCountry || !safeCity || safeCountry === 'unknown') && ip && ip !== 'unknown' && ip !== '::1' && ip !== '127.0.0.1') {
+    // Resolve location from IP if missing or unknown
+    const isCountryInvalid = !safeCountry || safeCountry.toLowerCase() === 'unknown';
+    const isCityInvalid = !safeCity || safeCity.toLowerCase() === 'unknown';
+    const isIpValid = ip && ip.toLowerCase() !== 'unknown' && ip !== '::1' && ip !== '127.0.0.1';
+
+    if ((isCountryInvalid || isCityInvalid) && isIpValid) {
       try {
         // Try ip-api.com first
         const res = await fetch(`http://ip-api.com/json/${ip}`);
