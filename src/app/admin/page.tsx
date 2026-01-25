@@ -386,12 +386,12 @@ export default function AdminPage() {
   }
 
   return (
-    <div className="flex min-h-screen min-h-[100dvh] flex-col bg-white text-black">
+    <div className="flex min-h-screen min-h-[100dvh] flex-col bg-slate-50 text-black">
       <main className="flex-1 p-[0_20px] md:p-[30px_40px] min-h-screen min-h-[100dvh] md:h-screen overflow-y-auto flex flex-col">
         <MobileHeader />
 
         <div className="max-w-4xl mx-auto w-full pt-4 md:pt-0">
-          <div className="flex justify-between items-center mb-8 border-b border-gray-100 pb-4">
+          <div className="flex justify-between items-center mb-8 border-b border-gray-200 pb-4">
             <div>
               <h1 className="text-2xl font-normal font-gt-america-regular">Dashboard</h1>
               <p className="text-gray-500 text-sm mt-1">
@@ -412,7 +412,7 @@ export default function AdminPage() {
               onChange={(e) => {
                 setAnalyticsTimeRange(e.target.value);
               }}
-              className="bg-white border border-gray-200 text-gray-900 text-sm rounded-md focus:ring-black focus:border-black block p-2 cursor-pointer"
+              className="bg-white border border-gray-200 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block p-2 cursor-pointer shadow-sm"
             >
               <option value="0">Today</option>
               <option value="7">Last 7 Days</option>
@@ -424,13 +424,13 @@ export default function AdminPage() {
           <div className="space-y-6">
             {/* Overview Cards */}
             <div className="grid grid-cols-2 gap-4">
-              <div className="bg-gray-50 p-4 rounded-lg border border-gray-100">
+              <div className="bg-white p-4 rounded-lg border-l-4 border-blue-500 shadow-sm">
                 <p className="text-sm text-gray-500">Total Views</p>
-                <p className="text-2xl font-normal font-gt-america-regular text-black">{analytics?.overview?.views || 0}</p>
+                <p className="text-2xl font-normal font-gt-america-regular text-blue-600">{analytics?.overview?.views || 0}</p>
               </div>
-              <div className="bg-gray-50 p-4 rounded-lg border border-gray-100">
+              <div className="bg-white p-4 rounded-lg border-l-4 border-purple-500 shadow-sm">
                 <p className="text-sm text-gray-500">Unique Visitors</p>
-                <p className="text-2xl font-normal font-gt-america-regular text-black">{analytics?.overview?.visitors || 0}</p>
+                <p className="text-2xl font-normal font-gt-america-regular text-purple-600">{analytics?.overview?.visitors || 0}</p>
               </div>
             </div>
 
@@ -450,15 +450,15 @@ export default function AdminPage() {
                       >
                         <defs>
                           <linearGradient id="colorViews" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="5%" stopColor="#000" stopOpacity={0.1} />
-                            <stop offset="95%" stopColor="#000" stopOpacity={0} />
+                            <stop offset="5%" stopColor="#3b82f6" stopOpacity={0.1} />
+                            <stop offset="95%" stopColor="#3b82f6" stopOpacity={0} />
                           </linearGradient>
                           <linearGradient id="colorVisitors" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="5%" stopColor="#9ca3af" stopOpacity={0.1} />
-                            <stop offset="95%" stopColor="#9ca3af" stopOpacity={0} />
+                            <stop offset="5%" stopColor="#8b5cf6" stopOpacity={0.1} />
+                            <stop offset="95%" stopColor="#8b5cf6" stopOpacity={0} />
                           </linearGradient>
                         </defs>
-                        <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" vertical={false} />
+                        <CartesianGrid strokeDasharray="3 3" stroke="#f3f4f6" vertical={false} />
                         <XAxis
                           dataKey="date"
                           stroke="#9ca3af"
@@ -503,7 +503,7 @@ export default function AdminPage() {
                         <Area
                           type="monotone"
                           dataKey="views"
-                          stroke="#000"
+                          stroke="#3b82f6"
                           fillOpacity={1}
                           fill="url(#colorViews)"
                           name="Total Views"
@@ -512,7 +512,7 @@ export default function AdminPage() {
                         <Area
                           type="monotone"
                           dataKey="visitors"
-                          stroke="#9ca3af"
+                          stroke="#8b5cf6"
                           fillOpacity={1}
                           fill="url(#colorVisitors)"
                           name="Unique Visitors"
@@ -550,7 +550,7 @@ export default function AdminPage() {
                               >
                                 {r.name}
                               </span>
-                              <span className="text-sm font-mono text-gray-500 flex-shrink-0">{r.value}</span>
+                              <span className="text-sm font-mono text-gray-500 flex-shrink-0 bg-gray-100 px-2 py-0.5 rounded text-xs">{r.value}</span>
                             </li>
                           ))}
                       </ul>
@@ -560,7 +560,7 @@ export default function AdminPage() {
                         {referrersPage > 1 && (
                           <button
                             onClick={() => setReferrersPage(p => Math.max(1, p - 1))}
-                            className="text-xs text-gray-500 hover:text-black cursor-pointer"
+                            className="text-xs text-blue-600 hover:text-blue-800 cursor-pointer"
                           >
                             Previous
                           </button>
@@ -573,7 +573,7 @@ export default function AdminPage() {
                         {referrersPage < Math.ceil(analytics.data.referrers.length / referrersLimit) && (
                           <button
                             onClick={() => setReferrersPage(p => Math.min(Math.ceil(analytics.data.referrers.length / referrersLimit), p + 1))}
-                            className="text-xs text-gray-500 hover:text-black cursor-pointer"
+                            className="text-xs text-blue-600 hover:text-blue-800 cursor-pointer"
                           >
                             Next
                           </button>
@@ -602,7 +602,7 @@ export default function AdminPage() {
                           .map((v, i) => (
                             <li
                               key={i}
-                              className={`flex justify-between items-center group cursor-pointer transition-colors ${selectedVisitor === v.id ? 'opacity-100' : 'opacity-80 hover:opacity-100'}`}
+                              className={`flex justify-between items-center group cursor-pointer transition-colors p-1.5 rounded ${selectedVisitor === v.id ? 'bg-purple-50 text-purple-900' : 'hover:bg-gray-50'}`}
                               onClick={() => {
                                 setSelectedVisitor(selectedVisitor === v.id ? null : v.id);
                                 setPagesPage(1); // Reset pages pagination
@@ -611,20 +611,20 @@ export default function AdminPage() {
                             >
                               <div className="flex flex-col overflow-hidden mr-2">
                                 <div className="flex items-center gap-2">
-                                  <span className={`text-sm truncate font-mono text-xs ${selectedVisitor === v.id ? 'text-black font-semibold' : 'text-gray-600 group-hover:text-black'}`}>{v.ip || 'Unknown'}</span>
+                                  <span className={`text-sm truncate font-mono text-xs ${selectedVisitor === v.id ? 'text-purple-900 font-semibold' : 'text-gray-600 group-hover:text-black'}`}>{v.ip || 'Unknown'}</span>
                                   {(v.city || v.country) && (
-                                    <span className={`text-xs truncate ${selectedVisitor === v.id ? 'text-gray-500' : 'text-gray-400'}`}>
+                                    <span className={`text-xs truncate ${selectedVisitor === v.id ? 'text-purple-700' : 'text-gray-400'}`}>
                                       {v.city && v.city !== 'unknown' ? decodeURIComponent(v.city) : ''}
                                       {v.city && v.country ? ', ' : ''}
                                       {v.country ? getCountryName(v.country) : ''}
                                       {v.referrer && v.referrer !== 'unknown' && (
-                                        <span className="text-gray-400"> via {v.referrer}</span>
+                                        <span className={selectedVisitor === v.id ? 'text-purple-400' : 'text-gray-400'}> via {v.referrer}</span>
                                       )}
                                     </span>
                                   )}
                                 </div>
                               </div>
-                              <span className="text-sm font-mono text-gray-500 flex-shrink-0">{v.value}</span>
+                              <span className={`text-sm font-mono flex-shrink-0 px-2 py-0.5 rounded text-xs ${selectedVisitor === v.id ? 'bg-purple-100 text-purple-800' : 'bg-gray-100 text-gray-500'}`}>{v.value}</span>
                             </li>
                           ))}
                       </ul>
@@ -634,7 +634,7 @@ export default function AdminPage() {
                         {visitorsPage > 1 && (
                           <button
                             onClick={() => setVisitorsPage(p => Math.max(1, p - 1))}
-                            className="text-xs text-gray-500 hover:text-black cursor-pointer"
+                            className="text-xs text-blue-600 hover:text-blue-800 cursor-pointer"
                           >
                             Previous
                           </button>
@@ -647,7 +647,7 @@ export default function AdminPage() {
                         {visitorsPage < Math.ceil(analytics.data.topVisitors.length / 7) && (
                           <button
                             onClick={() => setVisitorsPage(p => Math.min(Math.ceil((analytics.data.topVisitors?.length || 0) / 7), p + 1))}
-                            className="text-xs text-gray-500 hover:text-black cursor-pointer"
+                            className="text-xs text-blue-600 hover:text-blue-800 cursor-pointer"
                           >
                             Next
                           </button>
@@ -683,7 +683,7 @@ export default function AdminPage() {
                           .map((p, i) => (
                             <li key={i} className="flex justify-between items-center">
                               <span className="text-sm text-gray-700 truncate" title={p.name}>{p.name}</span>
-                              <span className="text-sm font-mono text-gray-500">{p.value}</span>
+                              <span className="text-sm font-mono text-gray-500 bg-gray-100 px-2 py-0.5 rounded text-xs">{p.value}</span>
                             </li>
                           ))}
                       </ul>
@@ -693,7 +693,7 @@ export default function AdminPage() {
                         {pagesPage > 1 && (
                           <button
                             onClick={() => setPagesPage(p => Math.max(1, p - 1))}
-                            className="text-xs text-gray-500 hover:text-black cursor-pointer"
+                            className="text-xs text-blue-600 hover:text-blue-800 cursor-pointer"
                           >
                             Previous
                           </button>
@@ -706,7 +706,7 @@ export default function AdminPage() {
                         {pagesPage < Math.ceil(analytics.data.pages.length / 7) && (
                           <button
                             onClick={() => setPagesPage(p => Math.min(Math.ceil(analytics.data.pages.length / 7), p + 1))}
-                            className="text-xs text-gray-500 hover:text-black cursor-pointer"
+                            className="text-xs text-blue-600 hover:text-blue-800 cursor-pointer"
                           >
                             Next
                           </button>
@@ -735,15 +735,15 @@ export default function AdminPage() {
                           .map((p, i) => (
                             <li
                               key={i}
-                              className={`flex justify-between items-center group cursor-pointer transition-colors ${selectedCountry === p.name ? '' : ''}`}
+                              className={`flex justify-between items-center group cursor-pointer transition-colors p-1.5 rounded ${selectedCountry === p.name ? 'bg-blue-50 text-blue-900' : 'hover:bg-gray-50'}`}
                               onClick={() => {
                                 setSelectedCountry(selectedCountry === p.name ? null : p.name);
                                 setCityPage(1);
                                 setVisitorPage(1); // Reset visitor pagination
                               }}
                             >
-                              <span className={`text-sm truncate ${selectedCountry === p.name ? 'text-black font-semibold' : 'text-gray-700 group-hover:text-black'}`}>{getCountryName(p.name)}</span>
-                              <span className="text-sm font-mono text-gray-500">{p.value}</span>
+                              <span className={`text-sm truncate ${selectedCountry === p.name ? 'text-blue-900 font-semibold' : 'text-gray-700 group-hover:text-black'}`}>{getCountryName(p.name)}</span>
+                              <span className={`text-sm font-mono px-2 py-0.5 rounded text-xs ${selectedCountry === p.name ? 'bg-blue-100 text-blue-800' : 'text-gray-500 bg-gray-100'}`}>{p.value}</span>
                             </li>
                           ))}
                       </ul>
@@ -753,7 +753,7 @@ export default function AdminPage() {
                         {countryPage > 1 && (
                           <button
                             onClick={() => setCountryPage(p => Math.max(1, p - 1))}
-                            className="text-xs text-gray-500 hover:text-black cursor-pointer"
+                            className="text-xs text-blue-600 hover:text-blue-800 cursor-pointer"
                           >
                             Previous
                           </button>
@@ -766,7 +766,7 @@ export default function AdminPage() {
                         {countryPage < Math.ceil(analytics.data.countries.length / 7) && (
                           <button
                             onClick={() => setCountryPage(p => Math.min(Math.ceil(analytics.data.countries.length / 7), p + 1))}
-                            className="text-xs text-gray-500 hover:text-black cursor-pointer"
+                            className="text-xs text-blue-600 hover:text-blue-800 cursor-pointer"
                           >
                             Next
                           </button>
@@ -802,9 +802,9 @@ export default function AdminPage() {
                         {analytics.data.cities
                           .slice((cityPage - 1) * 7, cityPage * 7)
                           .map((p, i) => (
-                            <li key={i} className="flex justify-between items-center group">
-                              <span className="text-sm text-gray-700 truncate">{decodeURIComponent(p.name)}</span>
-                              <span className="text-sm font-mono text-gray-500">{p.value}</span>
+                            <li key={i} className="flex justify-between items-center group border-b border-gray-100 pb-2 border-none pb-0">
+                              <span className="text-sm text-gray-700 truncate" title={decodeURIComponent(p.name)}>{decodeURIComponent(p.name)}</span>
+                              <span className="text-sm font-mono text-gray-500 bg-gray-100 px-2 py-0.5 rounded text-xs">{p.value}</span>
                             </li>
                           ))}
                       </ul>
@@ -814,7 +814,7 @@ export default function AdminPage() {
                         {cityPage > 1 && (
                           <button
                             onClick={() => setCityPage(p => Math.max(1, p - 1))}
-                            className="text-xs text-gray-500 hover:text-black cursor-pointer"
+                            className="text-xs text-blue-600 hover:text-blue-800 cursor-pointer"
                           >
                             Previous
                           </button>
@@ -827,7 +827,7 @@ export default function AdminPage() {
                         {cityPage < Math.ceil(analytics.data.cities.length / 7) && (
                           <button
                             onClick={() => setCityPage(p => Math.min(Math.ceil(analytics.data.cities.length / 7), p + 1))}
-                            className="text-xs text-gray-500 hover:text-black cursor-pointer"
+                            className="text-xs text-blue-600 hover:text-blue-800 cursor-pointer"
                           >
                             Next
                           </button>
@@ -859,7 +859,7 @@ export default function AdminPage() {
                     placeholder="Search email, ip, city..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="bg-white border border-gray-200 text-black text-xs rounded px-2 py-1 focus:ring-black focus:border-black placeholder-gray-400 outline-none w-48"
+                    className="bg-white border border-gray-200 text-black text-xs rounded px-2 py-1 focus:ring-blue-500 focus:border-blue-500 placeholder-gray-400 outline-none w-48 shadow-sm transition-all"
                   />
                 )}
               </div>
@@ -867,10 +867,10 @@ export default function AdminPage() {
                 <table className="min-w-full text-left text-sm whitespace-nowrap">
                   <thead className="text-gray-500 border-b border-gray-200 bg-gray-50">
                     <tr>
-                      <th className="px-4 py-3 font-medium">IP Address</th>
-                      <th className="px-4 py-3 font-medium">Location</th>
-                      <th className="px-4 py-3 font-medium">Referrer</th>
-                      <th className="px-4 py-3 font-medium">Last Seen</th>
+                      <th className="px-4 py-3 font-medium text-xs uppercase tracking-wider">IP Address</th>
+                      <th className="px-4 py-3 font-medium text-xs uppercase tracking-wider">Location</th>
+                      <th className="px-4 py-3 font-medium text-xs uppercase tracking-wider">Referrer</th>
+                      <th className="px-4 py-3 font-medium text-xs uppercase tracking-wider">Last Seen</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-100">
@@ -878,13 +878,13 @@ export default function AdminPage() {
                       analytics.data.recentVisitors.map((v, i) => (
                         <tr
                           key={i}
-                          className={`hover:bg-gray-50 transition-colors cursor-pointer ${selectedVisitor === v.id ? 'bg-gray-100' : ''}`}
+                          className={`hover:bg-purple-50 transition-colors cursor-pointer ${selectedVisitor === v.id ? 'bg-purple-50' : ''}`}
                           onClick={() => {
                             setSelectedVisitor(selectedVisitor === v.id ? null : v.id);
                             setVisitorPage(1);
                           }}
                         >
-                          <td className="px-4 py-3 text-gray-600 font-mono text-xs">{v.ip}</td>
+                          <td className={`px-4 py-3 font-mono text-xs ${selectedVisitor === v.id ? 'text-purple-900 font-medium' : 'text-gray-600'}`}>{v.ip}</td>
                           <td className="px-4 py-3 text-gray-600">
                             {v.country ? getCountryName(v.country) : 'Unknown'}
                             {v.city && v.city !== 'unknown' && <span className="text-gray-400 text-xs ml-1">({decodeURIComponent(v.city)})</span>}
@@ -892,7 +892,15 @@ export default function AdminPage() {
                           <td className="px-4 py-3 text-gray-500 text-xs truncate max-w-[150px]" title={v.referrer || ''}>
                             {v.referrer && v.referrer !== 'unknown' ? v.referrer : '-'}
                           </td>
-                          <td className="px-4 py-3 text-gray-400 text-xs">{new Date(v.lastSeen).toLocaleString()}</td>
+                          <td className="px-4 py-3 text-gray-400 text-xs text-right">
+                            {new Date(v.lastSeen).toLocaleString('en-US', {
+                              month: 'short',
+                              day: 'numeric',
+                              hour: 'numeric',
+                              minute: 'numeric',
+                              hour12: true
+                            })}
+                          </td>
                         </tr>
                       ))
                     ) : (
