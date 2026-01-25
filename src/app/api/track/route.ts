@@ -28,12 +28,25 @@ export async function POST(req: Request) {
     // Resolve location from IP if missing
     if ((!safeCountry || !safeCity || safeCountry === 'unknown') && ip && ip !== 'unknown' && ip !== '::1' && ip !== '127.0.0.1') {
       try {
+        // Try ip-api.com first
         const res = await fetch(`http://ip-api.com/json/${ip}`);
         if (res.ok) {
           const data = await res.json();
           if (data.status === 'success') {
             safeCountry = data.country;
             safeCity = data.city;
+          }
+        }
+
+        // Fallback to ipwho.is if still unknown
+        if (!safeCountry || !safeCity) {
+          const res2 = await fetch(`http://ipwho.is/${ip}`);
+          if (res2.ok) {
+            const data2 = await res2.json();
+            if (data2.success) {
+              safeCountry = data2.country;
+              safeCity = data2.city;
+            }
           }
         }
       } catch (e) {

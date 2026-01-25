@@ -23,8 +23,8 @@ export async function middleware(req: NextRequest, event: NextFetchEvent) {
   const path = req.nextUrl.pathname
 
   // Improved Location Handling
-  let country = req.geo?.country ?? 'Unknown'
-  let city = req.geo?.city ?? 'Unknown'
+  let country = req.geo?.country ?? req.headers.get('x-vercel-ip-country') ?? 'Unknown'
+  let city = req.geo?.city ?? req.headers.get('x-vercel-ip-city') ?? 'Unknown'
 
   if (country === 'Unknown' && (ip === '127.0.0.1' || ip === '::1')) {
     country = 'Localhost'

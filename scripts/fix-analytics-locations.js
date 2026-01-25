@@ -1,7 +1,6 @@
 const Redis = require('ioredis');
 const fs = require('fs');
 const path = require('path');
-const https = require('http'); // ip-api is http
 
 // Load env vars
 try {
@@ -25,28 +24,19 @@ const redis = new Redis(process.env.REDIS_URL);
 const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
 async function getIpLocation(ip) {
-    return new Promise((resolve) => {
-        const req = https.get(`http://ip-api.com/json/${ip}`, (res) => {
-            let data = '';
-            res.on('data', chunk => data += chunk);
-            res.on('end', () => {
-                try {
-                    resolve(JSON.parse(data));
-                } catch (e) {
-                    resolve(null);
-                }
-            });
-        });
-        req.on('error', () => resolve(null));
-        req.end();
-    });
+    try {
+        const res = await fetch(`http://ipwho.is/${ip}`);
+        if (!res.ok) return null;
+        return await res.json();
+    } catch (e) {
+        return null;
+    }
 }
 
 async function fixLocations() {
     try {
         console.log('Fetching recent visitors...');
-        // Fetch more visitors to ensure we catch enough, say 500
-        const recentVisitorIds = await redis.lrange('analytics:recent_visitors', 0, 499);
+        const recentVisitorIds = await redis.lrange('analytics:recent_visitors', 0, 999);
 
         console.log(`Scanning ${recentVisitorIds.length} recent visitors...`);
 
@@ -60,16 +50,17 @@ async function fixLocations() {
                 continue;
             }
 
-            if (meta.country === 'Unknown' || !meta.country) {
-                console.log(`Fixing visitor ${id} with IP ${meta.ip}...`);
+            if (meta.country === 'Unknown' || !meta.country || meta.country === 'unknown') {
+                // Determine if we should fix
+                process.stdout.write(`Fixing visitor ${id} (IP: ${meta.ip})... `);
 
-                // Rate limit compliant (45/min goes to ~1.3s delay, let's be safe with 1.5s)
-                await sleep(1500);
+                // Small delay to be polite
+                await sleep(100);
 
                 const geo = await getIpLocation(meta.ip);
 
-                if (geo && geo.status === 'success') {
-                    console.log(`  -> Resolved to ${geo.city}, ${geo.country}`);
+                if (geo && geo.success) {
+                    console.log(`Resolved: ${geo.city}, ${geo.country}`);
 
                     const pipeline = redis.pipeline();
 
@@ -99,14 +90,14 @@ async function fixLocations() {
                     await pipeline.exec();
                     fixedCount++;
                 } else {
-                    console.log(`  -> Failed to resolve location for IP ${meta.ip}`);
+                    console.log(`Failed (API error or invalid IP)`);
                 }
             } else {
                 skippedCount++;
             }
         }
 
-        console.log(`Finished! Fixed: ${fixedCount}, Skipped (Already OK): ${skippedCount}`);
+        console.log(`Finished! Fixed: ${fixedCount}, Skipped: ${skippedCount}`);
         process.exit(0);
     } catch (error) {
         console.error('Fix failed:', error);
