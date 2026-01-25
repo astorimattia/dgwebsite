@@ -39,6 +39,7 @@ interface AnalyticsData {
       country?: string | null;
       city?: string | null;
       referrer?: string | null;
+      org?: string | null;
       lastSeen?: string;
     }[];
     recentVisitors?: {
@@ -48,6 +49,7 @@ interface AnalyticsData {
       city?: string;
       referrer?: string | null;
       userAgent?: string;
+      org?: string | null;
       lastSeen: string;
       email?: string;
     }[];
@@ -596,13 +598,13 @@ export default function AdminPage() {
                 {analytics && analytics.data.topVisitors && analytics.data.topVisitors.length > 0 ? (
                   <>
                     <div className="p-4 flex-1 overflow-hidden">
-                      <ul className="space-y-3">
+                      <ul className="space-y-1">
                         {analytics.data.topVisitors
                           .slice((visitorsPage - 1) * 7, visitorsPage * 7)
                           .map((v, i) => (
                             <li
                               key={i}
-                              className={`flex justify-between items-center group cursor-pointer transition-colors p-1.5 rounded ${selectedVisitor === v.id ? 'bg-purple-50 text-purple-900' : 'hover:bg-gray-50'}`}
+                              className={`flex justify-between items-center group cursor-pointer transition-colors p-1 rounded ${selectedVisitor === v.id ? 'bg-purple-50 text-purple-900' : 'hover:bg-gray-50'}`}
                               onClick={() => {
                                 setSelectedVisitor(selectedVisitor === v.id ? null : v.id);
                                 setPagesPage(1); // Reset pages pagination
@@ -617,6 +619,9 @@ export default function AdminPage() {
                                       {v.city && v.city !== 'unknown' ? decodeURIComponent(v.city) : ''}
                                       {v.city && v.country ? ', ' : ''}
                                       {v.country ? getCountryName(v.country) : ''}
+                                      {v.org && v.org !== 'unknown' && (
+                                        <span className="text-gray-400 text-[10px] ml-2 truncate max-w-[120px]" title={v.org}>• {v.org}</span>
+                                      )}
                                       {v.referrer && v.referrer !== 'unknown' && (
                                         <span className={selectedVisitor === v.id ? 'text-purple-400' : 'text-gray-400'}> via {v.referrer}</span>
                                       )}
@@ -677,7 +682,7 @@ export default function AdminPage() {
                 {analytics && analytics.data.pages.length > 0 ? (
                   <>
                     <div className="p-4 flex-1 overflow-hidden">
-                      <ul className="space-y-3">
+                      <ul className="space-y-1">
                         {analytics.data.pages
                           .slice((pagesPage - 1) * 7, pagesPage * 7)
                           .map((p, i) => (
@@ -729,13 +734,13 @@ export default function AdminPage() {
                 {analytics && analytics.data.countries.length > 0 ? (
                   <>
                     <div className="p-4 flex-1 overflow-hidden">
-                      <ul className="space-y-3">
+                      <ul className="space-y-1">
                         {analytics.data.countries
                           .slice((countryPage - 1) * 7, countryPage * 7)
                           .map((p, i) => (
                             <li
                               key={i}
-                              className={`flex justify-between items-center group cursor-pointer transition-colors p-1.5 rounded ${selectedCountry === p.name ? 'bg-blue-50 text-blue-900' : 'hover:bg-gray-50'}`}
+                              className={`flex justify-between items-center group cursor-pointer transition-colors p-1 rounded ${selectedCountry === p.name ? 'bg-blue-50 text-blue-900' : 'hover:bg-gray-50'}`}
                               onClick={() => {
                                 setSelectedCountry(selectedCountry === p.name ? null : p.name);
                                 setCityPage(1);
@@ -798,7 +803,7 @@ export default function AdminPage() {
                 {analytics && analytics.data.cities && analytics.data.cities.length > 0 ? (
                   <>
                     <div className="p-4 flex-1 overflow-hidden">
-                      <ul className="space-y-3">
+                      <ul className="space-y-1">
                         {analytics.data.cities
                           .slice((cityPage - 1) * 7, cityPage * 7)
                           .map((p, i) => (
@@ -868,6 +873,7 @@ export default function AdminPage() {
                   <thead className="text-gray-500 border-b border-gray-200 bg-gray-50">
                     <tr>
                       <th className="px-4 py-3 font-medium text-xs uppercase tracking-wider">IP Address</th>
+                      <th className="px-4 py-3 font-medium text-xs uppercase tracking-wider">Identity</th>
                       <th className="px-4 py-3 font-medium text-xs uppercase tracking-wider">Location</th>
                       <th className="px-4 py-3 font-medium text-xs uppercase tracking-wider">Referrer</th>
                       <th className="px-4 py-3 font-medium text-xs uppercase tracking-wider">Last Seen</th>
@@ -884,15 +890,26 @@ export default function AdminPage() {
                             setVisitorPage(1);
                           }}
                         >
-                          <td className={`px-4 py-3 font-mono text-xs ${selectedVisitor === v.id ? 'text-purple-900 font-medium' : 'text-gray-600'}`}>{v.ip}</td>
-                          <td className="px-4 py-3 text-gray-600">
+                          <td className="px-4 py-2">
+                            <span className={`font-mono text-xs ${selectedVisitor === v.id ? 'text-purple-900 font-medium' : 'text-gray-600'}`}>{v.ip}</span>
+                          </td>
+                          <td className="px-4 py-2">
+                            {v.org && v.org !== 'unknown' ? (
+                              <span className="text-gray-600 text-xs truncate max-w-[150px] block" title={v.org}>{v.org}</span>
+                            ) : v.email ? (
+                              <span className="text-gray-600 text-xs truncate max-w-[150px] block" title={v.email}>{v.email}</span>
+                            ) : (
+                              <span className="text-gray-300 text-xs">-</span>
+                            )}
+                          </td>
+                          <td className="px-4 py-2 text-gray-600">
                             {v.country ? getCountryName(v.country) : 'Unknown'}
                             {v.city && v.city !== 'unknown' && <span className="text-gray-400 text-xs ml-1">({decodeURIComponent(v.city)})</span>}
                           </td>
-                          <td className="px-4 py-3 text-gray-500 text-xs truncate max-w-[150px]" title={v.referrer || ''}>
+                          <td className="px-4 py-2 text-gray-500 text-xs truncate max-w-[150px]" title={v.referrer || ''}>
                             {v.referrer && v.referrer !== 'unknown' ? v.referrer : '-'}
                           </td>
-                          <td className="px-4 py-3 text-gray-400 text-xs text-right">
+                          <td className="px-4 py-2 text-gray-400 text-xs text-right">
                             {new Date(v.lastSeen).toLocaleString('en-US', {
                               month: 'short',
                               day: 'numeric',
@@ -905,7 +922,7 @@ export default function AdminPage() {
                       ))
                     ) : (
                       <tr>
-                        <td colSpan={5} className="px-4 py-6 text-center text-gray-400">
+                        <td colSpan={6} className="px-4 py-6 text-center text-gray-400">
                           No recent visitor data
                         </td>
                       </tr>

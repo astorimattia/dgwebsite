@@ -24,6 +24,7 @@ export async function POST(req: Request) {
     // Decode location data to avoid %20
     let safeCountry = country ? decodeURIComponent(country) : null;
     let safeCity = city ? decodeURIComponent(city) : null;
+    let safeOrg: string | null = null;
 
     // Resolve location from IP if missing or unknown
     const isCountryInvalid = !safeCountry || safeCountry.toLowerCase() === 'unknown';
@@ -39,6 +40,8 @@ export async function POST(req: Request) {
           if (data.status === 'success') {
             safeCountry = data.country;
             safeCity = data.city;
+            // Prefer Org, then ISP, then AS
+            safeOrg = data.org || data.isp || data.as;
           }
         }
 
@@ -50,6 +53,7 @@ export async function POST(req: Request) {
             if (data2.success) {
               safeCountry = data2.country;
               safeCity = data2.city;
+              safeOrg = data2.connection?.org || data2.connection?.isp || data2.connection?.asn?.toString();
             }
           }
         }
@@ -123,6 +127,7 @@ export async function POST(req: Request) {
         city: safeCity || 'unknown',
         referrer: referrer ? new URL(referrer).hostname : 'unknown',
         userAgent: userAgent || 'unknown',
+        org: safeOrg || 'unknown',
         lastSeen: new Date().toISOString()
       });
 
