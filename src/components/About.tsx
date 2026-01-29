@@ -9,9 +9,9 @@ const About: React.FC = () => {
         <p className="mb-5 text-base text-black">
           I&apos;m documenting the world&apos;s most <span className="font-gt-america-regular font-normal antialiased">extreme</span> rituals, from fist fights in Bolivia to spirt mediums in Thailand. Stories that deserve to be told, way outside of our city bubbles. (<a href="https://sacratos.com" target="_blank" rel="noopener noreferrer" className="invisible-link">sacratos.com</a>)
         </p>
-        <p className="mb-5 text-base text-black">
+        {/* <p className="mb-5 text-base text-black">
           I spent the past several years building, investing, and experimenting in San Francisco.
-        </p>
+        </p> */}
         <p className="mb-5 text-base text-black">
           I worked on AI weather models to enable <span className="font-gt-america-regular font-normal antialiased">weather modification</span> and control to increase rainfall and mitigate natural disasters. (<a href="https://www.spyroaero.com/" target="_blank" rel="noopener noreferrer" className="invisible-link">spyroaero.com</a>)
         </p>
