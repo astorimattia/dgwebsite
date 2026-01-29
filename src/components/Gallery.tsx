@@ -11,6 +11,34 @@ interface ImageData {
 }
 
 const imageData: ImageData[] = [
+  // Maut Ka Kuan series (India)
+  { src: '/assets/images-optimized/mautkakuan-analog.webp', title: 'Maut Ka Kuan, India', year: '2025' },
+  { src: '/assets/images-optimized/mautkakuan-analog3.webp', title: 'Maut Ka Kuan, India', year: '2025' },
+  { src: '/assets/images-optimized/mautkakuan-analog5.webp', title: 'Maut Ka Kuan, India', year: '2025' },
+  { src: '/assets/images-optimized/mautkakuan-analog6.webp', title: 'Maut Ka Kuan, India', year: '2025' },
+  { src: '/assets/images-optimized/mautkakuan-analog7.webp', title: 'Maut Ka Kuan, India', year: '2025' },
+  { src: '/assets/images-optimized/mautkakuan-analog8.webp', title: 'Maut Ka Kuan, India', year: '2025' },
+  { src: '/assets/images-optimized/mautkakuan-analog10.webp', title: 'Maut Ka Kuan, India', year: '2025' },
+  { src: '/assets/images-optimized/mautkakuan-analog12.webp', title: 'Maut Ka Kuan, India', year: '2025' },
+  { src: '/assets/images-optimized/mautkakuan-analog13.webp', title: 'Maut Ka Kuan, India', year: '2025' },
+  { src: '/assets/images-optimized/mautkakuan-analog14.webp', title: 'Maut Ka Kuan, India', year: '2025' },
+  { src: '/assets/images-optimized/mautkakuan-analog15.webp', title: 'Maut Ka Kuan, India', year: '2025' },
+
+  // Banni series (India)
+  { src: '/assets/images-optimized/banni-analog.webp', title: 'Banni, India', year: '2025' },
+  { src: '/assets/images-optimized/banni-analog2.webp', title: 'Banni, India', year: '2025' },
+  { src: '/assets/images-optimized/banni-analog3.webp', title: 'Banni, India', year: '2025' },
+  { src: '/assets/images-optimized/banni-analog5.webp', title: 'Banni, India', year: '2025' },
+  { src: '/assets/images-optimized/banni-analog6.webp', title: 'Banni, India', year: '2025' },
+  { src: '/assets/images-optimized/banni-analog7.webp', title: 'Banni, India', year: '2025' },
+  { src: '/assets/images-optimized/banni-analog8.webp', title: 'Banni, India', year: '2025' },
+  { src: '/assets/images-optimized/banni-analog9.webp', title: 'Banni, India', year: '2025' },
+  { src: '/assets/images-optimized/banni-analog10.webp', title: 'Banni, India', year: '2025' },
+  { src: '/assets/images-optimized/banni-analog11.webp', title: 'Banni, India', year: '2025' },
+  { src: '/assets/images-optimized/banni-analog13.webp', title: 'Banni, India', year: '2025' },
+  { src: '/assets/images-optimized/banni-analog14.webp', title: 'Banni, India', year: '2025' },
+  { src: '/assets/images-optimized/banni-analog15.webp', title: 'Banni, India', year: '2025' },
+
   // Tinku series (Macha, Bolivia)
   { src: '/assets/images/tinku-analog.webp', title: 'Tinku de Macha, Bolivia', year: '2025' },
   { src: '/assets/images/tinku-analog2.webp', title: 'Tinku de Macha, Bolivia', year: '2025' },
@@ -53,34 +81,11 @@ const imageData: ImageData[] = [
 
 const Gallery: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [showingThumbnails, setShowingThumbnails] = useState(false);
-  const [masonryReady, setMasonryReady] = useState(false);
   const [imageLoading, setImageLoading] = useState(true);
   const [showSpinner, setShowSpinner] = useState(false);
   const [loadedImages, setLoadedImages] = useState<Set<number>>(new Set());
-  const [preloadedImages, setPreloadedImages] = useState<Set<number>>(new Set());
 
   const totalSlides = imageData.length;
-
-  // Function to preload adjacent images
-  const preloadAdjacentImages = useCallback((currentIndex: number) => {
-    const nextIndex = (currentIndex + 1) % totalSlides;
-    const prevIndex = currentIndex === 0 ? totalSlides - 1 : currentIndex - 1;
-
-    // Preload next and previous images if not already loaded or preloaded
-    [nextIndex, prevIndex].forEach(index => {
-      if (!loadedImages.has(index) && !preloadedImages.has(index)) {
-        const img = new window.Image();
-        img.onload = () => {
-          setPreloadedImages(prev => new Set(prev).add(index));
-        };
-        img.onerror = () => {
-          console.warn(`Failed to preload image at index ${index}`);
-        };
-        img.src = imageData[index].src;
-      }
-    });
-  }, [totalSlides, loadedImages, preloadedImages]);
 
   const changeSlide = useCallback((direction: number) => {
     setCurrentSlide(prev => {
@@ -89,13 +94,13 @@ const Gallery: React.FC = () => {
       if (newSlide < 0) newSlide = totalSlides - 1;
 
       // Set loading state if the new image isn't loaded yet
-      if (!loadedImages.has(newSlide) && !preloadedImages.has(newSlide)) {
+      if (!loadedImages.has(newSlide)) {
         setImageLoading(true);
       }
 
       return newSlide;
     });
-  }, [totalSlides, loadedImages, preloadedImages]);
+  }, [totalSlides, loadedImages]);
 
   const handleImageLoad = useCallback((index: number) => {
     setLoadedImages(prev => new Set(prev).add(index));
@@ -117,24 +122,16 @@ const Gallery: React.FC = () => {
 
   const goToSlide = (index: number) => {
     setCurrentSlide(index);
-    if (showingThumbnails) {
-      setShowingThumbnails(false);
-    }
 
     // Set loading state if the new image isn't loaded yet
-    if (!loadedImages.has(index) && !preloadedImages.has(index)) {
+    if (!loadedImages.has(index)) {
       setImageLoading(true);
     }
   };
 
-  const toggleThumbnails = () => {
-    setMasonryReady(false);
-    setShowingThumbnails(prev => !prev);
-  };
-
   // Handle loading state when current slide changes
   useEffect(() => {
-    if (loadedImages.has(currentSlide) || preloadedImages.has(currentSlide)) {
+    if (loadedImages.has(currentSlide)) {
       setImageLoading(false);
       setShowSpinner(false);
     } else {
@@ -146,85 +143,7 @@ const Gallery: React.FC = () => {
 
       return () => clearTimeout(timer);
     }
-  }, [currentSlide, loadedImages, preloadedImages]);
-
-  // Preload adjacent images when current slide changes (with small delay)
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      preloadAdjacentImages(currentSlide);
-    }, 100); // Small delay to let current image load first
-
-    return () => clearTimeout(timer);
-  }, [currentSlide, preloadAdjacentImages]);
-
-  // Masonry layout function
-  const layoutMasonry = useCallback((columnCount = 3) => {
-    if (window.innerWidth <= 768) {
-      // Reset any masonry styles on mobile
-      const container = document.getElementById('thumbnails');
-      if (!container) return;
-      const thumbnails = container.querySelectorAll('.thumbnail');
-      thumbnails.forEach(thumbnail => {
-        (thumbnail as HTMLElement).style.width = '';
-        (thumbnail as HTMLElement).style.left = '';
-        (thumbnail as HTMLElement).style.top = '';
-      });
-      container.style.height = '';
-      return;
-    }
-
-    const container = document.getElementById('thumbnails');
-    if (!container) return;
-    const thumbnails = container.querySelectorAll('.thumbnail');
-
-    if (thumbnails.length === 0) return;
-
-    const containerWidth = container.offsetWidth;
-    const gap = 20;
-    const columnWidth = (containerWidth - (gap * (columnCount - 1))) / columnCount;
-
-    // Initialize column heights
-    const columnHeights = new Array(columnCount).fill(0);
-
-    thumbnails.forEach((thumbnail) => {
-      const img = thumbnail.querySelector('img') as HTMLImageElement;
-      if (!img || !img.complete) return; // Skip if image not loaded
-
-      // Calculate which column to place this thumbnail in
-      const shortestColumnIndex = columnHeights.indexOf(Math.min(...columnHeights));
-
-      // Set thumbnail size and position
-      (thumbnail as HTMLElement).style.width = `${columnWidth}px`;
-      (thumbnail as HTMLElement).style.left = `${shortestColumnIndex * (columnWidth + gap)}px`;
-      (thumbnail as HTMLElement).style.top = `${columnHeights[shortestColumnIndex]}px`;
-
-      // Calculate the aspect ratio and height
-      const aspectRatio = img.naturalHeight / img.naturalWidth;
-      const thumbnailHeight = columnWidth * aspectRatio;
-
-      // Update column height
-      columnHeights[shortestColumnIndex] += thumbnailHeight + gap;
-    });
-
-    // Set container height
-    const maxHeight = Math.max(...columnHeights);
-    container.style.height = `${maxHeight}px`;
-
-    // Mark masonry as ready
-    setMasonryReady(true);
-  }, []);
-
-  // Handle responsive layout
-  const handleResponsiveLayout = useCallback(() => {
-    if (window.innerWidth <= 768) {
-      // Mobile layout - thumbnails are always shown
-      setMasonryReady(true);
-      return;
-    } else {
-      // Desktop layout - always use 2 columns
-      layoutMasonry(2); // 2 columns for all desktop layouts
-    }
-  }, [layoutMasonry]);
+  }, [currentSlide, loadedImages]);
 
   // Handle keyboard navigation
   useEffect(() => {
@@ -273,33 +192,13 @@ const Gallery: React.FC = () => {
     };
   }, [changeSlide]);
 
-  // Initialize masonry layout when thumbnails are shown
-  useEffect(() => {
-    if (showingThumbnails) {
-      // Small delay to ensure DOM is updated
-      setTimeout(() => {
-        handleResponsiveLayout();
-      }, 50);
-    }
-  }, [showingThumbnails, handleResponsiveLayout]);
-
-  // Handle window resize
-  useEffect(() => {
-    const handleResize = () => {
-      handleResponsiveLayout();
-    };
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, [handleResponsiveLayout]);
-
   return (
     <>
       {/* Main Gallery Container */}
-      <div className={`relative flex flex-col w-full h-full mx-auto max-w-[1200px] min-h-[calc(100dvh-60px)] md:min-h-[calc(100vh-60px)] pt-0 md:pt-[50px] pb-0 transition-all duration-300 ease-in-out p-0 md:p-0 min-h-auto md:min-h-[calc(100vh-60px)] ${showingThumbnails ? 'hidden' : ''}`} id="home-section">
+      <div className="relative flex flex-col w-full h-full mx-auto max-w-[1200px] min-h-[calc(100dvh-60px)] md:min-h-[calc(100vh-60px)] pt-0 pb-0 transition-all duration-300 ease-in-out p-0 md:p-0 min-h-auto md:min-h-[calc(100vh-60px)]" id="home-section">
 
         {/* Desktop Gallery - Image Area */}
-        <div className={`hidden md:flex flex-col items-center justify-center flex-1 relative ${showingThumbnails ? 'hidden' : ''}`}>
+        <div className="hidden md:flex flex-col items-center justify-center flex-1 relative">
           {/* Navigation hover zones */}
           <div className="absolute top-0 h-full w-1/2 cursor-pointer opacity-0 transition-opacity duration-300 ease-in-out left-0 bg-gradient-to-r from-white/20 to-transparent hover:opacity-100 z-10" onClick={() => changeSlide(-1)} style={{ cursor: `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="black"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>') 12 12, auto`, pointerEvents: 'auto' }}></div>
           <div className="absolute top-0 h-full w-1/2 cursor-pointer opacity-0 transition-opacity duration-300 ease-in-out right-0 bg-gradient-to-l from-white/20 to-transparent hover:opacity-100 z-10" onClick={() => changeSlide(1)} style={{ cursor: `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="black"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>') 12 12, auto`, pointerEvents: 'auto' }}></div>
@@ -311,34 +210,49 @@ const Gallery: React.FC = () => {
             </div>
           )}
 
-          {imageData.map((image, index) => (
-            <div
-              key={index}
-              className={`w-full h-full relative ${index === currentSlide ? 'block' : 'hidden'}`}
-            >
-              <Image
-                src={image.src}
-                alt={image.title}
-                width={1200}
-                height={800}
-                priority={index === currentSlide}
-                onLoad={() => handleImageLoad(index)}
-                onError={() => handleImageError(index)}
+          {imageData.map((image, index) => {
+            // Calculate if image should be mounted (current, next, or previous)
+            // We want to keep adjacent images mounted to allow loading
+            const isCurrent = index === currentSlide;
+            const isNext = index === (currentSlide + 1) % totalSlides;
+            const isPrev = index === (currentSlide - 1 + totalSlides) % totalSlides;
+
+            // Preload strategy: mount current, next, and prev.
+            const shouldMount = isCurrent || isNext || isPrev;
+
+            if (!shouldMount && !loadedImages.has(index)) return null;
+
+            return (
+              <div
+                key={index}
+                className={`w-full h-full relative ${shouldMount || loadedImages.has(index) ? 'block' : 'hidden'}`}
                 style={{
-                  height: 'calc(100vh - 200px)',
-                  minHeight: 'calc(100vh - 200px)',
-                  maxHeight: 'calc(100vh - 200px)',
-                  width: 'auto',
-                  maxWidth: '95%',
-                  objectFit: 'contain',
-                  margin: '0 auto',
-                  opacity: (loadedImages.has(index) || preloadedImages.has(index)) ? 1 : 0,
-                  transition: 'opacity 0.3s ease-in-out'
+                  display: shouldMount || loadedImages.has(index) ? 'block' : 'none',
+                  position: isCurrent ? 'relative' : 'absolute',
+                  top: 0,
+                  left: 0,
+                  zIndex: isCurrent ? 1 : 0,
+                  opacity: isCurrent ? 1 : 0,
+                  pointerEvents: isCurrent ? 'auto' : 'none'
                 }}
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 85vw"
-              />
-            </div>
-          ))}
+              >
+                <Image
+                  src={image.src}
+                  alt={image.title}
+                  fill
+                  priority={isCurrent}
+                  onLoad={() => handleImageLoad(index)}
+                  onError={() => handleImageError(index)}
+                  style={{
+                    objectFit: 'contain',
+                    opacity: loadedImages.has(index) ? 1 : 0,
+                    transition: 'opacity 0.3s ease-in-out'
+                  }}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 85vw"
+                />
+              </div>
+            )
+          })}
         </div>
 
         {/* Mobile Thumbnails - Always visible on mobile */}
@@ -368,43 +282,32 @@ const Gallery: React.FC = () => {
         </div>
 
         {/* Desktop Navigation Controls - Fixed at bottom */}
-        <div className={`hidden md:flex items-center gap-[10px] text-sm justify-center relative bottom-0 left-0 right-0 z-[2] px-5 py-4 bg-white ${showingThumbnails ? 'hidden' : ''}`}>
-          <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-[10px] w-full mx-5">
+        <div className="hidden md:flex items-center gap-[10px] text-sm justify-center relative bottom-0 left-0 right-0 z-[2] py-6 bg-white">
+          <div className="grid grid-cols-[1fr_auto] items-center gap-[10px] w-full mx-5">
             <div className="text-sm text-black opacity-100 font-gt-america-regular leading-[1.4] flex flex-row items-center gap-2 text-left col-start-1 justify-self-start" id="image-title">
               {imageData[currentSlide].title}
               <div className="text-xs text-[#666] font-gt-america-thin">{imageData[currentSlide].year}</div>
             </div>
-            <div className="flex items-center gap-[10px] justify-center col-start-2">
+            <div className="flex items-center gap-[10px] justify-center col-start-2 justify-self-end">
               <button className="bg-none border-none text-black cursor-pointer text-sm underline transition-opacity duration-200 ease-in-out font-gt-america-thin p-0 hover:opacity-50" onClick={() => changeSlide(-1)}>prev</button>
               <span className="text-black mx-[5px] font-gt-america-thin">/</span>
               <button className="bg-none border-none text-black cursor-pointer text-sm underline transition-opacity duration-200 ease-in-out font-gt-america-thin p-0 hover:opacity-50" onClick={() => changeSlide(1)}>next</button>
             </div>
-            <span className="text-black cursor-pointer text-sm underline p-0 text-center font-gt-america-thin bg-none border-none outline-none transition-opacity duration-200 ease-in-out col-start-3 justify-self-end hover:opacity-50" onClick={toggleThumbnails}>show all photos</span>
           </div>
         </div>
       </div>
 
       {/* Thumbnails Container - Separate from main gallery */}
-      <div className={`hidden md:flex justify-center relative flex-col items-center w-full max-w-[1200px] mx-auto flex-shrink-0 z-[1] ${showingThumbnails ? 'pt-[60px]' : 'hidden'}`}>
-        <span
-          className="text-black cursor-pointer text-sm underline p-0 text-center w-full font-gt-america-thin bg-none border-none outline-none transition-opacity duration-200 ease-in-out absolute top-4 left-0 right-0 z-[3] hover:opacity-50"
-          onClick={toggleThumbnails}
-          style={{ display: showingThumbnails ? 'block' : 'none' }}
-        >
-          hide all photos
-        </span>
+      <div className="hidden md:flex justify-center relative flex-col items-center w-full max-w-[1200px] mx-auto flex-shrink-0 z-[1]">
+        {/* Mobile View - Single Column */}
         <div
-          className={`relative w-full mx-auto pb-10 ${showingThumbnails ? 'block' : 'hidden'}`}
-          id="thumbnails"
-          style={{
-            opacity: showingThumbnails && masonryReady ? 1 : 0,
-            transition: 'opacity 0.3s ease'
-          }}
+          className="relative w-full mx-auto pb-10 space-y-5 md:hidden"
+          id="thumbnails-mobile"
         >
           {imageData.map((image, index) => (
             <div
               key={index}
-              className="thumbnail cursor-pointer absolute transition-transform duration-200 ease-in-out mb-5 hover:scale-[1.02]"
+              className="thumbnail cursor-pointer relative transition-transform duration-200 ease-in-out hover:scale-[1.02]"
               onClick={() => goToSlide(index)}
             >
               <Image
@@ -417,18 +320,70 @@ const Gallery: React.FC = () => {
                   height: 'auto',
                   display: 'block'
                 }}
-                sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
-                onLoad={() => {
-                  // Trigger masonry layout when image loads
-                  if (showingThumbnails) {
-                    setTimeout(() => {
-                      handleResponsiveLayout();
-                    }, 100);
-                  }
-                }}
+                sizes="100vw"
               />
             </div>
           ))}
+        </div>
+
+        {/* Desktop View - Split Columns for correct global order */}
+        <div
+          className="relative w-full mx-auto pb-10 hidden md:grid grid-cols-2 gap-5 items-start px-3"
+          id="thumbnails-desktop"
+        >
+          {/* Left Column - Even Indices (0, 2, 4...) */}
+          <div className="flex flex-col gap-5">
+            {imageData.filter((_, i) => i % 2 === 0).map((image, i) => {
+              const originalIndex = i * 2;
+              return (
+                <div
+                  key={originalIndex}
+                  className="thumbnail cursor-pointer relative transition-transform duration-200 ease-in-out hover:scale-[1.02]"
+                  onClick={() => goToSlide(originalIndex)}
+                >
+                  <Image
+                    src={image.src}
+                    alt={image.title}
+                    width={300}
+                    height={200}
+                    style={{
+                      width: '100%',
+                      height: 'auto',
+                      display: 'block'
+                    }}
+                    sizes="50vw"
+                  />
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Right Column - Odd Indices (1, 3, 5...) */}
+          <div className="flex flex-col gap-5">
+            {imageData.filter((_, i) => i % 2 !== 0).map((image, i) => {
+              const originalIndex = (i * 2) + 1;
+              return (
+                <div
+                  key={originalIndex}
+                  className="thumbnail cursor-pointer relative transition-transform duration-200 ease-in-out hover:scale-[1.02]"
+                  onClick={() => goToSlide(originalIndex)}
+                >
+                  <Image
+                    src={image.src}
+                    alt={image.title}
+                    width={300}
+                    height={200}
+                    style={{
+                      width: '100%',
+                      height: 'auto',
+                      display: 'block'
+                    }}
+                    sizes="50vw"
+                  />
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
     </>

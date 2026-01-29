@@ -11,13 +11,13 @@ const Sidebar: React.FC = () => {
   const isAboutPage = pathname === '/about' || pathname === '/about/';
 
   return (
-    <aside className="w-sidebar-width p-[30px_40px] fixed h-screen overflow-y-auto top-5 left-[15px] flex flex-col flex-shrink-0 hidden md:flex" id="sidebar">
+    <aside className="w-[240px] p-[30px_40px] fixed h-screen overflow-y-auto top-5 left-[15px] flex flex-col flex-shrink-0 hidden md:flex" id="sidebar">
       <Link href="/" className="text-[25px] font-normal mb-[30px] text-black pl-0 font-gt-america-regular no-underline cursor-default hover:opacity-100">Mattia Astori</Link>
       <nav className="flex flex-col gap-[15px] mb-10">
         <Link href={isAboutPage ? "/" : "/about"} className="text-black no-underline text-base cursor-pointer transition-opacity duration-200 ease-in-out hover:opacity-50">
           {isAboutPage ? "Home" : "About"}
         </Link>
-        
+
         {/* About Preview Section - Only show when not on About page */}
         {!isAboutPage && (
           <div className="mt-2 mb-5">
@@ -27,10 +27,10 @@ const Sidebar: React.FC = () => {
             </Link>
           </div>
         )}
-        
+
         {/* Location Section */}
         <Location />
-        
+
         <SocialIcons />
       </nav>
     </aside>

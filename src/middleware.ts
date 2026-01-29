@@ -9,7 +9,7 @@ export const config = {
      * - _next/image (image optimization files)
      * - favicon.ico (favicon file)
      */
-    '/((?!api|_next/static|_next/image|favicon.ico).*)',
+    '/((?!api|_next/static|_next/image|favicon.ico|assets|sw.js).*)',
   ],
 }
 
@@ -18,11 +18,19 @@ export async function middleware(req: NextRequest, event: NextFetchEvent) {
     return NextResponse.next()
   }
 
-  const ip = req.ip ?? '127.0.0.1'
+  const ip = req.headers.get('x-forwarded-for')?.split(',')[0] ?? req.ip ?? '127.0.0.1'
   const userAgent = req.headers.get('user-agent') ?? 'unknown'
   const path = req.nextUrl.pathname
-  const country = req.geo?.country ?? 'Unknown'
-  const city = req.geo?.city ?? 'Unknown'
+
+  // Improved Location Handling
+  let country = req.geo?.country ?? req.headers.get('x-vercel-ip-country') ?? 'Unknown'
+  let city = req.geo?.city ?? req.headers.get('x-vercel-ip-city') ?? 'Unknown'
+
+  if (country === 'Unknown' && (ip === '127.0.0.1' || ip === '::1')) {
+    country = 'Localhost'
+    city = 'Local'
+  }
+
   const referrer = req.headers.get('referer') ?? 'Direct'
 
   // Generate visitorId hash
@@ -44,6 +52,7 @@ export async function middleware(req: NextRequest, event: NextFetchEvent) {
       },
       body: JSON.stringify({
         path,
+        ip,
         country,
         city,
         referrer,

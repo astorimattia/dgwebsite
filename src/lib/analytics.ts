@@ -234,7 +234,8 @@ export async function getAnalyticsData(options: AnalyticsOptions = {}) {
       ip: meta.ip || null,
       country: meta.country || null,
       city: meta.city || null,
-      referrer: meta.referrer || null
+      referrer: meta.referrer || null,
+      org: meta.org || null,
     };
   }));
 
@@ -298,6 +299,7 @@ export async function getAnalyticsData(options: AnalyticsOptions = {}) {
       city: meta.city || null,
       referrer: meta.referrer || null,
       userAgent: meta.userAgent || null,
+      org: meta.org || null,
       lastSeen: meta.lastSeen || null
     };
   }));
