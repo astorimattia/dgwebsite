@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import Image from 'next/image';
 
 
@@ -84,6 +84,7 @@ const Gallery: React.FC = () => {
   const [imageLoading, setImageLoading] = useState(true);
   const [showSpinner, setShowSpinner] = useState(false);
   const [loadedImages, setLoadedImages] = useState<Set<number>>(new Set());
+  const galleryRef = useRef<HTMLDivElement>(null);
 
   const totalSlides = imageData.length;
 
@@ -126,6 +127,11 @@ const Gallery: React.FC = () => {
     // Set loading state if the new image isn't loaded yet
     if (!loadedImages.has(index)) {
       setImageLoading(true);
+    }
+
+    // Scroll to the top of the gallery on desktop so the user can see the selected image big
+    if (window.innerWidth >= 768) {
+      galleryRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   };
 
@@ -195,7 +201,7 @@ const Gallery: React.FC = () => {
   return (
     <>
       {/* Main Gallery Container */}
-      <div className="relative flex flex-col w-full h-full mx-auto max-w-[1200px] min-h-[calc(100dvh-60px)] md:min-h-[calc(100vh-60px)] pt-0 pb-0 transition-all duration-300 ease-in-out p-0 md:p-0 min-h-auto md:min-h-[calc(100vh-60px)]" id="home-section">
+      <div ref={galleryRef} className="relative flex flex-col w-full h-full mx-auto max-w-[1200px] min-h-[calc(100dvh-60px)] md:min-h-[calc(100vh-60px)] pt-0 pb-0 transition-all duration-300 ease-in-out p-0 md:p-0 min-h-auto md:min-h-[calc(100vh-60px)]" id="home-section">
 
         {/* Desktop Gallery - Image Area */}
         <div className="hidden md:flex flex-col items-center justify-center flex-1 relative">
