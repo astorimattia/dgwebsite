@@ -5,16 +5,20 @@ export const config = {
     /*
      * Match all request paths except for the ones starting with:
      * - api (API routes)
-     * - _next/static (static files)
-     * - _next/image (image optimization files)
+     * - _next (ALL Next.js internal requests — data, static, image, etc.)
      * - favicon.ico (favicon file)
      */
-    '/((?!api|_next/static|_next/image|favicon.ico|assets|sw.js).*)',
+    '/((?!api|_next|favicon.ico|assets|sw.js).*)',
   ],
 }
 
 export async function middleware(req: NextRequest, event: NextFetchEvent) {
   if (req.method !== 'GET') {
+    return NextResponse.next()
+  }
+
+  // Skip RSC (React Server Component) requests — same URL, internal Next.js payload fetch
+  if (req.headers.get('RSC') === '1' || req.headers.get('Next-Router-Prefetch') === '1') {
     return NextResponse.next()
   }
 
