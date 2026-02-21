@@ -388,7 +388,7 @@ export async function getAnalyticsData(options: AnalyticsOptions = {}) {
         referrer: meta.referrer || null,
         userAgent: meta.userAgent || null,
         org: meta.org || null,
-        lastSeen: visitTime, // only embedded per-visit timestamp; null for legacy entries
+        lastSeen: visitTime ?? meta.lastSeen ?? null, // new entries: immutable per-visit ts; old entries: approximate meta.lastSeen
         queryParams: extractQueryParams(meta),
         firstTouch: extractFirstTouch(meta),
       };
@@ -437,7 +437,7 @@ export async function getAnalyticsData(options: AnalyticsOptions = {}) {
         referrer: meta.referrer || null,
         userAgent: meta.userAgent || null,
         org: meta.org || null,
-        lastSeen: visitTime, // only the embedded per-visit timestamp; null for legacy entries
+        lastSeen: visitTime ?? meta.lastSeen ?? null,
         queryParams: extractQueryParams(meta),
         firstTouch: extractFirstTouch(meta),
       };
