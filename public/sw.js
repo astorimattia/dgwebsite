@@ -1,12 +1,11 @@
 // Service Worker for caching and performance optimization
-const CACHE_NAME = 'mattia-astori-v2';
-const STATIC_CACHE = 'static-v2';
-const IMAGE_CACHE = 'images-v2';
+const CACHE_NAME = 'mattia-astori-v3';
+const STATIC_CACHE = 'static-v3';
+const IMAGE_CACHE = 'images-v3';
 
-// Files to cache immediately
+// Files to cache immediately — static assets only, NOT navigation pages
+// (Navigation pages fetched here would generate spurious tracking events)
 const STATIC_FILES = [
-  '/',
-  '/about/',
   '/assets/fonts.css',
   '/assets/favicon_chaos.webp',
   '/assets/font/GT-America/GT-America-Standard-Regular-Trial.otf',
