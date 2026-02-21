@@ -361,9 +361,6 @@ export async function getAnalyticsData(options: AnalyticsOptions = {}) {
     // If searching, we need to fetch a large chunk (or all) to filter in memory
     // Recent visitors list is trimmed to 5000 items, so we'll fetch them all for a complete search
     recentIds = await redis.lrange(recentVisitorsKey, 0, 5000);
-    // Deduplicate — keep first (most recent) occurrence of each visitorId
-    const seenSearch = new Set<string>();
-    recentIds = recentIds.filter(id => { if (seenSearch.has(id)) return false; seenSearch.add(id); return true; });
 
     const allVisitors = await Promise.all(recentIds.map(async (vid) => {
       const [meta, email] = await Promise.all([
@@ -406,13 +403,12 @@ export async function getAnalyticsData(options: AnalyticsOptions = {}) {
     filteredVisitors = searchFiltered.slice(start, start + visitorLimit);
 
   } else {
-    // Fetch a wide window, deduplicate, then paginate in memory
-    const rawIds = await redis.lrange(recentVisitorsKey, 0, 5000);
-    const seen = new Set<string>();
-    const uniqueIds = rawIds.filter(id => { if (seen.has(id)) return false; seen.add(id); return true; });
-    totalFilteredVisitors = uniqueIds.length;
+    // Fetch the exact page of entries needed
+    const total = await redis.llen(recentVisitorsKey);
+    totalFilteredVisitors = total;
     const start = (visitorPage - 1) * visitorLimit;
-    recentIds = uniqueIds.slice(start, start + visitorLimit);
+    const end = start + visitorLimit - 1;
+    recentIds = await redis.lrange(recentVisitorsKey, start, end);
 
     const visitors = await Promise.all(recentIds.map(async (vid) => {
       const [meta, email] = await Promise.all([
