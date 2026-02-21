@@ -50,6 +50,9 @@ export async function middleware(req: NextRequest, event: NextFetchEvent) {
   const url = req.nextUrl.clone()
   url.pathname = '/api/track'
 
+  // Extract Query Parameters (including UTMs)
+  const queryParams = Object.fromEntries(req.nextUrl.searchParams.entries())
+
   // Fire and forget tracking request
   event.waitUntil(
     fetch(url.toString(), {
@@ -64,6 +67,7 @@ export async function middleware(req: NextRequest, event: NextFetchEvent) {
         city,
         referrer,
         visitorId,
+        queryParams,
       }),
     }).catch((err) => console.error('Analytics track error:', err))
   )

@@ -41,6 +41,7 @@ interface AnalyticsData {
       referrer?: string | null;
       org?: string | null;
       lastSeen?: string;
+      queryParams?: Record<string, string>;
     }[];
     recentVisitors?: {
       id: string;
@@ -52,6 +53,7 @@ interface AnalyticsData {
       org?: string | null;
       lastSeen: string;
       email?: string;
+      queryParams?: Record<string, string>;
     }[];
     pagination?: PaginationMeta;
   };
@@ -879,6 +881,7 @@ export default function AdminPage() {
                       <th className="px-4 py-3 font-medium text-xs uppercase tracking-wider">IP Address</th>
                       <th className="px-4 py-3 font-medium text-xs uppercase tracking-wider">Location</th>
                       <th className="px-4 py-3 font-medium text-xs uppercase tracking-wider">Referrer</th>
+                      <th className="px-4 py-3 font-medium text-xs uppercase tracking-wider">Campaign</th>
                       <th className="px-4 py-3 font-medium text-xs uppercase tracking-wider">Last Seen</th>
                     </tr>
                   </thead>
@@ -902,6 +905,24 @@ export default function AdminPage() {
                           </td>
                           <td className="px-4 py-2 text-gray-500 text-xs truncate max-w-[150px]" title={v.referrer || ''}>
                             {v.referrer && v.referrer !== 'unknown' ? v.referrer : '-'}
+                          </td>
+                          <td className="px-4 py-2">
+                            {v.queryParams && Object.keys(v.queryParams).length > 0 ? (
+                              <div className="flex flex-wrap gap-1">
+                                {Object.entries(v.queryParams).map(([key, val]) => (
+                                  <span
+                                    key={key}
+                                    title={`${key}=${val}`}
+                                    className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[10px] font-mono bg-green-50 text-green-800 border border-green-200 max-w-[140px] truncate"
+                                  >
+                                    <span className="text-green-500 font-bold">{key}</span>
+                                    <span className="text-green-700 truncate">{val}</span>
+                                  </span>
+                                ))}
+                              </div>
+                            ) : (
+                              <span className="text-gray-300 text-xs">—</span>
+                            )}
                           </td>
                           <td className="px-4 py-2 text-gray-400 text-xs text-right">
                             {new Date(v.lastSeen).toLocaleString('en-US', {

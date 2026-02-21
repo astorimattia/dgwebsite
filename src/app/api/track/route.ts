@@ -5,7 +5,7 @@ import { NextResponse } from 'next/server';
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const { path, country, city, referrer, visitorId, ip, userAgent } = body;
+    const { path, country, city, referrer, visitorId, ip, userAgent, queryParams } = body;
 
     // Basic validation
     if (!path) {
@@ -31,6 +31,21 @@ export async function POST(req: Request) {
       path.includes('.xml') ||
       path.includes('.js') ||
       path.includes('.css') ||
+      // Font files
+      path.includes('.otf') ||
+      path.includes('.ttf') ||
+      path.includes('.woff') ||
+      path.includes('.woff2') ||
+      // Image files
+      path.includes('.webp') ||
+      path.includes('.jpg') ||
+      path.includes('.jpeg') ||
+      path.includes('.png') ||
+      path.includes('.gif') ||
+      path.includes('.svg') ||
+      path.includes('.ico') ||
+      // Asset directories
+      path.startsWith('/assets/') ||
       path.includes('feed') ||
       path.startsWith('/wp-') ||
       path.startsWith('/media/') ||
@@ -144,7 +159,8 @@ export async function POST(req: Request) {
     // 6. Visitor Metadata & Identity
     if (visitorId) {
       const metaKey = `analytics:visitor:${visitorId}`;
-      pipeline.hset(metaKey, {
+
+      const visitorMeta: Record<string, string> = {
         ip: ip || 'unknown',
         country: safeCountry || 'unknown',
         city: safeCity || 'unknown',
@@ -152,7 +168,18 @@ export async function POST(req: Request) {
         userAgent: userAgent || 'unknown',
         org: safeOrg || 'unknown',
         lastSeen: new Date().toISOString()
-      });
+      };
+
+      // Merge query parameters if they exist
+      if (queryParams && typeof queryParams === 'object') {
+        Object.entries(queryParams).forEach(([key, value]) => {
+          if (value && typeof value === 'string') {
+            visitorMeta[`q_${key}`] = value; // prefix with q_ to avoid collisions
+          }
+        });
+      }
+
+      pipeline.hset(metaKey, visitorMeta);
 
       // Update Recent Identified Visitors List ONLY if identified
       if (isIdentified) {

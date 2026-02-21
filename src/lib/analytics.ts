@@ -273,6 +273,17 @@ export async function getAnalyticsData(options: AnalyticsOptions = {}) {
     }
   }
 
+  // Helper to extract query/UTM params from visitor meta (keys prefixed with q_)
+  const extractQueryParams = (meta: Record<string, string>): Record<string, string> => {
+    const params: Record<string, string> = {};
+    for (const [key, value] of Object.entries(meta)) {
+      if (key.startsWith('q_') && value && value !== 'unknown') {
+        params[key.slice(2)] = value; // strip q_ prefix
+      }
+    }
+    return params;
+  };
+
   // Get Top Visitor Details
   const enrichedTopVisitors = await Promise.all(topVisitors.map(async (v) => {
     const vid = v.value;
@@ -289,6 +300,7 @@ export async function getAnalyticsData(options: AnalyticsOptions = {}) {
       city: meta.city || null,
       referrer: meta.referrer || null,
       org: meta.org || null,
+      queryParams: extractQueryParams(meta),
     };
   }));
 
@@ -352,7 +364,8 @@ export async function getAnalyticsData(options: AnalyticsOptions = {}) {
         referrer: meta.referrer || null,
         userAgent: meta.userAgent || null,
         org: meta.org || null,
-        lastSeen: meta.lastSeen || null
+        lastSeen: meta.lastSeen || null,
+        queryParams: extractQueryParams(meta),
       };
     }));
 
@@ -398,7 +411,8 @@ export async function getAnalyticsData(options: AnalyticsOptions = {}) {
         referrer: meta.referrer || null,
         userAgent: meta.userAgent || null,
         org: meta.org || null,
-        lastSeen: meta.lastSeen || null
+        lastSeen: meta.lastSeen || null,
+        queryParams: extractQueryParams(meta),
       };
     }));
 
