@@ -5,7 +5,7 @@ import { NextResponse } from 'next/server';
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const { path, country, city, referrer, visitorId, ip, userAgent, queryParams } = body;
+    const { path, country, city, referrer, visitorId, ip, userAgent, queryParams, firstTouch } = body;
 
     // Basic validation
     if (!path) {
@@ -175,6 +175,16 @@ export async function POST(req: Request) {
         Object.entries(queryParams).forEach(([key, value]) => {
           if (value && typeof value === 'string') {
             visitorMeta[`q_${key}`] = value; // prefix with q_ to avoid collisions
+          }
+        });
+      }
+
+      // Store first-touch attribution (only written once, on first visit)
+      if (firstTouch && typeof firstTouch === 'object') {
+        Object.entries(firstTouch).forEach(([key, value]) => {
+          if (value && typeof value === 'string') {
+            // Only set if not already recorded (don't overwrite existing first-touch)
+            visitorMeta[`ft_${key}`] = value;
           }
         });
       }

@@ -42,6 +42,7 @@ interface AnalyticsData {
       org?: string | null;
       lastSeen?: string;
       queryParams?: Record<string, string>;
+      firstTouch?: Record<string, string> | null;
     }[];
     recentVisitors?: {
       id: string;
@@ -54,6 +55,7 @@ interface AnalyticsData {
       lastSeen: string;
       email?: string;
       queryParams?: Record<string, string>;
+      firstTouch?: Record<string, string> | null;
     }[];
     pagination?: PaginationMeta;
   };
@@ -908,6 +910,7 @@ export default function AdminPage() {
                           </td>
                           <td className="px-4 py-2">
                             {v.queryParams && Object.keys(v.queryParams).length > 0 ? (
+                              // Current-visit UTM params (green)
                               <div className="flex flex-wrap gap-1">
                                 {Object.entries(v.queryParams).map(([key, val]) => (
                                   <span
@@ -919,6 +922,32 @@ export default function AdminPage() {
                                     <span className="text-green-700 truncate">{val}</span>
                                   </span>
                                 ))}
+                              </div>
+                            ) : v.firstTouch && Object.keys(v.firstTouch).filter(k => v.firstTouch![k]).length > 0 ? (
+                              // First-touch origin (amber) — shown when no current UTMs
+                              <div className="flex flex-wrap gap-1">
+                                {(['source', 'medium', 'campaign'] as const)
+                                  .filter(k => v.firstTouch![k] && v.firstTouch![k] !== 'direct' && v.firstTouch![k] !== 'none' && v.firstTouch![k] !== '')
+                                  .map(k => (
+                                    <span
+                                      key={k}
+                                      title={`First touch: ${k}=${v.firstTouch![k]}`}
+                                      className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[10px] font-mono bg-amber-50 text-amber-800 border border-amber-200 max-w-[140px] truncate"
+                                    >
+                                      <span className="text-amber-400">↩</span>
+                                      <span className="text-amber-600 font-bold">{k}</span>
+                                      <span className="text-amber-700 truncate">{v.firstTouch![k]}</span>
+                                    </span>
+                                  ))}
+                                {v.firstTouch.landingPage && (
+                                  <span
+                                    title={`First landed on: ${v.firstTouch.landingPage}`}
+                                    className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[10px] font-mono bg-amber-50 text-amber-800 border border-amber-200 max-w-[140px] truncate"
+                                  >
+                                    <span className="text-amber-400">↩</span>
+                                    <span className="text-amber-700 truncate">{v.firstTouch.landingPage}</span>
+                                  </span>
+                                )}
                               </div>
                             ) : (
                               <span className="text-gray-300 text-xs">—</span>

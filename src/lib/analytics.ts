@@ -284,6 +284,17 @@ export async function getAnalyticsData(options: AnalyticsOptions = {}) {
     return params;
   };
 
+  // Helper to extract first-touch attribution from visitor meta (keys prefixed with ft_)
+  const extractFirstTouch = (meta: Record<string, string>): Record<string, string> | null => {
+    const ft: Record<string, string> = {};
+    for (const [key, value] of Object.entries(meta)) {
+      if (key.startsWith('ft_') && value) {
+        ft[key.slice(3)] = value; // strip ft_ prefix
+      }
+    }
+    return Object.keys(ft).length > 0 ? ft : null;
+  };
+
   // Get Top Visitor Details
   const enrichedTopVisitors = await Promise.all(topVisitors.map(async (v) => {
     const vid = v.value;
@@ -301,6 +312,7 @@ export async function getAnalyticsData(options: AnalyticsOptions = {}) {
       referrer: meta.referrer || null,
       org: meta.org || null,
       queryParams: extractQueryParams(meta),
+      firstTouch: extractFirstTouch(meta),
     };
   }));
 
@@ -366,6 +378,7 @@ export async function getAnalyticsData(options: AnalyticsOptions = {}) {
         org: meta.org || null,
         lastSeen: meta.lastSeen || null,
         queryParams: extractQueryParams(meta),
+        firstTouch: extractFirstTouch(meta),
       };
     }));
 
@@ -413,6 +426,7 @@ export async function getAnalyticsData(options: AnalyticsOptions = {}) {
         org: meta.org || null,
         lastSeen: meta.lastSeen || null,
         queryParams: extractQueryParams(meta),
+        firstTouch: extractFirstTouch(meta),
       };
     }));
 

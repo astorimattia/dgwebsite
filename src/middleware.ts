@@ -47,11 +47,64 @@ export async function middleware(req: NextRequest, event: NextFetchEvent) {
   const hashArray = Array.from(new Uint8Array(hashBuffer))
   const visitorId = hashArray.map((b) => b.toString(16).padStart(2, '0')).join('')
 
+  // Extract Query Parameters (including UTMs)
+  const queryParams = Object.fromEntries(req.nextUrl.searchParams.entries())
+
+  // --- First-Touch Attribution ---
+  // Only capture on the very first visit (when _ft cookie is absent)
+  let firstTouch: Record<string, string> | null = null
+  const hasFirstTouchCookie = req.cookies.has('_ft')
+
+  if (!hasFirstTouchCookie) {
+    let ftSource = queryParams.utm_source || ''
+    let ftMedium = queryParams.utm_medium || ''
+    let ftCampaign = queryParams.utm_campaign || ''
+    let ftReferrer = ''
+
+    try {
+      if (referrer && referrer !== 'Direct') {
+        const domain = new URL(referrer).hostname
+        if (!domain.includes('mattiaastori.com') && !domain.includes('localhost')) {
+          ftReferrer = domain
+          // Auto-detect medium if no explicit UTM params
+          if (!ftSource) {
+            if (/instagram|facebook|twitter|x\.com|linkedin|pinterest|tiktok/.test(domain)) {
+              ftSource = domain.split('.')[0]
+              ftMedium = ftMedium || 'social'
+            } else {
+              ftSource = domain
+              ftMedium = ftMedium || 'referral'
+            }
+          }
+        }
+      }
+    } catch { }
+
+    firstTouch = {
+      source: ftSource || 'direct',
+      medium: ftMedium || 'none',
+      campaign: ftCampaign || '',
+      referrer: ftReferrer || '',
+      landingPage: path,
+      date: new Date().toISOString().slice(0, 10),
+    }
+  }
+  // --- End First-Touch Attribution ---
+
   const url = req.nextUrl.clone()
   url.pathname = '/api/track'
 
-  // Extract Query Parameters (including UTMs)
-  const queryParams = Object.fromEntries(req.nextUrl.searchParams.entries())
+  const response = NextResponse.next()
+
+  // Set the _ft cookie on the very first visit (1-year expiry)
+  if (firstTouch) {
+    response.cookies.set('_ft', JSON.stringify(firstTouch), {
+      maxAge: 60 * 60 * 24 * 365,
+      path: '/',
+      sameSite: 'lax',
+      httpOnly: false,
+    })
+  }
 
   // Fire and forget tracking request
   event.waitUntil(
@@ -68,9 +121,10 @@ export async function middleware(req: NextRequest, event: NextFetchEvent) {
         referrer,
         visitorId,
         queryParams,
+        firstTouch, // null for returning visitors — Redis already has their data
       }),
     }).catch((err) => console.error('Analytics track error:', err))
   )
 
-  return NextResponse.next()
+  return response
 }
