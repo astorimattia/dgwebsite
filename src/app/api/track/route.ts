@@ -99,6 +99,16 @@ export async function POST(req: Request) {
     const today = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
     const currentHour = new Date().toISOString().slice(0, 13); // YYYY-MM-DDTHH
 
+    // Deduplication: skip if this visitor+path was already tracked in the last 5 seconds
+    // This catches duplicate requests from Next.js RSC, prefetch or Turbopack dev-mode requests
+    if (visitorId) {
+      const dedupeKey = `analytics:dedup:${visitorId}:${path}`;
+      const isNew = await redis.set(dedupeKey, '1', 'EX', 5, 'NX'); // NX = only set if not exists
+      if (!isNew) {
+        return NextResponse.json({ success: true, deduped: true });
+      }
+    }
+
     // Check if visitor is identified
     let isIdentified = false;
     if (visitorId) {
