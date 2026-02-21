@@ -180,20 +180,41 @@ export async function POST(req: Request) {
         lastSeen: new Date().toISOString()
       };
 
-      // Merge query parameters if they exist
+      // Merge query parameters — skip platform tracking IDs and analytics noise
+      const NOISE_PARAMS = new Set(['fbclid', 'gclid', 'msclkid', 'dclid', '_ga', '_gid', '_gl', 'igshid', 'mc_eid', 'ref']);
+      // Map platform click IDs to a readable source name
+      const PLATFORM_CLICK_IDS: Record<string, string> = {
+        fbclid: 'facebook',
+        igshid: 'instagram',
+        gclid: 'google_ads',
+        msclkid: 'microsoft_ads',
+        dclid: 'google_display',
+      };
+
+      let inferredSource: string | null = null;
       if (queryParams && typeof queryParams === 'object') {
         Object.entries(queryParams).forEach(([key, value]) => {
-          if (value && typeof value === 'string') {
-            visitorMeta[`q_${key}`] = value; // prefix with q_ to avoid collisions
+          if (!value || typeof value !== 'string') return;
+          if (NOISE_PARAMS.has(key)) {
+            // Infer source from click ID if no explicit utm_source
+            if (PLATFORM_CLICK_IDS[key] && !inferredSource) {
+              inferredSource = PLATFORM_CLICK_IDS[key];
+            }
+            return; // don't store raw token
           }
+          visitorMeta[`q_${key}`] = value;
         });
       }
 
       // Store first-touch attribution (only written once, on first visit)
-      if (firstTouch && typeof firstTouch === 'object') {
-        Object.entries(firstTouch).forEach(([key, value]) => {
+      // Apply inferred source (from fbclid/gclid) if no explicit utm_source
+      const enrichedFirstTouch = firstTouch && inferredSource && !firstTouch.source || firstTouch?.source === 'direct'
+        ? { ...firstTouch, source: inferredSource!, medium: firstTouch?.medium === 'none' ? 'social' : (firstTouch?.medium || 'social') }
+        : firstTouch;
+
+      if (enrichedFirstTouch && typeof enrichedFirstTouch === 'object') {
+        Object.entries(enrichedFirstTouch).forEach(([key, value]) => {
           if (value && typeof value === 'string') {
-            // Only set if not already recorded (don't overwrite existing first-touch)
             visitorMeta[`ft_${key}`] = value;
           }
         });

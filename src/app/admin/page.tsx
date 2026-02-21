@@ -92,7 +92,6 @@ export default function AdminPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [debouncedSearch, setDebouncedSearch] = useState('');
   const referrersLimit = 7; // Fixed 7 rows to match UI height
-  const [expandedVisitorRow, setExpandedVisitorRow] = useState<string | null>(null);
 
   // Sorting is default by Date Descending from backend
 
@@ -891,101 +890,51 @@ export default function AdminPage() {
                   <tbody className="divide-y divide-gray-100">
                     {(analytics && analytics.data.recentVisitors && analytics.data.recentVisitors.length > 0) ? (
                       analytics.data.recentVisitors.map((v, i) => {
-                        const hasCampaignInfo = (v.queryParams && Object.keys(v.queryParams).length > 0) ||
-                          (v.firstTouch && Object.values(v.firstTouch).some(val => val && val !== 'direct' && val !== 'none' && val !== ''));
-                        const isExpanded = expandedVisitorRow === v.id;
-                        const isSelected = selectedVisitor === v.id;
+                        // Build a compact campaign summary string
+                        let campaignLabel: string | null = null;
+                        if (v.queryParams && Object.keys(v.queryParams).length > 0) {
+                          const src = v.queryParams.utm_source;
+                          const med = v.queryParams.utm_medium;
+                          campaignLabel = [src, med].filter(Boolean).join(' · ');
+                        } else if (v.firstTouch?.source && v.firstTouch.source !== 'direct') {
+                          const src = v.firstTouch.source;
+                          const med = v.firstTouch.medium && v.firstTouch.medium !== 'none' ? v.firstTouch.medium : null;
+                          campaignLabel = `↩ ${[src, med].filter(Boolean).join(' · ')}`;
+                        }
 
+                        const isSelected = selectedVisitor === v.id;
                         return (
-                          <>
-                            <tr
-                              key={`row-${i}`}
-                              className={`transition-colors cursor-pointer ${isSelected ? 'bg-purple-50' : 'hover:bg-gray-50'}`}
-                              onClick={() => {
-                                if (hasCampaignInfo) {
-                                  setExpandedVisitorRow(isExpanded ? null : v.id);
-                                }
-                                setSelectedVisitor(isSelected ? null : v.id);
-                                setVisitorPage(1);
-                              }}
-                            >
-                              <td className="px-4 py-2">
-                                <div className="flex items-center gap-1.5">
-                                  <span className={`font-mono text-xs ${isSelected ? 'text-purple-900 font-medium' : 'text-gray-600'}`}>{v.ip}</span>
-                                </div>
-                              </td>
-                              <td className="px-4 py-2 text-gray-600 text-sm">
-                                {v.country ? getCountryName(v.country) : 'Unknown'}
-                                {v.city && v.city !== 'unknown' && <span className="text-gray-400 text-xs ml-1">({decodeURIComponent(v.city)})</span>}
-                              </td>
-                              <td className="px-4 py-2 text-gray-500 text-xs truncate max-w-[150px]" title={v.referrer || ''}>
-                                {v.referrer && v.referrer !== 'unknown' ? v.referrer : '-'}
-                              </td>
-                              <td className="px-4 py-2 text-gray-500 text-xs">
-                                {hasCampaignInfo ? (
-                                  <span className="flex items-center gap-1 font-mono">
-                                    <span className="text-gray-300 select-none">{isExpanded ? '▾' : '▸'}</span>
-                                    <span className="text-gray-400 truncate max-w-[120px]">
-                                      {v.queryParams && Object.keys(v.queryParams).length > 0
-                                        ? Object.entries(v.queryParams).map(([k, val]) => `${k}=${val}`).join(' ')
-                                        : v.firstTouch?.source && v.firstTouch.source !== 'direct'
-                                          ? `↩ ${v.firstTouch.source}`
-                                          : v.firstTouch?.landingPage || ''}
-                                    </span>
-                                  </span>
-                                ) : (
-                                  <span className="text-gray-200">—</span>
-                                )}
-                              </td>
-                              <td className="px-4 py-2 text-gray-400 text-xs text-right">
-                                {new Date(v.lastSeen).toLocaleString('en-US', {
-                                  month: 'short',
-                                  day: 'numeric',
-                                  hour: 'numeric',
-                                  minute: 'numeric',
-                                  hour12: true
-                                })}
-                              </td>
-                            </tr>
-                            {isExpanded && hasCampaignInfo && (
-                              <tr key={`detail-${i}`} className="bg-gray-50 border-t-0">
-                                <td colSpan={5} className="px-6 py-2 pb-3">
-                                  <div className="flex flex-wrap gap-x-6 gap-y-1">
-                                    {v.queryParams && Object.keys(v.queryParams).length > 0 && (
-                                      <>
-                                        <span className="text-[10px] text-gray-400 uppercase tracking-wider font-medium self-center">UTM</span>
-                                        {Object.entries(v.queryParams).map(([key, val]) => (
-                                          <span key={key} className="text-xs text-gray-500 font-mono">
-                                            <span className="text-gray-400">{key}=</span>{val}
-                                          </span>
-                                        ))}
-                                      </>
-                                    )}
-                                    {v.firstTouch && (
-                                      <>
-                                        <span className="text-[10px] text-gray-400 uppercase tracking-wider font-medium self-center">Origin</span>
-                                        {v.firstTouch.source && v.firstTouch.source !== 'direct' && (
-                                          <span className="text-xs text-gray-500 font-mono"><span className="text-gray-400">source=</span>{v.firstTouch.source}</span>
-                                        )}
-                                        {v.firstTouch.medium && v.firstTouch.medium !== 'none' && (
-                                          <span className="text-xs text-gray-500 font-mono"><span className="text-gray-400">medium=</span>{v.firstTouch.medium}</span>
-                                        )}
-                                        {v.firstTouch.campaign && (
-                                          <span className="text-xs text-gray-500 font-mono"><span className="text-gray-400">campaign=</span>{v.firstTouch.campaign}</span>
-                                        )}
-                                        {v.firstTouch.landingPage && (
-                                          <span className="text-xs text-gray-500 font-mono"><span className="text-gray-400">landed=</span>{v.firstTouch.landingPage}</span>
-                                        )}
-                                        {v.firstTouch.date && (
-                                          <span className="text-xs text-gray-500 font-mono"><span className="text-gray-400">first seen=</span>{v.firstTouch.date}</span>
-                                        )}
-                                      </>
-                                    )}
-                                  </div>
-                                </td>
-                              </tr>
-                            )}
-                          </>
+                          <tr
+                            key={i}
+                            className={`transition-colors cursor-pointer ${isSelected ? 'bg-purple-50' : 'hover:bg-gray-50'}`}
+                            onClick={() => {
+                              setSelectedVisitor(isSelected ? null : v.id);
+                              setVisitorPage(1);
+                            }}
+                          >
+                            <td className="px-4 py-2">
+                              <span className={`font-mono text-xs ${isSelected ? 'text-purple-900 font-medium' : 'text-gray-600'}`}>{v.ip}</span>
+                            </td>
+                            <td className="px-4 py-2 text-gray-600 text-sm">
+                              {v.country ? getCountryName(v.country) : 'Unknown'}
+                              {v.city && v.city !== 'unknown' && <span className="text-gray-400 text-xs ml-1">({decodeURIComponent(v.city)})</span>}
+                            </td>
+                            <td className="px-4 py-2 text-gray-500 text-xs truncate max-w-[150px]" title={v.referrer || ''}>
+                              {v.referrer && v.referrer !== 'unknown' ? v.referrer : '-'}
+                            </td>
+                            <td className="px-4 py-2 text-gray-400 text-xs font-mono truncate max-w-[160px]" title={campaignLabel || ''}>
+                              {campaignLabel || <span className="text-gray-200">—</span>}
+                            </td>
+                            <td className="px-4 py-2 text-gray-400 text-xs text-right">
+                              {new Date(v.lastSeen).toLocaleString('en-US', {
+                                month: 'short',
+                                day: 'numeric',
+                                hour: 'numeric',
+                                minute: 'numeric',
+                                hour12: true
+                              })}
+                            </td>
+                          </tr>
                         );
                       })
                     ) : (
