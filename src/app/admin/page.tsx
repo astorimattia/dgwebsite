@@ -926,13 +926,13 @@ export default function AdminPage() {
                               {campaignLabel || <span className="text-gray-200">—</span>}
                             </td>
                             <td className="px-4 py-2 text-gray-400 text-xs text-right">
-                              {new Date(v.lastSeen).toLocaleString('en-US', {
+                              {v.lastSeen ? new Date(v.lastSeen).toLocaleString('en-US', {
                                 month: 'short',
                                 day: 'numeric',
                                 hour: 'numeric',
                                 minute: 'numeric',
                                 hour12: true
-                              })}
+                              }) : <span className="text-gray-200">—</span>}
                             </td>
                           </tr>
                         );

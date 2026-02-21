@@ -99,12 +99,20 @@ export async function POST(req: Request) {
     const today = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
     const currentHour = new Date().toISOString().slice(0, 13); // YYYY-MM-DDTHH
 
-    // Deduplication: skip if this visitor+path was already tracked in the last 5 seconds
-    // This catches duplicate requests from Next.js RSC, prefetch or Turbopack dev-mode requests
+    // Two-tier deduplication:
+    // Tier 1 (3s) — global per-visitor: blocks any burst of requests within 3s regardless of path
+    //   This catches SW/RSC/prefetch requests to different paths in the same page load
+    // Tier 2 (30s) — per-visitor+path: prevents the same page being counted twice in 30s
     if (visitorId) {
-      const dedupeKey = `analytics:dedup:${visitorId}:${path}`;
-      const isNew = await redis.set(dedupeKey, '1', 'EX', 5, 'NX'); // NX = only set if not exists
-      if (!isNew) {
+      const globalDedupeKey = `analytics:dedup:${visitorId}`;
+      const isNewVisitor = await redis.set(globalDedupeKey, '1', 'EX', 3, 'NX');
+      if (!isNewVisitor) {
+        return NextResponse.json({ success: true, deduped: true });
+      }
+
+      const pathDedupeKey = `analytics:dedup:${visitorId}:${path}`;
+      const isNewPath = await redis.set(pathDedupeKey, '1', 'EX', 30, 'NX');
+      if (!isNewPath) {
         return NextResponse.json({ success: true, deduped: true });
       }
     }
