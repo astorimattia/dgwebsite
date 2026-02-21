@@ -227,8 +227,9 @@ export async function POST(req: Request) {
         pipeline.lpush('analytics:recent_identified_visitors', visitorId);
       }
 
-      // Update Recent Visitors List (No deduplication, record every visit)
-      pipeline.lpush('analytics:recent_visitors', visitorId);
+      // Update Recent Visitors List — store visitorId|timestamp so each entry has its own time
+      const visitEntry = `${visitorId}|${Date.now()}`;
+      pipeline.lpush('analytics:recent_visitors', visitEntry);
       pipeline.ltrim('analytics:recent_visitors', 0, 5000);
 
       // Country-specific list

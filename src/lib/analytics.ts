@@ -353,6 +353,17 @@ export async function getAnalyticsData(options: AnalyticsOptions = {}) {
     recentVisitorsKey = `analytics:recent_visitors:country:${countryFilter}`;
   }
 
+  // Parse list entries — new format is "visitorId|epochMs", old format is just "visitorId"
+  const parseEntry = (entry: string): { vid: string; visitTime: string | null } => {
+    const pipeIdx = entry.lastIndexOf('|');
+    if (pipeIdx !== -1) {
+      const ts = entry.slice(pipeIdx + 1);
+      const ms = parseInt(ts, 10);
+      return { vid: entry.slice(0, pipeIdx), visitTime: isNaN(ms) ? null : new Date(ms).toISOString() };
+    }
+    return { vid: entry, visitTime: null };
+  };
+
   let recentIds: string[] = [];
   let totalFilteredVisitors = 0;
   let filteredVisitors: any[] = [];
@@ -362,7 +373,8 @@ export async function getAnalyticsData(options: AnalyticsOptions = {}) {
     // Recent visitors list is trimmed to 5000 items, so we'll fetch them all for a complete search
     recentIds = await redis.lrange(recentVisitorsKey, 0, 5000);
 
-    const allVisitors = await Promise.all(recentIds.map(async (vid) => {
+    const allVisitors = await Promise.all(recentIds.map(async (entry) => {
+      const { vid, visitTime } = parseEntry(entry);
       const [meta, email] = await Promise.all([
         redis.hgetall(`analytics:visitor:${vid}`),
         redis.get(`analytics:identity:${vid}`)
@@ -376,7 +388,7 @@ export async function getAnalyticsData(options: AnalyticsOptions = {}) {
         referrer: meta.referrer || null,
         userAgent: meta.userAgent || null,
         org: meta.org || null,
-        lastSeen: meta.lastSeen || null,
+        lastSeen: visitTime || meta.lastSeen || null,
         queryParams: extractQueryParams(meta),
         firstTouch: extractFirstTouch(meta),
       };
@@ -410,7 +422,8 @@ export async function getAnalyticsData(options: AnalyticsOptions = {}) {
     const end = start + visitorLimit - 1;
     recentIds = await redis.lrange(recentVisitorsKey, start, end);
 
-    const visitors = await Promise.all(recentIds.map(async (vid) => {
+    const visitors = await Promise.all(recentIds.map(async (entry) => {
+      const { vid, visitTime } = parseEntry(entry);
       const [meta, email] = await Promise.all([
         redis.hgetall(`analytics:visitor:${vid}`),
         redis.get(`analytics:identity:${vid}`)
@@ -424,7 +437,7 @@ export async function getAnalyticsData(options: AnalyticsOptions = {}) {
         referrer: meta.referrer || null,
         userAgent: meta.userAgent || null,
         org: meta.org || null,
-        lastSeen: meta.lastSeen || null,
+        lastSeen: visitTime || meta.lastSeen || null,
         queryParams: extractQueryParams(meta),
         firstTouch: extractFirstTouch(meta),
       };
