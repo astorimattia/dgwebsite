@@ -58,9 +58,13 @@ interface AnalyticsData {
 }
 
 const getCountryName = (code: string) => {
+  if (!code) return code;
   try {
     const regionNames = new Intl.DisplayNames(['en'], { type: 'region' });
-    return regionNames.of(code) || code;
+    // Intl.DisplayNames expects uppercase ISO 3166-1 alpha-2 codes.
+    // E.g., 'us' throws an exception, but 'US' works.
+    const cleanCode = code.trim().toUpperCase();
+    return regionNames.of(cleanCode) || code;
   } catch {
     return code;
   }
@@ -83,7 +87,7 @@ export default function AdminPage() {
   const [visitorsPage, setVisitorsPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState('');
   const [debouncedSearch, setDebouncedSearch] = useState('');
-  const [referrersLimit, setReferrersLimit] = useState(14); // Default to desktop limit
+  const referrersLimit = 7; // Fixed 7 rows to match UI height
 
   // Sorting is default by Date Descending from backend
 
@@ -156,11 +160,26 @@ export default function AdminPage() {
       let analyticsData;
       if (analyticsRes.ok) {
         analyticsData = await analyticsRes.json();
+
+        // Deduplicate countries: Combine ISO codes ("US") and full names ("United States")
+        if (analyticsData?.data?.countries) {
+          const cMap = new Map();
+          for (const c of analyticsData.data.countries) {
+            // Note: Since we are replacing the name with the resolved country name here,
+            // later when rendering, getCountryName(resolvedName) will just return the resolved name
+            // but we'll also preserve the first original ISO code if we want to for clicking/filtering,
+            // but for simplicity, grouping by the final display name is the most correct.
+            const displayName = getCountryName(c.name);
+            cMap.set(displayName, (cMap.get(displayName) || 0) + c.value);
+          }
+          analyticsData.data.countries = Array.from(cMap.entries())
+            .map(([name, value]) => ({ name, value }))
+            .sort((a, b: any) => b.value - a.value);
+        }
       } else {
         if (analyticsRes.status === 401) throw new Error('Invalid credentials');
         throw new Error('Failed to fetch analytics');
       }
-
 
       setAnalytics(analyticsData);
       setIsAuthenticated(true);
@@ -221,21 +240,6 @@ export default function AdminPage() {
 
 
 
-  // Handle Resize for Referrers Limit
-  useEffect(() => {
-    const handleResize = () => {
-      setReferrersLimit(window.innerWidth >= 768 ? 14 : 7);
-    };
-
-    // Initial check
-    handleResize();
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-
-
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     verifyAndLoad(password);
@@ -285,7 +289,7 @@ export default function AdminPage() {
           <button
             onClick={() => onPageChange(Math.max(1, meta.page - 1))}
             disabled={meta.page === 1}
-            className="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50"
+            className="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 disabled:opacity-50"
           >
             Prev
           </button>
@@ -295,7 +299,7 @@ export default function AdminPage() {
           <button
             onClick={() => onPageChange(Math.min(meta.totalPages, meta.page + 1))}
             disabled={meta.page === meta.totalPages}
-            className="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50"
+            className="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 disabled:opacity-50"
           >
             Next
           </button>
@@ -311,7 +315,7 @@ export default function AdminPage() {
               <button
                 onClick={() => onPageChange(Math.max(1, meta.page - 1))}
                 disabled={meta.page === 1}
-                className="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0 disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed"
+                className="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 focus:z-20 focus:outline-offset-0 disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed"
               >
                 <span className="sr-only">Previous</span>
                 <span className="h-5 w-5" aria-hidden="true">&lsaquo;</span>
@@ -324,7 +328,7 @@ export default function AdminPage() {
                   disabled={typeof p !== 'number'}
                   className={`relative inline-flex items-center px-4 py-2 text-sm font-semibold ${p === meta.page
                     ? 'z-10 bg-black text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black cursor-default'
-                    : 'text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:outline-offset-0 cursor-pointer'
+                    : 'text-gray-900 ring-1 ring-inset ring-gray-300 focus:outline-offset-0 cursor-pointer'
                     } ${typeof p !== 'number' ? 'cursor-default' : 'cursor-pointer'}`}
                 >
                   {p}
@@ -334,7 +338,7 @@ export default function AdminPage() {
               <button
                 onClick={() => onPageChange(Math.min(meta.totalPages, meta.page + 1))}
                 disabled={meta.page === meta.totalPages}
-                className="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0 disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed"
+                className="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 focus:z-20 focus:outline-offset-0 disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed"
               >
                 <span className="sr-only">Next</span>
                 <span className="h-5 w-5" aria-hidden="true">&rsaquo;</span>
@@ -400,27 +404,26 @@ export default function AdminPage() {
                 Views{analyticsTimeRange === 'all' ? ' (All Time)' : analyticsTimeRange === '0' ? '' : ` (Last ${analyticsTimeRange} Days)`}: {analytics?.overview?.views || 0}
               </p>
             </div>
-            <button
-              onClick={handleLogout}
-              className="text-sm text-gray-400 hover:text-black cursor-pointer transition-colors"
-            >
-              Logout
-            </button>
-          </div>
-
-          <div className="flex justify-end mb-6 gap-4">
-            <select
-              value={analyticsTimeRange}
-              onChange={(e) => {
-                setAnalyticsTimeRange(e.target.value);
-              }}
-              className="bg-white border border-gray-200 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block p-2 cursor-pointer shadow-sm"
-            >
-              <option value="0">Today</option>
-              <option value="7">Last 7 Days</option>
-              <option value="30">Last 30 Days</option>
-              <option value="all">All Time</option>
-            </select>
+            <div className="flex items-center gap-4">
+              <select
+                value={analyticsTimeRange}
+                onChange={(e) => {
+                  setAnalyticsTimeRange(e.target.value);
+                }}
+                className="bg-white border border-gray-200 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block p-2 cursor-pointer shadow-sm"
+              >
+                <option value="0">Today</option>
+                <option value="7">Last 7 Days</option>
+                <option value="30">Last 30 Days</option>
+                <option value="all">All Time</option>
+              </select>
+              <button
+                onClick={handleLogout}
+                className="text-sm text-gray-400 hover:text-black cursor-pointer transition-colors"
+              >
+                Logout
+              </button>
+            </div>
           </div>
 
           <div className="space-y-6">
@@ -436,14 +439,14 @@ export default function AdminPage() {
               </div>
             </div>
 
-            {/* Traffic Chart */}
+            {/* Traffic and Referrers */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
               {/* Traffic Overview */}
-              <div className="bg-white rounded-lg border border-gray-200 overflow-hidden col-span-2 shadow-sm">
-                <div className="px-4 py-3 bg-gray-50 border-b border-gray-200">
+              <div className="bg-white rounded-lg border border-gray-200 overflow-hidden shadow-sm flex flex-col h-[340px]">
+                <div className="px-4 border-b border-gray-200 flex-shrink-0 h-[48px] flex items-center bg-gray-50">
                   <h3 className="text-sm font-medium text-gray-900">Traffic Overview</h3>
                 </div>
-                <div className="p-4 h-72">
+                <div className="p-4 flex-1">
                   {analytics?.data?.chart && analytics.data.chart.length > 0 ? (
                     <ResponsiveContainer width="100%" height="100%">
                       <AreaChart
@@ -529,30 +532,27 @@ export default function AdminPage() {
                   )}
                 </div>
               </div>
-            </div>
 
-            {/* Top Lists */}
-            <div className="grid md:grid-cols-2 gap-6">
               {/* Top Referrers */}
-              <div className="bg-white rounded-lg border border-gray-200 overflow-hidden flex flex-col h-[340px] md:col-span-2 shadow-sm">
+              <div className="bg-white rounded-lg border border-gray-200 overflow-hidden flex flex-col h-[340px] shadow-sm">
                 <div className="px-4 border-b border-gray-200 flex-shrink-0 h-[48px] flex items-center bg-gray-50">
                   <h3 className="text-sm font-medium text-gray-900">Top Referrers</h3>
                 </div>
                 {analytics && analytics.data.referrers && analytics.data.referrers.length > 0 ? (
                   <>
                     <div className="p-4 flex-1 overflow-hidden">
-                      <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-3">
+                      <ul className="space-y-1">
                         {analytics.data.referrers
                           .slice((referrersPage - 1) * referrersLimit, referrersPage * referrersLimit)
                           .map((r, i) => (
-                            <li key={i} className="flex justify-between items-center group border-b border-gray-100 pb-2 md:border-none md:pb-0">
+                            <li key={i} className="flex justify-between items-center group p-1 rounded transition-colors">
                               <span
                                 className="text-sm font-medium text-gray-700 truncate max-w-[300px]"
                                 title={r.name}
                               >
                                 {r.name}
                               </span>
-                              <span className="text-sm font-mono text-gray-500 flex-shrink-0 bg-gray-100 px-2 py-0.5 rounded text-xs">{r.value}</span>
+                              <span className="text-sm font-mono text-gray-500 flex-shrink-0 px-2 py-0.5 rounded text-xs">{r.value}</span>
                             </li>
                           ))}
                       </ul>
@@ -589,6 +589,10 @@ export default function AdminPage() {
                   </div>
                 )}
               </div>
+            </div>
+
+            {/* Top Lists */}
+            <div className="grid md:grid-cols-2 gap-6">
 
               {/* Top Visitors */}
               <div className="bg-white rounded-lg border border-gray-200 overflow-hidden flex flex-col h-[340px] shadow-sm">
@@ -604,7 +608,7 @@ export default function AdminPage() {
                           .map((v, i) => (
                             <li
                               key={i}
-                              className={`flex justify-between items-center group cursor-pointer transition-colors p-1 rounded ${selectedVisitor === v.id ? 'bg-purple-50 text-purple-900' : 'hover:bg-gray-50'}`}
+                              className={`flex justify-between items-center group cursor-pointer transition-colors p-1 rounded ${selectedVisitor === v.id ? 'bg-purple-50 text-purple-900' : ''}`}
                               onClick={() => {
                                 setSelectedVisitor(selectedVisitor === v.id ? null : v.id);
                                 setPagesPage(1); // Reset pages pagination
@@ -629,7 +633,7 @@ export default function AdminPage() {
                                   )}
                                 </div>
                               </div>
-                              <span className={`text-sm font-mono flex-shrink-0 px-2 py-0.5 rounded text-xs ${selectedVisitor === v.id ? 'bg-purple-100 text-purple-800' : 'bg-gray-100 text-gray-500'}`}>{v.value}</span>
+                              <span className={`text-sm font-mono flex-shrink-0 px-2 py-0.5 rounded text-xs ${selectedVisitor === v.id ? 'bg-purple-100 text-purple-800' : 'text-gray-500'}`}>{v.value}</span>
                             </li>
                           ))}
                       </ul>
@@ -686,9 +690,9 @@ export default function AdminPage() {
                         {analytics.data.pages
                           .slice((pagesPage - 1) * 7, pagesPage * 7)
                           .map((p, i) => (
-                            <li key={i} className="flex justify-between items-center">
+                            <li key={i} className="flex justify-between items-center group p-1 rounded">
                               <span className="text-sm text-gray-700 truncate" title={p.name}>{p.name}</span>
-                              <span className="text-sm font-mono text-gray-500 bg-gray-100 px-2 py-0.5 rounded text-xs">{p.value}</span>
+                              <span className="text-sm font-mono text-gray-500 px-2 py-0.5 rounded text-xs">{p.value}</span>
                             </li>
                           ))}
                       </ul>
@@ -740,7 +744,7 @@ export default function AdminPage() {
                           .map((p, i) => (
                             <li
                               key={i}
-                              className={`flex justify-between items-center group cursor-pointer transition-colors p-1 rounded ${selectedCountry === p.name ? 'bg-blue-50 text-blue-900' : 'hover:bg-gray-50'}`}
+                              className={`flex justify-between items-center group cursor-pointer transition-colors p-1 rounded ${selectedCountry === p.name ? 'bg-blue-50 text-blue-900' : ''}`}
                               onClick={() => {
                                 setSelectedCountry(selectedCountry === p.name ? null : p.name);
                                 setCityPage(1);
@@ -748,7 +752,7 @@ export default function AdminPage() {
                               }}
                             >
                               <span className={`text-sm truncate ${selectedCountry === p.name ? 'text-blue-900 font-semibold' : 'text-gray-700 group-hover:text-black'}`}>{getCountryName(p.name)}</span>
-                              <span className={`text-sm font-mono px-2 py-0.5 rounded text-xs ${selectedCountry === p.name ? 'bg-blue-100 text-blue-800' : 'text-gray-500 bg-gray-100'}`}>{p.value}</span>
+                              <span className={`text-sm font-mono px-2 py-0.5 rounded text-xs ${selectedCountry === p.name ? 'bg-blue-100 text-blue-800' : 'text-gray-500'}`}>{p.value}</span>
                             </li>
                           ))}
                       </ul>
@@ -807,9 +811,9 @@ export default function AdminPage() {
                         {analytics.data.cities
                           .slice((cityPage - 1) * 7, cityPage * 7)
                           .map((p, i) => (
-                            <li key={i} className="flex justify-between items-center group border-b border-gray-100 pb-2 border-none pb-0">
+                            <li key={i} className="flex justify-between items-center group p-1 rounded">
                               <span className="text-sm text-gray-700 truncate" title={decodeURIComponent(p.name)}>{decodeURIComponent(p.name)}</span>
-                              <span className="text-sm font-mono text-gray-500 bg-gray-100 px-2 py-0.5 rounded text-xs">{p.value}</span>
+                              <span className="text-sm font-mono text-gray-500 px-2 py-0.5 rounded text-xs">{p.value}</span>
                             </li>
                           ))}
                       </ul>
@@ -856,7 +860,7 @@ export default function AdminPage() {
                     ? 'Selected Visitor Identity'
                     : selectedCountry
                       ? `Recent Visitors from ${getCountryName(selectedCountry)}`
-                      : 'Recent/Identified Visitors'}
+                      : 'Recent Visitors'}
                 </h3>
                 {!selectedVisitor && (
                   <input
@@ -873,7 +877,6 @@ export default function AdminPage() {
                   <thead className="text-gray-500 border-b border-gray-200 bg-gray-50">
                     <tr>
                       <th className="px-4 py-3 font-medium text-xs uppercase tracking-wider">IP Address</th>
-                      <th className="px-4 py-3 font-medium text-xs uppercase tracking-wider">Identity</th>
                       <th className="px-4 py-3 font-medium text-xs uppercase tracking-wider">Location</th>
                       <th className="px-4 py-3 font-medium text-xs uppercase tracking-wider">Referrer</th>
                       <th className="px-4 py-3 font-medium text-xs uppercase tracking-wider">Last Seen</th>
@@ -892,15 +895,6 @@ export default function AdminPage() {
                         >
                           <td className="px-4 py-2">
                             <span className={`font-mono text-xs ${selectedVisitor === v.id ? 'text-purple-900 font-medium' : 'text-gray-600'}`}>{v.ip}</span>
-                          </td>
-                          <td className="px-4 py-2">
-                            {v.org && v.org !== 'unknown' ? (
-                              <span className="text-gray-600 text-xs truncate max-w-[150px] block" title={v.org}>{v.org}</span>
-                            ) : v.email ? (
-                              <span className="text-gray-600 text-xs truncate max-w-[150px] block" title={v.email}>{v.email}</span>
-                            ) : (
-                              <span className="text-gray-300 text-xs">-</span>
-                            )}
                           </td>
                           <td className="px-4 py-2 text-gray-600">
                             {v.country ? getCountryName(v.country) : 'Unknown'}
@@ -922,7 +916,7 @@ export default function AdminPage() {
                       ))
                     ) : (
                       <tr>
-                        <td colSpan={6} className="px-4 py-6 text-center text-gray-400">
+                        <td colSpan={4} className="px-4 py-6 text-center text-gray-400">
                           No recent visitor data
                         </td>
                       </tr>

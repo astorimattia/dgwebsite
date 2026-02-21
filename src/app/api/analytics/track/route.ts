@@ -39,9 +39,16 @@ export async function POST(req: NextRequest) {
     if (referrer && referrer !== 'Direct') {
       try {
         const refUrl = new URL(referrer)
-        pipeline.zincrby(`analytics:referrers:daily:${dayKey}`, 1, refUrl.hostname)
+        // Exclude internal navigation and localhost
+        if (!refUrl.hostname.includes('mattiaastori.com') && !refUrl.hostname.includes('localhost')) {
+          // Provide more details (e.g. reddit.com/r/photography instead of just reddit.com)
+          const detailedReferrer = `${refUrl.hostname}${refUrl.pathname !== '/' ? refUrl.pathname : ''}`
+          pipeline.zincrby(`analytics:referrers:daily:${dayKey}`, 1, detailedReferrer)
+        }
       } catch {
-        pipeline.zincrby(`analytics:referrers:daily:${dayKey}`, 1, referrer)
+        if (!referrer.includes('mattiaastori.com') && !referrer.includes('localhost')) {
+          pipeline.zincrby(`analytics:referrers:daily:${dayKey}`, 1, referrer)
+        }
       }
     }
 

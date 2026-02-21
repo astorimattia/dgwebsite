@@ -22,6 +22,13 @@ export async function middleware(req: NextRequest, event: NextFetchEvent) {
   const userAgent = req.headers.get('user-agent') ?? 'unknown'
   const path = req.nextUrl.pathname
 
+  // Filter out known bots, crawlers, and scanners to reduce analytics noise
+  // (This often explains a high number of views from places like China or US datacenters)
+  const isBot = /bot|crawler|spider|crawling|headless|prerender|lighthouse|scanner/i.test(userAgent)
+  if (isBot) {
+    return NextResponse.next()
+  }
+
   // Improved Location Handling
   let country = req.geo?.country ?? req.headers.get('x-vercel-ip-country') ?? 'Unknown'
   let city = req.geo?.city ?? req.headers.get('x-vercel-ip-city') ?? 'Unknown'

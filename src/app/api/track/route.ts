@@ -21,6 +21,25 @@ export async function POST(req: Request) {
     if (ip === '::1' || ip === '127.0.0.1' || ip === '73.231.242.251') {
       return NextResponse.json({ success: true, ignored: true });
     }
+
+    // 3. Ignore Bot Scans and Common Crawl Paths
+    const isBotPath =
+      path.includes('.php') ||
+      path.includes('.txt') ||
+      path.includes('.env') ||
+      path.includes('.git') ||
+      path.includes('.xml') ||
+      path.includes('.js') ||
+      path.includes('.css') ||
+      path.includes('feed') ||
+      path.startsWith('/wp-') ||
+      path.startsWith('/media/') ||
+      path.startsWith('/api/') ||
+      path.includes('txets');
+
+    if (isBotPath) {
+      return NextResponse.json({ success: true, ignored: true });
+    }
     // Decode location data to avoid %20
     let safeCountry = country ? decodeURIComponent(country) : null;
     let safeCity = city ? decodeURIComponent(city) : null;
@@ -108,12 +127,16 @@ export async function POST(req: Request) {
     }
 
     // 5. Top Referrers (Sorted Set)
+    let safeReferrer = 'Direct';
     if (referrer) {
       try {
         const domain = new URL(referrer).hostname;
-        pipeline.zincrby(`analytics:referrers:${today}`, 1, domain);
-        if (safeCountry && safeCountry !== 'unknown') {
-          pipeline.zincrby(`analytics:referrers:country:${safeCountry}:${today}`, 1, domain);
+        if (!domain.includes('mattiaastori.com') && !domain.includes('localhost')) {
+          safeReferrer = domain;
+          pipeline.zincrby(`analytics:referrers:${today}`, 1, domain);
+          if (safeCountry && safeCountry !== 'unknown') {
+            pipeline.zincrby(`analytics:referrers:country:${safeCountry}:${today}`, 1, domain);
+          }
         }
       } catch { }
     }
@@ -125,7 +148,7 @@ export async function POST(req: Request) {
         ip: ip || 'unknown',
         country: safeCountry || 'unknown',
         city: safeCity || 'unknown',
-        referrer: referrer ? new URL(referrer).hostname : 'unknown',
+        referrer: safeReferrer,
         userAgent: userAgent || 'unknown',
         org: safeOrg || 'unknown',
         lastSeen: new Date().toISOString()
@@ -136,21 +159,15 @@ export async function POST(req: Request) {
         pipeline.lpush('analytics:recent_identified_visitors', visitorId);
       }
 
-      // Update Recent Visitors List (Deduplicated)
-      // Check if most recent visitor is same (to avoid duplicates)
-      const lastVisitors = await redis.lrange('analytics:recent_visitors', 0, 0);
-      const isDuplicate = lastVisitors.length > 0 && lastVisitors[0] === visitorId;
+      // Update Recent Visitors List (No deduplication, record every visit)
+      pipeline.lpush('analytics:recent_visitors', visitorId);
+      pipeline.ltrim('analytics:recent_visitors', 0, 5000);
 
-      if (!isDuplicate) {
-        pipeline.lpush('analytics:recent_visitors', visitorId);
-        pipeline.ltrim('analytics:recent_visitors', 0, 5000);
-
-        // Country-specific list
-        if (safeCountry && safeCountry !== 'unknown') {
-          const countryKey = `analytics:recent_visitors:country:${safeCountry}`;
-          pipeline.lpush(countryKey, visitorId);
-          pipeline.ltrim(countryKey, 0, 1000);
-        }
+      // Country-specific list
+      if (safeCountry && safeCountry !== 'unknown') {
+        const countryKey = `analytics:recent_visitors:country:${safeCountry}`;
+        pipeline.lpush(countryKey, visitorId);
+        pipeline.ltrim(countryKey, 0, 1000);
       }
     }
 

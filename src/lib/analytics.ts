@@ -22,7 +22,8 @@ export async function getAnalyticsData(options: AnalyticsOptions = {}) {
     country: countryFilter = null,
     visitorId: visitorFilter = null,
     timeZone = 'UTC',
-    granularity = 'day'
+    granularity = 'day',
+    search
   } = options
 
   // Date Range Logic
@@ -49,17 +50,57 @@ export async function getAnalyticsData(options: AnalyticsOptions = {}) {
   // Calculate Days Range
   const dates: string[] = [];
   if (fromParam === 'all') {
-    const current = new Date('2024-01-01T00:00:00Z');
+    // Dynamically find the earliest date in the database
+    const allViewKeys = await redis.keys('analytics:views:20*'); // Only grab daily/hourly keys
+    let earliestDate = new Date();
+
+    if (allViewKeys.length > 0) {
+      // Find the earliest date string (e.g., '2025-01-20' from 'analytics:views:2025-01-20')
+      const dateStrings = allViewKeys
+        .map(k => k.split(':').pop())
+        .filter(d => d && d.length === 10) // Only look at YYYY-MM-DD
+        .sort();
+
+      if (dateStrings.length > 0) {
+        // Use local timezone to construct the start date so it doesn't wrap to the day before in PST
+        earliestDate = new Date(`${dateStrings[0]}T00:00:00`);
+      } else {
+        earliestDate.setDate(earliestDate.getDate() - 30); // Fallback
+      }
+    } else {
+      earliestDate.setDate(earliestDate.getDate() - 30); // Fallback
+    }
+
+    // Generate array from earliest date to today
+    const current = new Date(earliestDate);
+    // Strip time for clean comparison
+    current.setHours(0, 0, 0, 0);
     const end = new Date();
+    end.setHours(23, 59, 59, 999);
+
     while (current <= end) {
-      dates.push(current.toISOString().slice(0, 10));
+      // Use YYYY-MM-DD local logic to avoid UTC timezone skipping
+      const y = current.getFullYear();
+      const m = String(current.getMonth() + 1).padStart(2, '0');
+      const d = String(current.getDate()).padStart(2, '0');
+      dates.push(`${y}-${m}-${d}`);
+
       current.setDate(current.getDate() + 1);
     }
   } else {
     const s = new Date(startYmd!);
-    const e = new Date(endYmd!);
+    s.setHours(0, 0, 0, 0); // Ensure clean start
+
+    // We construct the end date safely
+    const eParts = endYmd!.split('-');
+    const e = new Date(parseInt(eParts[0]), parseInt(eParts[1]) - 1, parseInt(eParts[2]), 23, 59, 59);
+
     while (s <= e) {
-      dates.push(s.toISOString().slice(0, 10));
+      const y = s.getFullYear();
+      const m = String(s.getMonth() + 1).padStart(2, '0');
+      const d = String(s.getDate()).padStart(2, '0');
+      dates.push(`${y}-${m}-${d}`);
+
       s.setDate(s.getDate() + 1);
     }
   }
@@ -161,21 +202,33 @@ export async function getAnalyticsData(options: AnalyticsOptions = {}) {
     keys.forEach(k => pipeline.zrevrange(k, 0, -1, 'WITHSCORES'));
     const results = await pipeline.exec();
 
-    const agg = new Map<string, number>();
+    const agg = new Map<string, { original: string; score: number }>();
     results?.forEach((res) => {
       const dayList = res[1] as string[]; // [val, score, val, score]
       if (Array.isArray(dayList)) {
         for (let i = 0; i < dayList.length; i += 2) {
-          const val = dayList[i];
+          // Normalize the value to uppercase for countries, or lowercase generically, to group duplicates
+          // Assuming most of these are case-insensitive aggregations anyway
+          let val = dayList[i];
+          // For countries or general cases, let's normalize to uppercase if it looks like a country code, 
+          // or just standard string if it's a URL path. We'll uppercase everything here for consistency in grouping 
+          // but preserve original casing for display later if possible. A better approach is to capitalize first letter or uppercase all.
+          // Since it's mainly countries and cities having this issue, let's just use standard capitalization.
+          // We'll normalize keys to lowercase for aggregation but store original casing.
+          const lowerVal = val.trim().toLowerCase();
           const score = Number(dayList[i + 1]);
-          const current = agg.get(val) || 0;
-          agg.set(val, current + score);
+          const current = agg.get(lowerVal) || { original: val.trim(), score: 0 };
+
+          agg.set(lowerVal, {
+            original: current.score > score ? current.original : val.trim(), // keep the capitalization of the most frequent one
+            score: current.score + score
+          });
         }
       }
     });
 
-    return Array.from(agg.entries())
-      .map(([value, score]) => ({ value, score }))
+    return Array.from(agg.values())
+      .map(({ original: value, score }) => ({ value, score }))
       .filter(item => {
         const val = item.value.toLowerCase();
         if (val === 'unknown') return false;
@@ -270,7 +323,7 @@ export async function getAnalyticsData(options: AnalyticsOptions = {}) {
     filteredTopVisitors = filteredTopVisitors.filter(v => v.country === countryFilter);
   }
 
-  // 2. Recent Visitor Identities & Pagination logic (simplified)
+  // 2. Recent Visitor Identities & Pagination logic
   let recentVisitorsKey = 'analytics:recent_visitors';
   if (countryFilter) {
     recentVisitorsKey = `analytics:recent_visitors:country:${countryFilter}`;
@@ -278,34 +331,80 @@ export async function getAnalyticsData(options: AnalyticsOptions = {}) {
 
   let recentIds: string[] = [];
   let totalFilteredVisitors = 0;
+  let filteredVisitors: any[] = [];
 
-  // Simple Logic for now: Fetch from recent list
-  const total = await redis.llen(recentVisitorsKey);
-  totalFilteredVisitors = total;
-  const start = (visitorPage - 1) * visitorLimit;
-  const end = start + visitorLimit - 1;
-  recentIds = await redis.lrange(recentVisitorsKey, start, end);
+  if (search) {
+    // If searching, we need to fetch a large chunk (or all) to filter in memory
+    // Recent visitors list is trimmed to 5000 items, so we'll fetch them all for a complete search
+    recentIds = await redis.lrange(recentVisitorsKey, 0, 5000);
 
-  const visitors = await Promise.all(recentIds.map(async (vid) => {
-    const [meta, email] = await Promise.all([
-      redis.hgetall(`analytics:visitor:${vid}`),
-      redis.get(`analytics:identity:${vid}`)
-    ]);
-    return {
-      id: vid,
-      email: email || null,
-      ip: meta.ip || null,
-      country: meta.country || null,
-      city: meta.city || null,
-      referrer: meta.referrer || null,
-      userAgent: meta.userAgent || null,
-      org: meta.org || null,
-      lastSeen: meta.lastSeen || null
-    };
-  }));
+    const allVisitors = await Promise.all(recentIds.map(async (vid) => {
+      const [meta, email] = await Promise.all([
+        redis.hgetall(`analytics:visitor:${vid}`),
+        redis.get(`analytics:identity:${vid}`)
+      ]);
+      return {
+        id: vid,
+        email: email || null,
+        ip: meta.ip || null,
+        country: meta.country || null,
+        city: meta.city || null,
+        referrer: meta.referrer || null,
+        userAgent: meta.userAgent || null,
+        org: meta.org || null,
+        lastSeen: meta.lastSeen || null
+      };
+    }));
 
-  // Filter out localhost from recent visitors
-  const filteredVisitors = visitors.filter(v => !isLocalhost(v.ip));
+    // Filter out localhost
+    let searchFiltered = allVisitors.filter(v => !isLocalhost(v.ip));
+
+    // Apply search query
+    const s = search.toLowerCase();
+    searchFiltered = searchFiltered.filter(v =>
+      (v.ip && v.ip.toLowerCase().includes(s)) ||
+      (v.email && v.email.toLowerCase().includes(s)) ||
+      (v.city && decodeURIComponent(v.city).toLowerCase().includes(s)) ||
+      (v.country && v.country.toLowerCase().includes(s)) ||
+      (v.org && v.org.toLowerCase().includes(s)) ||
+      (v.referrer && v.referrer.toLowerCase().includes(s))
+    );
+
+    totalFilteredVisitors = searchFiltered.length;
+
+    // Apply pagination in memory
+    const start = (visitorPage - 1) * visitorLimit;
+    filteredVisitors = searchFiltered.slice(start, start + visitorLimit);
+
+  } else {
+    // Simple Logic for now: Fetch exactly what we need
+    const total = await redis.llen(recentVisitorsKey);
+    totalFilteredVisitors = total;
+    const start = (visitorPage - 1) * visitorLimit;
+    const end = start + visitorLimit - 1;
+    recentIds = await redis.lrange(recentVisitorsKey, start, end);
+
+    const visitors = await Promise.all(recentIds.map(async (vid) => {
+      const [meta, email] = await Promise.all([
+        redis.hgetall(`analytics:visitor:${vid}`),
+        redis.get(`analytics:identity:${vid}`)
+      ]);
+      return {
+        id: vid,
+        email: email || null,
+        ip: meta.ip || null,
+        country: meta.country || null,
+        city: meta.city || null,
+        referrer: meta.referrer || null,
+        userAgent: meta.userAgent || null,
+        org: meta.org || null,
+        lastSeen: meta.lastSeen || null
+      };
+    }));
+
+    // Filter out localhost from recent visitors
+    filteredVisitors = visitors.filter(v => !isLocalhost(v.ip));
+  }
 
   return {
     overview: {
