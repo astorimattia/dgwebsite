@@ -50,31 +50,31 @@ export default function StoryArticle({ story }: StoryArticleProps) {
 
       {/* Floating nav */}
       <nav
-        className={`fixed top-0 left-0 right-0 z-40 flex justify-between items-center px-5 md:px-10 py-4 transition-all duration-500 ${
-          pastHero
-            ? 'bg-white'
-            : 'mix-blend-difference'
+        className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 ${
+          pastHero ? 'bg-white' : 'md:mix-blend-difference'
         }`}
       >
-        <Link
-          href="/"
-          className={`text-[20px] md:text-[22px] font-gt-america-regular no-underline transition-colors duration-500 hover:opacity-60 ${
-            pastHero ? 'text-black' : 'text-white'
-          }`}
-        >
-          Mattia Astori
-        </Link>
-        <div className="flex gap-5">
-          <Link href="/about" className={`text-sm no-underline transition-colors duration-500 hover:opacity-60 ${
-            pastHero ? 'text-black' : 'text-white'
-          }`}>
-            About
+        <div className="flex justify-between items-center px-5 md:px-10 pt-5 pb-[25px] md:py-4">
+          <Link
+            href="/"
+            className={`text-[22px] font-gt-america-regular no-underline transition-colors duration-500 hover:opacity-60 ${
+              pastHero ? 'text-black' : 'text-black md:text-white'
+            }`}
+          >
+            Mattia Astori
           </Link>
-          <Link href="/stories" className={`text-sm no-underline transition-colors duration-500 hover:opacity-60 ${
-            pastHero ? 'text-black' : 'text-white'
-          }`}>
-            Stories
-          </Link>
+          <div className="flex gap-4 md:gap-5">
+            <Link href="/about" className={`text-base md:text-sm no-underline transition-colors duration-500 hover:opacity-60 ${
+              pastHero ? 'text-black' : 'text-black md:text-white'
+            }`}>
+              About
+            </Link>
+            <Link href="/stories" className={`text-base md:text-sm no-underline transition-colors duration-500 hover:opacity-60 ${
+              pastHero ? 'text-black' : 'text-black md:text-white'
+            }`}>
+              Stories
+            </Link>
+          </div>
         </div>
       </nav>
 
@@ -90,9 +90,6 @@ export default function StoryArticle({ story }: StoryArticleProps) {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
         <div className="absolute bottom-0 left-0 right-0 p-[30px_20px] md:p-[60px_80px]">
-          <p className="text-white/60 text-xs uppercase tracking-[0.2em] mb-4 font-gt-america-regular">
-            {story.location}, {story.date}
-          </p>
           <h1 className="text-white text-[clamp(40px,8vw,90px)] font-gt-america-regular leading-[0.95] tracking-[-0.03em] mb-3">
             {story.title}
           </h1>
@@ -104,11 +101,8 @@ export default function StoryArticle({ story }: StoryArticleProps) {
 
       {/* Article meta */}
       <div className="max-w-[680px] mx-auto mt-12 md:mt-16 mb-10 md:mb-14 px-0">
-        <div className="flex items-center gap-4 text-xs text-[#999] uppercase tracking-[0.1em]">
-          <span>{story.credit}</span>
-          <span className="w-[1px] h-3 bg-[#ddd]" />
-          <span>{story.readingTime}</span>
-        </div>
+        <p className="text-sm text-black font-gt-america-regular mb-2">{story.author}</p>
+        <p className="text-xs text-[#999] tracking-[0.05em]" dangerouslySetInnerHTML={{ __html: story.credit }} />
         <div className="w-full h-[1px] bg-[#e5e5e5] mt-6" />
       </div>
 
@@ -218,25 +212,7 @@ export default function StoryArticle({ story }: StoryArticleProps) {
         })}
       </div>
 
-      {/* End marker */}
-      <div className="max-w-[680px] mx-auto mt-16 md:mt-24 mb-8">
-        <div className="flex items-center gap-4">
-          <div className="flex-1 h-[1px] bg-[#e5e5e5]" />
-          <span className="text-xs text-[#999] uppercase tracking-[0.15em] font-gt-america-regular">End</span>
-          <div className="flex-1 h-[1px] bg-[#e5e5e5]" />
-        </div>
-      </div>
-
-      {/* Back link */}
-      <div className="max-w-[680px] mx-auto mb-16">
-        <Link
-          href="/stories"
-          className="inline-flex items-center gap-2 text-sm text-[#666] no-underline transition-opacity duration-200 hover:opacity-50"
-        >
-          <span>←</span>
-          <span>All Stories</span>
-        </Link>
-      </div>
+      <div className="mb-16 md:mb-24" />
     </article>
   );
 }

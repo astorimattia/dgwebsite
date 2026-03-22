@@ -22,7 +22,7 @@ export interface Story {
   heroImage: string;
   heroAlt: string;
   excerpt: string;
-  readingTime: string;
+  author: string;
   credit: string;
   sections: StorySection[];
 }
@@ -38,10 +38,9 @@ export const stories: Story[] = [
     heroImage: '/assets/images/sanjuanito.webp',
     heroAlt: 'San Juan de la Vega, Mexico',
     excerpt: 'Every year on Shrove Tuesday, the townspeople of San Juan de la Vega pack homemade explosives onto sledgehammers and slam them against the ground. For the first time, authorities banned it. The town had other plans.',
-    readingTime: '12 min read',
-    credit: 'Text by Mattia Astori. Photographs by Mattia Astori and Daniele Colucci.',
+    author: 'By Mattia Astori',
+    credit: 'A <a href="https://sacratos.com" target="_blank" rel="noopener noreferrer">Sacratos.com</a> project. Photographs by Mattia Astori and Daniele Colucci.',
     sections: [
-      // PAGE 1: hero (sanjuanito) + intro text
       {
         type: 'text',
         content: `A door in the street cracked open just enough for a hand to slip through. A kid, maybe fifteen, curled his fingers toward himself \u2013 come here, come here \u2013 then pulled back into the dark. I looked around the street. Nobody. I stepped inside.`
@@ -62,17 +61,17 @@ export const stories: Story[] = [
         type: 'text',
         content: `Don Juan David, Josu\u00e9\u2019s father, walked into the room. He greeted me with a handshake and a smile, glanced at the tables of explosive powder where their children worked, and walked back out.`
       },
-      {
-        type: 'text',
-        content: `Every year, on Shrove Tuesday, the townspeople of San Juan de la Vega pack homemade explosives onto sledgehammers, carry them to the streets and open fields, and slam them against the ground. The detonations are enormous. The earth shakes. People lose limbs. This time, something was different. For the first time in the town\u2019s history, authorities had banned the use of explosives during the carnival. A public petition, signatures gathered, police mobilized. I wanted to understand what happens when a government tells a town to stop being itself.`
-      },
-      // PAGE 2: sanjuanito2
+      // sanjuanito2
       {
         type: 'image-full',
         image: {
           src: '/assets/images-optimized/sanjuanito2-lg.webp',
           alt: 'San Juan de la Vega',
         }
+      },
+      {
+        type: 'text',
+        content: `Every year, on Shrove Tuesday, the townspeople of San Juan de la Vega pack homemade explosives onto sledgehammers, carry them to the streets and open fields, and slam them against the ground. The detonations are enormous. The earth shakes. People lose limbs. This time, something was different. For the first time in the town\u2019s history, authorities had banned the use of explosives during the carnival. A public petition, signatures gathered, police mobilized. I wanted to understand what happens when a government tells a town to stop being itself.`
       },
       {
         type: 'text',
@@ -86,7 +85,7 @@ export const stories: Story[] = [
         type: 'text',
         content: `But here\u2019s what surprised me: every family also wanted to make sure we knew that the big explosions, the ones the town is famous for, are not the real tradition. The real tradition is small. Modest. A respectful crack of gunpowder in honor of the saint. What the town has become known for is something else entirely. Kids started making bigger and bigger explosives, detonating them around town, destroying city piping. Everything breaks, they said, shaking their own heads. This is not what we are.`
       },
-      // PAGE 3: sanjuanito3
+      // sanjuanito3
       {
         type: 'image-full',
         image: {
@@ -106,6 +105,14 @@ export const stories: Story[] = [
         type: 'text',
         content: `What the explosions reenact are the robberies, the bandits on the Camino Real, the indigenous defenders with their machetes and farm tools, the occasional Spanish pistol shot. The men who hold the tradition will tell you this, quietly, with some embarrassment about what it has become.`
       },
+      // sanjuanito4
+      {
+        type: 'image-full',
+        image: {
+          src: '/assets/images-optimized/sanjuanito4-lg.webp',
+          alt: 'San Juan de la Vega',
+        }
+      },
       {
         type: 'text',
         content: `The word I heard more than any other during my time in San Juan de la Vega was adrenalina. I heard it from a man in his forties, shirtless, showing me scars on his forearms. I heard it from teenagers leaning against trucks in the afternoon heat. But I understood it best watching Josu\u00e9.`
@@ -122,14 +129,6 @@ export const stories: Story[] = [
         type: 'text',
         content: `I asked about the dangers, and stories came easily: a man who burned, another who was paralyzed, people who lost fingers, hands, arms, legs. Accidents happen because the explosives are powerful enough to send twenty-five-kilogram sledgehammers flying through the air. A hammer goes up, a hammer comes down, and sometimes there is a head in the way. Or a spark hits a bag of powder before the hammer does, and someone standing too close disappears into smoke.`
       },
-      // PAGE 4: sanjuanito4
-      {
-        type: 'image-full',
-        image: {
-          src: '/assets/images-optimized/sanjuanito4-lg.webp',
-          alt: 'San Juan de la Vega',
-        }
-      },
       {
         type: 'text',
         content: `"Police always try to take them away," one man said. He was sitting in a plastic chair outside his house, two kids playing in the dirt beside him. "But they will never stop the tradition. Nothing will change."`
@@ -137,6 +136,14 @@ export const stories: Story[] = [
       {
         type: 'text',
         content: `He said it without bravado.`
+      },
+      // sanjuanito5
+      {
+        type: 'image-full',
+        image: {
+          src: '/assets/images-optimized/sanjuanito5-lg.webp',
+          alt: 'San Juan de la Vega',
+        }
       },
       {
         type: 'text',
@@ -146,11 +153,11 @@ export const stories: Story[] = [
         type: 'text',
         content: `On the afternoon before the main event, a strange calm settled over the town. Streets were empty. Doors closed. No music. No voices. The air itself seemed to hold still, as if the entire town had taken a breath and was waiting to exhale.`
       },
-      // PAGE 5: sanjuanito5
+      // sanjuanito6
       {
         type: 'image-full',
         image: {
-          src: '/assets/images-optimized/sanjuanito5-lg.webp',
+          src: '/assets/images-optimized/sanjuanito6-lg.webp',
           alt: 'San Juan de la Vega',
         }
       },
@@ -174,14 +181,6 @@ export const stories: Story[] = [
         type: 'text',
         content: `I found Josu\u00e9 in the crowd. He was barely recognizable, face covered in soot, eyes wide. He swung a hammer down and the detonation threw him sideways. He got up laughing and loaded another charge. This was what he\u2019d been waiting for. This was the adrenaline he had tried to explain.`
       },
-      // PAGE 6: sanjuanito6
-      {
-        type: 'image-full',
-        image: {
-          src: '/assets/images-optimized/sanjuanito6-lg.webp',
-          alt: 'San Juan de la Vega',
-        }
-      },
       {
         type: 'text',
         content: `Around midnight, the first police cars appeared.`
@@ -204,9 +203,13 @@ export const stories: Story[] = [
       },
       {
         type: 'text',
-        content: `At around three in the morning, we walked back toward town to catch some sleep. I did not sleep. The city was at war. The bed shook after every boom, one every few seconds, sometimes overlapping, sometimes a chain of three or four in rapid succession. Even with earplugs pushed deep, my ears hurt. The walls vibrated. The floor vibrated. There was no pause, no gap long enough to trick yourself into thinking it might be over. It went on for hours. It went on until seven in the morning.`
+        content: `At around three in the morning, we walked back toward town to catch some sleep.`
       },
-      // PAGE 7: sanjuanito7
+      {
+        type: 'text',
+        content: `I did not sleep. The city was at war. The bed shook after every boom, one every few seconds, sometimes overlapping, sometimes a chain of three or four in rapid succession. Even with earplugs pushed deep, my ears hurt. The walls vibrated. The floor vibrated. There was no pause, no gap long enough to trick yourself into thinking it might be over. It went on for hours. It went on until seven in the morning.`
+      },
+      // sanjuanito7
       {
         type: 'image-full',
         image: {
@@ -214,7 +217,7 @@ export const stories: Story[] = [
           alt: 'San Juan de la Vega',
         }
       },
-      // PAGE 8: sanjuanito8 + sanjuanito9 (image-only spread)
+      // sanjuanito8 + sanjuanito9
       {
         type: 'image-pair',
         images: [
@@ -228,7 +231,6 @@ export const stories: Story[] = [
           }
         ]
       },
-      // PAGE 9: text only
       {
         type: 'text',
         content: `We walked outside into the silence. The sun was coming up, pale and cautious. Over ten police cars patrolled the town, circling slowly with lights off. They had shut everything down.`
@@ -285,7 +287,7 @@ export const stories: Story[] = [
         type: 'text',
         content: `The crowd began to split. People moved into groups. Clans formed along lines I couldn\u2019t read. One side started throwing rocks at the other. Throwing, with full force, people ducking behind trucks, scrambling to get clear. One group charged together across the field. Military forces showed up with guns drawn. A man walked toward them. His head was covered in blood.`
       },
-      // PAGE 10: sanjuanito10 + sanjuanito11 (image-only spread)
+      // sanjuanito10 + sanjuanito11
       {
         type: 'image-pair',
         images: [
@@ -299,6 +301,7 @@ export const stories: Story[] = [
           }
         ]
       },
+      // sanjuanito12
       {
         type: 'image-full',
         image: {
@@ -322,6 +325,7 @@ export const stories: Story[] = [
         type: 'pullquote',
         content: `"Si San Juanito permite," he said. If San Juanito allows it.`
       },
+      // sanjuanito13
       {
         type: 'image-full',
         image: {
