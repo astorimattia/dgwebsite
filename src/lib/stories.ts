@@ -115,7 +115,7 @@ export const stories: Story[] = [
       },
       {
         type: 'text',
-        content: `The word I heard more than any other during my time in San Juan de la Vega was adrenalina. I heard it from a man in his forties, shirtless, showing me scars on his forearms. I heard it from teenagers leaning against trucks in the afternoon heat. But I understood it best watching Josu\u00e9.`
+        content: `The word I heard more than any other during my time in San Juan de la Vega was <em>adrenalina</em>. I heard it from a man in his forties, shirtless, showing me scars on his forearms. I heard it from teenagers leaning against trucks in the afternoon heat. But I understood it best watching Josu\u00e9.`
       },
       {
         type: 'text',

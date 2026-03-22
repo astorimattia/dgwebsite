@@ -114,9 +114,7 @@ export default function StoryArticle({ story }: StoryArticleProps) {
             if (isFirstParagraph) isFirstParagraph = false;
             return (
               <FadeIn key={i} className="max-w-[680px] mx-auto mb-8 px-0">
-                <p className={`text-[17px] md:text-[18px] leading-[1.75] text-[#1a1a1a] font-gt-america-thin font-[200] ${showDropCap ? 'story-drop-cap' : ''}`}>
-                  {section.content}
-                </p>
+                <p className={`text-[17px] md:text-[18px] leading-[1.75] text-[#1a1a1a] font-gt-america-thin font-[200] ${showDropCap ? 'story-drop-cap' : ''}`} dangerouslySetInnerHTML={{ __html: section.content }} />
               </FadeIn>
             );
           }
