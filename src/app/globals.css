@@ -100,4 +100,33 @@
   .invisible-link:hover::after {
     @apply w-full;
   }
+
+  /* Story article styles */
+  .story-drop-cap::first-letter {
+    float: left;
+    font-family: 'GT America Regular', Georgia, serif;
+    font-size: 4.2em;
+    line-height: 0.8;
+    padding-right: 0.08em;
+    padding-top: 0.07em;
+    color: black;
+    font-weight: normal;
+  }
+
+  .story-pullquote {
+    border-left: 2px solid black;
+    padding-left: 30px;
+  }
+
+  @media (min-width: 768px) {
+    .story-pullquote {
+      border-left: none;
+      padding-left: 0;
+      text-align: center;
+    }
+    .story-pullquote > div {
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
 }

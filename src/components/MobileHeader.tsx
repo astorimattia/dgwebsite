@@ -9,22 +9,24 @@ import Location from './Location';
 const MobileHeader: React.FC = () => {
   const pathname = usePathname();
   const isAboutPage = pathname === '/about' || pathname === '/about/';
+  const isStoriesPage = pathname.startsWith('/stories');
 
   return (
     <div className="flex md:hidden flex-col pt-5 pb-[25px] bg-white">
       <div className="flex justify-between items-center w-full">
         <Link href="/" className="text-[22px] font-normal text-black font-gt-america-regular no-underline cursor-default hover:opacity-100">Mattia Astori</Link>
-        <Link href={isAboutPage ? "/" : "/about"} className="text-base text-black no-underline transition-opacity duration-200 ease-in-out hover:opacity-50">
-          {isAboutPage ? "Home" : "About"}
-        </Link>
+        <div className="flex gap-4">
+          <Link href="/about" className="text-base text-black no-underline transition-opacity duration-200 ease-in-out hover:opacity-50">About</Link>
+          <Link href="/stories" className="text-base text-black no-underline transition-opacity duration-200 ease-in-out hover:opacity-50">Stories</Link>
+        </div>
       </div>
       <div className="flex justify-between items-center gap-[18px]">
         <SocialIcons />
         <Location isMobile={true} />
       </div>
-      
+
       {/* Mobile About Preview */}
-      {!isAboutPage && (
+      {!isAboutPage && !isStoriesPage && (
         <div className="block p-[25px_0_0_0]">
           <Link href="/about" className="no-underline text-inherit block transition-opacity duration-200 ease-in-out cursor-pointer hover:opacity-70">
             <p className="text-sm leading-[1.4] m-0 text-[#333]">

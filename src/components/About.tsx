@@ -28,7 +28,7 @@ const About: React.FC = () => {
       <Image
         src="/assets/images/Mattia-Astori.webp"
         alt="Mattia Astori"
-        className="w-[300px] h-[400px] object-cover flex-shrink-0 mt-0 w-full max-w-[300px] h-[400px] order-[-1] md:order-none"
+        className="w-[300px] h-[400px] object-cover flex-shrink-0 mt-0 max-w-[300px] order-[-1] md:order-none mx-auto md:mx-0"
         width={300}
         height={400}
       />
