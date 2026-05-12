@@ -17,7 +17,7 @@ async function optimizeImages() {
         const files = fs.readdirSync(inputDir);
         // Filter for the new images only
         const targetFiles = files.filter(file =>
-            (file.startsWith('banni-') || file.startsWith('mautkakuan-')) &&
+            (file.startsWith('banni-') || file.startsWith('mautkakuan-') || file.startsWith('sanjuan-analog')) &&
             file.endsWith('.webp')
         );
 

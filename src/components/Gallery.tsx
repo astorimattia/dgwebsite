@@ -11,6 +11,21 @@ interface ImageData {
 }
 
 const imageData: ImageData[] = [
+  // San Juan de la Vega series (Mexico)
+  { src: '/assets/images-optimized/sanjuan-analog.webp', title: 'San Juan de la Vega, Mexico', year: '2026' },
+  { src: '/assets/images-optimized/sanjuan-analog2.webp', title: 'San Juan de la Vega, Mexico', year: '2026' },
+  { src: '/assets/images-optimized/sanjuan-analog3.webp', title: 'San Juan de la Vega, Mexico', year: '2026' },
+  { src: '/assets/images-optimized/sanjuan-analog4.webp', title: 'San Juan de la Vega, Mexico', year: '2026' },
+  { src: '/assets/images-optimized/sanjuan-analog5.webp', title: 'San Juan de la Vega, Mexico', year: '2026' },
+  { src: '/assets/images-optimized/sanjuan-analog6.webp', title: 'San Juan de la Vega, Mexico', year: '2026' },
+  { src: '/assets/images-optimized/sanjuan-analog7.webp', title: 'San Juan de la Vega, Mexico', year: '2026' },
+  { src: '/assets/images-optimized/sanjuan-analog8.webp', title: 'San Juan de la Vega, Mexico', year: '2026' },
+  { src: '/assets/images-optimized/sanjuan-analog9.webp', title: 'San Juan de la Vega, Mexico', year: '2026' },
+  { src: '/assets/images-optimized/sanjuan-analog10.webp', title: 'San Juan de la Vega, Mexico', year: '2026' },
+  { src: '/assets/images-optimized/sanjuan-analog11.webp', title: 'San Juan de la Vega, Mexico', year: '2026' },
+  { src: '/assets/images-optimized/sanjuan-analog12.webp', title: 'San Juan de la Vega, Mexico', year: '2026' },
+  { src: '/assets/images-optimized/sanjuan-analog13.webp', title: 'San Juan de la Vega, Mexico', year: '2026' },
+
   // Maut Ka Kuan series (India)
   { src: '/assets/images-optimized/mautkakuan-analog.webp', title: 'Maut Ka Kuan, India', year: '2025' },
   { src: '/assets/images-optimized/mautkakuan-analog3.webp', title: 'Maut Ka Kuan, India', year: '2025' },
