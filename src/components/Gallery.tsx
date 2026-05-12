@@ -11,6 +11,19 @@ interface ImageData {
 }
 
 const imageData: ImageData[] = [
+  // Maut Ka Kuan series (India)
+  { src: '/assets/images-optimized/mautkakuan-analog.webp', title: 'Maut Ka Kuan, India', year: '2025' },
+  { src: '/assets/images-optimized/mautkakuan-analog3.webp', title: 'Maut Ka Kuan, India', year: '2025' },
+  { src: '/assets/images-optimized/mautkakuan-analog5.webp', title: 'Maut Ka Kuan, India', year: '2025' },
+  { src: '/assets/images-optimized/mautkakuan-analog6.webp', title: 'Maut Ka Kuan, India', year: '2025' },
+  { src: '/assets/images-optimized/mautkakuan-analog7.webp', title: 'Maut Ka Kuan, India', year: '2025' },
+  { src: '/assets/images-optimized/mautkakuan-analog8.webp', title: 'Maut Ka Kuan, India', year: '2025' },
+  { src: '/assets/images-optimized/mautkakuan-analog10.webp', title: 'Maut Ka Kuan, India', year: '2025' },
+  { src: '/assets/images-optimized/mautkakuan-analog12.webp', title: 'Maut Ka Kuan, India', year: '2025' },
+  { src: '/assets/images-optimized/mautkakuan-analog13.webp', title: 'Maut Ka Kuan, India', year: '2025' },
+  { src: '/assets/images-optimized/mautkakuan-analog14.webp', title: 'Maut Ka Kuan, India', year: '2025' },
+  { src: '/assets/images-optimized/mautkakuan-analog15.webp', title: 'Maut Ka Kuan, India', year: '2025' },
+
   // San Juan de la Vega series (Mexico)
   { src: '/assets/images-optimized/sanjuan-analog.webp', title: 'San Juan de la Vega, Mexico', year: '2026' },
   { src: '/assets/images-optimized/sanjuan-analog2.webp', title: 'San Juan de la Vega, Mexico', year: '2026' },
@@ -25,19 +38,6 @@ const imageData: ImageData[] = [
   { src: '/assets/images-optimized/sanjuan-analog11.webp', title: 'San Juan de la Vega, Mexico', year: '2026' },
   { src: '/assets/images-optimized/sanjuan-analog12.webp', title: 'San Juan de la Vega, Mexico', year: '2026' },
   { src: '/assets/images-optimized/sanjuan-analog13.webp', title: 'San Juan de la Vega, Mexico', year: '2026' },
-
-  // Maut Ka Kuan series (India)
-  { src: '/assets/images-optimized/mautkakuan-analog.webp', title: 'Maut Ka Kuan, India', year: '2025' },
-  { src: '/assets/images-optimized/mautkakuan-analog3.webp', title: 'Maut Ka Kuan, India', year: '2025' },
-  { src: '/assets/images-optimized/mautkakuan-analog5.webp', title: 'Maut Ka Kuan, India', year: '2025' },
-  { src: '/assets/images-optimized/mautkakuan-analog6.webp', title: 'Maut Ka Kuan, India', year: '2025' },
-  { src: '/assets/images-optimized/mautkakuan-analog7.webp', title: 'Maut Ka Kuan, India', year: '2025' },
-  { src: '/assets/images-optimized/mautkakuan-analog8.webp', title: 'Maut Ka Kuan, India', year: '2025' },
-  { src: '/assets/images-optimized/mautkakuan-analog10.webp', title: 'Maut Ka Kuan, India', year: '2025' },
-  { src: '/assets/images-optimized/mautkakuan-analog12.webp', title: 'Maut Ka Kuan, India', year: '2025' },
-  { src: '/assets/images-optimized/mautkakuan-analog13.webp', title: 'Maut Ka Kuan, India', year: '2025' },
-  { src: '/assets/images-optimized/mautkakuan-analog14.webp', title: 'Maut Ka Kuan, India', year: '2025' },
-  { src: '/assets/images-optimized/mautkakuan-analog15.webp', title: 'Maut Ka Kuan, India', year: '2025' },
 
   // Banni series (India)
   { src: '/assets/images-optimized/banni-analog.webp', title: 'Banni, India', year: '2025' },
