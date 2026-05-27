@@ -7,7 +7,7 @@ const About: React.FC = () => {
       <div className="max-w-about-content leading-[1.5] font-gt-america-thin">
         <p className="mb-5 text-base text-black">Hi, I&apos;m Mattia!</p>
         <p className="mb-5 text-base text-black">
-          I run a <span className="font-gt-america-regular font-normal antialiased">private markets</span> firm in San Francisco, investing and structuring transactions in early to late stage startups.
+          I run a <span className="font-gt-america-regular font-normal antialiased">private markets</span> firm in San Francisco, investing and structuring transactions in early to late stage startups. (<a href="https://astori.vc" target="_blank" rel="noopener noreferrer" className="invisible-link">astori.vc</a>)
         </p>
         <p className="mb-5 text-base text-black">
           For fun, I document the world&apos;s most <span className="font-gt-america-regular font-normal antialiased">extreme</span> rituals, from fist fights in Bolivia to spirit mediums in Thailand. Stories that deserve to be told, way outside of our city bubbles. (<a href="https://sacratos.com" target="_blank" rel="noopener noreferrer" className="invisible-link">sacratos.com</a>)
