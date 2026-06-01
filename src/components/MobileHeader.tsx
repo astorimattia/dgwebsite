@@ -30,7 +30,7 @@ const MobileHeader: React.FC = () => {
         <div className="block p-[25px_0_0_0]">
           <Link href="/about" className="no-underline text-inherit block transition-opacity duration-200 ease-in-out cursor-pointer hover:opacity-70">
             <p className="text-sm leading-[1.4] m-0 text-[#333]">
-              Hi, I&apos;m Mattia! I&apos;m documenting the world&apos;s most extreme rituals, from fist fights in Bolivia to spirit mediums in Thailand.
+              Hi, I&apos;m Mattia! I run a private markets firm in SF and document extreme rituals around the world.
               <span className="text-black text-xs font-[100] transition-opacity duration-200 ease-in-out inline opacity-40 ml-[3px]">→</span>
             </p>
           </Link>
