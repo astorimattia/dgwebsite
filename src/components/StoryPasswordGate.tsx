@@ -53,10 +53,10 @@ export default function StoryPasswordGate({ story, children }: Props) {
       <div className="relative z-10 flex flex-col items-center px-[20px] md:px-[40px] pb-24 -mt-[10vh]">
         <div className="w-full max-w-[320px] text-center">
           <div className="w-8 h-[1px] bg-[#ccc] mx-auto mb-6" />
-          <p className="text-[11px] uppercase tracking-[0.22em] text-[#aaa] mb-2 font-gt-america-regular">
+          <p className="text-[11px] uppercase tracking-[0.22em] text-black mb-2 font-gt-america-regular">
             Exclusive preview
           </p>
-          <p className="text-[13px] font-gt-america-thin italic text-[#999] mb-8 leading-[1.5]">
+          <p className="text-[13px] font-gt-america-thin italic text-black mb-8 leading-[1.5]">
             Enter the password to keep reading.
           </p>
           <form onSubmit={handleSubmit} className="flex flex-col gap-4">
