@@ -65,7 +65,7 @@ export default function StoryPasswordGate({ story, children }: Props) {
               value={input}
               onChange={e => { setInput(e.target.value); setError(false); }}
               placeholder="Password"
-              autoFocus
+              autoFocus={false}
               className={`w-full border-b ${error ? 'border-red-400' : 'border-[#d0d0d0]'} bg-transparent py-2 text-[15px] font-gt-america-thin text-black placeholder-[#bbb] outline-none focus:border-black transition-colors text-center tracking-widest`}
             />
             {error && (
