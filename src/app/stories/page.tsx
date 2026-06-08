@@ -37,9 +37,16 @@ export default function StoriesPage() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-r from-black/65 via-black/20 to-transparent" />
                 <div className="absolute inset-0 flex flex-col justify-end p-7 md:p-10">
-                  <p className="text-white/50 text-[10px] uppercase tracking-[0.25em] mb-3 font-gt-america-regular">
-                    {story.location} — {story.date}
-                  </p>
+                  <div className="flex items-center gap-3 mb-3">
+                    <p className="text-white/50 text-[10px] uppercase tracking-[0.25em] font-gt-america-regular">
+                      {story.location} — {story.date}
+                    </p>
+                    {story.password && (
+                      <span className="text-white/50 text-[10px] uppercase tracking-[0.25em] font-gt-america-regular border border-white/30 px-2 py-[2px]">
+                        Exclusive
+                      </span>
+                    )}
+                  </div>
                   <h2 className="text-white text-[clamp(24px,3vw,42px)] font-gt-america-regular leading-[1] tracking-[-0.02em] mb-2">
                     {story.title}
                   </h2>

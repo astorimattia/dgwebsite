@@ -25,6 +25,7 @@ export interface Story {
   author: string;
   credit: string;
   sections: StorySection[];
+  password?: string;
 }
 
 export const stories: Story[] = [
@@ -337,6 +338,7 @@ export const stories: Story[] = [
   }
   ,
   {
+    password: 'sansevero',
     slug: 'c-vdim-au-fnel',
     title: "C' vdim au' fnel",
     subtitle: 'Appunti dalla Festa del Soccorso',

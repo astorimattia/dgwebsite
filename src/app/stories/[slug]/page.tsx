@@ -1,6 +1,7 @@
 import React from 'react';
 import { notFound } from 'next/navigation';
 import StoryArticle from '@/components/StoryArticle';
+import StoryPasswordGate from '@/components/StoryPasswordGate';
 import { stories, getStoryBySlug } from '@/lib/stories';
 import type { Metadata } from 'next';
 
@@ -35,11 +36,21 @@ export default async function StoryPage({ params }: PageProps) {
     notFound();
   }
 
-  return (
+  const content = (
     <div className="min-h-screen min-h-[100dvh] bg-white">
       <main className="story-scroll-container overflow-y-auto h-screen h-[100dvh] p-[0_20px] md:p-[0_40px]">
         <StoryArticle story={story} />
       </main>
     </div>
   );
+
+  if (story.password) {
+    return (
+      <StoryPasswordGate slug={story.slug} password={story.password}>
+        {content}
+      </StoryPasswordGate>
+    );
+  }
+
+  return content;
 }
