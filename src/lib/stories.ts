@@ -335,6 +335,219 @@ export const stories: Story[] = [
       }
     ]
   }
+  ,
+  {
+    slug: 'c-vdim-au-fnel',
+    title: "C' vdim au' fnel",
+    subtitle: 'Appunti dalla Festa del Soccorso',
+    location: 'San Severo, Italia',
+    date: '2026',
+    year: '2026',
+    heroImage: '/assets/images-optimized/sansevero-hero-lg.webp',
+    heroAlt: 'Festa del Soccorso, San Severo',
+    excerpt: "Ogni anno a San Severo, nella terza settimana di maggio, migliaia di persone corrono sotto esplosioni a mezz'aria in onore della Madonna del Soccorso. Tre giorni in cui le leggi, il lavoro e il lutto vengono sospesi.",
+    author: 'By Mattia Astori',
+    credit: 'A <a href="https://sacratos.com" target="_blank" rel="noopener noreferrer">Sacratos.com</a> project. Photographs by Mattia Astori and Daniele Colucci.',
+    sections: [
+      {
+        type: 'image-full',
+        image: {
+          src: '/assets/images-optimized/sansevero-1-lg.webp',
+          alt: 'Festa del Soccorso, San Severo',
+        }
+      },
+      {
+        type: 'text',
+        content: `Era sabato sera e sopra le nostre teste pendevano i castelletti, ghirlande di filo di ferro tese da un lato all'altro della strada, cariche di cilindri grigi legati a intervalli regolari. La carta dei giornali vecchi avvolgeva ogni carica. A guardarle da sotto, controluce contro i lampioni, facevano pensare a una festa di paese, ma quella carta secca e l'odore di zolfo dicevano altro.`
+      },
+      {
+        type: 'text',
+        content: `Bruno mi teneva per il braccio destro. Alto, robusto, i capelli scuri mossi e pettinati all'indietro, un trench beige sopra la camicia. Pantaloni da abito, scarpe lucide. Niente che suggerisse che di lì a trenta secondi avremmo corso in mezzo a esplosioni a mezz'aria. Aveva l'espressione calma di chi ha già fatto quella cosa molte volte e adesso deve solo accompagnare qualcun altro a farla per la prima volta.`
+      },
+      {
+        type: 'text',
+        content: `La strada era piena, una calca fitta, spalla contro spalla. Gruppetti di ragazzi che si chiamavano da un marciapiede all'altro, famiglie con bambini in braccio, anziani appoggiati ai muri. Tutti guardavano nella stessa direzione. L'aria sapeva già di zolfo.`
+      },
+      {
+        type: 'text',
+        content: `Da lontano arrivò il primo botto. Mi partì il cuore in gola. La folla si strinse, un'increspatura attraversò la strada.\n\nBruno mi strinse il braccio. «No, aspetta», disse. «Aspetta... aspetta… aspetta...»\n\nAltri due botti, distanziati. Poi la raffica veloce. Da dietro qualcuno iniziò a spingere, la pressione crebbe all'improvviso.\n\nBruno strinse la presa. «Ok. Andiamo.»`
+      },
+      {
+        type: 'text',
+        content: `E poi correvamo. Ma non era una corsa scelta: la strada stessa si metteva in movimento, un'onda umana che partiva da dietro e ti prendeva alle spalle, ti comprimeva. Eravamo così schiacciati che non potevo alzare il gomito. Il braccio sinistro incastrato contro il costato, la mano destra serrata sulla macchina fotografica premuta sul petto, e intorno solo corpi. Corpi che spingevano e urlavano, corpi che a tratti ti sollevavano da terra senza che tu potessi opporti.`
+      },
+      {
+        type: 'text',
+        content: `I fuochi sopra di noi scoppiavano in sequenza lungo il filo di ferro, appena più veloci della folla. Li sentivi arrivare prima con le orecchie, crepitii sempre più vicini, poi li vedevi: lampi bianchi e arancioni ad altezza testa, scintille che piovevano sulle spalle, sulle braccia, nei capelli. Un ragazzo davanti a me inciampò, cadde in avanti, e prima ancora che toccasse terra quattro mani lo afferrarono per le ascelle e lo rimisero in piedi. Non si smise di correre per quel ragazzo.`
+      },
+      {
+        type: 'text',
+        content: `Poi la raffica si fermò. Due secondi di silenzio in cui si sentivano solo i respiri e il ronzio delle orecchie. Un botto isolato. Pausa. Un altro botto. Il fuoco prendeva fiato.\n\nBruno si fermò. Aveva il viso arrossato e una bruciatura fresca sul colletto, ma gli occhi erano tranquilli.\n\n«Dobbiamo decidere», disse. «Se stiamo qua dietro, ce lo prendiamo comodo. Se vuoi vedere il finale, dobbiamo andare avanti adesso, prima che riprenda. Però lì davanti si stringe, è un casino.»\n\n«Andiamo avanti», dissi.`
+      },
+      {
+        type: 'text',
+        content: `Ci rimettemmo in movimento, scansando corpi nella pausa. Bruno camminava veloce, si girava ogni tanto. La strada si restringeva in un budello tra due palazzi. Poi sentimmo la miccia ripartire in lontananza. Quel crepitio inconfondibile che si avvicinava. Bruno si voltò, già tirato dalla folla che ricominciava a spingere. Disse qualcosa in dialetto.\n\n«C' vdim au' fnel.»\n\nNon capii. Non c'era tempo per chiedere. La marea di corpi ci separò in un secondo, lui da una parte, io dall'altra, ed ero di nuovo solo in mezzo alla ressa ed esplosioni, il fuoco che avanzava sopra la mia testa.`
+      },
+      {
+        type: 'image-full',
+        image: {
+          src: '/assets/images-optimized/sansevero-2-lg.webp',
+          alt: 'Festa del Soccorso, San Severo',
+        }
+      },
+      {
+        type: 'text',
+        content: `Il finale era dove la strada si stringeva, e lì la folla si comprimeva in una massa unica. Le esplosioni a grappolo, così vicine che sentivo il calore sulla nuca. Un bruciore sul braccio destro. Poi una mano dietro di me, non ho mai saputo di chi, mi batté due colpi decisi sulla spalla per spegnere qualcosa.`
+      },
+      {
+        type: 'text',
+        content: `L'ultima esplosione fu la più forte. Un boato che rimbombava nello stomaco, il filo di ferro che vibrava sopra le nostre teste, poi silenzio. Il fumo bianco così denso che per qualche secondo non si vedeva più niente. Quando si diradò, la strada era un tappeto di carta bruciata e bossoli fumanti. La gente esplose in un urlo collettivo. Un uomo con la maglietta a brandelli, il torace coperto di puntini rossi, saltava gridando verso un balcone dove qualcuno sventolava una bandiera bruciacchiata. Ritrovai Bruno.`
+      },
+      {
+        type: 'text',
+        content: `Quella notte, in albergo, mi soffiai il naso e il fazzoletto diventò nero. La felpa crivellata di buchi. Sul braccio destro un segno rosso che ancora bruciava. Lo zaino aveva tre buchi netti, come di sigaretta. E quelle quattro sillabe, c' vdim au' fnel, mi tornavano in testa senza significato.\n\nPrima di cedere al sonno, ripensai a quello che ci avevano detto durante il giorno: questo è l'antipasto. Domani è la festa vera.`
+      },
+      {
+        type: 'text',
+        content: `Il giorno prima, il venerdì mattina, Michele Sales ci aveva presi in albergo alle nove. Guidava un'utilitaria grigia con i sedili posteriori pieni di copie della «Gazzetta di San Severo», il suo giornale. Al centro della prima pagina aveva stampato il nostro arrivo.\n\nMichele parlava muovendo poco le labbra, la voce troppo alta. «Vedete questa?», disse toccandosi l'orecchio destro. «2007. Una miccia fatta male. Mi è caduta sulla spalla, mi ha bucato la spalla e mi ha spaccato il timpano. Due operazioni. Mi hanno preso membrana dall'occipite e dalla tempia e ricostruito il timpano. Ho perso il cinquanta per cento dell'udito. Ma corr tutt l'ann.» Corro tutti gli anni.\n\nGli chiesi perché. Mi guardò dallo specchietto retrovisore, e in quell'attimo i suoi occhi cambiarono. Pieni di luce, non guardavano più la strada, ma qualcosa di interno. «Adrenalina», disse.`
+      },
+      {
+        type: 'text',
+        content: `Ci portò alla Nuova Pirodaunia. L'odore di zolfo e polvere pirica arrivava prima dell'edificio. Dentro, un operaio anziano con le mani nere e secche, unghie consumate, dita sottili, preparava le cariche arrotolando strisce di vecchi calendari intorno a cilindri di polvere compressa. Il proprietario, Michele Altrui, ci raccontò della giuria che fino al 2017 sceglieva il fuoco più forte. «Poi una ragazza si è fatta male. Il braccio. Spappolato. E hanno smesso.»`
+      },
+      {
+        type: 'image-full',
+        image: {
+          src: '/assets/images-optimized/sansevero-3-lg.webp',
+          alt: 'Preparazione delle cariche, San Severo',
+        }
+      },
+      {
+        type: 'text',
+        content: `Più tardi, da Umberto Presutto alla fabbrica San Pio, sentimmo la stessa storia: niente transenne prima del 2017, poi le barriere, la gente che le buttava giù, le transenne rinforzate. «Ogni volta che arriva un prefetto nuovo, un questore, un commissario, gente che non è del posto, prova a limitare. E ogni volta nascono proteste.» Negli anni Sessanta il vescovo Valentino Velati non voleva far sparare. A metà degli anni Ottanta un commissario bloccò tutto: la gente si sedette in strada, ore di trattativa, e alla fine le batterie vennero montate in fretta e si sparò lo stesso. Nel 2002 un altro tentativo. Tutti seduti, la Madonna non usciva, due ore dopo cambiarono le ordinanze.`
+      },
+      {
+        type: 'text',
+        content: `Nel pomeriggio incontrammo Raffaele Florio, presidente della Pro Loco. Uomo che faceva mille cose nello stesso momento, telefono nella mano destra, telefono fisso sulla scrivania, gente che entrava e usciva dall'ufficio ogni diciassette secondi. In uno di quegli intervalli trovò il tempo di dirmi: «Il più reprimi, più alimenti. Dal 2017 i ragazzi sono aumentati. Più gli dici che è pericoloso, più ci vogliono correre sotto.»`
+      },
+      {
+        type: 'text',
+        content: `Poi si alzò, mise via entrambi i telefoni e ci portò in giro per la città. E fu lì che capimmo chi era Raffaele Florio. In mezz'ora di cammino avremo contato quaranta interazioni. "Ciao doctor", "Mi manchi", "Ehi Raffaele, tutto pronto?" due baci sulla guancia, uno e due, strette di mano che duravano minuti. Ogni volta si fermava, presentava, spiegava chi eravamo. «Sono due fotografi, vengono a raccontare la festa» e la reazione era sempre la stessa: un sorriso largo, un «benvenuti, vedrete che roba».`
+      },
+      {
+        type: 'text',
+        content: `Passammo davanti alla cattedrale, gente vestita bene, anziani a braccetto, e poi in una chiesa laterale dove Raffaele indicò lo stemma della confraternita. «Memento mori. Ricordati che devi morire.»\n\nQuella sera mangiammo il primo panino col torcinello. Una nube di fumo bianco saliva da una griglia improvvisata sul marciapiede. Fegato e interiora di maiale, melanzane sott'olio, pomodori secchi, infilato in una ciabatta che si inzuppava del grasso della carne. Sedie di plastica bianca, quelle da gelateria. La piazza del Luna Park era già piena del doppio della gente del pomeriggio. In lontananza, botti.`
+      },
+      {
+        type: 'text',
+        content: `Domenica mattina piovigginava. Alle sette la città era bagnata e silenziosa, ma già tutta addobbata. I castelletti penzolavano sulle strade deserte con un rumore di carta secca. In un bar prendemmo un caffè. Il barista asciugava tazzine: «Poi smette. Alle nove smette sempre.» E alle nove smise.`
+      },
+      {
+        type: 'text',
+        content: `La vestizione dei portatori avveniva in una sala dietro la chiesa principale. Li vedemmo mettersi il mantello azzurro, il collare con il simbolo della Madonna del Soccorso. Poi venne il momento dell'estrazione. I bambini tenevano in mano coppole di stoffa grigio scuro con dentro i biglietti dei gruppi. Il primo biglietto estratto fu il numero tre. La squadra numero tre fu la prima sorteggiata: a loro sarebbe toccata l'uscita dalla cattedrale. Il gruppo si spostò verso l'altare, e uno di loro, un uomo sulla quarantina, si mise le mani sul viso e scoppiò a piangere. Disse qualcosa che non sentii, ma vidi le sue spalle scuotersi. «È un'emozione forte», disse a mezza voce. Lo stesso uomo lo avrei rivisto lunedì sera, in lacrime, con la statua sulla spalla.`
+      },
+      {
+        type: 'image-pair',
+        images: [
+          {
+            src: '/assets/images-optimized/sansevero-4-lg.webp',
+            alt: 'Vestizione dei portatori, San Severo',
+          },
+          {
+            src: '/assets/images-optimized/sansevero-5-lg.webp',
+            alt: 'Estrazione dei gruppi, San Severo',
+          }
+        ]
+      },
+      {
+        type: 'text',
+        content: `La Madonna uscì alle undici. L'anno prima alle dieci, ma la pioggia aveva ritardato tutto. La statua era bizantina, nera e dorata, patrona della città e della diocesi. La gente si sporgeva per toccarla, baciarla. Accanto a me un signore mi diede un colpo di gomito, indicandola col mento: «Vedi quant'è bella.» Lo dicevano tutti, ogni volta che ce la mostravano in quei giorni. La portarono fuori in spalla, e la folla esplose in un applauso. Da quel momento, la festa cominciò.`
+      },
+      {
+        type: 'image-full',
+        image: {
+          src: '/assets/images-optimized/sansevero-6-lg.webp',
+          alt: 'La Madonna del Soccorso, San Severo',
+        }
+      },
+      {
+        type: 'text',
+        content: `Il primo fuoco della domenica mi colse in mezzo alla strada, insieme ai fujenti che aspettavano. L'aria cambiò venti secondi prima che arrivasse il rumore: la gente si fece frizzante, i corpi si tesero, qualcuno si alzò sulle punte. Poi il primo botto, come un tuono. Il cuore mi partì in gola. Mi misi gli occhiali, i tappi, serrai la macchina fotografica. La fiumana partì da dietro e mi travolse. Di nuovo corpi che spingevano, di nuovo il braccio incastrato, le scintille sulla nuca. Un bruciore al braccio, poi sul collo. Mi girai e un ragazzo che non avevo mai visto mi stava già battendo una mano sulla spalla per spegnere un fuoco che mi era caduto addosso. Alzai il mento per ringraziarlo, e lui era già sparito.`
+      },
+      {
+        type: 'text',
+        content: `Undici rioni, undici batterie, dalla mattina al pomeriggio, in senso antiorario la domenica, in senso orario il lunedì. La città era un cerchio di fuochi, e noi ci spostavamo da un rione all'altro seguendo la massa. In un altro rione, dopo il fuoco, vidi una scarpa appesa a uno dei fili di ferro che avevano retto i petardi, legata lassù da qualcuno perché il proprietario la ritrovasse. Penzolava in mezzo alla strada, e un ragazzo saltava su una gamba sola per riprenderla.`
+      },
+      {
+        type: 'image-full',
+        image: {
+          src: '/assets/images-optimized/sansevero-7-lg.webp',
+          alt: 'I fujenti, Festa del Soccorso',
+        }
+      },
+      {
+        type: 'text',
+        content: `Tra un fuoco e l'altro sfrecciavano i TMax, scooteroni con a bordo padre, madre e figlio, tutti senza casco, passavano davanti alle macchine delle forze dell'ordine tagliando la folla per arrivare primi al fuoco successivo.\n\nI fujenti — quelli che fuggono — indossavano strati di maglie, due o tre o quattro, tutte crivellate di buchi dei fuochi precedenti. Più la maglietta era bucata, più eri valoroso. Su ogni maglietta uno sponsor: il frantoio, la ferramenta, la gastronomia locale, Pasta fresca da Ciro stampato sul petto di un ragazzo che correva con le braccia alzate. E poi c'erano le magliette con le foto dei morti. Un ragazzo portava stampata sul petto la foto di un amico, con una scritta in dialetto. Un altro aveva la foto di un figlio, e sotto la foto la scritta: Non ti vedo ma ti sento accanto. Quando glielo chiesi, indicò la scritta col dito. Si voltò e corse verso il fuoco successivo.`
+      },
+      {
+        type: 'image-full',
+        image: {
+          src: '/assets/images-optimized/sansevero-8-lg.webp',
+          alt: 'Le magliette dei fujenti, San Severo',
+        }
+      },
+      {
+        type: 'pullquote',
+        content: `«Due cose so' sicure ind'a vita: a mort' e a fest' d'u succors.»`
+      },
+      {
+        type: 'text',
+        content: `Durante una pausa sentii un fujente gridare a un altro, in dialetto: «Due cose so' sicure ind'a vita: a mort' e a fest' d'u succors.» L'altro rise, gli diede una pacca sulla spalla. Più tardi, un altro, appoggiato a un muro con la maglietta fumante: «L'agg ditt o capomi: a térz sttman d magg' so' ccà. O è feri o è malattì, vid tu.» Io l'ho detto al mio capo: la terza settimana di maggio sono qui. O è ferie o è malattia, vedi tu. Lavorava a Torino, era tornato.`
+      },
+      {
+        type: 'text',
+        content: `Lunedì ritrovai Bruno. Era appoggiato a un muro sotto i fuochi di Porta Lucera, il trench beige, una bruciatura sul collo. Aveva il telefono in mano e le cuffie nelle orecchie, lo schermo illuminato. Mi vide, mi fece un cenno col mento, «scusa un attimo, sono in riunione di lavoro», e rise. Poi la miccia partì in lontananza. Bruno si staccò dal muro, si sistemò il colletto. Mi guardò. Disse: «C' vdim au' fnel.»\n\nQuesta volta capii.`
+      },
+      {
+        type: 'text',
+        content: `Prima dell'ultimo fuoco, mentre mangiavo un panino col torcinello, un uomo sulla quarantina rideva con la famiglia, tatuaggi ovunque. Aveva un braccialetto elettronico alla caviglia, domiciliari, evidentemente sospesi per la giornata. Per quei tre giorni, a San Severo, le leggi si fermavano insieme al traffico.\n\nPoco distante, una signora con una maglietta stampata con la foto di un ragazzo e una data: 2024. Suo figlio, morto in un incidente stradale. «Lui correva tutti gli anni. E io corro per lui.»`
+      },
+      {
+        type: 'text',
+        content: `Lunedì sera la Madonna rientrò al Santuario del Soccorso. La chiesa era piccola, forse cinquanta posti, ma dentro eravamo in quattrocento, stipati come sotto i fuochi, tutti sudati e bruciacchiati, ma in silenzio. Un laico della confraternita stava all'ingresso e decideva chi entrava. Fuori, la folla premeva.\n\nDentro, due ore di rosario. Il diacono guidava l'Ave Maria, e tutti rispondevano in un'unica voce bassa, stanca, due ore di preghiera mentre fuori gli ultimi fuochi scoppiavano e la Madonna finiva il giro della città.`
+      },
+      {
+        type: 'text',
+        content: `Poi la statua arrivò. La portarono dentro in spalla, nera e dorata, e la chiesa scoppiò in un pianto collettivo. Davanti a me un uomo grosso con il collo tatuato piangeva senza fare rumore, le mani giunte e le lacrime che gli sparivano nella barba. Il ragazzo che avevo visto piangere all'estrazione era in prima fila, il mantello azzurro sporco di fuliggine. E piangeva.`
+      },
+      {
+        type: 'image-full',
+        image: {
+          src: '/assets/images-optimized/sansevero-9-lg.webp',
+          alt: 'Il rientro della Madonna, San Severo',
+        }
+      },
+      {
+        type: 'text',
+        content: `La statua venne adagiata nella sua nicchia. La gente si spinse per toccarla un'ultima volta.\n\nQuando uscii dal Santuario, la città era silenziosa, coperta di carta bruciata. In albergo mi soffiai il naso: nero. Lo zaino bucato. I segni sul braccio sinistro, sul braccio destro, sul collo. L'obiettivo della macchina fotografica aveva una bruciatura che non sarebbe più andata via.`
+      },
+      {
+        type: 'pullquote',
+        content: `Non era un'istruzione. Era l'unica cosa certa, in quei giorni in cui tutto il resto veniva sospeso.`
+      },
+      {
+        type: 'text',
+        content: `Prima di addormentarmi, ripensai alla frase. Non avevo più bisogno di tradurla.\n\nC' vdim au' fnel.\n\nNon era un'istruzione. Era l'unica cosa certa, in quei giorni in cui tutto il resto, le leggi, il lavoro, il lutto, la paura, veniva sospeso. Ci si perdeva nella ressa, nel fuoco, nel pianto. E poi ci si ritrovava. Alla fine del fuoco, alla fine della festa, davanti alla Madonna rientrata nella sua nicchia. Al finale.`
+      },
+      {
+        type: 'image-full',
+        image: {
+          src: '/assets/images-optimized/sansevero-10-lg.webp',
+          alt: 'Festa del Soccorso, San Severo',
+        }
+      }
+    ]
+  }
 ];
 
 export function getStoryBySlug(slug: string): Story | undefined {
