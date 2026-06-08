@@ -350,13 +350,6 @@ export const stories: Story[] = [
     credit: 'A <a href="https://sacratos.com" target="_blank" rel="noopener noreferrer">Sacratos.com</a> project. Photographs by Mattia Astori and Daniele Colucci.',
     sections: [
       {
-        type: 'image-full',
-        image: {
-          src: '/assets/images/aufnel.webp',
-          alt: 'Festa del Soccorso, San Severo',
-        }
-      },
-      {
         type: 'text',
         content: `Era sabato sera e sopra le nostre teste pendevano i castelletti, ghirlande di filo di ferro tese da un lato all'altro della strada, cariche di cilindri grigi legati a intervalli regolari. La carta dei giornali vecchi avvolgeva ogni carica. A guardarle da sotto, controluce contro i lampioni, facevano pensare a una festa di paese, ma quella carta secca e l'odore di zolfo dicevano altro.`
       },
