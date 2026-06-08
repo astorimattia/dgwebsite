@@ -352,7 +352,7 @@ export const stories: Story[] = [
       {
         type: 'image-full',
         image: {
-          src: '/assets/images/aufnel1.webp',
+          src: '/assets/images/aufnel.webp',
           alt: 'Festa del Soccorso, San Severo',
         }
       },
