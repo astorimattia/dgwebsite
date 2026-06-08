@@ -21,7 +21,7 @@ export default function StoryPasswordGate({ story, children }: Props) {
   }, [key]);
 
   if (!checked) return null;
-  if (unlocked) return <div className="p-[0_20px] md:p-[0_40px]">{children}</div>;
+  if (unlocked) return <>{children}</>;
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -36,9 +36,11 @@ export default function StoryPasswordGate({ story, children }: Props) {
 
   return (
     <div className="relative">
-      {/* Clipped article — hero + a bit of text visible */}
-      <div style={{ maxHeight: '155vh', overflow: 'clip' }}>
-        {children}
+      {/* Clipped article — break out of main padding so hero fills edge to edge */}
+      <div className="-mx-[20px] md:-mx-[40px]" style={{ maxHeight: '155vh', overflow: 'clip' }}>
+        <div className="px-[20px] md:px-[40px]">
+          {children}
+        </div>
       </div>
 
       {/* Gradient fade */}
