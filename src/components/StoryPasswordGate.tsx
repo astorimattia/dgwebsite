@@ -21,7 +21,7 @@ export default function StoryPasswordGate({ story, children }: Props) {
   }, [key]);
 
   if (!checked) return null;
-  if (unlocked) return <>{children}</>;
+  if (unlocked) return <div className="p-[0_20px] md:p-[0_40px]">{children}</div>;
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -48,7 +48,7 @@ export default function StoryPasswordGate({ story, children }: Props) {
       />
 
       {/* Password box */}
-      <div className="relative z-10 flex flex-col items-center px-6 pb-24 -mt-[10vh]">
+      <div className="relative z-10 flex flex-col items-center px-[20px] md:px-[40px] pb-24 -mt-[10vh]">
         <div className="w-full max-w-[320px] text-center">
           <div className="w-8 h-[1px] bg-[#ccc] mx-auto mb-6" />
           <p className="text-[11px] uppercase tracking-[0.22em] text-[#aaa] mb-2 font-gt-america-regular">
