@@ -37,7 +37,7 @@ export default function StoryPasswordGate({ story, children }: Props) {
   return (
     <div className="relative">
       {/* Clipped article — hero + a bit of text visible */}
-      <div style={{ maxHeight: '155vh', overflow: 'hidden' }}>
+      <div style={{ maxHeight: '155vh', overflow: 'clip' }}>
         {children}
       </div>
 
