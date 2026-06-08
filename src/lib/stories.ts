@@ -65,7 +65,7 @@ export const stories: Story[] = [
       {
         type: 'image-full',
         image: {
-          src: '/assets/images-optimized/sanjuanito2-lg.webp',
+          src: '/assets/images-optimized/sanjuanito2.webp',
           alt: 'San Juan de la Vega',
         }
       },
@@ -89,7 +89,7 @@ export const stories: Story[] = [
       {
         type: 'image-full',
         image: {
-          src: '/assets/images-optimized/sanjuanito3-lg.webp',
+          src: '/assets/images-optimized/sanjuanito3.webp',
           alt: 'San Juan de la Vega',
         }
       },
@@ -109,7 +109,7 @@ export const stories: Story[] = [
       {
         type: 'image-full',
         image: {
-          src: '/assets/images-optimized/sanjuanito4-lg.webp',
+          src: '/assets/images-optimized/sanjuanito4.webp',
           alt: 'San Juan de la Vega',
         }
       },
@@ -141,7 +141,7 @@ export const stories: Story[] = [
       {
         type: 'image-full',
         image: {
-          src: '/assets/images-optimized/sanjuanito5-lg.webp',
+          src: '/assets/images-optimized/sanjuanito5.webp',
           alt: 'San Juan de la Vega',
         }
       },
@@ -157,7 +157,7 @@ export const stories: Story[] = [
       {
         type: 'image-full',
         image: {
-          src: '/assets/images-optimized/sanjuanito6-lg.webp',
+          src: '/assets/images-optimized/sanjuanito6.webp',
           alt: 'San Juan de la Vega',
         }
       },
@@ -213,7 +213,7 @@ export const stories: Story[] = [
       {
         type: 'image-full',
         image: {
-          src: '/assets/images-optimized/sanjuanito7-lg.webp',
+          src: '/assets/images-optimized/sanjuanito7.webp',
           alt: 'San Juan de la Vega',
         }
       },
@@ -222,11 +222,11 @@ export const stories: Story[] = [
         type: 'image-pair',
         images: [
           {
-            src: '/assets/images-optimized/sanjuanito8-lg.webp',
+            src: '/assets/images-optimized/sanjuanito8.webp',
             alt: 'San Juan de la Vega',
           },
           {
-            src: '/assets/images-optimized/sanjuanito9-lg.webp',
+            src: '/assets/images-optimized/sanjuanito9.webp',
             alt: 'San Juan de la Vega',
           }
         ]
@@ -292,11 +292,11 @@ export const stories: Story[] = [
         type: 'image-pair',
         images: [
           {
-            src: '/assets/images-optimized/sanjuanito10-lg.webp',
+            src: '/assets/images-optimized/sanjuanito10.webp',
             alt: 'San Juan de la Vega',
           },
           {
-            src: '/assets/images-optimized/sanjuanito11-lg.webp',
+            src: '/assets/images-optimized/sanjuanito11.webp',
             alt: 'San Juan de la Vega',
           }
         ]
@@ -305,7 +305,7 @@ export const stories: Story[] = [
       {
         type: 'image-full',
         image: {
-          src: '/assets/images-optimized/sanjuanito12-lg.webp',
+          src: '/assets/images-optimized/sanjuanito12.webp',
           alt: 'San Juan de la Vega',
         }
       },
@@ -329,7 +329,7 @@ export const stories: Story[] = [
       {
         type: 'image-full',
         image: {
-          src: '/assets/images-optimized/sanjuanito13-lg.webp',
+          src: '/assets/images-optimized/sanjuanito13.webp',
           alt: 'San Juan de la Vega',
         }
       }
@@ -343,7 +343,7 @@ export const stories: Story[] = [
     location: 'San Severo, Italia',
     date: '2026',
     year: '2026',
-    heroImage: '/assets/images-optimized/sansevero-hero-lg.webp',
+    heroImage: '/assets/images/aufnel.webp',
     heroAlt: 'Festa del Soccorso, San Severo',
     excerpt: "Ogni anno a San Severo, nella terza settimana di maggio, migliaia di persone corrono sotto esplosioni a mezz'aria in onore della Madonna del Soccorso. Tre giorni in cui le leggi, il lavoro e il lutto vengono sospesi.",
     author: 'By Mattia Astori',
@@ -352,7 +352,7 @@ export const stories: Story[] = [
       {
         type: 'image-full',
         image: {
-          src: '/assets/images-optimized/sansevero-1-lg.webp',
+          src: '/assets/images/aufnel1.webp',
           alt: 'Festa del Soccorso, San Severo',
         }
       },
@@ -391,7 +391,7 @@ export const stories: Story[] = [
       {
         type: 'image-full',
         image: {
-          src: '/assets/images-optimized/sansevero-2-lg.webp',
+          src: '/assets/images/aufnel2.webp',
           alt: 'Festa del Soccorso, San Severo',
         }
       },
@@ -418,7 +418,7 @@ export const stories: Story[] = [
       {
         type: 'image-full',
         image: {
-          src: '/assets/images-optimized/sansevero-3-lg.webp',
+          src: '/assets/images/aufnel3.webp',
           alt: 'Preparazione delle cariche, San Severo',
         }
       },
@@ -447,17 +447,11 @@ export const stories: Story[] = [
         content: `La vestizione dei portatori avveniva in una sala dietro la chiesa principale. Li vedemmo mettersi il mantello azzurro, il collare con il simbolo della Madonna del Soccorso. Poi venne il momento dell'estrazione. I bambini tenevano in mano coppole di stoffa grigio scuro con dentro i biglietti dei gruppi. Il primo biglietto estratto fu il numero tre. La squadra numero tre fu la prima sorteggiata: a loro sarebbe toccata l'uscita dalla cattedrale. Il gruppo si spostò verso l'altare, e uno di loro, un uomo sulla quarantina, si mise le mani sul viso e scoppiò a piangere. Disse qualcosa che non sentii, ma vidi le sue spalle scuotersi. «È un'emozione forte», disse a mezza voce. Lo stesso uomo lo avrei rivisto lunedì sera, in lacrime, con la statua sulla spalla.`
       },
       {
-        type: 'image-pair',
-        images: [
-          {
-            src: '/assets/images-optimized/sansevero-4-lg.webp',
-            alt: 'Vestizione dei portatori, San Severo',
-          },
-          {
-            src: '/assets/images-optimized/sansevero-5-lg.webp',
-            alt: 'Estrazione dei gruppi, San Severo',
-          }
-        ]
+        type: 'image-full',
+        image: {
+          src: '/assets/images/aufnel4.webp',
+          alt: 'Vestizione dei portatori, San Severo',
+        }
       },
       {
         type: 'text',
@@ -466,7 +460,7 @@ export const stories: Story[] = [
       {
         type: 'image-full',
         image: {
-          src: '/assets/images-optimized/sansevero-6-lg.webp',
+          src: '/assets/images/aufnel5.webp',
           alt: 'La Madonna del Soccorso, San Severo',
         }
       },
@@ -481,7 +475,7 @@ export const stories: Story[] = [
       {
         type: 'image-full',
         image: {
-          src: '/assets/images-optimized/sansevero-7-lg.webp',
+          src: '/assets/images/aufnel6.webp',
           alt: 'I fujenti, Festa del Soccorso',
         }
       },
@@ -492,7 +486,7 @@ export const stories: Story[] = [
       {
         type: 'image-full',
         image: {
-          src: '/assets/images-optimized/sansevero-8-lg.webp',
+          src: '/assets/images/aufnel7.webp',
           alt: 'Le magliette dei fujenti, San Severo',
         }
       },
@@ -523,7 +517,7 @@ export const stories: Story[] = [
       {
         type: 'image-full',
         image: {
-          src: '/assets/images-optimized/sansevero-9-lg.webp',
+          src: '/assets/images/aufnel8.webp',
           alt: 'Il rientro della Madonna, San Severo',
         }
       },
@@ -542,7 +536,7 @@ export const stories: Story[] = [
       {
         type: 'image-full',
         image: {
-          src: '/assets/images-optimized/sansevero-10-lg.webp',
+          src: '/assets/images/aufnel9.webp',
           alt: 'Festa del Soccorso, San Severo',
         }
       }
