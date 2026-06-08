@@ -66,7 +66,7 @@ export const stories: Story[] = [
       {
         type: 'image-full',
         image: {
-          src: '/assets/images-optimized/sanjuanito2.webp',
+          src: '/assets/images-optimized/sanjuanito2-lg.webp',
           alt: 'San Juan de la Vega',
         }
       },
@@ -90,7 +90,7 @@ export const stories: Story[] = [
       {
         type: 'image-full',
         image: {
-          src: '/assets/images-optimized/sanjuanito3.webp',
+          src: '/assets/images-optimized/sanjuanito3-lg.webp',
           alt: 'San Juan de la Vega',
         }
       },
@@ -110,7 +110,7 @@ export const stories: Story[] = [
       {
         type: 'image-full',
         image: {
-          src: '/assets/images-optimized/sanjuanito4.webp',
+          src: '/assets/images-optimized/sanjuanito4-lg.webp',
           alt: 'San Juan de la Vega',
         }
       },
@@ -142,7 +142,7 @@ export const stories: Story[] = [
       {
         type: 'image-full',
         image: {
-          src: '/assets/images-optimized/sanjuanito5.webp',
+          src: '/assets/images-optimized/sanjuanito5-lg.webp',
           alt: 'San Juan de la Vega',
         }
       },
@@ -158,7 +158,7 @@ export const stories: Story[] = [
       {
         type: 'image-full',
         image: {
-          src: '/assets/images-optimized/sanjuanito6.webp',
+          src: '/assets/images-optimized/sanjuanito6-lg.webp',
           alt: 'San Juan de la Vega',
         }
       },
@@ -214,7 +214,7 @@ export const stories: Story[] = [
       {
         type: 'image-full',
         image: {
-          src: '/assets/images-optimized/sanjuanito7.webp',
+          src: '/assets/images-optimized/sanjuanito7-lg.webp',
           alt: 'San Juan de la Vega',
         }
       },
@@ -223,11 +223,11 @@ export const stories: Story[] = [
         type: 'image-pair',
         images: [
           {
-            src: '/assets/images-optimized/sanjuanito8.webp',
+            src: '/assets/images-optimized/sanjuanito8-lg.webp',
             alt: 'San Juan de la Vega',
           },
           {
-            src: '/assets/images-optimized/sanjuanito9.webp',
+            src: '/assets/images-optimized/sanjuanito9-lg.webp',
             alt: 'San Juan de la Vega',
           }
         ]
@@ -293,11 +293,11 @@ export const stories: Story[] = [
         type: 'image-pair',
         images: [
           {
-            src: '/assets/images-optimized/sanjuanito10.webp',
+            src: '/assets/images-optimized/sanjuanito10-lg.webp',
             alt: 'San Juan de la Vega',
           },
           {
-            src: '/assets/images-optimized/sanjuanito11.webp',
+            src: '/assets/images-optimized/sanjuanito11-lg.webp',
             alt: 'San Juan de la Vega',
           }
         ]
@@ -306,7 +306,7 @@ export const stories: Story[] = [
       {
         type: 'image-full',
         image: {
-          src: '/assets/images-optimized/sanjuanito12.webp',
+          src: '/assets/images-optimized/sanjuanito12-lg.webp',
           alt: 'San Juan de la Vega',
         }
       },
@@ -330,7 +330,7 @@ export const stories: Story[] = [
       {
         type: 'image-full',
         image: {
-          src: '/assets/images-optimized/sanjuanito13.webp',
+          src: '/assets/images-optimized/sanjuanito13-lg.webp',
           alt: 'San Juan de la Vega',
         }
       }
