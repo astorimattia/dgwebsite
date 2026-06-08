@@ -36,21 +36,17 @@ export default async function StoryPage({ params }: PageProps) {
     notFound();
   }
 
-  const content = (
+  return (
     <div className="min-h-screen min-h-[100dvh] bg-white">
       <main className="story-scroll-container overflow-y-auto h-screen h-[100dvh] p-[0_20px] md:p-[0_40px]">
-        <StoryArticle story={story} />
+        {story.password ? (
+          <StoryPasswordGate slug={story.slug} password={story.password}>
+            <StoryArticle story={story} />
+          </StoryPasswordGate>
+        ) : (
+          <StoryArticle story={story} />
+        )}
       </main>
     </div>
   );
-
-  if (story.password) {
-    return (
-      <StoryPasswordGate slug={story.slug} password={story.password}>
-        {content}
-      </StoryPasswordGate>
-    );
-  }
-
-  return content;
 }
