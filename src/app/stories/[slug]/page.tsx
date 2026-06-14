@@ -37,8 +37,8 @@ export default async function StoryPage({ params }: PageProps) {
   }
 
   return (
-    <div className="min-h-screen min-h-[100dvh] bg-white">
-      <main className="story-scroll-container overflow-y-auto h-screen h-[100dvh] p-[0_20px] md:p-[0_40px]">
+    <div className="min-h-screen min-h-[100dvh] bg-white overflow-x-hidden">
+      <main className="story-scroll-container overflow-y-auto overflow-x-hidden h-screen h-[100dvh] p-[0_20px] md:p-[0_40px]">
         {story.password ? (
           <StoryPasswordGate story={story}>
             <StoryArticle story={story} />
