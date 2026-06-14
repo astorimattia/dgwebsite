@@ -40,7 +40,7 @@ export const stories: Story[] = [
     heroAlt: 'San Juan de la Vega, Mexico',
     excerpt: 'Every year on Shrove Tuesday, the townspeople of San Juan de la Vega pack homemade explosives onto sledgehammers and slam them against the ground. For the first time, authorities banned it. The town had other plans.',
     author: 'By Mattia Astori',
-    credit: 'A <a href="https://sacratos.com" target="_blank" rel="noopener noreferrer">Sacratos.com</a> project. Photographs by Mattia Astori and Daniele Colucci.',
+    credit: 'A <a href="https://sacratos.com?utm_source=mattiaastori.com" target="_blank" rel="noopener noreferrer">Sacratos.com</a> project. Photographs by Mattia Astori and Daniele Colucci.',
     sections: [
       {
         type: 'text',
@@ -349,7 +349,7 @@ export const stories: Story[] = [
     heroAlt: 'Festa del Soccorso, San Severo',
     excerpt: "Ogni anno a San Severo, nella terza settimana di maggio, migliaia di persone corrono sotto esplosioni a mezz'aria in onore della Madonna del Soccorso. Tre giorni in cui le leggi, il lavoro e il lutto vengono sospesi.",
     author: 'By Mattia Astori',
-    credit: 'A <a href="https://sacratos.com" target="_blank" rel="noopener noreferrer">Sacratos.com</a> project. Photographs by Mattia Astori and Daniele Colucci.',
+    credit: 'A <a href="https://sacratos.com?utm_source=mattiaastori.com" target="_blank" rel="noopener noreferrer">Sacratos.com</a> project. Photographs by Mattia Astori and Daniele Colucci.',
     sections: [
       {
         type: 'text',
