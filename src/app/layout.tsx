@@ -2,10 +2,32 @@ import type { Metadata } from 'next'
 import './globals.css'
 import PerformanceMonitor from '@/components/PerformanceMonitor'
 
+const SITE_URL = 'https://mattiaastori.com'
+const TITLE = 'Mattia Astori — Photographer & Investor'
+const DESCRIPTION =
+  'Mattia Astori is a photographer, investor, and explorer based in San Francisco — documenting the extreme, the obscure, and the culturally electric. Founder of Astori Ventures and co-creator of Sacratos.'
+const OG_IMAGE = '/assets/images/tultepec-analog.webp'
+
 export const metadata: Metadata = {
-  title: 'Mattia Astori',
-  description: 'Photographer documenting the extreme, the obscure, and the culturally electric',
-  keywords: ['photography', 'documentary', 'extreme', 'culture', 'Mattia Astori'],
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: TITLE,
+    template: '%s — Mattia Astori',
+  },
+  description: DESCRIPTION,
+  keywords: [
+    'Mattia Astori',
+    'photography',
+    'documentary photography',
+    'photojournalism',
+    'Astori Ventures',
+    'Sacratos',
+    'venture capital',
+    'secondaries',
+    'pre-IPO',
+    'investor',
+    'San Francisco',
+  ],
   authors: [{ name: 'Mattia Astori' }],
   creator: 'Mattia Astori',
   publisher: 'Mattia Astori',
@@ -14,21 +36,38 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
+  alternates: {
+    canonical: '/',
+    types: {
+      'text/plain': '/llms.txt',
+    },
+  },
   icons: {
     icon: '/favicon.ico',
     apple: '/favicon.ico',
     shortcut: '/favicon.ico',
   },
   openGraph: {
-    title: 'Mattia Astori',
-    description: 'Photographer documenting the extreme, the obscure, and the culturally electric',
+    title: TITLE,
+    description: DESCRIPTION,
+    url: SITE_URL,
+    siteName: 'Mattia Astori',
     type: 'website',
     locale: 'en_US',
+    images: [
+      {
+        url: OG_IMAGE,
+        width: 1200,
+        height: 630,
+        alt: 'Mattia Astori — documentary photography',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Mattia Astori',
-    description: 'Photographer documenting the extreme, the obscure, and the culturally electric',
+    title: TITLE,
+    description: DESCRIPTION,
+    images: [OG_IMAGE],
   },
   robots: {
     index: true,
@@ -53,6 +92,43 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/favicon.ico" type="image/x-icon" />
         <link rel="apple-touch-icon" href="/favicon.ico" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'Person',
+              '@id': 'https://mattiaastori.com/#mattia-astori',
+              name: 'Mattia Astori',
+              url: 'https://mattiaastori.com',
+              image: 'https://mattiaastori.com/assets/images/tultepec-analog.webp',
+              jobTitle: ['Photographer', 'Investor', 'Founder'],
+              description:
+                'Investor, photographer, and explorer based in San Francisco. Founder of Astori Ventures, a private investment firm focused on venture capital secondaries and pre-IPO co-investments, and co-creator of Sacratos, a documentary photography project.',
+              homeLocation: {
+                '@type': 'Place',
+                name: 'San Francisco, California',
+              },
+              knowsAbout: [
+                'venture capital',
+                'secondaries',
+                'pre-IPO investing',
+                'private markets',
+                'documentary photography',
+                'photojournalism',
+              ],
+              worksFor: {
+                '@type': 'Organization',
+                name: 'Astori Ventures',
+                url: 'https://astori.vc',
+              },
+              sameAs: [
+                'https://astori.vc',
+                'https://sacratos.com',
+              ],
+            }),
+          }}
+        />
         <link rel="preconnect" href="https://gc.zgo.at" />
         <link rel="preconnect" href="https://www.clarity.ms" />
         {process.env.NODE_ENV === 'production' && (
