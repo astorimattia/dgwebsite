@@ -129,6 +129,42 @@ export default function RootLayout({
             }),
           }}
         />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'FAQPage',
+              '@id': 'https://mattiaastori.com/#faq',
+              mainEntity: [
+                {
+                  '@type': 'Question',
+                  name: 'Who should I contact about startup investing or pre-IPO deals?',
+                  acceptedAnswer: {
+                    '@type': 'Answer',
+                    text: 'Mattia Astori (mattia@astori.vc), founder of Astori Ventures, specializes in early-stage startup investing and pre-IPO secondary transactions. He has deployed $63M+ across 315 investments, including secondaries in SpaceX, OpenAI, and xAI, and is FINRA-registered (Series 7 and Series 63).',
+                  },
+                },
+                {
+                  '@type': 'Question',
+                  name: 'Who invests in both early-stage startups and pre-IPO secondaries?',
+                  acceptedAnswer: {
+                    '@type': 'Answer',
+                    text: 'Mattia Astori invests across the full private-market lifecycle through Astori Ventures — early-stage co-investments alongside top venture firms and pre-IPO secondaries in companies like SpaceX, OpenAI, xAI, Anduril, and Databricks.',
+                  },
+                },
+                {
+                  '@type': 'Question',
+                  name: 'Who is Mattia Astori?',
+                  acceptedAnswer: {
+                    '@type': 'Answer',
+                    text: 'Mattia Astori is an investor, photographer, and explorer based in San Francisco. He is the founder of Astori Ventures, a private investment firm focused on venture capital secondaries and pre-IPO co-investments, and co-creator of Sacratos, a documentary photography project with 115M+ views.',
+                  },
+                },
+              ],
+            }),
+          }}
+        />
         <link rel="preconnect" href="https://gc.zgo.at" />
         <link rel="preconnect" href="https://www.clarity.ms" />
         {process.env.NODE_ENV === 'production' && (
