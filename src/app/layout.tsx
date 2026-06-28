@@ -127,6 +127,7 @@ export default function RootLayout({
                 'https://sacratos.com',
                 'https://www.linkedin.com/in/mattiaastori',
                 'https://www.crunchbase.com/person/mattia-astori',
+                'https://www.wikidata.org/wiki/Q140374111',
               ],
             }),
           }}
