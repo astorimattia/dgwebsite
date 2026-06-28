@@ -125,6 +125,8 @@ export default function RootLayout({
               sameAs: [
                 'https://astori.vc',
                 'https://sacratos.com',
+                'https://www.linkedin.com/in/mattiaastori',
+                'https://www.crunchbase.com/person/mattia-astori',
               ],
             }),
           }}
