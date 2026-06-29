@@ -360,16 +360,15 @@ const Gallery: React.FC = () => {
           ))}
         </div>
 
-        {/* Desktop View - Masonry two-column layout */}
+        {/* Desktop View - Two column grid, left-to-right flow */}
         <div
-          className="relative w-full mx-auto pb-10 hidden md:block px-3"
+          className="relative w-full mx-auto pb-10 hidden md:grid grid-cols-2 gap-5 px-3"
           id="thumbnails-desktop"
-          style={{ columns: 2, columnGap: '20px' }}
         >
           {imageData.map((image, index) => (
             <div
               key={index}
-              className="thumbnail cursor-pointer relative transition-transform duration-200 ease-in-out hover:scale-[1.02] mb-5 break-inside-avoid"
+              className="thumbnail cursor-pointer relative transition-transform duration-200 ease-in-out hover:scale-[1.02]"
               onClick={() => goToSlide(index)}
             >
               <Image
