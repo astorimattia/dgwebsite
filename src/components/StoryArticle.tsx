@@ -17,10 +17,17 @@ function FadeIn({ children, className = '' }: { children: React.ReactNode; class
   );
 }
 
+const LANG_LABELS = {
+  it: { original: 'Italiano', translated: 'English', note: 'This story was thought and crafted in Italian. The English version is a direct translation.' },
+  es: { original: 'Español', translated: 'English', note: 'This story was thought and crafted in Spanish. The English version is a direct translation.' },
+} as const;
+
 export default function StoryArticle({ story }: StoryArticleProps) {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [pastHero, setPastHero] = useState(false);
+  const [lang, setLang] = useState<'original' | 'en'>('original');
   const articleRef = useRef<HTMLElement>(null);
+  const hasBilingual = !!(story.sectionsEn && story.originalLanguage);
 
   useEffect(() => {
     const container = articleRef.current?.closest('.story-scroll-container');
@@ -94,7 +101,7 @@ export default function StoryArticle({ story }: StoryArticleProps) {
             {story.title}
           </h1>
           <p className="text-white/80 text-[clamp(16px,2.5vw,24px)] font-gt-america-thin italic max-w-[600px] leading-[1.3]">
-            {story.subtitle}
+            {lang === 'en' && story.subtitleEn ? story.subtitleEn : story.subtitle}
           </p>
         </div>
       </div>
@@ -104,11 +111,41 @@ export default function StoryArticle({ story }: StoryArticleProps) {
         <p className="text-sm text-black font-gt-america-regular mb-2">{story.author}</p>
         <p className="text-xs text-[#999] tracking-[0.05em]" dangerouslySetInnerHTML={{ __html: story.credit }} />
         <div className="w-full h-[1px] bg-[#e5e5e5] mt-6" />
+        {hasBilingual && (
+          <div className="mt-6">
+            <div className="flex items-center gap-3">
+              <button
+                onClick={() => setLang('original')}
+                className={`text-sm tracking-[0.03em] transition-colors duration-200 ${
+                  lang === 'original'
+                    ? 'text-black font-gt-america-regular'
+                    : 'text-[#999] font-gt-america-thin hover:text-[#666]'
+                }`}
+              >
+                {LANG_LABELS[story.originalLanguage!].original}
+              </button>
+              <span className="text-[#ccc] text-sm">/</span>
+              <button
+                onClick={() => setLang('en')}
+                className={`text-sm tracking-[0.03em] transition-colors duration-200 ${
+                  lang === 'en'
+                    ? 'text-black font-gt-america-regular'
+                    : 'text-[#999] font-gt-america-thin hover:text-[#666]'
+                }`}
+              >
+                {LANG_LABELS[story.originalLanguage!].translated}
+              </button>
+            </div>
+            <p className="text-xs text-[#999] mt-2 italic tracking-[0.02em]">
+              {LANG_LABELS[story.originalLanguage!].note}
+            </p>
+          </div>
+        )}
       </div>
 
       {/* Sections */}
       <div className="story-body">
-        {story.sections.map((section, i) => {
+        {(lang === 'en' && story.sectionsEn ? story.sectionsEn : story.sections).map((section, i) => {
           if (section.type === 'text' && section.content) {
             const showDropCap = isFirstParagraph;
             if (isFirstParagraph) isFirstParagraph = false;

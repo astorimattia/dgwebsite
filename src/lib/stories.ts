@@ -25,6 +25,9 @@ export interface Story {
   author: string;
   credit: string;
   sections: StorySection[];
+  sectionsEn?: StorySection[];
+  subtitleEn?: string;
+  originalLanguage?: 'it' | 'es';
   password?: string;
 }
 
@@ -342,6 +345,8 @@ export const stories: Story[] = [
     slug: 'c-vdim-au-fnel',
     title: "C' vdim au' fnel",
     subtitle: 'Appunti dalla Festa del Soccorso',
+    subtitleEn: 'Notes from the Feast of the Soccorso',
+    originalLanguage: 'it',
     location: 'San Severo, Italia',
     date: '2026',
     year: '2026',
@@ -527,6 +532,192 @@ export const stories: Story[] = [
       {
         type: 'text',
         content: `Prima di addormentarmi, ripensai alla frase. Non avevo più bisogno di tradurla.\n\nC' vdim au' fnel.\n\nNon era un'istruzione. Era l'unica cosa certa, in quei giorni in cui tutto il resto, le leggi, il lavoro, il lutto, la paura, veniva sospeso. Ci si perdeva nella ressa, nel fuoco, nel pianto. E poi ci si ritrovava. Alla fine del fuoco, alla fine della festa, davanti alla Madonna rientrata nella sua nicchia. Al finale.`
+      },
+      {
+        type: 'image-full',
+        image: {
+          src: '/assets/images/aufnel9.webp',
+          alt: 'Festa del Soccorso, San Severo',
+        }
+      }
+    ],
+    sectionsEn: [
+      {
+        type: 'text',
+        content: `It was Saturday night and above our heads hung the <em>castelletti</em>, garlands of iron wire strung from one side of the street to the other, loaded with gray cylinders tied at regular intervals. Old newspaper wrapped each charge. Seen from below, backlit against the streetlamps, they could have passed for the decorations of a village fair, but the dry paper and the smell of sulfur said otherwise.`
+      },
+      {
+        type: 'text',
+        content: `Bruno held me by the right arm. Tall, solid, dark wavy hair combed back, a beige trench coat over his shirt. Dress trousers, polished shoes. Nothing to suggest that thirty seconds later we'd be running through explosions going off in midair. He had the calm expression of a man who has done this many times and now only has to walk someone else through it for the first time.`
+      },
+      {
+        type: 'text',
+        content: `The street was packed, a dense crush, shoulder to shoulder. Clusters of young guys calling to each other across the sidewalks, families with children in their arms, old people leaning against the walls. Everyone was looking in the same direction. The air already tasted of sulfur.`
+      },
+      {
+        type: 'text',
+        content: `From far off came the first blast. My heart leapt into my throat. The crowd tightened, a ripple ran through the street.\n\nBruno gripped my arm. "No, wait," he said. "Wait… wait… wait…"\n\nTwo more blasts, spaced apart. Then the fast volley. Behind us someone started to push, the pressure surged all at once.\n\nBruno tightened his grip. "Okay. Let's go."`
+      },
+      {
+        type: 'text',
+        content: `And then we were running. But it wasn't a run you chose: the street itself began to move, a human wave that started from behind and took you from the back, compressed you. We were packed so tight I couldn't lift my elbow. Left arm wedged against my ribs, right hand clenched around the camera pressed to my chest, and all around me, only bodies. Bodies pushing and shouting, bodies that every so often lifted you off your feet with no way to resist.`
+      },
+      {
+        type: 'text',
+        content: `The fireworks above us went off in sequence along the iron wire, just a little faster than the crowd. You heard them coming first with your ears, crackles getting closer and closer, then you saw them: white and orange flashes at head height, sparks raining down on shoulders, on arms, into hair. A boy in front of me tripped, fell forward, and before he even hit the ground four hands grabbed him by the armpits and set him back on his feet. Nobody stopped running for that boy.`
+      },
+      {
+        type: 'text',
+        content: `Then the volley stopped. Two seconds of silence in which all you could hear was breathing and the ringing in your ears. A single blast. A pause. Another blast. The fire was catching its breath.\n\nBruno stopped. His face was flushed and there was a fresh burn on his collar, but his eyes were calm.\n\n"We have to decide," he said. "If we stay back here, we take it easy. If you want to see the finale, we have to go up now, before it starts again. But up front it gets tight, it's a mess."\n\n"Let's go up," I said.`
+      },
+      {
+        type: 'text',
+        content: `We started moving again, dodging bodies in the lull. Bruno walked fast, glancing back every so often. The street narrowed into a gut between two buildings. Then we heard the fuse start up again in the distance. That unmistakable crackle, coming closer. Bruno turned, already pulled by the crowd that was beginning to push again. He said something in dialect.\n\n"<em>C' vdim au' fnel.</em>"\n\nI didn't understand. There was no time to ask. The tide of bodies separated us in a second, him one way, me the other, and I was alone again in the middle of the crush and the explosions, the fire advancing over my head.`
+      },
+      {
+        type: 'image-full',
+        image: {
+          src: '/assets/images/aufnel2.webp',
+          alt: 'Festa del Soccorso, San Severo',
+        }
+      },
+      {
+        type: 'text',
+        content: `The finale was where the street narrowed, and there the crowd compressed into a single mass. The explosions came in clusters, so close I could feel the heat on the back of my neck. A burning on my right arm. Then a hand behind me, I never knew whose, struck me twice, hard, on the shoulder, to put something out.`
+      },
+      {
+        type: 'text',
+        content: `The last explosion was the loudest. A roar that boomed in your stomach, the iron wire shuddering above our heads, then silence. The white smoke so thick that for a few seconds you couldn't see anything at all. When it cleared, the street was a carpet of burned paper and smoking casings. The crowd erupted in a single collective shout. A man in a shredded shirt, his chest covered in little red dots, jumped and shouted toward a balcony where someone was waving a scorched flag. I found Bruno again.`
+      },
+      {
+        type: 'text',
+        content: `That night, at the hotel, I blew my nose and the tissue came away black. My sweatshirt riddled with holes. On my right arm a red mark that still burned. My backpack had three clean holes, like cigarette burns. And those four syllables, <em>c' vdim au' fnel</em>, kept coming back to me with no meaning attached.\n\nBefore I gave in to sleep, I thought back to what they'd told us during the day: this is the appetizer. Tomorrow is the real feast.`
+      },
+      {
+        type: 'text',
+        content: `The day before, Friday morning, Michele Sales had picked us up at the hotel at nine. He drove a little gray hatchback with the back seats full of copies of the <em>Gazzetta di San Severo</em>, his newspaper. He'd printed our arrival in the center of the front page.\n\nMichele talked barely moving his lips, his voice too loud. "See this?" he said, touching his right ear. "2007. A badly made fuse. It fell on my shoulder, went through my shoulder and burst my eardrum. Two operations. They took membrane from the back of my head and from my temple and rebuilt the eardrum. I lost fifty percent of my hearing. <em>Ma corr tutt l'ann.</em>" I run every year.\n\nI asked him why. He looked at me in the rearview mirror, and in that instant his eyes changed. Full of light, no longer watching the road but something inside. "Adrenaline," he said.`
+      },
+      {
+        type: 'text',
+        content: `He took us to the Nuova Pirodaunia. The smell of sulfur and gunpowder reached you before the building did. Inside, an old workman with black, dried-out hands, worn-down nails, thin fingers, was preparing the charges, rolling strips of old calendars around cylinders of compressed powder. The owner, Michele Altrui, told us about the jury that until 2017 used to choose the loudest fire. "Then a girl got hurt. Her arm. Pulped. And they stopped."`
+      },
+      {
+        type: 'image-full',
+        image: {
+          src: '/assets/images/aufnel3.webp',
+          alt: 'Preparazione delle cariche, San Severo',
+        }
+      },
+      {
+        type: 'text',
+        content: `Later, at Umberto Presutto's, at the San Pio factory, we heard the same story: no barriers before 2017, then the barricades, people knocking them down, the barriers reinforced. "Every time a new prefect arrives, a police chief, a commissioner, people who aren't from here, they try to rein it in. And every time, protests break out." In the sixties, Bishop Valentino Velati didn't want the fires set off. In the mid-eighties a commissioner shut it all down: people sat down in the street, hours of negotiation, and in the end the batteries were mounted in a hurry and they fired anyway. In 2002, another attempt. Everyone sat down, the Madonna wouldn't come out, two hours later they changed the ordinances.`
+      },
+      {
+        type: 'text',
+        content: `In the afternoon we met Raffaele Florio, president of the Pro Loco. A man doing a thousand things at once, cell phone in his right hand, landline on the desk, people coming in and out of the office every seventeen seconds. In one of those gaps he found the time to tell me: "The more you repress it, the more you feed it. Since 2017 the kids have multiplied. The more you tell them it's dangerous, the more they want to run under it."`
+      },
+      {
+        type: 'text',
+        content: `Then he stood up, put both phones away, and took us around town. And that was when we understood who Raffaele Florio was. In half an hour of walking we must have counted forty interactions. "Ciao dottò," "I've missed you," "Hey Raffaele, all set?" two kisses on the cheek, one and two, handshakes that lasted minutes. Every time he stopped, introduced us, explained who we were. "They're two photographers, they've come to tell the story of the feast," and the reaction was always the same: a wide smile, a "welcome, you'll see what this is."`
+      },
+      {
+        type: 'text',
+        content: `We passed in front of the cathedral, people dressed up, old folks arm in arm, and then into a side chapel where Raffaele pointed out the crest of the confraternity. "Memento mori. Remember that you must die."\n\nThat evening we ate our first <em>torcinello</em> sandwich. A cloud of white smoke rose from a makeshift grill on the sidewalk. Pork liver and offal, eggplant in oil, sun-dried tomatoes, stuffed into a ciabatta that soaked up the fat of the meat. White plastic chairs, the kind from a gelateria. The Luna Park square was already filled with twice the people of the afternoon. In the distance, blasts.`
+      },
+      {
+        type: 'text',
+        content: `Sunday morning it was drizzling. At seven the town was wet and silent, but already all decked out. The <em>castelletti</em> dangled over the empty streets with a sound of dry paper. In a bar we had a coffee. The barman was drying cups: "It'll stop. At nine it always stops." And at nine it stopped.`
+      },
+      {
+        type: 'text',
+        content: `The robing of the bearers took place in a hall behind the main church. We watched them put on the light-blue mantle, the collar with the symbol of the Madonna del Soccorso. Then came the moment of the draw. Children held dark gray cloth caps with the groups' tickets inside. The first ticket drawn was number three. Team number three was the first to be picked: they would be the ones to carry her out of the cathedral. The group moved toward the altar, and one of them, a man in his forties, put his hands over his face and burst into tears. He said something I didn't catch, but I saw his shoulders shaking. "It's a powerful feeling," he said under his breath. The same man I would see again Monday evening, in tears, with the statue on his shoulder.`
+      },
+      {
+        type: 'image-full',
+        image: {
+          src: '/assets/images/aufnel4.webp',
+          alt: 'Vestizione dei portatori, San Severo',
+        }
+      },
+      {
+        type: 'text',
+        content: `The Madonna came out at eleven. The year before, at ten, but the rain had delayed everything. The statue was Byzantine, black and gold, patron of the city and the diocese. People leaned in to touch her, to kiss her. Next to me a man elbowed me, nodding at her with his chin: "See how beautiful she is." Everyone said it, every time they showed her to us in those days. They carried her out on their shoulders, and the crowd erupted in applause. From that moment, the feast began.`
+      },
+      {
+        type: 'image-full',
+        image: {
+          src: '/assets/images/aufnel5.webp',
+          alt: 'La Madonna del Soccorso, San Severo',
+        }
+      },
+      {
+        type: 'text',
+        content: `The first fire of Sunday caught me in the middle of the street, together with the <em>fujenti</em> who were waiting. The air changed twenty seconds before the noise arrived: people went electric, bodies tensed, some rose onto their toes. Then the first blast, like thunder. My heart leapt into my throat. I put on the goggles, the earplugs, gripped the camera. The torrent started from behind and swept over me. Again bodies pushing, again my arm wedged, sparks on the back of my neck. A burning on my arm, then on my neck. I turned and a boy I'd never seen was already patting a hand on my shoulder to put out a fire that had landed on me. I lifted my chin to thank him, and he was already gone.`
+      },
+      {
+        type: 'text',
+        content: `Eleven districts, eleven batteries, from morning to afternoon, counterclockwise on Sunday, clockwise on Monday. The town was a ring of fires, and we moved from one district to the next following the mass. In another district, after the fire, I saw a shoe hanging from one of the iron wires that had held the firecrackers, tied up there by someone so its owner could find it again. It dangled in the middle of the street, and a boy hopped on one leg to get it back.`
+      },
+      {
+        type: 'image-full',
+        image: {
+          src: '/assets/images/aufnel6.webp',
+          alt: 'I fujenti, Festa del Soccorso',
+        }
+      },
+      {
+        type: 'text',
+        content: `Between one fire and the next the TMaxes shot past, big scooters carrying father, mother, and son, all without helmets, passing right in front of the police cars, cutting through the crowd to reach the next fire first.\n\nThe <em>fujenti</em> — the ones who flee — wore layers of shirts, two or three or four, all riddled with holes from earlier fires. The more holes in your shirt, the braver you were. On every shirt a sponsor: the oil press, the hardware store, the local deli, <em>Pasta fresca da Ciro</em> printed on the chest of a boy running with his arms raised. And then there were the shirts with photos of the dead. One boy wore the photo of a friend printed on his chest, with a line of dialect under it. Another had the photo of a son, and beneath the photo the words: <em>I don't see you but I feel you beside me</em>. When I asked him about it, he pointed at the words with his finger. He turned and ran toward the next fire.`
+      },
+      {
+        type: 'image-full',
+        image: {
+          src: '/assets/images/aufnel7.webp',
+          alt: 'Le magliette dei fujenti, San Severo',
+        }
+      },
+      {
+        type: 'pullquote',
+        content: `"Due cose so' sicure ind'a vita: a mort' e a fest' d'u succors."`
+      },
+      {
+        type: 'text',
+        content: `During a lull I heard one <em>fujente</em> shout to another, in dialect: "<em>Due cose so' sicure ind'a vita: a mort' e a fest' d'u succors.</em>" Two things in life are certain: death and the Feast of the Soccorso. The other laughed, gave him a slap on the shoulder. Later, another man, leaning against a wall with his shirt still smoking: "<em>L'agg ditt o capomi: a térz sttman d magg' so' ccà. O è feri o è malattì, vid tu.</em>" I told my boss: the third week of May, I'm here. Either it's vacation or it's sick leave, you figure it out. He worked in Turin. He'd come back.`
+      },
+      {
+        type: 'text',
+        content: `On Monday I found Bruno again. He was leaning against a wall under the fires of Porta Lucera, the beige trench coat, a burn on his neck. He had his phone in his hand and earbuds in, the screen lit up. He saw me, gave me a nod with his chin, "sorry, one second, I'm in a work meeting," and laughed. Then the fuse started up in the distance. Bruno pushed off the wall, straightened his collar. He looked at me. He said: "<em>C' vdim au' fnel.</em>"\n\nThis time I understood.`
+      },
+      {
+        type: 'text',
+        content: `Before the last fire, while I was eating a <em>torcinello</em> sandwich, a man in his forties was laughing with his family, tattoos everywhere. He had an ankle monitor, house arrest, evidently suspended for the day. For those three days, in San Severo, the laws stopped along with the traffic.\n\nA little way off, a woman in a shirt printed with the photo of a young man and a date: 2024. Her son, killed in a car accident. "He ran every year. And I run for him."`
+      },
+      {
+        type: 'text',
+        content: `Monday evening the Madonna returned to the Sanctuary of the Soccorso. The church was small, maybe fifty seats, but inside there were four hundred of us, packed like under the fires, all sweating and singed, but silent. A layman of the confraternity stood at the entrance and decided who came in. Outside, the crowd pressed.\n\nInside, two hours of rosary. The deacon led the Ave Maria, and everyone answered in a single low, tired voice, two hours of prayer while outside the last fires went off and the Madonna finished her round of the city.`
+      },
+      {
+        type: 'text',
+        content: `Then the statue arrived. They carried her in on their shoulders, black and gold, and the church erupted into collective weeping. In front of me a big man with a tattooed neck was crying without making a sound, his hands clasped and the tears disappearing into his beard. The boy I'd seen crying at the draw was in the front row, the light-blue mantle dirty with soot. And he was crying.`
+      },
+      {
+        type: 'image-full',
+        image: {
+          src: '/assets/images/aufnel8.webp',
+          alt: 'Il rientro della Madonna, San Severo',
+        }
+      },
+      {
+        type: 'text',
+        content: `The statue was laid in its niche. People pushed to touch her one last time.\n\nWhen I came out of the Sanctuary, the town was silent, covered in burned paper. At the hotel I blew my nose: black. The backpack full of holes. The marks on my left arm, on my right arm, on my neck. The camera lens had a burn that would never come off.`
+      },
+      {
+        type: 'pullquote',
+        content: `It wasn't an instruction. It was the only certain thing, in those days when everything else was suspended.`
+      },
+      {
+        type: 'text',
+        content: `Before I fell asleep, I thought back to the phrase. I no longer needed to translate it.\n\n<em>C' vdim au' fnel.</em>\n\nIt wasn't an instruction. It was the only certain thing, in those days when everything else — the laws, the work, the grief, the fear — was suspended. You lost yourself in the crush, in the fire, in the weeping. And then you found yourself again. At the end of the fire, at the end of the feast, before the Madonna returned to her niche. At the finale.`
       },
       {
         type: 'image-full',
