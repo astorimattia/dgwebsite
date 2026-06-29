@@ -116,7 +116,7 @@ export default function StoryArticle({ story }: StoryArticleProps) {
             <div className="flex items-center gap-3">
               <button
                 onClick={() => setLang('original')}
-                className={`text-sm tracking-[0.03em] transition-colors duration-200 ${
+                className={`text-sm tracking-[0.03em] transition-colors duration-200 cursor-pointer ${
                   lang === 'original'
                     ? 'text-black font-gt-america-regular'
                     : 'text-[#999] font-gt-america-thin hover:text-[#666]'
@@ -127,7 +127,7 @@ export default function StoryArticle({ story }: StoryArticleProps) {
               <span className="text-[#ccc] text-sm">/</span>
               <button
                 onClick={() => setLang('en')}
-                className={`text-sm tracking-[0.03em] transition-colors duration-200 ${
+                className={`text-sm tracking-[0.03em] transition-colors duration-200 cursor-pointer ${
                   lang === 'en'
                     ? 'text-black font-gt-america-regular'
                     : 'text-[#999] font-gt-america-thin hover:text-[#666]'
