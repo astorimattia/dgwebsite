@@ -39,6 +39,19 @@ const imageData: ImageData[] = [
   { src: '/assets/images-optimized/sanjuan-analog12.webp', title: 'San Juan de la Vega, Mexico', year: '2026' },
   { src: '/assets/images-optimized/sanjuan-analog13.webp', title: 'San Juan de la Vega, Mexico', year: '2026' },
 
+  // San Severo series (Italy)
+  { src: '/assets/images/sansevero.webp', title: 'Festa del Soccorso, San Severo', year: '2026' },
+  { src: '/assets/images/sansevero2.webp', title: 'Festa del Soccorso, San Severo', year: '2026' },
+  { src: '/assets/images/sansevero3.webp', title: 'Festa del Soccorso, San Severo', year: '2026' },
+  { src: '/assets/images/sansevero4.webp', title: 'Festa del Soccorso, San Severo', year: '2026' },
+  { src: '/assets/images/sansevero5.webp', title: 'Festa del Soccorso, San Severo', year: '2026' },
+  { src: '/assets/images/sansevero6.webp', title: 'Festa del Soccorso, San Severo', year: '2026' },
+  { src: '/assets/images/sansevero7.webp', title: 'Festa del Soccorso, San Severo', year: '2026' },
+  { src: '/assets/images/sansevero8.webp', title: 'Festa del Soccorso, San Severo', year: '2026' },
+  { src: '/assets/images/sansevero9.webp', title: 'Festa del Soccorso, San Severo', year: '2026' },
+  { src: '/assets/images/sansevero10.webp', title: 'Festa del Soccorso, San Severo', year: '2026' },
+  { src: '/assets/images/sansevero11.webp', title: 'Festa del Soccorso, San Severo', year: '2026' },
+
   // Banni series (India)
   { src: '/assets/images-optimized/banni-analog.webp', title: 'Banni, India', year: '2025' },
   { src: '/assets/images-optimized/banni-analog2.webp', title: 'Banni, India', year: '2025' },
