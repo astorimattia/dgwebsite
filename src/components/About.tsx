@@ -16,7 +16,7 @@ const About: React.FC = () => {
           I worked on AI weather models with one of my portfolio companies to enable <span className="font-gt-america-regular font-normal antialiased">weather modification</span> and mitigate natural disasters. (<a href="https://spyroaero.com" target="_blank" rel="noopener noreferrer" className="invisible-link">spyroaero.com</a>)
         </p>
         <p className="mb-5 text-base text-black">
-          I managed $150m and <span className="font-gt-america-regular font-normal antialiased">backed</span> companies like OpenAI, Anduril, SpaceX, SSI, xAI, Databricks, Plaid, Perplexity, and over 200 seed-stage YC startups. (<a href="https://1199capital.com" target="_blank" rel="noopener noreferrer" className="invisible-link">1199capital.com</a>)
+          I managed $150m and <span className="font-gt-america-regular font-normal antialiased">backed</span> companies like OpenAI, Anduril, SpaceX, SSI, xAI, Databricks, Plaid, Perplexity, and over 200 seed-stage YC startups. (<a href="https://wefunder.com" target="_blank" rel="noopener noreferrer" className="invisible-link">wefunder.com</a>)
         </p>
         <p className="mb-5 text-base text-black">
           A little further back, I co-founded a payments company with friends (<a href="https://idospay.com/en/" target="_blank" rel="noopener noreferrer" className="invisible-link">idospay.com</a>), briefly consulted for large public Italian firms (<a href="https://pwc.com" target="_blank" rel="noopener noreferrer" className="invisible-link">pwc.com</a>), and ran a pickleball and tennis school, where I coached for a bit.
