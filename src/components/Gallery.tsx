@@ -12,10 +12,10 @@ interface ImageData {
 
 const imageData: ImageData[] = [
   // San Severo series (Italy)
-  { src: '/assets/images/sansevero.webp', title: 'Festa del Soccorso, San Severo', year: '2026' },
   { src: '/assets/images/sansevero2.webp', title: 'Festa del Soccorso, San Severo', year: '2026' },
   { src: '/assets/images/sansevero3.webp', title: 'Festa del Soccorso, San Severo', year: '2026' },
   { src: '/assets/images/sansevero4.webp', title: 'Festa del Soccorso, San Severo', year: '2026' },
+  { src: '/assets/images/sansevero.webp', title: 'Festa del Soccorso, San Severo', year: '2026' },
   { src: '/assets/images/sansevero5.webp', title: 'Festa del Soccorso, San Severo', year: '2026' },
   { src: '/assets/images/sansevero6.webp', title: 'Festa del Soccorso, San Severo', year: '2026' },
   { src: '/assets/images/sansevero7.webp', title: 'Festa del Soccorso, San Severo', year: '2026' },
