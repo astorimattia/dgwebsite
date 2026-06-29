@@ -350,7 +350,7 @@ export const stories: Story[] = [
     location: 'San Severo, Italia',
     date: '2026',
     year: '2026',
-    heroImage: '/assets/images/aufnel.webp',
+    heroImage: '/assets/images/sansevero.webp',
     heroAlt: 'Festa del Soccorso, San Severo',
     excerpt: "Ogni anno a San Severo, nella terza settimana di maggio, migliaia di persone corrono sotto esplosioni a mezz'aria in onore della Madonna del Soccorso. Tre giorni in cui le leggi, il lavoro e il lutto vengono sospesi.",
     author: 'By Mattia Astori',
@@ -359,6 +359,13 @@ export const stories: Story[] = [
       {
         type: 'text',
         content: `Era sabato sera e sopra le nostre teste pendevano i castelletti, ghirlande di filo di ferro tese da un lato all'altro della strada, cariche di cilindri grigi legati a intervalli regolari. La carta dei giornali vecchi avvolgeva ogni carica. A guardarle da sotto, controluce contro i lampioni, facevano pensare a una festa di paese, ma quella carta secca e l'odore di zolfo dicevano altro.`
+      },
+      {
+        type: 'image-full',
+        image: {
+          src: '/assets/images/sansevero3.webp',
+          alt: 'Festa del Soccorso, San Severo',
+        }
       },
       {
         type: 'text',
@@ -391,7 +398,7 @@ export const stories: Story[] = [
       {
         type: 'image-full',
         image: {
-          src: '/assets/images/aufnel2.webp',
+          src: '/assets/images/sansevero5.webp',
           alt: 'Festa del Soccorso, San Severo',
         }
       },
@@ -418,7 +425,7 @@ export const stories: Story[] = [
       {
         type: 'image-full',
         image: {
-          src: '/assets/images/aufnel3.webp',
+          src: '/assets/images/sansevero2.webp',
           alt: 'Preparazione delle cariche, San Severo',
         }
       },
@@ -449,7 +456,7 @@ export const stories: Story[] = [
       {
         type: 'image-full',
         image: {
-          src: '/assets/images/aufnel4.webp',
+          src: '/assets/images/sansevero10.webp',
           alt: 'Vestizione dei portatori, San Severo',
         }
       },
@@ -460,7 +467,7 @@ export const stories: Story[] = [
       {
         type: 'image-full',
         image: {
-          src: '/assets/images/aufnel5.webp',
+          src: '/assets/images/sansevero8.webp',
           alt: 'La Madonna del Soccorso, San Severo',
         }
       },
@@ -475,7 +482,7 @@ export const stories: Story[] = [
       {
         type: 'image-full',
         image: {
-          src: '/assets/images/aufnel6.webp',
+          src: '/assets/images/sansevero7.webp',
           alt: 'I fujenti, Festa del Soccorso',
         }
       },
@@ -486,7 +493,7 @@ export const stories: Story[] = [
       {
         type: 'image-full',
         image: {
-          src: '/assets/images/aufnel7.webp',
+          src: '/assets/images/sansevero6.webp',
           alt: 'Le magliette dei fujenti, San Severo',
         }
       },
@@ -507,6 +514,13 @@ export const stories: Story[] = [
         content: `Prima dell'ultimo fuoco, mentre mangiavo un panino col torcinello, un uomo sulla quarantina rideva con la famiglia, tatuaggi ovunque. Aveva un braccialetto elettronico alla caviglia, domiciliari, evidentemente sospesi per la giornata. Per quei tre giorni, a San Severo, le leggi si fermavano insieme al traffico.\n\nPoco distante, una signora con una maglietta stampata con la foto di un ragazzo e una data: 2024. Suo figlio, morto in un incidente stradale. «Lui correva tutti gli anni. E io corro per lui.»`
       },
       {
+        type: 'image-full',
+        image: {
+          src: '/assets/images/sansevero4.webp',
+          alt: 'Festa del Soccorso, San Severo',
+        }
+      },
+      {
         type: 'text',
         content: `Lunedì sera la Madonna rientrò al Santuario del Soccorso. La chiesa era piccola, forse cinquanta posti, ma dentro eravamo in quattrocento, stipati come sotto i fuochi, tutti sudati e bruciacchiati, ma in silenzio. Un laico della confraternita stava all'ingresso e decideva chi entrava. Fuori, la folla premeva.\n\nDentro, due ore di rosario. Il diacono guidava l'Ave Maria, e tutti rispondevano in un'unica voce bassa, stanca, due ore di preghiera mentre fuori gli ultimi fuochi scoppiavano e la Madonna finiva il giro della città.`
       },
@@ -517,7 +531,7 @@ export const stories: Story[] = [
       {
         type: 'image-full',
         image: {
-          src: '/assets/images/aufnel8.webp',
+          src: '/assets/images/sansevero9.webp',
           alt: 'Il rientro della Madonna, San Severo',
         }
       },
@@ -536,7 +550,7 @@ export const stories: Story[] = [
       {
         type: 'image-full',
         image: {
-          src: '/assets/images/aufnel9.webp',
+          src: '/assets/images/sansevero11.webp',
           alt: 'Festa del Soccorso, San Severo',
         }
       }
@@ -545,6 +559,13 @@ export const stories: Story[] = [
       {
         type: 'text',
         content: `It was Saturday night and above our heads hung the <em>castelletti</em>, garlands of iron wire strung from one side of the street to the other, loaded with gray cylinders tied at regular intervals. Old newspaper wrapped each charge. Seen from below, backlit against the streetlamps, they could have passed for the decorations of a village fair, but the dry paper and the smell of sulfur said otherwise.`
+      },
+      {
+        type: 'image-full',
+        image: {
+          src: '/assets/images/sansevero3.webp',
+          alt: 'Festa del Soccorso, San Severo',
+        }
       },
       {
         type: 'text',
@@ -577,7 +598,7 @@ export const stories: Story[] = [
       {
         type: 'image-full',
         image: {
-          src: '/assets/images/aufnel2.webp',
+          src: '/assets/images/sansevero5.webp',
           alt: 'Festa del Soccorso, San Severo',
         }
       },
@@ -604,7 +625,7 @@ export const stories: Story[] = [
       {
         type: 'image-full',
         image: {
-          src: '/assets/images/aufnel3.webp',
+          src: '/assets/images/sansevero2.webp',
           alt: 'Preparazione delle cariche, San Severo',
         }
       },
@@ -635,7 +656,7 @@ export const stories: Story[] = [
       {
         type: 'image-full',
         image: {
-          src: '/assets/images/aufnel4.webp',
+          src: '/assets/images/sansevero10.webp',
           alt: 'Vestizione dei portatori, San Severo',
         }
       },
@@ -646,7 +667,7 @@ export const stories: Story[] = [
       {
         type: 'image-full',
         image: {
-          src: '/assets/images/aufnel5.webp',
+          src: '/assets/images/sansevero8.webp',
           alt: 'La Madonna del Soccorso, San Severo',
         }
       },
@@ -661,7 +682,7 @@ export const stories: Story[] = [
       {
         type: 'image-full',
         image: {
-          src: '/assets/images/aufnel6.webp',
+          src: '/assets/images/sansevero7.webp',
           alt: 'I fujenti, Festa del Soccorso',
         }
       },
@@ -672,7 +693,7 @@ export const stories: Story[] = [
       {
         type: 'image-full',
         image: {
-          src: '/assets/images/aufnel7.webp',
+          src: '/assets/images/sansevero6.webp',
           alt: 'Le magliette dei fujenti, San Severo',
         }
       },
@@ -693,6 +714,13 @@ export const stories: Story[] = [
         content: `Before the last fire, while I was eating a <em>torcinello</em> sandwich, a man in his forties was laughing with his family, tattoos everywhere. He had an ankle monitor, house arrest, evidently suspended for the day. For those three days, in San Severo, the laws stopped along with the traffic.\n\nA little way off, a woman in a shirt printed with the photo of a young man and a date: 2024. Her son, killed in a car accident. "He ran every year. And I run for him."`
       },
       {
+        type: 'image-full',
+        image: {
+          src: '/assets/images/sansevero4.webp',
+          alt: 'Festa del Soccorso, San Severo',
+        }
+      },
+      {
         type: 'text',
         content: `Monday evening the Madonna returned to the Sanctuary of the Soccorso. The church was small, maybe fifty seats, but inside there were four hundred of us, packed like under the fires, all sweating and singed, but silent. A layman of the confraternity stood at the entrance and decided who came in. Outside, the crowd pressed.\n\nInside, two hours of rosary. The deacon led the Ave Maria, and everyone answered in a single low, tired voice, two hours of prayer while outside the last fires went off and the Madonna finished her round of the city.`
       },
@@ -703,7 +731,7 @@ export const stories: Story[] = [
       {
         type: 'image-full',
         image: {
-          src: '/assets/images/aufnel8.webp',
+          src: '/assets/images/sansevero9.webp',
           alt: 'Il rientro della Madonna, San Severo',
         }
       },
@@ -722,7 +750,7 @@ export const stories: Story[] = [
       {
         type: 'image-full',
         image: {
-          src: '/assets/images/aufnel9.webp',
+          src: '/assets/images/sansevero11.webp',
           alt: 'Festa del Soccorso, San Severo',
         }
       }
