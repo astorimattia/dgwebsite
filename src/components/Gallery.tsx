@@ -360,31 +360,64 @@ const Gallery: React.FC = () => {
           ))}
         </div>
 
-        {/* Desktop View - Two column grid, left-to-right flow */}
+        {/* Desktop View - Split Columns for correct global order */}
         <div
-          className="relative w-full mx-auto pb-10 hidden md:grid grid-cols-2 gap-5 px-3"
+          className="relative w-full mx-auto pb-10 hidden md:grid grid-cols-2 gap-5 items-start px-3"
           id="thumbnails-desktop"
         >
-          {imageData.map((image, index) => (
-            <div
-              key={index}
-              className="thumbnail cursor-pointer relative transition-transform duration-200 ease-in-out hover:scale-[1.02]"
-              onClick={() => goToSlide(index)}
-            >
-              <Image
-                src={image.src}
-                alt={image.title}
-                width={300}
-                height={200}
-                style={{
-                  width: '100%',
-                  height: 'auto',
-                  display: 'block'
-                }}
-                sizes="50vw"
-              />
-            </div>
-          ))}
+          {/* Left Column - Even Indices (0, 2, 4...) */}
+          <div className="flex flex-col gap-5">
+            {imageData.filter((_, i) => i % 2 === 0).map((image, i) => {
+              const originalIndex = i * 2;
+              return (
+                <div
+                  key={originalIndex}
+                  className="thumbnail cursor-pointer relative transition-transform duration-200 ease-in-out hover:scale-[1.02]"
+                  onClick={() => goToSlide(originalIndex)}
+                >
+                  <Image
+                    src={image.src}
+                    alt={image.title}
+                    width={300}
+                    height={200}
+                    style={{
+                      width: '100%',
+                      height: 'auto',
+                      display: 'block'
+                    }}
+                    sizes="50vw"
+                  />
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Right Column - Odd Indices (1, 3, 5...) */}
+          <div className="flex flex-col gap-5">
+            {imageData.filter((_, i) => i % 2 !== 0).map((image, i) => {
+              const originalIndex = (i * 2) + 1;
+              return (
+                <div
+                  key={originalIndex}
+                  className="thumbnail cursor-pointer relative transition-transform duration-200 ease-in-out hover:scale-[1.02]"
+                  onClick={() => goToSlide(originalIndex)}
+                >
+                  <Image
+                    src={image.src}
+                    alt={image.title}
+                    width={300}
+                    height={200}
+                    style={{
+                      width: '100%',
+                      height: 'auto',
+                      display: 'block'
+                    }}
+                    sizes="50vw"
+                  />
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
     </>
