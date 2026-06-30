@@ -540,11 +540,11 @@ export const stories: Story[] = [
       },
       {
         type: 'pullquote',
-        content: `Non era un'istruzione. Era l'unica cosa certa, in quei giorni in cui tutto il resto veniva sospeso.`
+        content: `Era l'unica cosa certa, in quei giorni in cui tutto il resto veniva sospeso.`
       },
       {
         type: 'text',
-        content: `Prima di addormentarmi, ripensai alla frase. Non avevo più bisogno di tradurla.\n\nC' vdim au' fnel.\n\nNon era un'istruzione. Era l'unica cosa certa, in quei giorni in cui tutto il resto, le leggi, il lavoro, il lutto, la paura, veniva sospeso. Ci si perdeva nella ressa, nel fuoco, nel pianto. E poi ci si ritrovava. Alla fine del fuoco, alla fine della festa, davanti alla Madonna rientrata nella sua nicchia. Al finale.`
+        content: `Prima di addormentarmi, ripensai alla frase. Non avevo più bisogno di tradurla.\n\nC' vdim au' fnel.\n\nEra l'unica cosa certa, in quei giorni in cui tutto il resto, le leggi, il lavoro, il lutto, la paura, veniva sospeso. Ci si perdeva nella ressa, nel fuoco, nel pianto. E poi ci si ritrovava. Alla fine del fuoco, alla fine della festa, davanti alla Madonna rientrata nella sua nicchia. Al finale.`
       },
       {
         type: 'image-full',
