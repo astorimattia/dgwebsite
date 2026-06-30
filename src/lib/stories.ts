@@ -638,7 +638,7 @@ export const stories: Story[] = [
       },
       {
         type: 'text',
-        content: `Then he stood up, put both phones away, and took us around town. And that was when we understood who Raffaele Florio was. In half an hour of walking we must have counted forty interactions. "Ciao dottò," "I've missed you," "Hey Raffaele, all set?" two kisses on the cheek, one and two, handshakes that lasted minutes. Every time he stopped, introduced us, explained who we were. "They're two photographers, they've come to tell the story of the festa," and the reaction was always the same: a wide smile, a "welcome, you'll see what this is."`
+        content: `Then he stood up, put both phones away, and took us around town. And that was when we understood who Raffaele Florio was. In half an hour of walking we must have counted forty interactions. "Ciao dottò," "I've missed you," "Hey Raffaele, all set?" two kisses on the cheek, one and two, handshakes that lasted minutes. Every time he stopped, introduced us, explained who we were. "They're two photographers, they've come to tell the story of the Festa," and the reaction was always the same: a wide smile, a "welcome, you'll see what this is."`
       },
       {
         type: 'text',
@@ -661,7 +661,7 @@ export const stories: Story[] = [
       },
       {
         type: 'text',
-        content: `The Madonna came out at eleven. The year before, at ten, but the rain had delayed everything. The statue was Byzantine, black and gold, patron of the city and the diocese. People leaned in to touch her, to kiss her. Next to me a man elbowed me, nodding at her with his chin: "See how beautiful she is." Everyone said it, every time they showed her to us in those days. They carried her out on their shoulders, and the crowd erupted in applause. From that moment, the feast began.`
+        content: `The Madonna came out at eleven. The year before, at ten, but the rain had delayed everything. The statue was Byzantine, black and gold, patron of the city and the diocese. People leaned in to touch her, to kiss her. Next to me a man elbowed me, nodding at her with his chin: "See how beautiful she is." Everyone said it, every time they showed her to us in those days. They carried her out on their shoulders, and the crowd erupted in applause. From that moment, the Festa began.`
       },
       {
         type: 'image-full',
@@ -744,7 +744,7 @@ export const stories: Story[] = [
       },
       {
         type: 'text',
-        content: `Before I fell asleep, I thought back to the phrase. I no longer needed to translate it.\n\n<em>C' vdim au' fnel.</em>\n\nIt was the only certain thing, in those days when everything else — the laws, the work, the grief, the fear — was suspended. You lost yourself in the crush and the fire. And then you found yourself again. At the end of the fire, at the end of the feast, before the Madonna returned to her niche. At the finale.`
+        content: `Before I fell asleep, I thought back to the phrase. I no longer needed to translate it.\n\n<em>C' vdim au' fnel.</em>\n\nIt was the only certain thing, in those days when everything else — the laws, the work, the grief, the fear — was suspended. You lost yourself in the crush and the fire. And then you found yourself again. At the end of the fire, at the end of the Festa, before the Madonna returned to her niche. At the finale.`
       },
       {
         type: 'image-full',
