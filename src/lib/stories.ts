@@ -638,7 +638,7 @@ export const stories: Story[] = [
       },
       {
         type: 'text',
-        content: `Then he stood up, put both phones away, and took us around town. And that was when we understood who Raffaele Florio was. In half an hour of walking we must have counted forty interactions. "Ciao dottò," "I've missed you," "Hey Raffaele, all set?" two kisses on the cheek, one and two, handshakes that lasted minutes. Every time he stopped, introduced us, explained who we were. "They're two photographers, they've come to tell the story of the Festa," and the reaction was always the same: a wide smile, a "welcome, you'll see what this is."`
+        content: `Then he stood up, put both phones away, and took us around town. And that was when we understood who Raffaele Florio was. In half an hour of walking we must have counted forty interactions. "Ciao dottò," "I've missed you," "Hey Raffaele, all set?" two kisses on the cheek, one and two, handshakes that lasted minutes. Every time he stopped, introduced us, explained who we were. "They're two photographers, they've come to tell the story of the Festa," and the reaction was always the same: a wide smile, a "welcome, you'll see…"`
       },
       {
         type: 'text',
