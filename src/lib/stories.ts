@@ -344,7 +344,7 @@ export const stories: Story[] = [
     slug: 'c-vdim-au-fnel',
     title: "C' vdim au' fnel",
     subtitle: 'Appunti dalla Festa del Soccorso',
-    subtitleEn: 'Notes from the Feast of the Soccorso',
+    subtitleEn: 'Notes from the Festa del Soccorso',
     originalLanguage: 'it',
     location: 'San Severo, Italia',
     date: '2026',
