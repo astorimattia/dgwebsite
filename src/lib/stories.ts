@@ -580,7 +580,7 @@ export const stories: Story[] = [
       },
       {
         type: 'text',
-        content: `And then we were running. But it wasn't a run you chose: the street itself began to move, a human wave that started from behind and took you from the back, compressed you. We were packed so tight I couldn't lift my elbow. Left arm wedged against my ribs, right hand clenched around the camera pressed to my chest, and all around me, only bodies. Bodies pushing and shouting, bodies that every so often lifted you off your feet with no way to resist.`
+        content: `And then we were running. The street itself began to move, a human wave that started from behind and took you from the back, compressed you. We were packed so tight I couldn't lift my elbow. Left arm wedged against my ribs, right hand clenched around the camera pressed to my chest, and all around me, only bodies. Bodies pushing and shouting, bodies that every so often lifted you off your feet with no way to resist.`
       },
       {
         type: 'text',
