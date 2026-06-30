@@ -588,7 +588,7 @@ export const stories: Story[] = [
       },
       {
         type: 'text',
-        content: `Then the volley stopped. Two seconds of silence in which all you could hear was breathing and the ringing in your ears. A single blast. A pause. Another blast. The fire was catching its breath.\n\nBruno stopped. His face was flushed and there was a fresh burn on his collar, but his eyes were calm.\n\n"We have to decide," he said. "If we stay back here, we take it easy. If you want to see the finale, we have to go up now, before it starts again. But up front it gets tight, it's a mess."\n\n"Let's go up," I said.`
+        content: `Then the burst stopped. Two seconds of silence in which all you could hear was breathing and the ringing in your ears. A single blast. A pause. Another blast. The fire was catching its breath.\n\nBruno stopped. His face was flushed and there was a fresh burn on his collar, but his eyes were calm.\n\n"We have to decide," he said. "If we stay back here, we take it easy. If you want to see the finale, we have to go up now, before it starts again. But up front it gets tight, it's a mess."\n\n"Let's go up," I said.`
       },
       {
         type: 'text',
