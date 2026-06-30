@@ -18,8 +18,8 @@ function FadeIn({ children, className = '' }: { children: React.ReactNode; class
 }
 
 const LANG_LABELS = {
-  it: { original: 'Italiano', translated: 'English', note: 'This story was thought and crafted in Italian. The English version is a direct translation.' },
-  es: { original: 'Español', translated: 'English', note: 'This story was thought and crafted in Spanish. The English version is a direct translation.' },
+  it: { original: 'Italiano', translated: 'English', note: 'This story was thought and written in Italian. The English version is a direct translation.' },
+  es: { original: 'Español', translated: 'English', note: 'This story was thought and written in Spanish. The English version is a direct translation.' },
 } as const;
 
 export default function StoryArticle({ story }: StoryArticleProps) {
@@ -86,7 +86,7 @@ export default function StoryArticle({ story }: StoryArticleProps) {
       </nav>
 
       {/* Hero */}
-      <div className="relative w-[100vw] -ml-[20px] md:-ml-[40px] h-[85vh] md:h-[92vh] overflow-hidden">
+      <div className="relative w-[calc(100%+40px)] -ml-[20px] md:w-[calc(100%+80px)] md:-ml-[40px] h-[85vh] md:h-[92vh] overflow-hidden">
         <Image
           src={story.heroImage}
           alt={story.heroAlt}
@@ -158,7 +158,7 @@ export default function StoryArticle({ story }: StoryArticleProps) {
 
           if (section.type === 'image-full' && section.image) {
             return (
-              <FadeIn key={i} className="w-[100vw] -ml-[20px] md:-ml-[40px] my-12 md:my-16">
+              <FadeIn key={i} className="w-[calc(100%+40px)] -ml-[20px] md:w-[calc(100%+80px)] md:-ml-[40px] my-12 md:my-16">
                 <div className="relative aspect-[3/2] md:aspect-[16/9]">
                   <Image
                     src={section.image.src}
@@ -179,7 +179,7 @@ export default function StoryArticle({ story }: StoryArticleProps) {
 
           if (section.type === 'image-pair' && section.images) {
             return (
-              <FadeIn key={i} className="w-[100vw] -ml-[20px] md:-ml-[40px] my-12 md:my-16">
+              <FadeIn key={i} className="w-[calc(100%+40px)] -ml-[20px] md:w-[calc(100%+80px)] md:-ml-[40px] my-12 md:my-16">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-[4px]">
                   {section.images.map((img, j) => (
                     <div key={j} className="relative aspect-[4/3]">
