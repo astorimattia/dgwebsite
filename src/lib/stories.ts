@@ -744,7 +744,7 @@ export const stories: Story[] = [
       },
       {
         type: 'text',
-        content: `Before I fell asleep, I thought back to the phrase. I no longer needed to translate it.\n\n<em>C' vdim au' fnel.</em>\n\nIt was the only certain thing, in those days when everything else — the laws, the work, the grief, the fear — was suspended. You lost yourself in the crush, in the fire, in the weeping. And then you found yourself again. At the end of the fire, at the end of the feast, before the Madonna returned to her niche. At the finale.`
+        content: `Before I fell asleep, I thought back to the phrase. I no longer needed to translate it.\n\n<em>C' vdim au' fnel.</em>\n\nIt was the only certain thing, in those days when everything else — the laws, the work, the grief, the fear — was suspended. You lost yourself in the crush and the fire. And then you found yourself again. At the end of the fire, at the end of the feast, before the Madonna returned to her niche. At the finale.`
       },
       {
         type: 'image-full',
