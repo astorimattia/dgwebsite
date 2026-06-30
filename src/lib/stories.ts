@@ -341,7 +341,6 @@ export const stories: Story[] = [
   }
   ,
   {
-    password: 'sansevero',
     slug: 'c-vdim-au-fnel',
     title: "C' vdim au' fnel",
     subtitle: 'Appunti dalla Festa del Soccorso',
