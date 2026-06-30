@@ -576,7 +576,7 @@ export const stories: Story[] = [
       },
       {
         type: 'text',
-        content: `From far off came the first blast. My heart leapt into my throat. The crowd tightened, a ripple ran through the street.\n\nBruno gripped my arm. "No, wait," he said. "Wait… wait… wait…"\n\nTwo more blasts, spaced apart. Then the fast volley. Behind us someone started to push, the pressure surged all at once.\n\nBruno tightened his grip. "Okay. Let's go."`
+        content: `From far off came the first blast. My heart leapt into my throat. The crowd tightened, a ripple ran through the street.\n\nBruno gripped my arm. "No, wait," he said. "Wait… wait… wait…"\n\nTwo more blasts, spaced apart. Then the rapid burst. Behind us someone started to push, the pressure surged all at once.\n\nBruno tightened his grip. "Okay. Let's go."`
       },
       {
         type: 'text',
