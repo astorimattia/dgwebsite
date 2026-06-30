@@ -702,7 +702,7 @@ export const stories: Story[] = [
       },
       {
         type: 'text',
-        content: `During a lull I heard one <em>fujente</em> shout to another, in dialect: "<em>Due cose so' sicure ind'a vita: a mort' e a fest' d'u succors.</em>" Two things in life are certain: death and the Feast of the Soccorso. The other laughed, gave him a slap on the shoulder. Later, another man, leaning against a wall with his shirt still smoking: "<em>L'agg ditt o capomi: a térz sttman d magg' so' ccà. O è feri o è malattì, vid tu.</em>" I told my boss: the third week of May, I'm here. Either it's vacation or it's sick leave, you figure it out. He worked in Turin. He'd come back.`
+        content: `During a lull I heard one <em>fujente</em> shout to another, in dialect: "<em>Due cose so' sicure ind'a vita: a mort' e a fest' d'u succors.</em>" Two things in life are certain: death and the Festa del Soccorso. The other laughed, gave him a slap on the shoulder. Later, another man, leaning against a wall with his shirt still smoking: "<em>L'agg ditt o capomi: a térz sttman d magg' so' ccà. O è feri o è malattì, vid tu.</em>" I told my boss: the third week of May, I'm here. Either it's vacation or it's sick leave, you figure it out. He worked in Turin. He'd come back.`
       },
       {
         type: 'text',
