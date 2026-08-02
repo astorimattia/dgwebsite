@@ -1,11 +1,13 @@
 import type { Metadata } from 'next'
+import { Analytics } from '@vercel/analytics/react'
+import { SpeedInsights } from '@vercel/speed-insights/react'
 import './globals.css'
 import PerformanceMonitor from '@/components/PerformanceMonitor'
 
 const SITE_URL = 'https://mattiaastori.com'
-const TITLE = 'Mattia Astori — Photographer & Investor'
+const TITLE = 'Mattia Astori — Investor & Photographer'
 const DESCRIPTION =
-  'Mattia Astori is a photographer, investor, and explorer based in San Francisco — documenting the extreme, the obscure, and the culturally electric. Founder of Astori Ventures and co-creator of Sacratos.'
+  'Mattia Astori is an investor, photographer, and explorer based in San Francisco. Founder of Astori Ventures, a private investment firm focused on venture capital secondaries and pre-IPO co-investments, and co-creator of Sacratos, documenting the extreme, the obscure, and the culturally electric.'
 const OG_IMAGE = '/assets/images/tultepec-analog.webp'
 
 export const metadata: Metadata = {
@@ -17,16 +19,16 @@ export const metadata: Metadata = {
   description: DESCRIPTION,
   keywords: [
     'Mattia Astori',
-    'photography',
-    'documentary photography',
-    'photojournalism',
     'Astori Ventures',
-    'Sacratos',
     'venture capital',
     'secondaries',
     'pre-IPO',
     'investor',
     'San Francisco',
+    'photography',
+    'documentary photography',
+    'photojournalism',
+    'Sacratos',
   ],
   authors: [{ name: 'Mattia Astori' }],
   creator: 'Mattia Astori',
@@ -59,7 +61,7 @@ export const metadata: Metadata = {
         url: OG_IMAGE,
         width: 1200,
         height: 630,
-        alt: 'Mattia Astori — documentary photography',
+        alt: 'Mattia Astori — investor and documentary photographer',
       },
     ],
   },
@@ -102,7 +104,7 @@ export default function RootLayout({
               name: 'Mattia Astori',
               url: 'https://mattiaastori.com',
               image: 'https://mattiaastori.com/assets/images/tultepec-analog.webp',
-              jobTitle: ['Photographer', 'Investor', 'Founder'],
+              jobTitle: ['Investor', 'Founder', 'Photographer'],
               description:
                 'Investor, photographer, and explorer based in San Francisco. Founder of Astori Ventures, a private investment firm focused on venture capital secondaries and pre-IPO co-investments, and co-creator of Sacratos, a documentary photography project.',
               homeLocation: {
@@ -127,7 +129,6 @@ export default function RootLayout({
                 'https://sacratos.com',
                 'https://www.linkedin.com/in/mattiaastori',
                 'https://www.crunchbase.com/person/mattia-astori',
-                'https://www.wikidata.org/wiki/Q140374111',
               ],
             }),
           }}
@@ -222,6 +223,8 @@ export default function RootLayout({
       </head>
       <body suppressHydrationWarning={true}>
         {children}
+        <Analytics />
+        <SpeedInsights />
         <PerformanceMonitor />
       </body>
     </html>
