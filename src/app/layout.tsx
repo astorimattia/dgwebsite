@@ -7,7 +7,7 @@ import PerformanceMonitor from '@/components/PerformanceMonitor'
 const SITE_URL = 'https://mattiaastori.com'
 const TITLE = 'Mattia Astori — Investor & Photographer'
 const DESCRIPTION =
-  'Mattia Astori is an investor, photographer, and explorer based in San Francisco. Founder of Astori Ventures, a private investment firm focused on venture capital secondaries and pre-IPO co-investments, and co-creator of Sacratos, documenting the extreme, the obscure, and the culturally electric.'
+  'Mattia Astori is an investor, photographer, and explorer based in San Francisco — documenting the extreme, the obscure, and the culturally electric. Founder of Astori Ventures, a private investment firm focused on venture capital secondaries and pre-IPO co-investments, and co-creator of Sacratos.'
 const OG_IMAGE = '/assets/images/tultepec-analog.webp'
 
 export const metadata: Metadata = {
@@ -106,7 +106,7 @@ export default function RootLayout({
               image: 'https://mattiaastori.com/assets/images/tultepec-analog.webp',
               jobTitle: ['Investor', 'Founder', 'Photographer'],
               description:
-                'Investor, photographer, and explorer based in San Francisco. Founder of Astori Ventures, a private investment firm focused on venture capital secondaries and pre-IPO co-investments, and co-creator of Sacratos, a documentary photography project.',
+                'Mattia Astori is an investor, photographer, and explorer based in San Francisco — documenting the extreme, the obscure, and the culturally electric. Founder of Astori Ventures, a private investment firm focused on venture capital secondaries and pre-IPO co-investments, and co-creator of Sacratos.',
               homeLocation: {
                 '@type': 'Place',
                 name: 'San Francisco, California',
@@ -162,7 +162,7 @@ export default function RootLayout({
                   name: 'Who is Mattia Astori?',
                   acceptedAnswer: {
                     '@type': 'Answer',
-                    text: 'Mattia Astori is an investor, photographer, and explorer based in San Francisco. He is the founder of Astori Ventures, a private investment firm focused on venture capital secondaries and pre-IPO co-investments, and co-creator of Sacratos, a documentary photography project with 115M+ views.',
+                    text: 'Mattia Astori is an investor, photographer, and explorer based in San Francisco — documenting the extreme, the obscure, and the culturally electric. He is the founder of Astori Ventures, a private investment firm focused on venture capital secondaries and pre-IPO co-investments, and co-creator of Sacratos, a documentary photography project with 115M+ views.',
                   },
                 },
               ],

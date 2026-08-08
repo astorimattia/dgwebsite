@@ -1,6 +1,6 @@
-# Mattia Astori Photography Website
+# Mattia Astori Website
 
-A modern Next.js photography portfolio website showcasing Mattia Astori's analog photography work.
+A modern Next.js website for Mattia Astori — Investor & Photographer.
 
 ## Features
 
