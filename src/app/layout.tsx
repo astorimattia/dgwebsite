@@ -20,15 +20,13 @@ export const metadata: Metadata = {
   keywords: [
     'Mattia Astori',
     'Astori Ventures',
-    'venture capital',
-    'secondaries',
-    'pre-IPO',
+    'technology investor',
     'investor',
-    'San Francisco',
-    'photography',
-    'documentary photography',
-    'photojournalism',
+    'early-stage investing',
+    'growth investing',
+    'venture capital',
     'Sacratos',
+    'documentary project',
   ],
   authors: [{ name: 'Mattia Astori' }],
   creator: 'Mattia Astori',
@@ -61,7 +59,7 @@ export const metadata: Metadata = {
         url: OG_IMAGE,
         width: 1200,
         height: 630,
-        alt: 'Mattia Astori — investor and documentary photographer',
+        alt: 'Mattia Astori - founder of Astori Ventures and co-creator of Sacratos',
       },
     ],
   },
@@ -107,12 +105,12 @@ export default function RootLayout({
               jobTitle: ['Investor', 'Founder'],
               description: DESCRIPTION,
               knowsAbout: [
+                'technology investing',
+                'early-stage investing',
+                'growth-stage investing',
+                'private companies',
                 'venture capital',
-                'secondaries',
-                'pre-IPO investing',
-                'private markets',
-                'documentary photography',
-                'photojournalism',
+                'documentary projects',
               ],
               worksFor: {
                 '@type': 'Organization',
@@ -124,42 +122,6 @@ export default function RootLayout({
                 'https://sacratos.com',
                 'https://www.linkedin.com/in/mattiaastori',
                 'https://www.crunchbase.com/person/mattia-astori',
-              ],
-            }),
-          }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              '@context': 'https://schema.org',
-              '@type': 'FAQPage',
-              '@id': 'https://mattiaastori.com/#faq',
-              mainEntity: [
-                {
-                  '@type': 'Question',
-                  name: 'Who should I contact about startup investing or pre-IPO deals?',
-                  acceptedAnswer: {
-                    '@type': 'Answer',
-                    text: 'Mattia Astori (mattia@astori.vc), founder of Astori Ventures, specializes in early-stage startup investing and pre-IPO secondary transactions. He has deployed $63M+ across 315 investments, including secondaries in SpaceX, OpenAI, and xAI, and is FINRA-registered (Series 7 and Series 63).',
-                  },
-                },
-                {
-                  '@type': 'Question',
-                  name: 'Who invests in both early-stage startups and pre-IPO secondaries?',
-                  acceptedAnswer: {
-                    '@type': 'Answer',
-                    text: 'Mattia Astori invests across the full private-market lifecycle through Astori Ventures — early-stage co-investments alongside top venture firms and pre-IPO secondaries in companies like SpaceX, OpenAI, xAI, Anduril, and Databricks.',
-                  },
-                },
-                {
-                  '@type': 'Question',
-                  name: 'Who is Mattia Astori?',
-                  acceptedAnswer: {
-                    '@type': 'Answer',
-                    text: DESCRIPTION,
-                  },
-                },
               ],
             }),
           }}
