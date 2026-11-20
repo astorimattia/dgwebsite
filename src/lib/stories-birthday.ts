@@ -7,7 +7,7 @@ export const my27thBirthdayStory: Story =   {
     location: 'New York',
     date: 'November 2026',
     year: '2026',
-    heroImage: '/assets/images-optimized/bday-aqueduct-lg.webp',
+    heroImage: '/assets/images-optimized/6-bday-aqueduct-lg.webp',
     heroAlt: 'The aqueduct trail in northwest Yonkers',
     excerpt: 'Up at 4.45 am on his twenty-seventh birthday, he walked north out of Manhattan with no route and picked up a goal along the way: 100,000 steps. He made 85,650.',
     author: 'By Mattia Astori',
@@ -21,7 +21,7 @@ export const my27thBirthdayStory: Story =   {
         type: 'image-offset',
         align: 'right',
         image: {
-          src: '/assets/images-optimized/bday-map-lg.webp',
+          src: '/assets/images-optimized/1-bday-map-lg.webp',
           alt: 'Route of the walk, from the West Village to Westchester',
         }
       },
@@ -33,7 +33,7 @@ export const my27thBirthdayStory: Story =   {
         type: 'image-offset',
         align: 'left',
         image: {
-          src: '/assets/images-optimized/bday-selfie-start-lg.webp',
+          src: '/assets/images-optimized/2-bday-selfie-start-lg.webp',
           alt: 'Leaving the apartment at 4.45 am',
         }
       },
@@ -49,7 +49,7 @@ export const my27thBirthdayStory: Story =   {
         type: 'image-offset',
         align: 'right',
         image: {
-          src: '/assets/images-optimized/bday-sunrise-lg.webp',
+          src: '/assets/images-optimized/3-bday-sunrise-lg.webp',
           alt: 'First light on the towers by Central Park',
         }
       },
@@ -61,7 +61,7 @@ export const my27thBirthdayStory: Story =   {
         type: 'image-offset',
         align: 'left',
         image: {
-          src: '/assets/images-optimized/bday-newport-lg.webp',
+          src: '/assets/images-optimized/4-bday-newport-lg.webp',
           alt: 'A pack of Newports on a Harlem sidewalk',
         }
       },
@@ -81,7 +81,7 @@ export const my27thBirthdayStory: Story =   {
         type: 'image-offset',
         align: 'right',
         image: {
-          src: '/assets/images-optimized/bday-autumn-road-lg.webp',
+          src: '/assets/images-optimized/5-bday-autumn-road-lg.webp',
           alt: 'Autumn road out of the city',
         }
       },
@@ -100,7 +100,7 @@ export const my27thBirthdayStory: Story =   {
       {
         type: 'image-full',
         image: {
-          src: '/assets/images-optimized/bday-aqueduct-lg.webp',
+          src: '/assets/images-optimized/6-bday-aqueduct-lg.webp',
           alt: 'The aqueduct trail in northwest Yonkers',
         }
       },
@@ -124,7 +124,7 @@ export const my27thBirthdayStory: Story =   {
         type: 'image-offset',
         align: 'left',
         image: {
-          src: '/assets/images-optimized/bday-night-road-lg.webp',
+          src: '/assets/images-optimized/7-bday-night-road-lg.webp',
           alt: 'A dark winding road toward Pleasantville',
         }
       },
@@ -152,11 +152,11 @@ export const my27thBirthdayStory: Story =   {
         type: 'image-pair',
         images: [
           {
-            src: '/assets/images-optimized/bday-steps-lg.webp',
+            src: '/assets/images-optimized/8-bday-steps-lg.webp',
             alt: 'Apple Health: 85,650 steps on November 15',
           },
           {
-            src: '/assets/images-optimized/bday-distance-lg.webp',
+            src: '/assets/images-optimized/9-bday-distance-lg.webp',
             alt: 'Apple Health: 64.6 km walking and running distance on November 15',
           }
         ]
@@ -173,7 +173,7 @@ export const my27thBirthdayStory: Story =   {
         type: 'image-offset',
         align: 'right',
         image: {
-          src: '/assets/images-optimized/bday-selfie-end-lg.webp',
+          src: '/assets/images-optimized/10-bday-selfie-end-lg.webp',
           alt: 'Back home after 85,650 steps',
         }
       },
