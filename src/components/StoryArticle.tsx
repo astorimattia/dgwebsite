@@ -100,9 +100,11 @@ export default function StoryArticle({ story }: StoryArticleProps) {
           <h1 className="text-white text-[clamp(40px,8vw,90px)] font-gt-america-regular leading-[0.95] tracking-[-0.03em] mb-3">
             {story.title}
           </h1>
-          <p className="text-white/80 text-[clamp(16px,2.5vw,24px)] font-gt-america-thin italic max-w-[600px] leading-[1.3]">
-            {lang === 'en' && story.subtitleEn ? story.subtitleEn : story.subtitle}
-          </p>
+          {(lang === 'en' && story.subtitleEn ? story.subtitleEn : story.subtitle) ? (
+            <p className="text-white/80 text-[clamp(16px,2.5vw,24px)] font-gt-america-thin italic max-w-[600px] leading-[1.3]">
+              {lang === 'en' && story.subtitleEn ? story.subtitleEn : story.subtitle}
+            </p>
+          ) : null}
         </div>
       </div>
 
