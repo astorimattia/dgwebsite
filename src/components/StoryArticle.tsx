@@ -92,9 +92,19 @@ export default function StoryArticle({ story }: StoryArticleProps) {
           alt={story.heroAlt}
           fill
           priority
-          className="object-cover"
+          className={story.heroImageMobile ? 'object-cover hidden md:block' : 'object-cover'}
           sizes="100vw"
         />
+        {story.heroImageMobile && (
+          <Image
+            src={story.heroImageMobile}
+            alt={story.heroAlt}
+            fill
+            priority
+            className="object-cover md:hidden"
+            sizes="100vw"
+          />
+        )}
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
         <div className="absolute bottom-0 left-0 right-0 p-[30px_20px] md:p-[60px_80px]">
           <h1 className="text-white text-[clamp(40px,8vw,90px)] font-gt-america-regular leading-[0.95] tracking-[-0.03em] mb-3">
