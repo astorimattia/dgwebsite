@@ -7,8 +7,9 @@ export const my27thBirthdayStory: Story =   {
     location: 'New York',
     date: 'November 2026',
     year: '2026',
-    heroImage: '/assets/images-optimized/2-bday-distance-hero.webp',
-    heroAlt: 'Apple Health: 64.6 km walked on November 15',
+    heroImage: '/assets/images-optimized/1-bday-cover-pair.webp',
+    heroImageMobile: '/assets/images-optimized/2-bday-cover-stack.webp',
+    heroAlt: 'Apple Health: 85,650 steps and 64.6 km on November 15',
     excerpt: 'The alarm goes off at 4.45 am. The heaters aren’t on, and the apartment is freezing. I shove a water bottle and some nuts in my backpack, and I step outside.',
     author: 'By Mattia Astori',
     credit: 'Photographs by Mattia Astori.',
@@ -159,7 +160,7 @@ export const my27thBirthdayStory: Story =   {
       },
       {
         type: 'text',
-        content: `When I was twelve, I thought I was going to be the number one tennis player in the world. Today, mid-morning, I had decided I was going to walk 100,000 steps. A whole life fit inside this one day: the confusing first hours in the dark, the energy of the morning, the slow narrowing of what was possible, the long quiet stretch, the evening coming down. People come and go, but at the end it’s just you and your experience. I lived more when I was looking around than when I was counting. I walked 85,650 steps. Not the hundred thousand. I still want it. Maybe in a couple of weeks I’ll go back for it.`
+        content: `When I was twelve, I thought I was going to be the number one tennis player in the world. Today, mid-morning, I had decided I was going to walk 100,000 steps. People come and go, but at the end it’s just you and your experience. I lived more when I was looking around than when I was counting. I walked 85,650 steps. Not the hundred thousand. I still want it. Maybe in a couple of weeks I’ll go back for it.`
       },
       {
         type: 'text',
