@@ -3,20 +3,16 @@ import type { Story } from './stories';
 export const my27thBirthdayStory: Story =   {
     slug: 'my-27th-birthday',
     title: 'My 27th Birthday',
-    subtitle: 'From the West Village to Westchester on foot, 85,650 steps and 64.6 km',
+    subtitle: '',
     location: 'New York',
     date: 'November 2026',
     year: '2026',
     heroImage: '/assets/images-optimized/6-bday-aqueduct-lg.webp',
     heroAlt: 'The aqueduct trail in northwest Yonkers',
-    excerpt: 'Up at 4.45 am on his twenty-seventh birthday, he walked north out of Manhattan with no route and picked up a goal along the way: 100,000 steps. He made 85,650.',
+    excerpt: 'The alarm goes off at 4.45 am. The heaters aren’t on, and the apartment is freezing. I shove a water bottle and some nuts in my backpack, and I step outside.',
     author: 'By Mattia Astori',
     credit: 'Photographs by Mattia Astori.',
     sections: [
-      {
-        type: 'text',
-        content: `My 27th Birthday`
-      },
       {
         type: 'image-offset',
         align: 'right',
