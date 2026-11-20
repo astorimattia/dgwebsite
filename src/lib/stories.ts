@@ -1,3 +1,4 @@
+import { my27thBirthdayStory } from './stories-birthday';
 export interface StoryImage {
   src: string;
   alt: string;
@@ -20,6 +21,7 @@ export interface Story {
   date: string;
   year: string;
   heroImage: string;
+  heroImageMobile?: string;
   heroAlt: string;
   excerpt: string;
   author: string;
@@ -754,7 +756,8 @@ export const stories: Story[] = [
         }
       }
     ]
-  }
+  },
+  my27thBirthdayStory
 ];
 
 export function getStoryBySlug(slug: string): Story | undefined {
