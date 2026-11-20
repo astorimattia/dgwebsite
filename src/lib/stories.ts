@@ -21,6 +21,7 @@ export interface Story {
   date: string;
   year: string;
   heroImage: string;
+  heroImageMobile?: string;
   heroAlt: string;
   excerpt: string;
   author: string;
