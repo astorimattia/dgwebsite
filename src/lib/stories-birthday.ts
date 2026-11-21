@@ -143,6 +143,7 @@ export const my27thBirthdayStory: Story =   {
       },
       {
         type: 'image-pair',
+        tight: true,
         images: [
           {
             src: '/assets/images-optimized/8-bday-steps-lg.webp',
