@@ -4,6 +4,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import type { Story } from '@/lib/stories';
+import SkachKoylBody from './SkachKoylBody';
 
 interface StoryArticleProps {
   story: Story;
@@ -157,7 +158,7 @@ export default function StoryArticle({ story }: StoryArticleProps) {
 
       {/* Sections */}
       <div className="story-body">
-        {(lang === 'en' && story.sectionsEn ? story.sectionsEn : story.sections).map((section, i) => {
+        {story.slug === 'skach-koyl' ? <SkachKoylBody story={story} /> : (lang === 'en' && story.sectionsEn ? story.sectionsEn : story.sections).map((section, i) => {
           if (section.type === 'text' && section.content) {
             const showDropCap = isFirstParagraph;
             if (isFirstParagraph) isFirstParagraph = false;
