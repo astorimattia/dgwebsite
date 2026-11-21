@@ -219,11 +219,10 @@ export default function StoryArticle({ story }: StoryArticleProps) {
           }
 
           if (section.type === 'image-offset' && section.image) {
-            const isRight = section.align === 'right';
             return (
-              <FadeIn key={i} className={`max-w-[900px] mx-auto my-12 md:my-16 px-0 flex ${isRight ? 'justify-end' : 'justify-start'}`}>
-                <div className={`w-full md:w-[60%] ${isRight ? 'md:mr-[-5vw]' : 'md:ml-[-5vw]'}`}>
-                  <div className="relative aspect-[3/4]">
+              <FadeIn key={i} className={`max-w-[900px] mx-auto my-12 md:my-16 px-0 flex justify-center`}>
+                <div className={`w-full md:w-[60%]`}>
+                  <div className="relative aspect-[3/4] md:aspect-[4/5]">
                     <Image
                       src={section.image.src}
                       alt={section.image.alt}
