@@ -1,4 +1,5 @@
 import { my27thBirthdayStory } from './stories-birthday';
+import { skachKoylStory } from './stories-skach-koyl';
 export interface StoryImage {
   src: string;
   alt: string;
@@ -758,7 +759,8 @@ export const stories: Story[] = [
       }
     ]
   },
-  my27thBirthdayStory
+  my27thBirthdayStory,
+  skachKoylStory
 ];
 
 export function getStoryBySlug(slug: string): Story | undefined {
