@@ -40,7 +40,7 @@ export const my27thBirthdayStory: Story =   {
       },
       {
         type: 'text',
-        content: `I walk north toward Central Park. The first light touches only the very tops of the tallest buildings, a thin line of orange. A few runners, a few people with dogs. At the light into the park , a woman waits in perfect running gear, wool hat, wool socks, an elegant gray uniform. The pond is calm.`
+        content: `I walk north toward Central Park. The first light touches only the very tops of the tallest buildings, a thin line of orange. A few runners, a few people with dogs. At the traffic light by the park entrance, a woman waits in perfect running gear, wool hat, wool socks, an elegant gray uniform. The pond is calm.`
       },
       {
         type: 'image-offset',
@@ -88,11 +88,11 @@ export const my27thBirthdayStory: Story =   {
       },
       {
         type: 'text',
-        content: `At some point I fall into a trance. My legs move on their own. I can’t feel them anymore, they just go. I stare straight ahead, on autopilot, and it feels like a dream. They hurt when I stop. They don’t when I move. I know that’s a problem. A problem for later. I sit on a bench and it’s the best thing I’ve ever done, right up until I remember I have to stand up again.`
+        content: `At some point I fall into a trance. My legs move on their own. I can’t feel them anymore, they just go. I stare straight ahead, on autopilot, and it feels like a dream. They hurt when I stop. They don’t when I move. I know that’s a problem (a problem for later). I sit on a bench and it’s the best thing I’ve ever done, right up until I remember I have to stand up again.`
       },
       {
         type: 'text',
-        content: `Then I’m on the aqueduct trail in northwest Yonkers: black rocks on my left, red-brown trees on top of them, and below, the Hudson, dark teal. For miles there is nothing but orange and brown leaves under my feet. On the trail everyone says hi to everyone. You walk toward a stranger, lock eyes and smile, how’s it going, and keep going. Nobody does that in the city.`
+        content: `Then I’m on the aqueduct trail in northwest Yonkers: black rocks on my left, red-brown trees on top of them, and below, the Hudson, dark teal. For miles there is nothing but orange and brown leaves under my feet. On the trail everyone says hi to everyone. You walk toward a stranger, lock eyes and smile, <em>how’s it going</em>, and keep going. Nobody does that in the city.`
       },
       {
         type: 'image-full',
@@ -107,15 +107,11 @@ export const my27thBirthdayStory: Story =   {
       },
       {
         type: 'text',
-        content: `It also hits me that nobody told me to do this. If someone else had chosen this challenge for me, I would have quit by now. You only get through something like this when the drive is your own.`
-      },
-      {
-        type: 'text',
         content: `After 3 pm, the day starts to mellow. The light, the energy, mine or everyone else’s, I can’t tell. There’s a melancholy in it, the feeling of a day that’s about to end.`
       },
       {
         type: 'text',
-        content: `It’s pitch dark now. I’ve been walking for twelve hours and I decide to take a detour toward Pleasantville, where my sister goes to college and push a little faster. That’s when the bottoms of my calves and my heels start to hurt, badly. The roads get dark and empty and a little scary. I put my headphones on and blast music so I can’t hear the pain.`
+        content: `It’s pitch dark now. I’ve been walking for twelve hours and I decide to take a detour toward Pleasantville, where my sister goes to college, and push a little faster. That’s when the bottoms of my calves and my heels start to hurt, badly. The roads get dark and empty and a little scary. I put my headphones on and blast music so I can’t hear the pain.`
       },
       {
         type: 'image-offset',
@@ -160,19 +156,11 @@ export const my27thBirthdayStory: Story =   {
       },
       {
         type: 'text',
-        content: `When I was twelve, I thought I was going to be the number one tennis player in the world. Today, mid-morning, I had decided I was going to walk 100,000 steps. People come and go, but at the end it’s just you and your experience. I lived more when I was looking around than when I was counting. I walked 85,650 steps. Not the hundred thousand. I still want it. Maybe in a couple of weeks I’ll go back for it.`
+        content: `When I was twelve, I thought I was going to be the number one tennis player in the world. Today, mid-morning, I had decided I was going to walk 100,000 steps. A whole life fit inside this one day: the confusing first hours in the dark, the energy of the morning, the slow narrowing of what was possible, the long quiet stretch, the evening coming down. People come and go, but at the end it’s just you and your experience. I lived more when I was looking around than when I was counting. I walked 85,650 steps.`
       },
       {
         type: 'text',
-        content: `It was my twenty-seventh birthday, and I was there for every hour of it.`
-      },
-      {
-        type: 'image-offset',
-        align: 'right',
-        image: {
-          src: '/assets/images-optimized/10-bday-selfie-end-lg.webp',
-          alt: 'Back home after 85,650 steps',
-        }
+        content: `It was my twenty-seventh birthday, and I was there for every hour of it :)`
       },
     ]
   };
