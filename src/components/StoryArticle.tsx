@@ -194,12 +194,12 @@ export default function StoryArticle({ story }: StoryArticleProps) {
               <FadeIn key={i} className="w-[calc(100%+40px)] -ml-[20px] md:w-[calc(100%+80px)] md:-ml-[40px] my-12 md:my-16">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-[4px]">
                   {section.images.map((img, j) => (
-                    <div key={j} className="relative aspect-[4/3]">
+                    <div key={j} className="relative aspect-[4/3] overflow-hidden">
                       <Image
                         src={img.src}
                         alt={img.alt}
                         fill
-                        className="object-cover"
+                        className={`object-cover${section.tight ? (j === 0 ? ' md:translate-x-[60px]' : ' md:-translate-x-[60px]') : ''}`}
                         sizes="(max-width: 768px) 100vw, 50vw"
                       />
                     </div>
