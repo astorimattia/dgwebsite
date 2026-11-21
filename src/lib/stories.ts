@@ -11,6 +11,7 @@ export interface StorySection {
   image?: StoryImage;
   images?: [StoryImage, StoryImage];
   align?: 'left' | 'right';
+  tight?: boolean;
 }
 
 export interface Story {
