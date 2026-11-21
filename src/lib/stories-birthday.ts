@@ -157,7 +157,7 @@ export const my27thBirthdayStory: Story =   {
       },
       {
         type: 'text',
-        content: `When I was twelve, I thought I was going to be the number one tennis player in the world. Today, mid-morning, I had decided I was going to walk 100,000 steps. A whole life fit inside this one day: the confusing first hours in the dark, the energy of the morning, the slow narrowing of what was possible, the long quiet stretch, the evening coming down. People come and go, but at the end it’s just you and your experience. I lived more when I was looking around than when I was counting. I walked 85,650 steps.`
+        content: `When I was twelve, I thought I was going to be the number one tennis player in the world. Today, mid-morning, I had decided I was going to walk 100,000 steps. This one day felt like a whole life: the confusing first hours in the dark, the energy of the morning, the slow narrowing of what was possible, the long quiet stretch. People come and go, but at the end it’s just you and your experience. I lived more when I was looking around than when I was counting. I walked 85,650 steps.`
       },
       {
         type: 'text',
