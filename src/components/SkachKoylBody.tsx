@@ -8,9 +8,9 @@ export default function SkachKoylBody({ story }: { story: Story }) {
   const paragraphs = story.sections.filter(s => s.type === 'text' && s.content);
   const photographs = story.sections.flatMap(s => s.image ? [s.image] : []);
   const accurateAlts: Record<number, string> = {
-    9: 'A man raises a bottle among people gathered indoors',
-    10: 'An elderly woman in a patterned headscarf among people gathered indoors',
-    11: 'A man and woman stand together beneath colorful decorations indoors',
+    9: 'A man raises a bottle among a group of people',
+    10: 'An elderly woman in a patterned headscarf among a group of people',
+    11: 'A man and woman stand together beneath colorful decorations',
   };
 
   function text(start: number, end: number) {
