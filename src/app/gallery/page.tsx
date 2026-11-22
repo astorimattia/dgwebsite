@@ -8,7 +8,7 @@ const CSS = `
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
 html,body{margin:0;height:100%;overflow:hidden;background:#f4f3f1;
   font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;color:var(--ink);}
-#gl{position:fixed;inset:0;cursor:grab;touch-action:none;}
+#gl{position:fixed;inset:0;width:100%;height:100%;display:block;cursor:grab;touch-action:none;}
 #gl.dragging{cursor:grabbing;}
 .topbar{position:fixed;top:0;left:0;right:0;z-index:20;display:flex;justify-content:space-between;align-items:center;padding:26px 34px;pointer-events:none;}
 .topbar .name{font-size:15px;letter-spacing:.04em;pointer-events:auto;text-decoration:none;color:var(--ink);}
