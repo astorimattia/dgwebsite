@@ -36,7 +36,7 @@ export const my27thBirthdayStory: Story =   {
       },
       {
         type: 'text',
-        content: `The street still belongs to last night. People are walking home, some of them still drunk and looking like zombies. I peek inside a bar and see someone alone, cleaning, ready to go home and sleep. A few steps ahead, someone else stands with keys in hand, opening the bodega for the day. For a few minutes the two crowds overlap, the one ending the night and the one starting the morning.`
+        content: `The street still belongs to last night. People are walking home, some of them still drunk and looking like zombies. I peek inside a bar and see someone alone, cleaning, ready to go to sleep. A few steps ahead, someone else stands with keys in hand, opening the bodega for the day. For a few minutes the two crowds overlap, the one ending the night and the one starting the morning.`
       },
       {
         type: 'text',
