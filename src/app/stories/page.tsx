@@ -51,7 +51,7 @@ export default function StoriesPage() {
                     {story.title}
                   </h2>
                   {story.subtitle ? (
-                    <p className="text-white/60 text-[clamp(13px,1.1vw,16px)] font-gt-america-thin italic max-w-[480px] leading-[1.4]">
+                    <p className="text-white/60 text-[clamp(13px,1.1vw,16px)] font-gt-america-thin max-w-[480px] leading-[1.4]">
                       {story.subtitle}
                     </p>
                   ) : null}
