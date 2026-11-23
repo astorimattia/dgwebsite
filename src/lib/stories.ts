@@ -346,7 +346,7 @@ export const stories: Story[] = [
   ,
   {
     slug: 'c-vdim-au-fnel',
-    title: "C' vdim au' fnel",
+    title: "C' Vdim Au' Fnel",
     subtitle: 'Appunti dalla Festa del Soccorso',
     subtitleEn: 'Notes from the Festa del Soccorso',
     originalLanguage: 'it',
