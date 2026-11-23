@@ -17,11 +17,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { slug } = await params;
   const story = getStoryBySlug(slug);
   if (!story) return { title: 'Story Not Found' };
+  const storyTitle = story.subtitle ? `${story.title}: ${story.subtitle}` : story.title;
   return {
-    title: `${story.title}: ${story.subtitle} — Mattia Astori`,
+    title: `${storyTitle} — Mattia Astori`,
     description: story.excerpt,
     openGraph: {
-      title: `${story.title}: ${story.subtitle}`,
+      title: storyTitle,
       description: story.excerpt,
       images: [story.heroImage],
     },
