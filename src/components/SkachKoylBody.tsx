@@ -32,13 +32,13 @@ export default function SkachKoylBody({ story }: { story: Story }) {
   function sequence(start: number, count: number) {
     const images = photographs.slice(start, start + count);
     return (
-      <div className="max-w-[1120px] mx-auto my-12 md:my-16" data-photo-sequence={count}>
-        <div className="grid grid-cols-2 gap-2 md:gap-3">
+      <div className="w-[calc(100%+40px)] -ml-[20px] md:w-[calc(100%+80px)] md:-ml-[40px] my-12 md:my-16" data-photo-sequence={count}>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-[4px]">
           {images.map((image: StoryImage, offset: number) => (
             <a key={image.src} href={image.src} target="_blank" rel="noopener noreferrer"
               aria-label={`View full photograph: ${accurateAlts[start + offset] || image.alt}`}
-              className={`block relative aspect-[3/2] overflow-hidden bg-[#f5f5f5] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-black ${count === 3 && offset === 0 ? 'col-span-2' : ''}`}>
-              <Image src={image.src} alt={accurateAlts[start + offset] || image.alt} fill className="object-contain" sizes={count === 3 && offset === 0 ? '(max-width: 1200px) 100vw, 1120px' : '(max-width: 768px) 50vw, 560px'} />
+              className={`block relative aspect-[3/2] md:aspect-[4/3] overflow-hidden bg-[#f5f5f5] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-black ${count === 3 && offset === 0 ? 'md:col-span-2 md:aspect-[16/9]' : ''}`}>
+              <Image src={image.src} alt={accurateAlts[start + offset] || image.alt} fill className="object-cover" sizes={count === 3 && offset === 0 ? '100vw' : '(max-width: 768px) 100vw, 50vw'} />
             </a>
           ))}
         </div>
