@@ -220,15 +220,16 @@ export default function StoryArticle({ story }: StoryArticleProps) {
           }
 
           if (section.type === 'image-offset' && section.image) {
+            const isBirthdayMap = story.slug === 'my-27th-birthday' && section.image.src.endsWith('1-bday-map-lg.webp');
             return (
               <FadeIn key={i} className={`max-w-[900px] mx-auto my-12 md:my-16 px-0 flex justify-center`}>
                 <div className={`w-full md:w-[60%]`}>
-                  <div className="relative aspect-[3/4] md:aspect-[4/5]">
+                  <div className={isBirthdayMap ? "relative aspect-[928/1166]" : "relative aspect-[3/4] md:aspect-[4/5]"}>
                     <Image
                       src={section.image.src}
                       alt={section.image.alt}
                       fill
-                      className="object-cover"
+                      className={isBirthdayMap ? "object-cover object-bottom" : "object-cover"}
                       sizes="(max-width: 768px) 100vw, 60vw"
                     />
                   </div>
